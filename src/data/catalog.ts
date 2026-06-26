@@ -887,6 +887,49 @@ export const ACTIONS: Action[] = [
     impact: 'med',
     countries: ['hr'],
   },
+  {
+    id: 'optout-dk-cpr-protection',
+    title: 'Add name & address protection in CPR',
+    tier: 2,
+    category: 'data-brokers',
+    summary:
+      'Denmark’s public-records principle lists your address in directories like krak.dk. Name- and address protection (navne- og adressebeskyttelse) stops the CPR register releasing your name and address to private people-search and directories.',
+    url: 'https://www.borger.dk/bolig-og-flytning/flytning_oversigt/navne-og-adressebeskyttelse',
+    urlLabel: 'Navne- og adressebeskyttelse',
+    effort: 'low',
+    impact: 'med',
+    countries: ['dk'],
+    recurDays: 365,
+    panicPriority: 6,
+  },
+  {
+    id: 'optout-fi-luovutuskielto',
+    title: 'Set a disclosure ban at DVV (luovutuskielto)',
+    tier: 2,
+    category: 'data-brokers',
+    summary:
+      'Finland’s population register feeds directories and people-search. A disclosure ban (luovutuskielto) at DVV stops your data being released for directories, marketing and surveys. Set it on Suomi.fi — it stays in force indefinitely.',
+    url: 'https://dvv.fi/en/non-disclosure-of-personal-data',
+    urlLabel: 'Non-disclosure',
+    effort: 'low',
+    impact: 'med',
+    countries: ['fi'],
+    panicPriority: 7,
+  },
+  {
+    id: 'optout-ee-register-restriction',
+    title: 'Restrict population-register disclosure',
+    tier: 2,
+    category: 'data-brokers',
+    summary:
+      'Estonia’s population register can release your data to private firms. You can restrict access for advertising and survey purposes by submitting a signed application to SMIT — public bodies keep lawful access.',
+    url: 'https://www.siseministeerium.ee/en/activities/population-procedures/population-register',
+    urlLabel: 'Population Register',
+    effort: 'med',
+    impact: 'med',
+    countries: ['ee'],
+    panicPriority: 8,
+  },
 
   // ───────────────────────── Tier 3 — Lock Down ─────────────────────────
   {
