@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ScoreRing } from '../components/ScoreRing'
+import { CatMark } from '../components/CatMark'
 import { TIERS, type Country, type Tier, emptyProfile } from '../lib/types'
 import { COUNTRIES, COUNTRY_GROUPS, authorityFor, regionForCountry } from '../data/countries'
 import { adversaryFor } from '../lib/adversary'
@@ -41,6 +42,7 @@ export function Onboarding() {
       <div className="card animate-fade-up p-6 sm:p-8">
         {step === 0 && (
           <>
+            <CatMark size={72} className="mx-auto mb-4" />
             <div className="mb-5 flex items-center gap-3">
               <ScoreRing score={0} size={64} label={false} />
               <div>
