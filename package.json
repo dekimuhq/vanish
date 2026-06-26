@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "type": "module",
   "description": "Disappear from the internet, one tier at a time. A fully-offline, zero-network privacy coach.",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "scripts": {
     "dev": "vite",
     "dev:poll": "CHOKIDAR_USEPOLLING=true vite",

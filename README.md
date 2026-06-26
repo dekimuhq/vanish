@@ -24,7 +24,7 @@ The privacy-removal market is split between **link directories** that teach you 
 |---|---|
 | Nothing leaves your device | All state in `localStorage`; the CSP blocks third-party network requests. |
 | No account, no backend | There is no server. Transfer between devices via an export/import JSON file. |
-| No tracking | No analytics, no cookies, no telemetry. MIT, open-source, auditable. |
+| No tracking | No analytics, no cookies, no telemetry. Everything runs on your device. |
 | Works offline | PWA precaches the whole app; install it and use it on a plane. |
 
 The only outbound "network" calls are (1) the service worker caching the app from its own origin, and (2) links to real opt-out pages, which **you** click.
@@ -129,4 +129,4 @@ The letter templates are provided for convenience and are **not legal advice**. 
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+Proprietary — © 2026 Dekimu Labs, S.L. All rights reserved. See [LICENSE](LICENSE).
