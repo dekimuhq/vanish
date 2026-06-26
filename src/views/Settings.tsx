@@ -200,7 +200,7 @@ export function Settings() {
         <ul className="space-y-1.5">
           <li className="flex gap-2"><span className="text-ghost">⬡</span> Everything lives in this browser’s local storage. Nothing is uploaded, ever.</li>
           <li className="flex gap-2"><span className="text-ghost">⬡</span> The page’s Content-Security-Policy blocks all third-party network requests — verifiable in your browser’s dev tools.</li>
-          <li className="flex gap-2"><span className="text-ghost">⬡</span> No analytics, no cookies, no account, no telemetry. Open-source, MIT-licensed.</li>
+          <li className="flex gap-2"><span className="text-ghost">⬡</span> No analytics, no cookies, no account, no telemetry — verify it in your browser’s dev tools.</li>
           <li className="flex gap-2"><span className="text-ghost">⬡</span> Links to opt-out pages open in a new tab — those are the only “network” calls, and you initiate every one.</li>
         </ul>
       </section>
