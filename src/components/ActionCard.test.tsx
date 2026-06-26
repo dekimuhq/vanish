@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
 import { ActionCard } from './ActionCard'
 import { StoreProvider } from '../store/store'
+import { I18nProvider } from '../i18n/i18n'
 import type { Action } from '../lib/types'
 
 const sample: Action = {
@@ -24,7 +25,9 @@ function setup() {
   return render(
     <MemoryRouter>
       <StoreProvider>
-        <ActionCard action={sample} />
+        <I18nProvider>
+          <ActionCard action={sample} />
+        </I18nProvider>
       </StoreProvider>
     </MemoryRouter>,
   )

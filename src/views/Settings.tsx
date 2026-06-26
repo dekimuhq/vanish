@@ -4,9 +4,12 @@ import { sanitize } from '../store/store'
 import { TIERS, type Country, type Tier } from '../lib/types'
 import { COUNTRIES, COUNTRY_GROUPS, authorityFor, regionForCountry } from '../data/countries'
 import { useStore } from '../store/store'
+import { useI18n } from '../i18n/i18n'
+import { LANGS, LANG_LABELS, type Lang } from '../i18n/langs'
 
 export function Settings() {
-  const { state, updateProfile, exportJSON, importState, wipe } = useStore()
+  const { state, updateProfile, setLang, exportJSON, importState, wipe } = useStore()
+  const { t } = useI18n()
   const fileRef = useRef<HTMLInputElement>(null)
   const [confirmWipe, setConfirmWipe] = useState(false)
   const [importMsg, setImportMsg] = useState<string | null>(null)
@@ -29,9 +32,9 @@ export function Settings() {
       try {
         const parsed = sanitize(JSON.parse(String(reader.result)))
         importState(parsed)
-        setImportMsg('✓ Plan imported.')
+        setImportMsg(t('settings.importOk'))
       } catch {
-        setImportMsg('✗ Could not read that file.')
+        setImportMsg(t('settings.importErr'))
       }
       setTimeout(() => setImportMsg(null), 3000)
     }
@@ -45,7 +48,7 @@ export function Settings() {
     const w = window.open('', '_blank', 'width=420,height=280')
     if (!w) return
     const doc = w.document
-    doc.title = 'Vanish code word'
+    doc.title = t('settings.cardDocTitle')
     const style = doc.createElement('style')
     style.textContent =
       'body{font-family:system-ui,sans-serif;margin:0;display:grid;place-items:center;height:100vh}' +
@@ -58,14 +61,13 @@ export function Settings() {
     card.className = 'card'
     const k = doc.createElement('div')
     k.className = 'k'
-    k.textContent = 'Family code word'
+    k.textContent = t('settings.cardLabel')
     const wd = doc.createElement('div')
     wd.className = 'w'
     wd.textContent = word
     const n = doc.createElement('div')
     n.className = 'n'
-    n.textContent =
-      'Any urgent money or secret request must include this word, or treat it as fake. Don’t text or email the word itself.'
+    n.textContent = t('settings.cardNote')
     card.append(k, wd, n)
     doc.body.appendChild(card)
     w.focus()
@@ -75,13 +77,32 @@ export function Settings() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-2xl font-bold text-slate-100">Settings</h1>
+        <h1 className="text-2xl font-bold text-slate-100">{t('settings.title')}</h1>
       </header>
 
-      <section className="card space-y-4 p-5">
-        <h2 className="font-semibold text-slate-100">Your plan</h2>
+      <section className="card space-y-3 p-5">
+        <h2 className="font-semibold text-slate-100">{t('settings.language')}</h2>
         <label className="block">
-          <span className="mb-1 block text-xs font-medium text-slate-400">Country</span>
+          <select
+            className="input"
+            value={state.lang}
+            onChange={(e) => setLang(e.target.value as Lang)}
+            aria-label={t('settings.language')}
+          >
+            {LANGS.map((l) => (
+              <option key={l} value={l}>
+                {LANG_LABELS[l]}
+              </option>
+            ))}
+          </select>
+          <span className="mt-2 block text-xs text-slate-500">{t('settings.languageHint')}</span>
+        </label>
+      </section>
+
+      <section className="card space-y-4 p-5">
+        <h2 className="font-semibold text-slate-100">{t('settings.yourPlan')}</h2>
+        <label className="block">
+          <span className="mb-1 block text-xs font-medium text-slate-400">{t('settings.country')}</span>
           <select
             className="input"
             value={state.profile.country ?? ''}
@@ -90,9 +111,9 @@ export function Settings() {
               updateProfile({ country: c, region: regionForCountry(c) })
             }}
           >
-            <option value="">Not set</option>
+            <option value="">{t('settings.notSet')}</option>
             {COUNTRY_GROUPS.map((g) => (
-              <optgroup key={g.label} label={g.label}>
+              <optgroup key={g.key} label={t(`countryGroup.${g.key}`)}>
                 {g.codes.map((c) => (
                   <option key={c} value={c}>
                     {COUNTRIES[c].flag} {COUNTRIES[c].name}
@@ -105,30 +126,30 @@ export function Settings() {
             const auth = authorityFor(state.profile.country)
             return auth ? (
               <p className="mt-2 text-xs text-slate-500">
-                Supervisory authority:{' '}
+                {t('settings.supervisoryAuthority')}{' '}
                 <a className="text-ghost-bright hover:underline" href={auth.url} target="_blank" rel="noopener noreferrer">
                   {auth.name} ↗
                 </a>
               </p>
             ) : (
-              <p className="mt-2 text-xs text-slate-500">Region: {state.profile.region.toUpperCase()}</p>
+              <p className="mt-2 text-xs text-slate-500">{t('settings.region', { region: state.profile.region.toUpperCase() })}</p>
             )
           })()}
         </label>
 
         <label className="block">
-          <span className="mb-1 block text-xs font-medium text-slate-400">Target tier</span>
+          <span className="mb-1 block text-xs font-medium text-slate-400">{t('settings.targetTier')}</span>
           <div className="grid gap-2 sm:grid-cols-2">
-            {([1, 2, 3, 4] as Tier[]).map((t) => (
+            {([1, 2, 3, 4] as Tier[]).map((tier) => (
               <button
-                key={t}
-                onClick={() => updateProfile({ targetTier: t })}
+                key={tier}
+                onClick={() => updateProfile({ targetTier: tier })}
                 className={`flex items-center gap-2 rounded-xl border px-3 py-2 text-left text-sm ${
-                  state.profile.targetTier === t ? 'border-ghost/40 bg-ghost/10' : 'border-ink-700 hover:border-ink-600'
+                  state.profile.targetTier === tier ? 'border-ghost/40 bg-ghost/10' : 'border-ink-700 hover:border-ink-600'
                 }`}
               >
-                <TierBadge tier={t} withName={false} />
-                <span className="text-slate-300">{TIERS[t].name}</span>
+                <TierBadge tier={tier} withName={false} />
+                <span className="text-slate-300">{t(`tier.${TIERS[tier].key}.name`)}</span>
               </button>
             ))}
           </div>
@@ -136,72 +157,60 @@ export function Settings() {
       </section>
 
       <section className="card space-y-3 p-5" id="code-word">
-        <h2 className="font-semibold text-slate-100">🔑 Family code word</h2>
-        <p className="text-sm text-slate-400">
-          A shared word that defeats AI voice-clone “it’s me, send money” scams. Agree it with close family and stored
-          only on this device — never sent anywhere.
-        </p>
+        <h2 className="font-semibold text-slate-100">{t('settings.codeWordTitle')}</h2>
+        <p className="text-sm text-slate-400">{t('settings.codeWordBody')}</p>
         <input
           className="input"
           value={state.profile.codeWord ?? ''}
           onChange={(e) => updateProfile({ codeWord: e.target.value || undefined })}
-          placeholder="e.g. blue penguin"
-          aria-label="Family code word"
+          placeholder={t('settings.codeWordPlaceholder')}
+          aria-label={t('settings.cardLabel')}
           autoComplete="off"
         />
         {state.profile.codeWord && (
           <button className="btn-ghost btn-sm" onClick={() => printCodeWordCard(state.profile.codeWord!)}>
-            🖨 Print a wallet card
+            {t('settings.printCard')}
           </button>
         )}
-        <p className="text-xs text-slate-500">
-          Rule: any urgent money or secret request must include this word, or treat it as fake. Never send the word
-          itself by text or email.
-        </p>
+        <p className="text-xs text-slate-500">{t('settings.codeWordRule')}</p>
       </section>
 
       <section className="card space-y-3 p-5">
-        <h2 className="font-semibold text-slate-100">Backup & transfer</h2>
-        <p className="text-sm text-slate-400">
-          No account means no cloud sync — by design. Export an encrypted-at-rest-by-you JSON file to move your plan to
-          another device. The file contains your progress and the details you entered for letters.
-        </p>
+        <h2 className="font-semibold text-slate-100">{t('settings.backupTitle')}</h2>
+        <p className="text-sm text-slate-400">{t('settings.backupBody')}</p>
         <div className="flex flex-wrap gap-2">
-          <button className="btn-ghost btn-sm" onClick={download}>↓ Export plan</button>
-          <button className="btn-ghost btn-sm" onClick={() => fileRef.current?.click()}>↑ Import plan</button>
+          <button className="btn-ghost btn-sm" onClick={download}>{t('settings.export')}</button>
+          <button className="btn-ghost btn-sm" onClick={() => fileRef.current?.click()}>{t('settings.import')}</button>
           <input ref={fileRef} type="file" accept="application/json" className="hidden" onChange={onImport} />
           {importMsg && <span className="self-center text-sm text-ghost-bright">{importMsg}</span>}
         </div>
       </section>
 
       <section className="card space-y-3 border-signal-danger/20 p-5">
-        <h2 className="font-semibold text-slate-100">Wipe everything</h2>
-        <p className="text-sm text-slate-400">
-          Erase all progress and personal details from this device. This cannot be undone. (There’s nothing on a
-          server to delete — there never was.)
-        </p>
+        <h2 className="font-semibold text-slate-100">{t('settings.wipeTitle')}</h2>
+        <p className="text-sm text-slate-400">{t('settings.wipeBody')}</p>
         {!confirmWipe ? (
           <button className="btn-sm rounded-xl border border-signal-danger/40 px-3 py-1.5 text-sm text-signal-danger hover:bg-signal-danger/10" onClick={() => setConfirmWipe(true)}>
-            Wipe all local data
+            {t('settings.wipeBtn')}
           </button>
         ) : (
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-sm text-signal-danger">Sure? This deletes everything.</span>
+            <span className="text-sm text-signal-danger">{t('settings.wipeConfirm')}</span>
             <button className="btn-sm rounded-xl bg-signal-danger px-3 py-1.5 text-sm font-semibold text-ink-950" onClick={wipe}>
-              Yes, wipe it
+              {t('settings.wipeYes')}
             </button>
-            <button className="btn-ghost btn-sm" onClick={() => setConfirmWipe(false)}>Cancel</button>
+            <button className="btn-ghost btn-sm" onClick={() => setConfirmWipe(false)}>{t('common.cancel')}</button>
           </div>
         )}
       </section>
 
       <section className="card space-y-2 p-5 text-sm text-slate-400">
-        <h2 className="font-semibold text-slate-100">How Vanish handles your data</h2>
+        <h2 className="font-semibold text-slate-100">{t('settings.dataTitle')}</h2>
         <ul className="space-y-1.5">
-          <li className="flex gap-2"><span className="text-ghost">⬡</span> Everything lives in this browser’s local storage. Nothing is uploaded, ever.</li>
-          <li className="flex gap-2"><span className="text-ghost">⬡</span> The page’s Content-Security-Policy blocks all third-party network requests — verifiable in your browser’s dev tools.</li>
-          <li className="flex gap-2"><span className="text-ghost">⬡</span> No analytics, no cookies, no account, no telemetry — verify it in your browser’s dev tools.</li>
-          <li className="flex gap-2"><span className="text-ghost">⬡</span> Links to opt-out pages open in a new tab — those are the only “network” calls, and you initiate every one.</li>
+          <li className="flex gap-2"><span className="text-ghost">⬡</span> {t('settings.dataBullet1')}</li>
+          <li className="flex gap-2"><span className="text-ghost">⬡</span> {t('settings.dataBullet2')}</li>
+          <li className="flex gap-2"><span className="text-ghost">⬡</span> {t('settings.dataBullet3')}</li>
+          <li className="flex gap-2"><span className="text-ghost">⬡</span> {t('settings.dataBullet4')}</li>
         </ul>
       </section>
     </div>

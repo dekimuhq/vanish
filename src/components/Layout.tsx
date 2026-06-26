@@ -1,35 +1,37 @@
 import type { ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
+import { useI18n } from '../i18n/i18n'
 
 const NAV = [
-  { to: '/', label: 'Dashboard', icon: '◎', end: true },
-  { to: '/plan', label: 'The Ladder', icon: '☰' },
-  { to: '/brokers', label: 'Brokers', icon: '🏷️' },
-  { to: '/letters', label: 'Letters', icon: '✍️' },
-  { to: '/panic', label: 'Panic', icon: '🆘' },
-  { to: '/settings', label: 'Settings', icon: '⚙️' },
+  { to: '/', labelKey: 'nav.dashboard', icon: '◎', end: true },
+  { to: '/plan', labelKey: 'nav.plan', icon: '☰' },
+  { to: '/brokers', labelKey: 'nav.brokers', icon: '🏷️' },
+  { to: '/letters', labelKey: 'nav.letters', icon: '✍️' },
+  { to: '/panic', labelKey: 'nav.panic', icon: '🆘' },
+  { to: '/settings', labelKey: 'nav.settings', icon: '⚙️' },
 ]
 
 export function Layout({ children }: { children: ReactNode }) {
+  const { t } = useI18n()
   return (
     <div className="mx-auto flex min-h-full max-w-5xl flex-col px-4 pb-28 pt-5 sm:px-6 sm:pb-10">
       <header className="mb-6 flex items-center justify-between">
         <NavLink to="/" className="flex items-center gap-2.5">
           <Logo />
           <div>
-            <div className="text-lg font-bold tracking-tight text-slate-100">Vanish</div>
-            <div className="-mt-1 text-[11px] text-slate-500">disappear, one tier at a time</div>
+            <div className="text-lg font-bold tracking-tight text-slate-100">{t('app.name')}</div>
+            <div className="-mt-1 text-[11px] text-slate-500">{t('app.tagline')}</div>
           </div>
         </NavLink>
-        <span className="pill border border-ghost/20 bg-ghost/5 text-ghost-bright" title="No network requests leave your device">
-          ⬡ 100% offline
+        <span className="pill border border-ghost/20 bg-ghost/5 text-ghost-bright" title={t('offline.title')}>
+          {t('offline.badge')}
         </span>
       </header>
 
       {/* Desktop / wide nav */}
       <nav className="mb-6 hidden flex-wrap gap-1.5 sm:flex">
         {NAV.map((n) => (
-          <NavItem key={n.to} {...n} />
+          <NavItem key={n.to} to={n.to} label={t(n.labelKey)} icon={n.icon} end={n.end} />
         ))}
       </nav>
 
@@ -50,7 +52,7 @@ export function Layout({ children }: { children: ReactNode }) {
               }
             >
               <span className="text-base">{n.icon}</span>
-              {n.label}
+              {t(n.labelKey)}
             </NavLink>
           ))}
         </div>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import type { Action } from '../lib/types'
 import { CATEGORIES } from '../lib/types'
 import { useStore } from '../store/store'
+import { useI18n } from '../i18n/i18n'
 import { EffortPill, ImpactPill, TierBadge } from './Pills'
 
 interface Props {
@@ -17,12 +18,14 @@ function fallbackSearch(title: string): string {
   return `https://duckduckgo.com/?q=${encodeURIComponent(`${q} opt out removal`)}`
 }
 
-export function ActionCard({ action, showTier = true }: Props) {
+export function ActionCard({ action: raw, showTier = true }: Props) {
   const { state, setStatus, clearStatus } = useStore()
+  const { t, localizeAction } = useI18n()
   const [open, setOpen] = useState(false)
   const [deadLink, setDeadLink] = useState(false)
+  const action = localizeAction(raw)
   const status = state.progress[action.id]?.status ?? 'todo'
-  const cat = CATEGORIES[action.category]
+  const catName = t(`category.${action.category}`)
 
   const ringState =
     status === 'done'
@@ -37,7 +40,7 @@ export function ActionCard({ action, showTier = true }: Props) {
         <button
           onClick={() => setStatus(action.id, status === 'done' ? 'todo' : 'done')}
           aria-pressed={status === 'done'}
-          aria-label={status === 'done' ? `Mark "${action.title}" not done` : `Mark "${action.title}" done`}
+          aria-label={status === 'done' ? t('actionCard.markNotDone', { title: action.title }) : t('actionCard.markDone', { title: action.title })}
           className={`mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-md border text-sm transition ${
             status === 'done'
               ? 'border-signal-ok bg-signal-ok text-ink-950'
@@ -54,7 +57,7 @@ export function ActionCard({ action, showTier = true }: Props) {
             </h3>
             {showTier && <TierBadge tier={action.tier} withName={false} />}
             <span className="pill bg-ink-700/60 text-slate-400">
-              {cat.icon} {cat.name}
+              {CATEGORIES[action.category].icon} {catName}
             </span>
           </div>
 
@@ -64,8 +67,8 @@ export function ActionCard({ action, showTier = true }: Props) {
             <EffortPill level={action.effort} />
             <ImpactPill level={action.impact} />
             {action.recurDays && (
-              <span className="pill bg-ink-700/60 text-slate-400" title="Brokers re-list you; redo this periodically">
-                ↻ re-check every {action.recurDays}d
+              <span className="pill bg-ink-700/60 text-slate-400" title={t('actionCard.recheckTitle')}>
+                {t('actionCard.recheckEvery', { days: action.recurDays })}
               </span>
             )}
           </div>
@@ -73,36 +76,36 @@ export function ActionCard({ action, showTier = true }: Props) {
           <div className="mt-3 flex flex-wrap items-center gap-2">
             {action.url && (
               <a className="btn-primary btn-sm" href={action.url} target="_blank" rel="noopener noreferrer">
-                {action.urlLabel ?? 'Open'} ↗
+                {action.urlLabel ?? t('actionCard.open')} ↗
               </a>
             )}
             {action.url &&
               (deadLink ? (
                 <a className="btn-ghost btn-sm" href={fallbackSearch(action.title)} target="_blank" rel="noopener noreferrer">
-                  🔎 Search for current page
+                  {t('actionCard.searchCurrent')}
                 </a>
               ) : (
                 <button
                   className="btn-sm rounded-lg px-2 text-xs text-slate-500 hover:text-slate-300"
                   onClick={() => setDeadLink(true)}
-                  title="Opt-out URLs change often"
+                  title={t('actionCard.linkDeadTitle')}
                 >
-                  link dead?
+                  {t('actionCard.linkDead')}
                 </button>
               ))}
             {action.letter && (
               <Link className="btn-ghost btn-sm" to={`/letters?t=${action.letter}`}>
-                ✍️ Generate letter
+                {t('actionCard.generateLetter')}
               </Link>
             )}
             {action.internalTo && (
               <Link className="btn-ghost btn-sm" to={action.internalTo}>
-                {action.internalLabel ?? 'Open tool'}
+                {action.internalLabel ?? t('actionCard.openTool')}
               </Link>
             )}
             {action.steps && (
               <button className="btn-ghost btn-sm" onClick={() => setOpen((o) => !o)} aria-expanded={open}>
-                {open ? 'Hide steps' : 'How-to'}
+                {open ? t('actionCard.hideSteps') : t('actionCard.howTo')}
               </button>
             )}
             <div className="ml-auto flex items-center gap-1">
@@ -111,14 +114,14 @@ export function ActionCard({ action, showTier = true }: Props) {
                   className="btn-sm rounded-lg px-2 text-xs text-slate-500 hover:text-slate-300"
                   onClick={() => setStatus(action.id, 'skipped')}
                 >
-                  Not relevant
+                  {t('actionCard.notRelevant')}
                 </button>
               ) : (
                 <button
                   className="btn-sm rounded-lg px-2 text-xs text-ghost-bright hover:underline"
                   onClick={() => clearStatus(action.id)}
                 >
-                  Restore
+                  {t('actionCard.restore')}
                 </button>
               )}
             </div>

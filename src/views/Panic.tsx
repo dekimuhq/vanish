@@ -1,32 +1,26 @@
 import { ActionCard } from '../components/ActionCard'
 import { panicActions } from '../lib/select'
 import { useStore } from '../store/store'
+import { useI18n } from '../i18n/i18n'
 
 export function Panic() {
   const { state } = useStore()
+  const { t } = useI18n()
   const actions = panicActions(state.profile.region, state.profile.country)
   const done = actions.filter((a) => state.progress[a.id]?.status === 'done').length
 
   return (
     <div className="space-y-6">
       <header className="card border-signal-danger/30 bg-signal-danger/[0.05] p-5">
-        <h1 className="flex items-center gap-2 text-2xl font-bold text-slate-100">🆘 Panic Mode</h1>
-        <p className="mt-2 max-w-2xl text-sm text-slate-300">
-          If someone is actively trying to find, harass, or dox you, do these in order. They’re the highest-leverage
-          steps to break the trail between your name and your location, fastest first.
-        </p>
-        <p className="mt-3 text-sm font-semibold text-signal-danger">
-          If you are in immediate danger, contact your local emergency services first.
-        </p>
-        <p className="mt-1 text-xs text-slate-400">
-          Survivor resources: in the US, the National DV Hotline runs an Address Confidentiality referral; many countries
-          have equivalents. A local victim-services org can help you file public-record suppressions.
-        </p>
+        <h1 className="flex items-center gap-2 text-2xl font-bold text-slate-100">{t('panic.title')}</h1>
+        <p className="mt-2 max-w-2xl text-sm text-slate-300">{t('panic.intro')}</p>
+        <p className="mt-3 text-sm font-semibold text-signal-danger">{t('panic.danger')}</p>
+        <p className="mt-1 text-xs text-slate-400">{t('panic.resources')}</p>
       </header>
 
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-bold text-slate-100">Do these now</h2>
-        <span className="text-sm text-slate-500">{done}/{actions.length} done</span>
+        <h2 className="text-lg font-bold text-slate-100">{t('panic.doNow')}</h2>
+        <span className="text-sm text-slate-500">{t('panic.doneCount', { done, total: actions.length })}</span>
       </div>
 
       <ol className="space-y-3">

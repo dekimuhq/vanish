@@ -1,26 +1,37 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useStore } from '../store/store'
-import { nameVariants, buildDecoyBio, DECOY_INTERESTS, DECOY_RULES } from '../lib/decoy'
+import { useI18n } from '../i18n/i18n'
+import { nameVariants } from '../lib/decoy'
 
-function pickInterests(seed: number): string[] {
+function pickInterests(seed: number, pool: string[]): string[] {
   // Deterministic-ish spread driven by a regen counter — no real randomness
   // needed, and it keeps the output stable for a given seed.
+  if (pool.length === 0) return []
   const out: string[] = []
   const step = 7
-  for (let i = 0; i < 4; i++) out.push(DECOY_INTERESTS[(seed * step + i * 5) % DECOY_INTERESTS.length])
+  for (let i = 0; i < 4; i++) out.push(pool[(seed * step + i * 5) % pool.length])
   return [...new Set(out)]
 }
 
 export function Decoy() {
   const { state } = useStore()
+  const { t, tList } = useI18n()
   const name = state.profile.name.trim()
   const [seed, setSeed] = useState(1)
   const [copied, setCopied] = useState<string | null>(null)
 
+  const pool = tList('decoy.interests')
+  const bioAnd = t('decoy.bioAnd')
   const variants = useMemo(() => nameVariants(name), [name])
-  const interests = useMemo(() => pickInterests(seed), [seed])
-  const bio = useMemo(() => buildDecoyBio(interests), [interests])
+  const interests = useMemo(() => pickInterests(seed, pool), [seed, pool])
+  const bio = useMemo(() => {
+    const items = interests.filter(Boolean)
+    if (items.length === 0) return ''
+    const joined =
+      items.length === 1 ? items[0] : `${items.slice(0, -1).join(', ')} ${bioAnd} ${items[items.length - 1]}`
+    return t('decoy.bioTemplate', { list: joined })
+  }, [interests, bioAnd, t])
 
   function copy(label: string, text: string) {
     void navigator.clipboard?.writeText(text)
@@ -31,28 +42,25 @@ export function Decoy() {
   return (
     <div className="space-y-6">
       <header className="space-y-1">
-        <h1 className="text-2xl font-bold text-slate-100">⬡ Decoy Kit</h1>
-        <p className="text-sm text-slate-400">
-          Poison, don’t delete. Brokers and platforms re-list and rebuild, so adding bland noise to your{' '}
-          <em>own</em> low-stakes accounts beats chasing deletions. This kit runs entirely on your device.
-        </p>
+        <h1 className="text-2xl font-bold text-slate-100">{t('decoy.title')}</h1>
+        <p className="text-sm text-slate-400">{t('decoy.subtitle')}</p>
       </header>
 
       <section className="card space-y-3 border-signal-danger/20 p-5">
-        <h2 className="font-semibold text-slate-100">Use it responsibly</h2>
+        <h2 className="font-semibold text-slate-100">{t('decoy.responsibly')}</h2>
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-signal-ok">Do</p>
+            <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-signal-ok">{t('decoy.do')}</p>
             <ul className="space-y-1.5 text-sm text-slate-300">
-              {DECOY_RULES.do.map((r) => (
+              {tList('decoy.rulesDo').map((r) => (
                 <li key={r} className="flex gap-2"><span className="text-signal-ok">✓</span>{r}</li>
               ))}
             </ul>
           </div>
           <div>
-            <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-signal-danger">Never</p>
+            <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-signal-danger">{t('decoy.never')}</p>
             <ul className="space-y-1.5 text-sm text-slate-300">
-              {DECOY_RULES.dont.map((r) => (
+              {tList('decoy.rulesDont').map((r) => (
                 <li key={r} className="flex gap-2"><span className="text-signal-danger">✗</span>{r}</li>
               ))}
             </ul>
@@ -61,7 +69,7 @@ export function Decoy() {
       </section>
 
       <section className="card space-y-3 p-5">
-        <h2 className="font-semibold text-slate-100">Name variants</h2>
+        <h2 className="font-semibold text-slate-100">{t('decoy.nameVariants')}</h2>
         {name ? (
           variants.length ? (
             <div className="flex flex-wrap gap-2">
@@ -72,19 +80,19 @@ export function Decoy() {
               ))}
             </div>
           ) : (
-            <p className="text-sm text-slate-500">No variants for a single-word name — add a surname in Settings to seed more.</p>
+            <p className="text-sm text-slate-500">{t('decoy.noVariants')}</p>
           )
         ) : (
           <p className="text-sm text-slate-500">
-            Add your name in <Link className="text-ghost-bright hover:underline" to="/settings">Settings</Link> to generate alternate spellings to spread across throwaway profiles.
+            {t('decoy.addNamePre')}<Link className="text-ghost-bright hover:underline" to="/settings">{t('decoy.addNameLink')}</Link>{t('decoy.addNamePost')}
           </p>
         )}
       </section>
 
       <section className="card space-y-3 p-5">
         <div className="flex items-center justify-between">
-          <h2 className="font-semibold text-slate-100">Filler bio</h2>
-          <button className="btn-ghost btn-sm" onClick={() => setSeed((s) => s + 1)}>↻ Regenerate</button>
+          <h2 className="font-semibold text-slate-100">{t('decoy.fillerBio')}</h2>
+          <button className="btn-ghost btn-sm" onClick={() => setSeed((s) => s + 1)}>{t('decoy.regenerate')}</button>
         </div>
         <div className="flex flex-wrap gap-1.5">
           {interests.map((i) => (
@@ -93,14 +101,11 @@ export function Decoy() {
         </div>
         <div className="rounded-xl bg-ink-900/60 p-3 text-sm text-slate-300">{bio}</div>
         <button className="btn-ghost btn-sm" onClick={() => copy('bio', bio)}>
-          {copied === 'bio' ? '✓ Copied' : '⧉ Copy bio'}
+          {copied === 'bio' ? t('decoy.copied') : t('decoy.copyBio')}
         </button>
       </section>
 
-      <p className="text-xs text-slate-500">
-        Generic by design — the goal is statistical noise, not a convincing fake person. Paste into profiles that are
-        yours and low-stakes.
-      </p>
+      <p className="text-xs text-slate-500">{t('decoy.footer')}</p>
     </div>
   )
 }

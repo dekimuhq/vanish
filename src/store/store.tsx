@@ -6,6 +6,7 @@ import {
   initialState,
   SCHEMA_VERSION,
 } from '../lib/types'
+import { type Lang, isLang, detectLang } from '../i18n/langs'
 
 const STORAGE_KEY = 'vanish.state.v1'
 
@@ -14,6 +15,7 @@ type Msg =
   | { type: 'clearStatus'; id: string }
   | { type: 'completeOnboarding'; profile: Profile }
   | { type: 'updateProfile'; patch: Partial<Profile> }
+  | { type: 'setLang'; lang: Lang }
   | { type: 'import'; state: AppState }
   | { type: 'wipe' }
 
@@ -33,6 +35,8 @@ function reducer(state: AppState, msg: Msg): AppState {
       return { ...state, onboarded: true, profile: msg.profile }
     case 'updateProfile':
       return { ...state, profile: { ...state.profile, ...msg.patch } }
+    case 'setLang':
+      return { ...state, lang: msg.lang }
     case 'import':
       return sanitize(msg.state)
     case 'wipe':
@@ -50,6 +54,7 @@ function sanitize(raw: unknown): AppState {
   return {
     schemaVersion: SCHEMA_VERSION,
     onboarded: Boolean(r.onboarded),
+    lang: isLang(r.lang) ? r.lang : base.lang,
     profile: { ...base.profile, ...(r.profile ?? {}) },
     progress:
       r.progress && typeof r.progress === 'object'
@@ -65,7 +70,11 @@ function sanitize(raw: unknown): AppState {
 function load(): AppState {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
-    return raw ? sanitize(JSON.parse(raw)) : initialState()
+    if (raw) return sanitize(JSON.parse(raw))
+    // Fresh install: best-effort match the browser language to a supported one.
+    const fresh = initialState()
+    fresh.lang = detectLang(typeof navigator !== 'undefined' ? navigator.language : null)
+    return fresh
   } catch {
     return initialState()
   }
@@ -77,6 +86,7 @@ interface Ctx {
   clearStatus: (id: string) => void
   completeOnboarding: (profile: Profile) => void
   updateProfile: (patch: Partial<Profile>) => void
+  setLang: (lang: Lang) => void
   importState: (state: AppState) => void
   wipe: () => void
   exportJSON: () => string
@@ -102,6 +112,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       clearStatus: (id) => dispatch({ type: 'clearStatus', id }),
       completeOnboarding: (profile) => dispatch({ type: 'completeOnboarding', profile }),
       updateProfile: (patch) => dispatch({ type: 'updateProfile', patch }),
+      setLang: (lang) => dispatch({ type: 'setLang', lang }),
       importState: (s) => dispatch({ type: 'import', state: s }),
       wipe: () => dispatch({ type: 'wipe' }),
       exportJSON: () => JSON.stringify(state, null, 2),

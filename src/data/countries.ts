@@ -64,12 +64,14 @@ export const COUNTRIES: Record<Country, CountryInfo> = {
   ot: { code: 'ot', name: 'Elsewhere', flag: '🌍', region: 'other' },
 }
 
-/** Grouped for the onboarding / settings country pickers. */
-export const COUNTRY_GROUPS: { label: string; codes: Country[] }[] = [
-  { label: 'European Union', codes: EU_COUNTRIES },
-  { label: 'United Kingdom', codes: ['gb'] },
-  { label: 'United States', codes: ['us'] },
-  { label: 'Elsewhere', codes: ['ot'] },
+/** Grouped for the onboarding / settings country pickers. `key` resolves the
+ *  localized group label via `t('countryGroup.'+key)`; `label` is the English
+ *  fallback. */
+export const COUNTRY_GROUPS: { key: 'eu' | 'uk' | 'us' | 'other'; label: string; codes: Country[] }[] = [
+  { key: 'eu', label: 'European Union', codes: EU_COUNTRIES },
+  { key: 'uk', label: 'United Kingdom', codes: ['gb'] },
+  { key: 'us', label: 'United States', codes: ['us'] },
+  { key: 'other', label: 'Elsewhere', codes: ['ot'] },
 ]
 
 /** Coarse region a country belongs to. Defaults to 'eu' when unset so existing

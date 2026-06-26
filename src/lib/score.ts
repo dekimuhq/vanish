@@ -110,9 +110,14 @@ export function momentum(state: AppState, now = new Date()): Momentum {
   return { streakDays: streak, completedThisWeek: weekly, lastActive: last ? new Date(last) : null }
 }
 
-export function scoreLabel(score: number): { label: string; tone: 'danger' | 'warn' | 'ok' } {
-  if (score < 25) return { label: 'Wide open', tone: 'danger' }
-  if (score < 55) return { label: 'Exposed', tone: 'warn' }
-  if (score < 80) return { label: 'Guarded', tone: 'warn' }
-  return { label: 'Ghosting', tone: 'ok' }
+export type ScoreKey = 'wideOpen' | 'exposed' | 'guarded' | 'ghosting'
+
+/** Returns an i18n key (resolved via `t('score.'+key)`) plus the colour tone.
+ *  Kept prose-free so the band thresholds stay the single source of truth and
+ *  the label text lives in the locale dictionaries. */
+export function scoreLabel(score: number): { key: ScoreKey; tone: 'danger' | 'warn' | 'ok' } {
+  if (score < 25) return { key: 'wideOpen', tone: 'danger' }
+  if (score < 55) return { key: 'exposed', tone: 'warn' }
+  if (score < 80) return { key: 'guarded', tone: 'warn' }
+  return { key: 'ghosting', tone: 'ok' }
 }

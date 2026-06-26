@@ -1,0 +1,296 @@
+import type { Dict } from './en'
+
+export const es: Dict = {
+  // App chrome / nav
+  'app.name': 'Vanish',
+  'app.tagline': 'desaparece, un nivel a la vez',
+  'offline.badge': '⬡ 100% sin conexión',
+  'offline.title': 'Ninguna petición de red sale de tu dispositivo',
+  'nav.dashboard': 'Inicio',
+  'nav.plan': 'La Escalera',
+  'nav.brokers': 'Brokers',
+  'nav.letters': 'Cartas',
+  'nav.panic': 'Pánico',
+  'nav.settings': 'Ajustes',
+
+  // Common
+  'common.back': '← Volver',
+  'common.next': 'Siguiente →',
+  'common.cancel': 'Cancelar',
+
+  // Country group labels (select optgroups)
+  'countryGroup.eu': 'Unión Europea',
+  'countryGroup.uk': 'Reino Unido',
+  'countryGroup.us': 'Estados Unidos',
+  'countryGroup.other': 'Otros países',
+
+  // Tiers
+  'tier.tidy.name': 'Ordenar',
+  'tier.tidy.tagline': 'Poco esfuerzo, mucho alivio',
+  'tier.tidy.who': 'Cualquiera. Los 20 minutos que todo el mundo debería dedicar.',
+  'tier.reduce.name': 'Reducir',
+  'tier.reduce.tagline': 'Achica tu huella digital',
+  'tier.reduce.who': 'Tienes curiosidad por la privacidad y quieres distancia real de Big Tech y los brokers.',
+  'tier.lockdown.name': 'Blindar',
+  'tier.lockdown.tagline': 'Refuerza todo',
+  'tier.lockdown.who': 'Quieres ser genuinamente difícil de rastrear, perfilar o doxear.',
+  'tier.ghost.name': 'Fantasma',
+  'tier.ghost.tagline': 'Desaparece',
+  'tier.ghost.who': 'Activistas, supervivientes, personas amenazadas. Máxima separación entre tu nombre y tu vida.',
+
+  // Categories
+  'category.accounts': 'Cuentas',
+  'category.data-brokers': 'Brokers de datos',
+  'category.devices': 'Dispositivos',
+  'category.browser': 'Navegador',
+  'category.social': 'Redes sociales',
+  'category.search': 'Búsqueda',
+  'category.messaging': 'Mensajería',
+  'category.email': 'Correo',
+  'category.finance': 'Finanzas',
+  'category.network': 'Red',
+  'category.legal': 'Palancas legales',
+
+  // Score labels + ring
+  'score.wideOpen': 'Completamente expuesto',
+  'score.exposed': 'Expuesto',
+  'score.guarded': 'Protegido',
+  'score.ghosting': 'Fantasma',
+  'score.ariaLabel': 'Puntuación de privacidad: {score} de 100',
+
+  // Effort / impact pills
+  'pills.effort.low': 'Fácil',
+  'pills.effort.med': 'Moderado',
+  'pills.effort.high': 'Exige trabajo',
+  'pills.effortTitle': 'Cuánto esfuerzo requiere esto',
+  'pills.impact.low': 'Impacto bajo',
+  'pills.impact.med': 'Impacto sólido',
+  'pills.impact.high': 'Impacto alto',
+
+  // Adversaries (onboarding concern → adversary phrase)
+  'adversary.stalking': 'una persona concreta que intenta localizarte',
+  'adversary.bigtech': 'el perfilado de Big Tech y las redes publicitarias',
+  'adversary.brokers': 'los brokers de datos que venden tu perfil',
+  'adversary.breaches': 'filtraciones y robo de cuentas',
+  'adversary.recruiters': 'búsquedas casuales — citas, reclutadores',
+  'adversary.spam': 'spammers y correo basura',
+
+  // Onboarding
+  'onboarding.subtitle': 'Desaparece de internet, un nivel a la vez.',
+  'onboarding.bullet1': 'Funciona 100% en tu dispositivo. Sin cuenta, sin servidores, sin rastreo.',
+  'onboarding.bullet2': 'Una guía escalonada de acciones reales de eliminación, desde el orden básico hasta desaparecer por completo.',
+  'onboarding.bullet3': 'Genera cartas de eliminación GDPR/CCPA que tú mismo envías.',
+  'onboarding.privacyNote': 'Tres preguntas rápidas personalizan tu plan. Tus respuestas nunca salen de este dispositivo.',
+  'onboarding.start': 'Empezar →',
+  'onboarding.step1.title': '¿Dónde estás?',
+  'onboarding.step1.hint': 'Determina qué brokers y derechos legales aplican, y nombra tu autoridad de protección de datos en las cartas.',
+  'onboarding.selectCountry': 'Selecciona tu país…',
+  'onboarding.authority': 'Tu autoridad de control:',
+  'onboarding.step2.title': '¿Qué te preocupa más?',
+  'onboarding.step2.hint': 'Elige las que quieras. Mostraremos primero las acciones más relevantes.',
+  'onboarding.concern.recruiters': 'Que me busquen en Google (citas, reclutadores)',
+  'onboarding.concern.brokers': 'Brokers de datos que venden mi información',
+  'onboarding.concern.bigtech': 'Perfilado de Big Tech y publicidad',
+  'onboarding.concern.breaches': 'Filtraciones y robo de cuentas',
+  'onboarding.concern.stalking': 'Una persona concreta que intenta encontrarme',
+  'onboarding.concern.spam': 'Llamadas, mensajes y correo basura',
+  'onboarding.step3.title': '¿Hasta dónde quieres llegar?',
+  'onboarding.step3.hint': 'Una meta, no una jaula — puedes subir más alto en cualquier momento.',
+  'onboarding.adversaryLead': 'Según tus preocupaciones, tu principal amenaza es {adversary}.',
+  'onboarding.rationale':
+    "Tu preocupación principal — {adversary} — recomienda {tier}. Ajusta el esfuerzo a quien realmente intentas esquivar; ir más lejos de lo que exige tu modelo de amenaza sacrifica comodidad sin ganar nada real.",
+  'onboarding.useRecommended': 'Usar la recomendación: N{tier} · {name}',
+  'onboarding.build': 'Crear mi plan →',
+
+  // Dashboard
+  'dashboard.title': 'Tu puntuación de privacidad',
+  'dashboard.actionsDone': '{done} de {total} acciones completadas · objetivo',
+  'dashboard.encouragement.danger':
+    "Ahora mismo estás completamente expuesto, pero las primeras acciones son las de mayor impacto y se hacen en minutos. Empieza por arriba.",
+  'dashboard.encouragement.warn':
+    'Buen comienzo. Has cerrado las brechas más fáciles; el siguiente nivel es donde empieza la distancia real de brokers y Big Tech.',
+  'dashboard.encouragement.ok':
+    'Ahora eres genuinamente difícil de rastrear. Mantén las revisiones periódicas y revisa tu modelo de amenaza cada trimestre.',
+  'dashboard.openLadder': 'Abrir la escalera →',
+  'dashboard.printPlan': '🖨 Imprimir mi plan',
+  'dashboard.rechecksDue.one': '↻ {count} revisión pendiente',
+  'dashboard.rechecksDue.other': '↻ {count} revisiones pendientes',
+  'dashboard.streak': '🔥 {count} días seguidos',
+  'dashboard.doneThisWeek': '{count} completadas esta semana',
+  'dashboard.rechecksHeading': '↻ Revisiones pendientes',
+  'dashboard.rechecksBody': 'Los brokers de datos te vuelven a listar después de unos meses. Estos opt-outs deben repetirse:',
+  'dashboard.overdue': 'vencido',
+  'dashboard.recommendedNext': 'Siguiente recomendado',
+  'dashboard.seeAll': 'Ver todo',
+  'dashboard.allDone': "🎉 Todas las acciones relevantes están hechas o descartadas. Eres fantasma — mantén las revisiones.",
+
+  // Plan / The Ladder
+  'plan.title': 'La Escalera',
+  'plan.subtitle': 'Sube a tu propio ritmo. Elige las acciones de mayor impacto de cualquier nivel — la privacidad es personal.',
+  'plan.results.one': '{count} resultado para «{query}»',
+  'plan.results.other': '{count} resultados para «{query}»',
+  'plan.allTiers': 'Todos los niveles',
+  'plan.allCategories': 'Todas las categorías',
+  'plan.hideCompleted': 'Ocultar completadas',
+  'plan.searchPlaceholder': 'Buscar acciones… (p.ej. «Spokeo», «2FA», «correo»)',
+  'plan.filterByCategory': 'Filtrar por categoría',
+  'plan.searchAria': 'Buscar acciones',
+
+  // Brokers
+  'brokers.title': 'Lista de brokers de datos',
+  'brokers.subtitle':
+    'Los brokers son quienes muestran tu dirección y teléfono en los resultados de búsqueda de un desconocido. Empieza por los que no piden identificación, luego los agregadores que alimentan al resto.',
+  'brokers.cleared': '{done}/{total} eliminados.',
+  'brokers.dueToRedo.one': '↻ {count} pendiente de repetir.',
+  'brokers.dueToRedo.other': '↻ {count} pendientes de repetir.',
+  'brokers.relistBody':
+    'Los brokers te vuelven a listar silenciosamente cada 3–6 meses — por eso los servicios cobran mensualmente. Vanish simplemente te recuerda que repitas el opt-out gratuito.',
+  'brokers.honestLabel': '⚠️ La verdad sin rodeos:',
+  'brokers.honestBody':
+    "los opt-outs reducen tu exposición, pero no garantizan invisibilidad permanente. Los enlaces cambian y los datos reaparecen. Trátalo como un hábito recurrente, no como una solución única — y nunca pagues una «garantía de eliminación».",
+
+  // Letters (chrome only — generated letter body/subject stay English)
+  'letters.title': 'Forja de cartas',
+  'letters.subtitle':
+    'Genera una solicitud de eliminación o acceso con base legal. Se construye totalmente en tu dispositivo con los datos que introduces aquí — no se envía nada por ti. Tú copias o envías el correo.',
+  'letters.authorityLabel': 'Tu autoridad de control ({flag} {name}):',
+  'letters.authorityNote': 'Se menciona en la carta — escala aquí si te ignoran.',
+  'letters.noAuthority': 'Establece tu país en Ajustes para que tu autoridad de control aparezca en esta carta.',
+  'letters.recipientOrg': 'Organización destinataria',
+  'letters.orgPlaceholder': 'p.ej. Spokeo, Inc.',
+  'letters.recipientEmail': 'Correo del destinatario (opcional)',
+  'letters.yourDetails': 'Tus datos — guardados solo en este dispositivo, usados para rellenar la carta',
+  'letters.fullName': 'Nombre completo',
+  'letters.namePlaceholder': 'Tu nombre completo',
+  'letters.email': 'Correo',
+  'letters.postalAddress': 'Dirección postal',
+  'letters.addressPlaceholder': 'Para brokers solo por correo postal',
+  'letters.subject': 'Asunto:',
+  'letters.copy': '⧉ Copiar texto',
+  'letters.copied': '✓ Copiado',
+  'letters.download': '↓ Descargar .txt',
+  'letters.openEmail': '✉️ Abrir en el correo',
+  'letters.disclaimerPre': '⚖️ Plantilla orientativa, ',
+  'letters.disclaimerStrong': 'no asesoramiento jurídico',
+  'letters.disclaimerPost': '. Verifica el destinatario correcto y tus derechos locales antes de enviar.',
+
+  // Panic
+  'panic.title': '🆘 Modo pánico',
+  'panic.intro':
+    'Si alguien está intentando activamente encontrarte, acosarte o doxearte, haz esto en orden. Son los pasos de mayor impacto para romper el rastro entre tu nombre y tu ubicación, los más rápidos primero.',
+  'panic.danger': 'Si estás en peligro inmediato, llama primero a los servicios de emergencia locales.',
+  'panic.resources':
+    'Recursos para supervivientes: en muchos países existen servicios de atención a víctimas que pueden ayudarte a solicitar la supresión de registros públicos. Una organización local de apoyo a víctimas puede orientarte.',
+  'panic.doNow': 'Haz esto ahora',
+  'panic.doneCount': '{done}/{total} hechas',
+
+  // Report / Disappearance Plan
+  'report.title': 'Tu plan de desaparición',
+  'report.subtitle': 'Una lista imprimible de lo que queda. Guárdala como PDF o imprímela.',
+  'report.print': '🖨 Imprimir / Guardar como PDF',
+  'report.costNote':
+    'Vanish eleva el coste de encontrarte. Contra un adversario con recursos y determinación, nada es absoluto — y lo que suele delatar a la gente rara vez es la tecnología, sino la falta de consistencia y el ego (un alias reutilizado, un descuido). Ajusta el esfuerzo a quien realmente intentas esquivar.',
+  'report.docTitle': 'Vanish — Plan de desaparición',
+  'report.meta': 'Generado el {date} · objetivo {tier} · región {region}',
+  'report.privacyScore': 'puntuación de privacidad',
+  'report.tierHeading': 'Nivel {tier} · {name} — {count} pendientes',
+  'report.allDone': 'Nada pendiente — todas las acciones relevantes están hechas o descartadas. Mantén las revisiones.',
+  'report.footer':
+    'Hecho con Vanish — un coach de privacidad completamente sin conexión. Los enlaces de opt-out cambian; verifica antes de actuar. No es asesoramiento jurídico.',
+
+  // Settings
+  'settings.title': 'Ajustes',
+  'settings.language': 'Idioma',
+  'settings.languageHint': 'Cambia todas las pantallas. Se guarda solo en este dispositivo.',
+  'settings.yourPlan': 'Tu plan',
+  'settings.country': 'País',
+  'settings.notSet': 'Sin definir',
+  'settings.supervisoryAuthority': 'Autoridad de control:',
+  'settings.region': 'Región: {region}',
+  'settings.targetTier': 'Nivel objetivo',
+  'settings.codeWordTitle': '🔑 Palabra clave familiar',
+  'settings.codeWordBody':
+    'Una palabra compartida que neutraliza las estafas de «soy yo, mándame dinero» generadas por clonación de voz con IA. Acuérdala con tu familia cercana; se guarda solo en este dispositivo — nunca se envía a ningún sitio.',
+  'settings.codeWordPlaceholder': 'p.ej. pingüino azul',
+  'settings.printCard': '🖨 Imprimir tarjeta de bolsillo',
+  'settings.codeWordRule':
+    'Regla: cualquier petición urgente de dinero o secreto debe incluir esta palabra, o trátala como falsa. Nunca envíes la palabra por texto o correo.',
+  'settings.cardDocTitle': 'Palabra clave Vanish',
+  'settings.cardLabel': 'Palabra clave familiar',
+  'settings.cardNote':
+    'Cualquier petición urgente de dinero o secreto debe incluir esta palabra, o trátala como falsa. No envíes la palabra por texto o correo.',
+  'settings.backupTitle': 'Copia de seguridad y transferencia',
+  'settings.backupBody':
+    'Sin cuenta no hay sincronización en la nube — es intencional. Exporta un archivo JSON (encriptado por ti) para mover tu plan a otro dispositivo. El archivo contiene tu progreso y los datos que introdujiste para las cartas.',
+  'settings.export': '↓ Exportar plan',
+  'settings.import': '↑ Importar plan',
+  'settings.importOk': '✓ Plan importado.',
+  'settings.importErr': '✗ No se pudo leer ese archivo.',
+  'settings.wipeTitle': 'Borrar todo',
+  'settings.wipeBody':
+    'Elimina todo el progreso y los datos personales de este dispositivo. No se puede deshacer. (No hay nada en ningún servidor que borrar — nunca lo hubo.)',
+  'settings.wipeBtn': 'Borrar todos los datos locales',
+  'settings.wipeConfirm': '¿Seguro? Esto borra todo.',
+  'settings.wipeYes': 'Sí, borrar',
+  'settings.dataTitle': 'Cómo gestiona Vanish tus datos',
+  'settings.dataBullet1': 'Todo vive en el almacenamiento local de este navegador. Nunca se sube nada.',
+  'settings.dataBullet2':
+    'La política de seguridad de contenido (CSP) de la página bloquea todas las peticiones de red a terceros — verificable en las herramientas de desarrollador de tu navegador.',
+  'settings.dataBullet3': 'Sin analíticas, sin cookies, sin cuenta, sin telemetría — verifícalo en las herramientas de desarrollador de tu navegador.',
+  'settings.dataBullet4':
+    'Los enlaces a páginas de opt-out se abren en una pestaña nueva — esas son las únicas «peticiones de red», y las inicias tú mismo.',
+
+  // Decoy Kit
+  'decoy.title': '⬡ Kit de ruido',
+  'decoy.subtitle':
+    'Envenena, no borres. Los brokers y plataformas vuelven a listarte y reconstruyen tu perfil, así que añadir ruido genérico a tus cuentas de bajo riesgo es más eficaz que perseguir eliminaciones. Este kit funciona completamente en tu dispositivo.',
+  'decoy.responsibly': 'Úsalo con responsabilidad',
+  'decoy.do': 'Haz',
+  'decoy.never': 'Nunca',
+  'decoy.rulesDo': [
+    'Úsalo solo en cuentas que sean TUYAS.',
+    'Aplícalo en perfiles de usar y tirar de bajo riesgo, nunca en nada relacionado con dinero o identidad.',
+    'Busca que sea soso y genérico — ruido, no una persona falsa convincente.',
+  ],
+  'decoy.rulesDont': [
+    'Nunca te hagas pasar por una persona real con nombre propio.',
+    'Nunca escribas reseñas o valoraciones falsas.',
+    'Nunca registres a otra persona ni uses los datos de nadie más.',
+    'Nunca uses esto para eludir a un acreedor, un tribunal o las fuerzas del orden.',
+  ],
+  'decoy.nameVariants': 'Variantes del nombre',
+  'decoy.noVariants': 'Sin variantes para un nombre de una sola palabra — añade un apellido en Ajustes para generar más.',
+  'decoy.addNamePre': 'Añade tu nombre en ',
+  'decoy.addNameLink': 'Ajustes',
+  'decoy.addNamePost': ' para generar grafías alternativas y distribuirlas en perfiles de usar y tirar.',
+  'decoy.fillerBio': 'Biografía de relleno',
+  'decoy.regenerate': '↻ Regenerar',
+  'decoy.copyBio': '⧉ Copiar bio',
+  'decoy.copied': '✓ Copiado',
+  'decoy.footer':
+    'Genérico por diseño — el objetivo es ruido estadístico, no una persona falsa convincente. Pégalo en perfiles que sean tuyos y de bajo riesgo.',
+  'decoy.interests': [
+    'plantas de interior', 'ciclismo', 'pan de masa madre', 'observación de aves', 'juegos de mesa',
+    'senderismo', 'fotografía analógica', 'jazz', 'cerámica', 'crucigramas',
+    'jardinería', 'running', 'cocina', 'astronomía', 'baño en agua fría',
+    'ajedrez', 'punto y ganchillo', 'viajes por carretera', 'café', 'música en directo',
+  ],
+  'decoy.bioTemplate': 'Por aquí para {list}. Sin drama. Opiniones propias.',
+  'decoy.bioAnd': 'y',
+
+  // Action card
+  'actionCard.markDone': 'Marcar «{title}» como hecha',
+  'actionCard.markNotDone': 'Marcar «{title}» como pendiente',
+  'actionCard.open': 'Abrir',
+  'actionCard.recheckEvery': '↻ revisar cada {days} días',
+  'actionCard.recheckTitle': 'Los brokers te vuelven a listar; repite esto periódicamente',
+  'actionCard.searchCurrent': '🔎 Buscar la página actual',
+  'actionCard.linkDead': '¿enlace roto?',
+  'actionCard.linkDeadTitle': 'Las URLs de opt-out cambian con frecuencia',
+  'actionCard.generateLetter': '✍️ Generar carta',
+  'actionCard.openTool': 'Abrir herramienta',
+  'actionCard.howTo': 'Cómo hacerlo',
+  'actionCard.hideSteps': 'Ocultar pasos',
+  'actionCard.notRelevant': 'No me aplica',
+  'actionCard.restore': 'Restaurar',
+} satisfies Dict

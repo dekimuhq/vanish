@@ -1,6 +1,8 @@
 // Core domain model for Vanish. Everything here is plain data — the entire app
 // is a view over a static action catalog plus locally-stored progress.
 
+import type { Lang } from '../i18n/langs'
+
 export type Tier = 1 | 2 | 3 | 4
 
 export const TIERS: Record<Tier, { id: Tier; key: string; name: string; tagline: string; who: string }> = {
@@ -116,6 +118,8 @@ export interface Profile {
 export interface AppState {
   schemaVersion: number
   onboarded: boolean
+  /** Active UI language. Defaults to a navigator-detected match, persisted. */
+  lang: Lang
   profile: Profile
   progress: Record<string, ProgressEntry>
 }
@@ -134,6 +138,7 @@ export const emptyProfile = (): Profile => ({
 export const initialState = (): AppState => ({
   schemaVersion: SCHEMA_VERSION,
   onboarded: false,
+  lang: 'en',
   profile: emptyProfile(),
   progress: {},
 })

@@ -16,7 +16,7 @@ describe('adversaryFor', () => {
   })
 
   it('names the dominant adversary', () => {
-    expect(adversaryFor(['stalking'])?.adversary).toMatch(/specific person/i)
+    expect(adversaryFor(['stalking'])?.concernId).toBe('stalking')
   })
 })
 

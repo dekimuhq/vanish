@@ -5,9 +5,11 @@ import { computeScore } from '../lib/score'
 import { actionsForRegion, byQuickWin } from '../lib/select'
 import { CATEGORIES, TIERS, type Category, type Tier } from '../lib/types'
 import { useStore } from '../store/store'
+import { useI18n } from '../i18n/i18n'
 
 export function Plan() {
   const { state } = useStore()
+  const { t, tPlural, localizeAction } = useI18n()
   const [params, setParams] = useSearchParams()
   const [hideDone, setHideDone] = useState(false)
   const [category, setCategory] = useState<Category | 'all'>('all')
@@ -40,12 +42,14 @@ export function Plan() {
 
   if (q) {
     const results = actions
-      .filter(
-        (a) =>
-          a.title.toLowerCase().includes(q) ||
-          a.summary.toLowerCase().includes(q) ||
-          CATEGORIES[a.category].name.toLowerCase().includes(q),
-      )
+      .filter((a) => {
+        const loc = localizeAction(a)
+        return (
+          loc.title.toLowerCase().includes(q) ||
+          (loc.summary ?? '').toLowerCase().includes(q) ||
+          t(`category.${a.category}`).toLowerCase().includes(q)
+        )
+      })
       .filter(byCatAndDone)
       .sort(byQuickWin)
     return (
@@ -53,7 +57,7 @@ export function Plan() {
         <Header />
         {toolbar}
         <p className="text-sm text-slate-500">
-          {results.length} result{results.length === 1 ? '' : 's'} for “{query}”
+          {tPlural('plan.results', results.length, { query })}
         </p>
         <div className="grid gap-3">
           {results.map((a) => (
@@ -68,19 +72,19 @@ export function Plan() {
     <div className="space-y-6">
       <Header />
       {toolbar}
-      {tiers.map((t) => {
-        const list = actions.filter((a) => a.tier === t).filter(byCatAndDone).sort(byQuickWin)
+      {tiers.map((tier) => {
+        const list = actions.filter((a) => a.tier === tier).filter(byCatAndDone).sort(byQuickWin)
         if (list.length === 0) return null
-        const bt = breakdown.byTier[t]
+        const bt = breakdown.byTier[tier]
         return (
-          <section key={t}>
+          <section key={tier}>
             <div className="mb-3 flex items-baseline justify-between border-b border-ink-700/60 pb-2">
               <div>
                 <h2 className="text-lg font-bold text-slate-100">
-                  <span className="font-mono text-slate-500">T{t}</span> {TIERS[t].name}
-                  <span className="ml-2 text-sm font-normal text-slate-500">{TIERS[t].tagline}</span>
+                  <span className="font-mono text-slate-500">T{tier}</span> {t(`tier.${TIERS[tier].key}.name`)}
+                  <span className="ml-2 text-sm font-normal text-slate-500">{t(`tier.${TIERS[tier].key}.tagline`)}</span>
                 </h2>
-                <p className="mt-0.5 text-xs text-slate-500">{TIERS[t].who}</p>
+                <p className="mt-0.5 text-xs text-slate-500">{t(`tier.${TIERS[tier].key}.who`)}</p>
               </div>
               <span className="shrink-0 font-mono text-xs text-slate-500">
                 {bt.done}/{bt.total}
@@ -99,12 +103,11 @@ export function Plan() {
 }
 
 function Header() {
+  const { t } = useI18n()
   return (
     <header>
-      <h1 className="text-2xl font-bold text-slate-100">The Ladder</h1>
-      <p className="mt-1 text-sm text-slate-400">
-        Climb at your own pace. Cherry-pick high-impact actions from any tier — privacy is personal.
-      </p>
+      <h1 className="text-2xl font-bold text-slate-100">{t('plan.title')}</h1>
+      <p className="mt-1 text-sm text-slate-400">{t('plan.subtitle')}</p>
     </header>
   )
 }
@@ -132,15 +135,16 @@ function Toolbar({
   query,
   setQuery,
 }: ToolbarProps) {
+  const { t } = useI18n()
   return (
     <div className="card sticky top-2 z-10 space-y-2 p-3">
       <div className="flex flex-wrap items-center gap-2">
         <FilterChip active={focusTier === null} onClick={() => setParams({})}>
-          All tiers
+          {t('plan.allTiers')}
         </FilterChip>
-        {([1, 2, 3, 4] as Tier[]).map((t) => (
-          <FilterChip key={t} active={focusTier === t} onClick={() => setParams({ tier: String(t) })}>
-            T{t} {TIERS[t].name}
+        {([1, 2, 3, 4] as Tier[]).map((tier) => (
+          <FilterChip key={tier} active={focusTier === tier} onClick={() => setParams({ tier: String(tier) })}>
+            T{tier} {t(`tier.${TIERS[tier].key}.name`)}
           </FilterChip>
         ))}
         <span className="mx-1 hidden h-5 w-px bg-ink-700 sm:block" />
@@ -148,27 +152,27 @@ function Toolbar({
           className="input max-w-[10rem] py-1.5 text-xs"
           value={category}
           onChange={(e) => setCategory(e.target.value as Category | 'all')}
-          aria-label="Filter by category"
+          aria-label={t('plan.filterByCategory')}
         >
-          <option value="all">All categories</option>
+          <option value="all">{t('plan.allCategories')}</option>
           {usedCategories.map((c) => (
             <option key={c} value={c}>
-              {CATEGORIES[c].icon} {CATEGORIES[c].name}
+              {CATEGORIES[c].icon} {t(`category.${c}`)}
             </option>
           ))}
         </select>
         <label className="ml-auto flex cursor-pointer items-center gap-2 text-xs text-slate-400">
           <input type="checkbox" checked={hideDone} onChange={(e) => setHideDone(e.target.checked)} className="accent-ghost" />
-          Hide completed
+          {t('plan.hideCompleted')}
         </label>
       </div>
       <input
         className="input py-1.5 text-sm"
         type="search"
-        placeholder="Search all actions… (e.g. “Spokeo”, “2FA”, “email”)"
+        placeholder={t('plan.searchPlaceholder')}
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        aria-label="Search actions"
+        aria-label={t('plan.searchAria')}
       />
     </div>
   )

@@ -5,18 +5,13 @@ import { TIERS, type Country, type Tier, emptyProfile } from '../lib/types'
 import { COUNTRIES, COUNTRY_GROUPS, authorityFor, regionForCountry } from '../data/countries'
 import { adversaryFor } from '../lib/adversary'
 import { useStore } from '../store/store'
+import { useI18n } from '../i18n/i18n'
 
-const CONCERNS = [
-  { id: 'recruiters', label: 'People Googling me (dates, recruiters)' },
-  { id: 'brokers', label: 'Data brokers selling my info' },
-  { id: 'bigtech', label: 'Big Tech profiling & ads' },
-  { id: 'breaches', label: 'Breaches & account takeover' },
-  { id: 'stalking', label: 'A specific person finding me' },
-  { id: 'spam', label: 'Spam calls, texts & junk mail' },
-]
+const CONCERN_IDS = ['recruiters', 'brokers', 'bigtech', 'breaches', 'stalking', 'spam'] as const
 
 export function Onboarding() {
   const { completeOnboarding } = useStore()
+  const { t } = useI18n()
   const navigate = useNavigate()
   const [step, setStep] = useState(0)
   const [country, setCountry] = useState<Country | ''>('')
@@ -49,35 +44,35 @@ export function Onboarding() {
             <div className="mb-5 flex items-center gap-3">
               <ScoreRing score={0} size={64} label={false} />
               <div>
-                <h1 className="text-2xl font-bold text-slate-100">Vanish</h1>
-                <p className="text-sm text-slate-400">Disappear from the internet, one tier at a time.</p>
+                <h1 className="text-2xl font-bold text-slate-100">{t('app.name')}</h1>
+                <p className="text-sm text-slate-400">{t('onboarding.subtitle')}</p>
               </div>
             </div>
             <ul className="mb-6 space-y-2 text-sm text-slate-300">
-              <li className="flex gap-2"><span className="text-ghost">⬡</span> Runs 100% on your device. No account, no servers, no tracking.</li>
-              <li className="flex gap-2"><span className="text-ghost">☰</span> A guided ladder of real removal actions, from tidy-up to fully ghost.</li>
-              <li className="flex gap-2"><span className="text-ghost">✍️</span> Generates GDPR/CCPA deletion letters you send yourself.</li>
+              <li className="flex gap-2"><span className="text-ghost">⬡</span> {t('onboarding.bullet1')}</li>
+              <li className="flex gap-2"><span className="text-ghost">☰</span> {t('onboarding.bullet2')}</li>
+              <li className="flex gap-2"><span className="text-ghost">✍️</span> {t('onboarding.bullet3')}</li>
             </ul>
             <p className="mb-5 text-xs text-slate-500">
-              Three quick questions tailor your plan. Your answers never leave this device.
+              {t('onboarding.privacyNote')}
             </p>
             <button className="btn-primary w-full" onClick={() => setStep(1)}>
-              Start →
+              {t('onboarding.start')}
             </button>
           </>
         )}
 
         {step === 1 && (
-          <Step title="Where are you?" hint="Tailors which brokers and legal rights apply — and names your data-protection authority in letters.">
+          <Step title={t('onboarding.step1.title')} hint={t('onboarding.step1.hint')}>
             <select
               className="input"
               value={country}
               onChange={(e) => setCountry(e.target.value as Country)}
-              aria-label="Country"
+              aria-label={t('settings.country')}
             >
-              <option value="">Select your country…</option>
+              <option value="">{t('onboarding.selectCountry')}</option>
               {COUNTRY_GROUPS.map((g) => (
-                <optgroup key={g.label} label={g.label}>
+                <optgroup key={g.key} label={t(`countryGroup.${g.key}`)}>
                   {g.codes.map((c) => (
                     <option key={c} value={c}>
                       {COUNTRIES[c].flag} {COUNTRIES[c].name}
@@ -88,7 +83,7 @@ export function Onboarding() {
             </select>
             {authority && (
               <p className="mt-3 text-xs text-slate-500">
-                Your supervisory authority: <span className="text-slate-300">{authority.name}</span>
+                {t('onboarding.authority')} <span className="text-slate-300">{authority.name}</span>
               </p>
             )}
             <Nav onBack={() => setStep(0)} onNext={() => setStep(2)} nextDisabled={!country} />
@@ -96,11 +91,11 @@ export function Onboarding() {
         )}
 
         {step === 2 && (
-          <Step title="What worries you most?" hint="Pick any. We’ll surface the matching actions first.">
+          <Step title={t('onboarding.step2.title')} hint={t('onboarding.step2.hint')}>
             <div className="grid gap-2">
-              {CONCERNS.map((c) => (
-                <Choice key={c.id} active={concerns.includes(c.id)} onClick={() => toggle(c.id)}>
-                  {c.label}
+              {CONCERN_IDS.map((id) => (
+                <Choice key={id} active={concerns.includes(id)} onClick={() => toggle(id)}>
+                  {t(`onboarding.concern.${id}`)}
                 </Choice>
               ))}
             </div>
@@ -109,41 +104,50 @@ export function Onboarding() {
         )}
 
         {step === 3 && (
-          <Step title="How far do you want to go?" hint="A target, not a cage — you can climb higher anytime.">
+          <Step title={t('onboarding.step3.title')} hint={t('onboarding.step3.hint')}>
             {recommendation && (
               <div className="mb-4 rounded-xl border border-ghost/30 bg-ghost/5 p-3 text-sm">
                 <p className="text-slate-300">
-                  Based on your concerns, your main adversary is <span className="text-ghost-bright">{recommendation.adversary}</span>.
+                  {t('onboarding.adversaryLead', { adversary: t(`adversary.${recommendation.concernId}`) })}
                 </p>
-                <p className="mt-1 text-xs text-slate-400">{recommendation.rationale}</p>
+                <p className="mt-1 text-xs text-slate-400">
+                  {t('onboarding.rationale', {
+                    adversary: t(`adversary.${recommendation.concernId}`),
+                    tier: t(`tier.${TIERS[recommendation.recommendedTier].key}.name`),
+                  })}
+                </p>
                 {targetTier !== recommendation.recommendedTier && (
                   <button
                     className="btn-ghost btn-sm mt-2"
                     onClick={() => setTargetTier(recommendation.recommendedTier)}
                   >
-                    Use recommended: T{recommendation.recommendedTier} · {TIERS[recommendation.recommendedTier].name}
+                    {t('onboarding.useRecommended', {
+                      tier: recommendation.recommendedTier,
+                      name: t(`tier.${TIERS[recommendation.recommendedTier].key}.name`),
+                    })}
                   </button>
                 )}
               </div>
             )}
             <div className="grid gap-2">
-              {([1, 2, 3, 4] as Tier[]).map((t) => (
-                <Choice key={t} active={targetTier === t} onClick={() => setTargetTier(t)}>
+              {([1, 2, 3, 4] as Tier[]).map((tier) => (
+                <Choice key={tier} active={targetTier === tier} onClick={() => setTargetTier(tier)}>
                   <div className="text-left">
                     <div className="font-semibold">
-                      T{t} · {TIERS[t].name} <span className="font-normal text-slate-500">— {TIERS[t].tagline}</span>
+                      T{tier} · {t(`tier.${TIERS[tier].key}.name`)}{' '}
+                      <span className="font-normal text-slate-500">— {t(`tier.${TIERS[tier].key}.tagline`)}</span>
                     </div>
-                    <div className="text-xs text-slate-500">{TIERS[t].who}</div>
+                    <div className="text-xs text-slate-500">{t(`tier.${TIERS[tier].key}.who`)}</div>
                   </div>
                 </Choice>
               ))}
             </div>
             <div className="mt-5 flex gap-2">
               <button className="btn-ghost" onClick={() => setStep(2)}>
-                ← Back
+                {t('common.back')}
               </button>
               <button className="btn-primary flex-1" onClick={finish}>
-                Build my plan →
+                {t('onboarding.build')}
               </button>
             </div>
           </Step>
@@ -177,13 +181,14 @@ function Choice({ active, onClick, children }: { active: boolean; onClick: () =>
 }
 
 function Nav({ onBack, onNext, nextDisabled }: { onBack: () => void; onNext: () => void; nextDisabled?: boolean }) {
+  const { t } = useI18n()
   return (
     <div className="mt-5 flex gap-2">
       <button className="btn-ghost" onClick={onBack}>
-        ← Back
+        {t('common.back')}
       </button>
       <button className="btn-primary flex-1 disabled:cursor-not-allowed disabled:opacity-40" onClick={onNext} disabled={nextDisabled}>
-        Next →
+        {t('common.next')}
       </button>
     </div>
   )
