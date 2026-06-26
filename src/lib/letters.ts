@@ -6,9 +6,16 @@ export interface LetterDef {
   law: string
   blurb: string
   subject: string
-  /** Builds the letter body from the user's locally-stored profile + the target org. */
-  body: (p: Profile, org: string) => string
+  /** Builds the letter body from the user's locally-stored profile, the target
+   *  org, and (for GDPR letters) the name of their supervisory authority. */
+  body: (p: Profile, org: string, authority?: string) => string
 }
+
+/** Escalation clause naming the competent authority, when we know it. */
+const escalation = (authority?: string) =>
+  `Should you fail to respond within the statutory period, or refuse this request without valid legal grounds, I reserve the right to lodge a complaint with ${
+    authority || 'my supervisory authority'
+  } and to pursue any further legal remedy available to me.`
 
 const sig = (p: Profile) =>
   [p.name || '[Your full name]', p.email || '[Your email]', p.address || '[Your postal address]']
@@ -23,7 +30,7 @@ export const LETTERS: Record<LetterTemplate, LetterDef> = {
     blurb:
       'Demand an EU/UK-regulated organisation delete all personal data they hold about you. They must respond within one month.',
     subject: 'Request for erasure of personal data under Article 17 GDPR',
-    body: (p, org) => `To the Data Protection Officer / Privacy Team at ${org || '[Organisation]'},
+    body: (p, org, authority) => `To the Data Protection Officer / Privacy Team at ${org || '[Organisation]'},
 
 I am writing to exercise my right to erasure under Article 17 of the General Data Protection Regulation (GDPR).
 
@@ -39,6 +46,8 @@ Please also:
 
 Under Article 12(3) GDPR you must respond within one month of receipt. If you do not hold any data about me, please confirm that explicitly.
 
+${escalation(authority)}
+
 Yours faithfully,
 ${p.name || '[Your full name]'}`,
   },
@@ -50,7 +59,7 @@ ${p.name || '[Your full name]'}`,
     blurb:
       'See exactly what an organisation holds on you and where it came from — the reconnaissance step before erasure.',
     subject: 'Subject Access Request under Article 15 GDPR',
-    body: (p, org) => `To the Data Protection Officer / Privacy Team at ${org || '[Organisation]'},
+    body: (p, org, authority) => `To the Data Protection Officer / Privacy Team at ${org || '[Organisation]'},
 
 I am exercising my right of access under Article 15 of the GDPR. Please provide me with:
 
@@ -66,6 +75,8 @@ My identifying details are:
 ${sig(p)}
 
 Please provide this information within one month, free of charge, in a commonly used electronic format, as required by Articles 12 and 15 GDPR.
+
+${escalation(authority)}
 
 Yours faithfully,
 ${p.name || '[Your full name]'}`,
@@ -98,9 +109,9 @@ ${p.name || '[Your full name]'}`,
   },
 }
 
-export function renderLetter(template: LetterTemplate, profile: Profile, org: string) {
+export function renderLetter(template: LetterTemplate, profile: Profile, org: string, authority?: string) {
   const def = LETTERS[template]
-  return { subject: def.subject, body: def.body(profile, org) }
+  return { subject: def.subject, body: def.body(profile, org, authority) }
 }
 
 export function mailtoHref(to: string, subject: string, body: string): string {

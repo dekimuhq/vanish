@@ -1,10 +1,9 @@
 import { useRef, useState } from 'react'
 import { TierBadge } from '../components/Pills'
 import { sanitize } from '../store/store'
-import { TIERS, type Region, type Tier } from '../lib/types'
+import { TIERS, type Country, type Tier } from '../lib/types'
+import { COUNTRIES, COUNTRY_GROUPS, authorityFor, regionForCountry } from '../data/countries'
 import { useStore } from '../store/store'
-
-const REGIONS: Region[] = ['eu', 'uk', 'us', 'other']
 
 export function Settings() {
   const { state, updateProfile, exportJSON, importState, wipe } = useStore()
@@ -49,20 +48,39 @@ export function Settings() {
       <section className="card space-y-4 p-5">
         <h2 className="font-semibold text-slate-100">Your plan</h2>
         <label className="block">
-          <span className="mb-1 block text-xs font-medium text-slate-400">Region</span>
-          <div className="flex flex-wrap gap-2">
-            {REGIONS.map((r) => (
-              <button
-                key={r}
-                onClick={() => updateProfile({ region: r })}
-                className={`pill border px-3 py-1.5 text-sm uppercase ${
-                  state.profile.region === r ? 'border-ghost/40 bg-ghost/10 text-ghost-bright' : 'border-ink-700 text-slate-400'
-                }`}
-              >
-                {r}
-              </button>
+          <span className="mb-1 block text-xs font-medium text-slate-400">Country</span>
+          <select
+            className="input"
+            value={state.profile.country ?? ''}
+            onChange={(e) => {
+              const c = (e.target.value || undefined) as Country | undefined
+              updateProfile({ country: c, region: regionForCountry(c) })
+            }}
+          >
+            <option value="">Not set</option>
+            {COUNTRY_GROUPS.map((g) => (
+              <optgroup key={g.label} label={g.label}>
+                {g.codes.map((c) => (
+                  <option key={c} value={c}>
+                    {COUNTRIES[c].flag} {COUNTRIES[c].name}
+                  </option>
+                ))}
+              </optgroup>
             ))}
-          </div>
+          </select>
+          {(() => {
+            const auth = authorityFor(state.profile.country)
+            return auth ? (
+              <p className="mt-2 text-xs text-slate-500">
+                Supervisory authority:{' '}
+                <a className="text-ghost-bright hover:underline" href={auth.url} target="_blank" rel="noopener noreferrer">
+                  {auth.name} ↗
+                </a>
+              </p>
+            ) : (
+              <p className="mt-2 text-xs text-slate-500">Region: {state.profile.region.toUpperCase()}</p>
+            )
+          })()}
         </label>
 
         <label className="block">

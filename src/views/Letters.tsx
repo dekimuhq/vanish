@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { LETTERS, mailtoHref, renderLetter } from '../lib/letters'
 import type { LetterTemplate, Region } from '../lib/types'
+import { authorityFor, countryInfo } from '../data/countries'
 import { useStore } from '../store/store'
 
 const REGION_DEFAULT: Record<Region, LetterTemplate> = {
@@ -21,9 +22,12 @@ export function Letters() {
   const [copied, setCopied] = useState(false)
 
   const def = LETTERS[template]
+  const authority = authorityFor(state.profile.country)
+  const country = countryInfo(state.profile.country)
+  const isGdpr = template === 'gdpr-erasure' || template === 'gdpr-access'
   const { subject, body } = useMemo(
-    () => renderLetter(template, state.profile, org),
-    [template, state.profile, org],
+    () => renderLetter(template, state.profile, org, authority?.name),
+    [template, state.profile, org, authority],
   )
 
   async function copy() {
@@ -75,6 +79,20 @@ export function Letters() {
           <div className="card p-4">
             <div className="text-xs font-semibold uppercase tracking-wide text-ghost-dim">{def.law}</div>
             <p className="mt-1 text-sm text-slate-400">{def.blurb}</p>
+            {isGdpr && authority && country && (
+              <p className="mt-3 border-t border-ink-700/60 pt-3 text-xs text-slate-400">
+                <span className="text-slate-500">Your supervisory authority ({country.flag} {country.name}):</span>{' '}
+                <a className="text-ghost-bright hover:underline" href={authority.url} target="_blank" rel="noopener noreferrer">
+                  {authority.name} ↗
+                </a>
+                <span className="mt-1 block text-slate-500">Named in the letter — escalate here if you’re ignored.</span>
+              </p>
+            )}
+            {isGdpr && !authority && (
+              <p className="mt-3 border-t border-ink-700/60 pt-3 text-xs text-slate-500">
+                Set your country in Settings to name your supervisory authority in this letter.
+              </p>
+            )}
           </div>
 
           <Field label="Recipient organisation" value={org} onChange={setOrg} placeholder="e.g. Spokeo, Inc." />

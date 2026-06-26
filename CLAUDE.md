@@ -12,6 +12,7 @@ Vite + React 18 + TS + Tailwind + vite-plugin-pwa + Vitest. HashRouter (works fr
 
 ## Where things live
 - `src/data/catalog.ts` — the 86-action catalog (the product). URLs verified ~2026-06; sourced from `docs/research/`.
+- `src/data/countries.ts` — EU-27 + UK/US/other table with each country's GDPR supervisory authority. `Profile.country` (optional) drives the authority named in letters; `region` (derived via `regionForCountry`) stays the action-filtering backbone. Next slice: per-action `countries` targeting for country-specific brokers/registers.
 - `src/lib/{types,score,letters,select}.ts` — model + logic. `src/views/*` — screens. `src/components/*` — shared UI.
 
 ## Working rules

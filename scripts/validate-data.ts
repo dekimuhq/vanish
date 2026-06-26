@@ -2,6 +2,7 @@
 //   npm run validate:data
 // Verifies catalog integrity + that every letter reference resolves. Exits non-zero on problems.
 import { ACTIONS } from '../src/data/catalog'
+import { COUNTRIES, EU_COUNTRIES, regionForCountry } from '../src/data/countries'
 import { LETTERS } from '../src/lib/letters'
 import { CATEGORIES, TIERS } from '../src/lib/types'
 
@@ -24,8 +25,27 @@ for (const a of ACTIONS) {
   if (a.letter && !LETTERS[a.letter]) problems.push(`${a.id}: unknown letter ${a.letter}`)
 }
 
+// Country table: EU-27 complete, codes consistent, authority URLs https.
+if (EU_COUNTRIES.length !== 27) problems.push(`EU list has ${EU_COUNTRIES.length} countries, expected 27`)
+for (const [code, info] of Object.entries(COUNTRIES)) {
+  if (info.code !== code) problems.push(`country ${code}: code mismatch (${info.code})`)
+  if (regionForCountry(code as never) !== info.region) problems.push(`country ${code}: region mapping mismatch`)
+  if (info.authority) {
+    try {
+      if (new URL(info.authority.url).protocol !== 'https:') problems.push(`country ${code}: non-https authority url`)
+    } catch {
+      problems.push(`country ${code}: invalid authority url ${info.authority.url}`)
+    }
+  }
+}
+for (const code of EU_COUNTRIES) {
+  if (COUNTRIES[code].region !== 'eu') problems.push(`EU country ${code} not mapped to region 'eu'`)
+  if (!COUNTRIES[code].authority) problems.push(`EU country ${code} missing supervisory authority`)
+}
+
 const counts = [1, 2, 3, 4].map((t) => `T${t}=${ACTIONS.filter((a) => a.tier === t).length}`)
 console.log(`Catalog: ${ACTIONS.length} actions (${counts.join(' ')}), ${Object.keys(LETTERS).length} letters`)
+console.log(`Countries: ${Object.keys(COUNTRIES).length} (${EU_COUNTRIES.length} EU + UK/US/other)`)
 
 if (problems.length) {
   console.error(`\n✗ ${problems.length} problem(s):`)

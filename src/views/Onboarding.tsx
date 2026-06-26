@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ScoreRing } from '../components/ScoreRing'
-import { TIERS, type Region, type Tier, emptyProfile } from '../lib/types'
+import { TIERS, type Country, type Tier, emptyProfile } from '../lib/types'
+import { COUNTRIES, COUNTRY_GROUPS, authorityFor, regionForCountry } from '../data/countries'
 import { useStore } from '../store/store'
 
 const CONCERNS = [
@@ -13,26 +14,28 @@ const CONCERNS = [
   { id: 'spam', label: 'Spam calls, texts & junk mail' },
 ]
 
-const REGIONS: { id: Region; label: string }[] = [
-  { id: 'eu', label: 'EU' },
-  { id: 'uk', label: 'UK' },
-  { id: 'us', label: 'US' },
-  { id: 'other', label: 'Elsewhere' },
-]
-
 export function Onboarding() {
   const { completeOnboarding } = useStore()
   const navigate = useNavigate()
   const [step, setStep] = useState(0)
-  const [region, setRegion] = useState<Region>('eu')
+  const [country, setCountry] = useState<Country | ''>('')
   const [concerns, setConcerns] = useState<string[]>([])
   const [targetTier, setTargetTier] = useState<Tier>(2)
 
   const toggle = (id: string) =>
     setConcerns((c) => (c.includes(id) ? c.filter((x) => x !== id) : [...c, id]))
 
+  const authority = country ? authorityFor(country) : undefined
+
   function finish() {
-    completeOnboarding({ ...emptyProfile(), region, concerns, targetTier })
+    const c = country || undefined
+    completeOnboarding({
+      ...emptyProfile(),
+      country: c,
+      region: regionForCountry(c),
+      concerns,
+      targetTier,
+    })
     navigate('/', { replace: true })
   }
 
@@ -63,15 +66,30 @@ export function Onboarding() {
         )}
 
         {step === 1 && (
-          <Step title="Where are you?" hint="Tailors which brokers and legal rights apply to you.">
-            <div className="grid grid-cols-2 gap-2">
-              {REGIONS.map((r) => (
-                <Choice key={r.id} active={region === r.id} onClick={() => setRegion(r.id)}>
-                  {r.label}
-                </Choice>
+          <Step title="Where are you?" hint="Tailors which brokers and legal rights apply — and names your data-protection authority in letters.">
+            <select
+              className="input"
+              value={country}
+              onChange={(e) => setCountry(e.target.value as Country)}
+              aria-label="Country"
+            >
+              <option value="">Select your country…</option>
+              {COUNTRY_GROUPS.map((g) => (
+                <optgroup key={g.label} label={g.label}>
+                  {g.codes.map((c) => (
+                    <option key={c} value={c}>
+                      {COUNTRIES[c].flag} {COUNTRIES[c].name}
+                    </option>
+                  ))}
+                </optgroup>
               ))}
-            </div>
-            <Nav onBack={() => setStep(0)} onNext={() => setStep(2)} />
+            </select>
+            {authority && (
+              <p className="mt-3 text-xs text-slate-500">
+                Your supervisory authority: <span className="text-slate-300">{authority.name}</span>
+              </p>
+            )}
+            <Nav onBack={() => setStep(0)} onNext={() => setStep(2)} nextDisabled={!country} />
           </Step>
         )}
 
@@ -140,13 +158,13 @@ function Choice({ active, onClick, children }: { active: boolean; onClick: () =>
   )
 }
 
-function Nav({ onBack, onNext }: { onBack: () => void; onNext: () => void }) {
+function Nav({ onBack, onNext, nextDisabled }: { onBack: () => void; onNext: () => void; nextDisabled?: boolean }) {
   return (
     <div className="mt-5 flex gap-2">
       <button className="btn-ghost" onClick={onBack}>
         ← Back
       </button>
-      <button className="btn-primary flex-1" onClick={onNext}>
+      <button className="btn-primary flex-1 disabled:cursor-not-allowed disabled:opacity-40" onClick={onNext} disabled={nextDisabled}>
         Next →
       </button>
     </div>

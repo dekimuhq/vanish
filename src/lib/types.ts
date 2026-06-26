@@ -75,12 +75,26 @@ export interface ProgressEntry {
 
 export type Region = 'us' | 'eu' | 'uk' | 'other'
 
+// ISO 3166-1 alpha-2 for the EU-27, plus coarse buckets for the UK, US, and
+// everywhere else. Each maps to a Region (see data/countries.ts) so the existing
+// region-based action filtering keeps working — country adds finer geographic
+// identity on top (e.g. the competent GDPR supervisory authority).
+export type Country =
+  | 'at' | 'be' | 'bg' | 'hr' | 'cy' | 'cz' | 'dk' | 'ee' | 'fi' | 'fr'
+  | 'de' | 'gr' | 'hu' | 'ie' | 'it' | 'lv' | 'lt' | 'lu' | 'mt' | 'nl'
+  | 'pl' | 'pt' | 'ro' | 'sk' | 'si' | 'es' | 'se'
+  | 'gb' | 'us' | 'ot'
+
 export interface Profile {
   /** Used only to prefill generated letters. Never leaves the device. */
   name: string
   email: string
   address: string
   region: Region
+  /** Specific country (EU-27 + UK/US/other). Drives the supervisory authority
+   *  named in letters and, in future, country-specific actions. Optional so
+   *  profiles created before the country layer keep working on `region` alone. */
+  country?: Country
   /** Self-selected ambition; controls which tiers are emphasised, not hard-gated. */
   targetTier: Tier
   /** Free-text concerns chosen at onboarding (stalking, employer, brokers, bigtech...). */
