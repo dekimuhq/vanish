@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* System font stack only — no web fonts are fetched, keeping the zero-network promise. */
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-ink-900 text-slate-200 antialiased;
+  background-image:
+    radial-gradient(900px 500px at 100% -5%, rgba(79, 209, 197, 0.07), transparent 60%),
+    radial-gradient(700px 400px at -10% 110%, rgba(79, 209, 197, 0.05), transparent 55%);
+  background-attachment: fixed;
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-ink-700/70 bg-ink-850/80 backdrop-blur-sm;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-ghost/60 disabled:opacity-40;
+  }
+  .btn-primary {
+    @apply btn bg-ghost text-ink-950 hover:bg-ghost-bright;
+  }
+  .btn-ghost {
+    @apply btn border border-ink-600 text-slate-200 hover:border-ghost/50 hover:text-ghost-bright;
+  }
+  .btn-sm {
+    @apply px-3 py-1.5 text-xs;
+  }
+  .pill {
+    @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-medium;
+  }
+  .input {
+    @apply w-full rounded-xl border border-ink-600 bg-ink-900/80 px-3 py-2 text-sm text-slate-100
+           placeholder:text-slate-500 focus:border-ghost/60 focus:outline-none focus:ring-1 focus:ring-ghost/40;
+  }
+  .link {
+    @apply text-ghost-bright underline-offset-2 hover:underline;
+  }
+}
+
+/* Print: strip app chrome so the Disappearance Plan prints clean on white. */
+@media print {
+  body {
+    background: #fff !important;
+  }
+  nav,
+  header.mb-6,
+  .print\:hidden {
+    display: none !important;
+  }
+  .card {
+    box-shadow: none;
+  }
+}
+
+/* Respect reduced-motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

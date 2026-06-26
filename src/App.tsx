@@ -1,0 +1,46 @@
+import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { Layout } from './components/Layout'
+import { useStore } from './store/store'
+import { Dashboard } from './views/Dashboard'
+import { Onboarding } from './views/Onboarding'
+import { Plan } from './views/Plan'
+import { Brokers } from './views/Brokers'
+import { Letters } from './views/Letters'
+import { Panic } from './views/Panic'
+import { Report } from './views/Report'
+import { Settings } from './views/Settings'
+
+export default function App() {
+  return (
+    <HashRouter>
+      <Gate />
+    </HashRouter>
+  )
+}
+
+function Gate() {
+  const { state } = useStore()
+  if (!state.onboarded) {
+    return (
+      <Routes>
+        <Route path="/welcome" element={<Onboarding />} />
+        <Route path="*" element={<Navigate to="/welcome" replace />} />
+      </Routes>
+    )
+  }
+  return (
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/plan" element={<Plan />} />
+        <Route path="/brokers" element={<Brokers />} />
+        <Route path="/letters" element={<Letters />} />
+        <Route path="/panic" element={<Panic />} />
+        <Route path="/report" element={<Report />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/welcome" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Layout>
+  )
+}

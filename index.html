@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <!--
+      Zero-exfiltration guarantee, enforced by the browser:
+      connect-src 'self' allows ONLY same-origin requests (needed for the service worker
+      to precache the app for offline use). No fetch/XHR/WebSocket/beacon can reach any
+      third party. img/style are kept tight too. External privacy sites open as top-level
+      navigations (user clicks a link), which CSP does not restrict.
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; connect-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; font-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'"
+    />
+    <meta name="theme-color" content="#0b0d10" />
+    <meta name="description" content="Vanish — disappear from the internet, one tier at a time. Fully offline, no accounts, no tracking." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+    <title>Vanish — Privacy Coach</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>Vanish needs JavaScript to run — but it runs entirely on your device and never sends data anywhere.</noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
