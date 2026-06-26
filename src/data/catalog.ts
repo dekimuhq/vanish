@@ -1407,6 +1407,169 @@ export const ACTIONS: Action[] = [
     countries: ['ie'],
     panicPriority: 4,
   },
+
+  // ─────────────── Applied privacy research (2026-06-26) ───────────────
+  // Spain has no US-style "credit freeze"; the equivalent protection is
+  // periodically reading your credit files to catch fraud opened in your name.
+  {
+    id: 'es-asnef',
+    title: 'Check your ASNEF credit file (Equifax Iberia)',
+    tier: 1,
+    category: 'finance',
+    summary:
+      'ASNEF (run by Equifax) is Spain’s main delinquency/credit file — fraudulent unpaid accounts opened in your name land here. Spain has no pre-emptive “freeze”, so reading the file is how you catch it.',
+    steps: [
+      'On Equifax’s site, find “derecho de acceso” (right of access) and submit a request with a copy of your DNI.',
+      'They must answer within one month, free.',
+      'Check for any account or debt you don’t recognise — that’s the fraud signal.',
+      'Repeat about once a year, and after any breach notification.',
+    ],
+    url: 'https://www.equifax.es',
+    urlLabel: 'Equifax España',
+    effort: 'low',
+    impact: 'high',
+    letter: 'gdpr-access',
+    countries: ['es'],
+  },
+  {
+    id: 'es-cirbe',
+    title: 'Request your CIRBE report (Banco de España)',
+    tier: 2,
+    category: 'finance',
+    summary:
+      'CIRBE is the Banco de España central credit register — it lists every loan/credit registered under your ID. The cleanest way to spot credit taken out in your name.',
+    steps: [
+      'Go to the Banco de España Sede Electrónica → CIRBE → request your report.',
+      'Identify with certificado digital or Cl@ve (or request by post / in person with your DNI).',
+      'Free and usually instant online.',
+      'Review for any loan you didn’t open.',
+    ],
+    url: 'https://sedeelectronica.bde.es',
+    urlLabel: 'Banco de España (sede)',
+    effort: 'med',
+    impact: 'med',
+    countries: ['es'],
+  },
+  {
+    id: 'uk-cifas-pr',
+    title: 'Add Cifas Protective Registration (UK)',
+    tier: 2,
+    category: 'finance',
+    summary:
+      'The UK’s closest thing to a credit freeze: a flag on your file telling lenders to do extra ID checks before opening credit in your name. Paid (~£30 for two years), worth it if you’re at elevated risk.',
+    steps: [
+      'Apply on the Cifas website for Protective Registration.',
+      'Lenders then see the flag and must take extra steps to verify it’s really you.',
+      'Expect your own credit applications to be slower while it’s active — that’s the point.',
+    ],
+    url: 'https://www.cifas.org.uk',
+    urlLabel: 'Cifas',
+    effort: 'low',
+    impact: 'high',
+    countries: ['gb'],
+  },
+  {
+    id: 'pihole',
+    title: 'Block trackers network-wide with Pi-hole',
+    tier: 3,
+    category: 'network',
+    summary:
+      'A Pi-hole sinkholes tracker and ad domains for every device on your network — phones, TVs, the lot — at the DNS layer, before they ever connect. One box, whole-home coverage.',
+    steps: [
+      'Install Pi-hole on a Raspberry Pi or any always-on Linux box.',
+      'Point your router’s DNS at it so every device is covered automatically.',
+      'Add blocklists; review the query log to see what your devices were phoning home to.',
+    ],
+    url: 'https://pi-hole.net',
+    urlLabel: 'Pi-hole',
+    effort: 'high',
+    impact: 'med',
+    regions: ['all'],
+  },
+  {
+    id: 'code-word',
+    title: 'Set a family “code word” against voice-clone scams',
+    tier: 1,
+    category: 'accounts',
+    summary:
+      'AI can clone a voice from seconds of audio and fake a panicked “it’s me, send money” call. A shared family code word that only you know defeats it instantly — cheap, and one of the highest-leverage things you can do.',
+    steps: [
+      'Agree a word or phrase with close family that a stranger couldn’t guess.',
+      'Rule: any urgent money/secret request by call or message must include it, or it’s treated as fake.',
+      'Never store or send the word digitally where it could leak.',
+    ],
+    effort: 'low',
+    impact: 'med',
+    regions: ['all'],
+    internalTo: '/settings',
+    internalLabel: '🔑 Set your code word',
+  },
+  {
+    id: 'dont-pay-removers',
+    title: 'Don’t pay a data-broker removal service',
+    tier: 1,
+    category: 'data-brokers',
+    summary:
+      'Paid services (DeleteMe, Incogni…) scrub only a small slice of brokers, inflate their “listings removed” counts, and bill forever — and many glowing reviews are paid sponsorships. The opt-outs they charge for are the free ones in this app.',
+    steps: [
+      'Do the free broker opt-outs in the Brokers tier yourself — same brokers, no subscription.',
+      'Credit-bureau and inferred/marketing data mostly can’t be deleted by these services anyway.',
+      'If you value the convenience, fine — just know what you’re actually buying.',
+    ],
+    effort: 'low',
+    impact: 'med',
+    regions: ['all'],
+  },
+  {
+    id: 'poison-profile',
+    title: 'Poison, don’t delete — dilute your profile',
+    tier: 4,
+    category: 'social',
+    summary:
+      'Brokers and platforms re-list and rebuild, so deletion is a treadmill. Adding plausible noise to your OWN low-stakes accounts degrades anyone’s confidence in which data is the real you. The Decoy Kit generates the noise.',
+    steps: [
+      'Use only accounts that are yours; aim for bland and generic, not a convincing fake person.',
+      'Never impersonate anyone, write fake reviews, or sign up other people.',
+      'Open the Decoy Kit for name variants and filler bios you can paste in.',
+    ],
+    effort: 'med',
+    impact: 'med',
+    regions: ['all'],
+    internalTo: '/decoy',
+    internalLabel: '⬡ Open Decoy Kit',
+  },
+  {
+    id: 'vary-writing-style',
+    title: 'Vary your writing style across identities',
+    tier: 4,
+    category: 'accounts',
+    summary:
+      'Stylometry can link your accounts by how you write — favourite phrases, punctuation, emoji habits — even with no shared name or IP. If you keep separate identities, write them differently.',
+    steps: [
+      'Pick deliberately different habits per identity: sentence length, punctuation, capitalisation, emoji use.',
+      'Avoid signature phrases and in-jokes that recur across accounts.',
+      'For high stakes, draft, then rewrite in a different voice before posting.',
+    ],
+    effort: 'med',
+    impact: 'low',
+    regions: ['all'],
+  },
+  {
+    id: 'behavioral-fingerprint',
+    title: 'Know your behavioral fingerprint',
+    tier: 3,
+    category: 'devices',
+    summary:
+      'Beyond cookies, sites profile how you behave — typing rhythm, scroll speed, even phone-accelerometer gait. You can’t fully erase it, but anti-fingerprinting browsers and separate profiles blunt it.',
+    steps: [
+      'Use a browser that resists fingerprinting (Tor Browser, or Brave with fingerprinting protection on).',
+      'Keep separate browser profiles/devices for separate identities so behaviour can’t be cross-linked.',
+      'Disable motion/sensor access for sites that don’t need it.',
+    ],
+    effort: 'med',
+    impact: 'low',
+    regions: ['all'],
+  },
 ]
 
 export const ACTIONS_BY_ID: Record<string, Action> = Object.fromEntries(ACTIONS.map((a) => [a.id, a]))

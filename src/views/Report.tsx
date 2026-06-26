@@ -29,6 +29,12 @@ export function Report() {
         </div>
       </div>
 
+      <p className="rounded-xl border border-ink-700/60 bg-ink-900/40 p-3 text-xs text-slate-400 print:hidden">
+        <span className="text-ghost">⬡</span> Vanish raises the <em>cost</em> of finding you. Against a funded,
+        determined adversary nothing is absolute — and the thing that gets people caught is rarely the tech, it’s
+        consistency and ego (a reused handle, one slip). Match your effort to who you’re actually hiding from.
+      </p>
+
       <article className="card space-y-6 p-6 print:border-none print:bg-white print:p-0 print:text-black">
         <header className="flex items-baseline justify-between border-b border-ink-700/60 pb-3 print:border-black/20">
           <div>

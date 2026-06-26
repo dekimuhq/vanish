@@ -9,6 +9,7 @@ import { Letters } from './views/Letters'
 import { Panic } from './views/Panic'
 import { Report } from './views/Report'
 import { Settings } from './views/Settings'
+import { Decoy } from './views/Decoy'
 
 export default function App() {
   return (
@@ -38,6 +39,7 @@ function Gate() {
         <Route path="/panic" element={<Panic />} />
         <Route path="/report" element={<Report />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/decoy" element={<Decoy />} />
         <Route path="/welcome" element={<Navigate to="/" replace />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

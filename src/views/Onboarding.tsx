@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { ScoreRing } from '../components/ScoreRing'
 import { TIERS, type Country, type Tier, emptyProfile } from '../lib/types'
 import { COUNTRIES, COUNTRY_GROUPS, authorityFor, regionForCountry } from '../data/countries'
+import { adversaryFor } from '../lib/adversary'
 import { useStore } from '../store/store'
 
 const CONCERNS = [
@@ -26,6 +27,7 @@ export function Onboarding() {
     setConcerns((c) => (c.includes(id) ? c.filter((x) => x !== id) : [...c, id]))
 
   const authority = country ? authorityFor(country) : undefined
+  const recommendation = adversaryFor(concerns)
 
   function finish() {
     const c = country || undefined
@@ -108,6 +110,22 @@ export function Onboarding() {
 
         {step === 3 && (
           <Step title="How far do you want to go?" hint="A target, not a cage — you can climb higher anytime.">
+            {recommendation && (
+              <div className="mb-4 rounded-xl border border-ghost/30 bg-ghost/5 p-3 text-sm">
+                <p className="text-slate-300">
+                  Based on your concerns, your main adversary is <span className="text-ghost-bright">{recommendation.adversary}</span>.
+                </p>
+                <p className="mt-1 text-xs text-slate-400">{recommendation.rationale}</p>
+                {targetTier !== recommendation.recommendedTier && (
+                  <button
+                    className="btn-ghost btn-sm mt-2"
+                    onClick={() => setTargetTier(recommendation.recommendedTier)}
+                  >
+                    Use recommended: T{recommendation.recommendedTier} · {TIERS[recommendation.recommendedTier].name}
+                  </button>
+                )}
+              </div>
+            )}
             <div className="grid gap-2">
               {([1, 2, 3, 4] as Tier[]).map((t) => (
                 <Choice key={t} active={targetTier === t} onClick={() => setTargetTier(t)}>

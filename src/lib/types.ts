@@ -60,6 +60,11 @@ export interface Action {
   recurDays?: number
   /** If set, this action can be fulfilled with a generated letter. */
   letter?: LetterTemplate
+  /** In-app route this action links to (e.g. the Decoy Kit), rendered as an
+   *  internal router link distinct from the external `url`. */
+  internalTo?: string
+  /** Label for the internal-link button. */
+  internalLabel?: string
   /** Region relevance — used to tailor the plan. 'all' shows everywhere. */
   regions?: Array<'us' | 'eu' | 'uk' | 'all'>
   /** Fine-grained country scope (EU-27 + UK/US codes). When set, the action
@@ -103,6 +108,9 @@ export interface Profile {
   targetTier: Tier
   /** Free-text concerns chosen at onboarding (stalking, employer, brokers, bigtech...). */
   concerns: string[]
+  /** Optional family "code word" to defeat AI voice-clone scams. Stored locally
+   *  only, like everything else. */
+  codeWord?: string
 }
 
 export interface AppState {

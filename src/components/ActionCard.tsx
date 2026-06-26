@@ -95,6 +95,11 @@ export function ActionCard({ action, showTier = true }: Props) {
                 ✍️ Generate letter
               </Link>
             )}
+            {action.internalTo && (
+              <Link className="btn-ghost btn-sm" to={action.internalTo}>
+                {action.internalLabel ?? 'Open tool'}
+              </Link>
+            )}
             {action.steps && (
               <button className="btn-ghost btn-sm" onClick={() => setOpen((o) => !o)} aria-expanded={open}>
                 {open ? 'Hide steps' : 'How-to'}

@@ -39,6 +39,39 @@ export function Settings() {
     e.target.value = ''
   }
 
+  function printCodeWordCard(word: string) {
+    // Offline-only: a blank window built with DOM APIs (textContent escapes the
+    // user value — no innerHTML/document.write), then printed. No network.
+    const w = window.open('', '_blank', 'width=420,height=280')
+    if (!w) return
+    const doc = w.document
+    doc.title = 'Vanish code word'
+    const style = doc.createElement('style')
+    style.textContent =
+      'body{font-family:system-ui,sans-serif;margin:0;display:grid;place-items:center;height:100vh}' +
+      '.card{border:2px dashed #6E7B8B;border-radius:12px;padding:24px 32px;text-align:center}' +
+      '.k{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#6E7B8B}' +
+      '.w{font-size:28px;font-weight:800;margin:8px 0}' +
+      '.n{font-size:11px;color:#555;max-width:280px}'
+    doc.head.appendChild(style)
+    const card = doc.createElement('div')
+    card.className = 'card'
+    const k = doc.createElement('div')
+    k.className = 'k'
+    k.textContent = 'Family code word'
+    const wd = doc.createElement('div')
+    wd.className = 'w'
+    wd.textContent = word
+    const n = doc.createElement('div')
+    n.className = 'n'
+    n.textContent =
+      'Any urgent money or secret request must include this word, or treat it as fake. Don’t text or email the word itself.'
+    card.append(k, wd, n)
+    doc.body.appendChild(card)
+    w.focus()
+    w.print()
+  }
+
   return (
     <div className="space-y-6">
       <header>
@@ -100,6 +133,31 @@ export function Settings() {
             ))}
           </div>
         </label>
+      </section>
+
+      <section className="card space-y-3 p-5" id="code-word">
+        <h2 className="font-semibold text-slate-100">🔑 Family code word</h2>
+        <p className="text-sm text-slate-400">
+          A shared word that defeats AI voice-clone “it’s me, send money” scams. Agree it with close family and stored
+          only on this device — never sent anywhere.
+        </p>
+        <input
+          className="input"
+          value={state.profile.codeWord ?? ''}
+          onChange={(e) => updateProfile({ codeWord: e.target.value || undefined })}
+          placeholder="e.g. blue penguin"
+          aria-label="Family code word"
+          autoComplete="off"
+        />
+        {state.profile.codeWord && (
+          <button className="btn-ghost btn-sm" onClick={() => printCodeWordCard(state.profile.codeWord!)}>
+            🖨 Print a wallet card
+          </button>
+        )}
+        <p className="text-xs text-slate-500">
+          Rule: any urgent money or secret request must include this word, or treat it as fake. Never send the word
+          itself by text or email.
+        </p>
       </section>
 
       <section className="card space-y-3 p-5">
