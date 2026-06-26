@@ -9,3 +9,6 @@ coverage
 dev-dist
 *.tsbuildinfo
 .gstack/
+
+# Internal product docs kept local, never published
+docs/
