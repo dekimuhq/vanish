@@ -835,6 +835,58 @@ export const ACTIONS: Action[] = [
     recurDays: BROKER_RECUR,
     panicPriority: 7,
   },
+  {
+    id: 'optout-at-ecg',
+    title: 'Add yourself to the ECG-Liste',
+    tier: 2,
+    category: 'data-brokers',
+    summary:
+      'Austria’s electronic-marketing exclusion list (run by RTR). Registering your address opts you out of unsolicited marketing email and SMS.',
+    url: 'https://www.rtr.at/TKP/service/ecg-liste/ECG-Liste.de.html',
+    urlLabel: 'ECG-Liste',
+    effort: 'low',
+    impact: 'low',
+    countries: ['at'],
+  },
+  {
+    id: 'optout-dk-robinson',
+    title: 'Join the Robinsonlisten',
+    tier: 2,
+    category: 'data-brokers',
+    summary:
+      'Denmark’s official advertising-protection list, run through the central person register (CPR). Blocks addressed advertising mail and marketing calls.',
+    url: 'https://www.borger.dk/bolig-og-flytning/beskyttelse-mod-reklamer/Robinsonlisten-markedsfoeringsbeskyttelse',
+    urlLabel: 'Robinsonlisten',
+    effort: 'low',
+    impact: 'med',
+    countries: ['dk'],
+  },
+  {
+    id: 'optout-fi-kieltopalvelu',
+    title: 'Register the marketing prohibition (ASML)',
+    tier: 2,
+    category: 'data-brokers',
+    summary:
+      'Finland’s Robinson opt-out, run by the marketing association ASML. Register to stop telephone and addressed direct marketing.',
+    url: 'https://asml.fi/kieltopalvelut/',
+    urlLabel: 'Kieltopalvelut',
+    effort: 'low',
+    impact: 'med',
+    countries: ['fi'],
+  },
+  {
+    id: 'optout-hr-nezovi',
+    title: 'Register with NE ZOVI',
+    tier: 2,
+    category: 'data-brokers',
+    summary:
+      'Croatia’s official do-not-call register (run by the regulator HAKOM). Free — you register through your telecom operator to block marketing calls.',
+    url: 'https://www.hakom.hr/hr/e-registar-ne-zovi/224',
+    urlLabel: 'NE ZOVI',
+    effort: 'low',
+    impact: 'med',
+    countries: ['hr'],
+  },
 
   // ───────────────────────── Tier 3 — Lock Down ─────────────────────────
   {
