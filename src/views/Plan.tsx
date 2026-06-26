@@ -13,7 +13,7 @@ export function Plan() {
   const [category, setCategory] = useState<Category | 'all'>('all')
   const [query, setQuery] = useState('')
 
-  const actions = actionsForRegion(state.profile.region)
+  const actions = actionsForRegion(state.profile.region, state.profile.country)
   const breakdown = computeScore(actions, state)
   const focusTier = params.get('tier') ? (Number(params.get('tier')) as Tier) : null
 

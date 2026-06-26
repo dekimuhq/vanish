@@ -11,8 +11,8 @@ Fully-offline privacy-coach PWA. Helps anyone remove their online persona across
 Vite + React 18 + TS + Tailwind + vite-plugin-pwa + Vitest. HashRouter (works from any sub-path / `file://`).
 
 ## Where things live
-- `src/data/catalog.ts` — the 86-action catalog (the product). URLs verified ~2026-06; sourced from `docs/research/`.
-- `src/data/countries.ts` — EU-27 + UK/US/other table with each country's GDPR supervisory authority. `Profile.country` (optional) drives the authority named in letters; `region` (derived via `regionForCountry`) stays the action-filtering backbone. Next slice: per-action `countries` targeting for country-specific brokers/registers.
+- `src/data/catalog.ts` — the 98-action catalog (the product). URLs verified ~2026-06; sourced from `docs/research/`. Actions may carry `countries` (EU-27/UK/US codes) for nation-specific opt-outs (national DM registers, Swedish/German people-search, UK/IE electoral roll) — these show only to that country and override `regions` (see `lib/select.ts`).
+- `src/data/countries.ts` — EU-27 + UK/US/other table with each country's GDPR supervisory authority. `Profile.country` (optional) drives the authority named in letters; `region` (derived via `regionForCountry`) stays the coarse action-filtering backbone, refined by per-action `countries`.
 - `src/lib/{types,score,letters,select}.ts` — model + logic. `src/views/*` — screens. `src/components/*` — shared UI.
 
 ## Working rules

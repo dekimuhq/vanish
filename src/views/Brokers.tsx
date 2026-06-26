@@ -5,11 +5,11 @@ import { useStore } from '../store/store'
 
 export function Brokers() {
   const { state } = useStore()
-  const brokers = actionsForRegion(state.profile.region)
+  const brokers = actionsForRegion(state.profile.region, state.profile.country)
     .filter((a) => a.category === 'data-brokers')
     .sort(byQuickWin)
   const done = brokers.filter((a) => state.progress[a.id]?.status === 'done').length
-  const rechecks = dueRechecks(actionsForRegion(state.profile.region), state)
+  const rechecks = dueRechecks(actionsForRegion(state.profile.region, state.profile.country), state)
 
   return (
     <div className="space-y-6">

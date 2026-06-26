@@ -19,7 +19,7 @@ const CONCERN_CATEGORIES: Record<string, Category[]> = {
 
 export function Dashboard() {
   const { state } = useStore()
-  const actions = actionsForRegion(state.profile.region)
+  const actions = actionsForRegion(state.profile.region, state.profile.country)
   const breakdown = computeScore(actions, state)
   const rechecks = dueRechecks(actions, state)
   const mo = momentum(state)

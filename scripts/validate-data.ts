@@ -23,6 +23,10 @@ for (const a of ACTIONS) {
     }
   }
   if (a.letter && !LETTERS[a.letter]) problems.push(`${a.id}: unknown letter ${a.letter}`)
+  if (a.countries) {
+    if (!a.countries.length) problems.push(`${a.id}: empty countries[] (omit the field instead)`)
+    for (const c of a.countries) if (!COUNTRIES[c]) problems.push(`${a.id}: unknown country ${c}`)
+  }
 }
 
 // Country table: EU-27 complete, codes consistent, authority URLs https.

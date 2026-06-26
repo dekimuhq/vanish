@@ -4,7 +4,7 @@ import { useStore } from '../store/store'
 
 export function Panic() {
   const { state } = useStore()
-  const actions = panicActions(state.profile.region)
+  const actions = panicActions(state.profile.region, state.profile.country)
   const done = actions.filter((a) => state.progress[a.id]?.status === 'done').length
 
   return (

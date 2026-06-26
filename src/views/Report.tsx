@@ -8,7 +8,7 @@ import { useStore } from '../store/store'
 // user save it as a PDF or paper checklist — fully offline, no generator needed.
 export function Report() {
   const { state } = useStore()
-  const actions = actionsForRegion(state.profile.region)
+  const actions = actionsForRegion(state.profile.region, state.profile.country)
   const breakdown = computeScore(actions, state)
   const today = new Date().toISOString().slice(0, 10)
 

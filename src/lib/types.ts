@@ -62,6 +62,10 @@ export interface Action {
   letter?: LetterTemplate
   /** Region relevance — used to tailor the plan. 'all' shows everywhere. */
   regions?: Array<'us' | 'eu' | 'uk' | 'all'>
+  /** Fine-grained country scope (EU-27 + UK/US codes). When set, the action
+   *  shows only to users in one of these countries and overrides `regions` —
+   *  for nation-specific opt-outs (a national register, a local people-search). */
+  countries?: Country[]
   /** Surface in the emergency Panic flow, with a priority (lower = sooner). */
   panicPriority?: number
 }
