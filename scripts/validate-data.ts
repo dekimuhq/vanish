@@ -1,13 +1,16 @@
 // Standalone data sanity check, runnable in CI without the test runner:
 //   npm run validate:data
 // Verifies catalog integrity + that every letter reference resolves. Exits non-zero on problems.
-import { ACTIONS } from '../src/data/catalog'
+import { ACTIONS, CATALOG_VERIFIED_AT, verifiedAtOf } from '../src/data/catalog'
 import { COUNTRIES, EU_COUNTRIES, regionForCountry } from '../src/data/countries'
 import { LETTERS } from '../src/lib/letters'
 import { CATEGORIES, TIERS } from '../src/lib/types'
 
 const problems: string[] = []
 const ids = new Set<string>()
+
+const isISODate = (s: string): boolean => /^\d{4}-\d{2}-\d{2}/.test(s) && !Number.isNaN(Date.parse(s))
+if (!isISODate(CATALOG_VERIFIED_AT)) problems.push(`CATALOG_VERIFIED_AT invalid: ${CATALOG_VERIFIED_AT}`)
 
 for (const a of ACTIONS) {
   if (ids.has(a.id)) problems.push(`duplicate id: ${a.id}`)
@@ -23,6 +26,12 @@ for (const a of ACTIONS) {
     }
   }
   if (a.letter && !LETTERS[a.letter]) problems.push(`${a.id}: unknown letter ${a.letter}`)
+  if (a.verifiedAt !== undefined) {
+    if (!isISODate(a.verifiedAt)) problems.push(`${a.id}: invalid verifiedAt ${a.verifiedAt}`)
+    else if (Date.parse(a.verifiedAt) > Date.now()) problems.push(`${a.id}: verifiedAt is in the future`)
+  }
+  // Always resolvable to a date (baseline or override) — provenance is total.
+  if (!isISODate(verifiedAtOf(a))) problems.push(`${a.id}: unresolved verifiedAt`)
   if (a.countries) {
     if (!a.countries.length) problems.push(`${a.id}: empty countries[] (omit the field instead)`)
     for (const c of a.countries) if (!COUNTRIES[c]) problems.push(`${a.id}: unknown country ${c}`)
