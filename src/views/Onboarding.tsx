@@ -1,28 +1,47 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { CatMark } from '../components/CatMark'
 import { TIERS, type Country, type Tier, emptyProfile } from '../lib/types'
 import { COUNTRIES, COUNTRY_GROUPS, authorityFor, regionForCountry } from '../data/countries'
 import { adversaryFor } from '../lib/adversary'
 import { useStore } from '../store/store'
+import { sanitize } from '../store/store'
+import { decryptBackup, BackupError } from '../lib/backup'
 import { useI18n } from '../i18n/i18n'
 
 const CONCERN_IDS = ['recruiters', 'brokers', 'bigtech', 'breaches', 'stalking', 'spam'] as const
 
 export function Onboarding() {
-  const { completeOnboarding } = useStore()
+  const { completeOnboarding, importState } = useStore()
   const { t } = useI18n()
   const navigate = useNavigate()
   const [step, setStep] = useState(0)
   const [country, setCountry] = useState<Country | ''>('')
   const [concerns, setConcerns] = useState<string[]>([])
   const [targetTier, setTargetTier] = useState<Tier>(2)
+  const restoreRef = useRef<HTMLInputElement>(null)
+  const [restorePass, setRestorePass] = useState('')
+  const [restoreErr, setRestoreErr] = useState(false)
 
   const toggle = (id: string) =>
     setConcerns((c) => (c.includes(id) ? c.filter((x) => x !== id) : [...c, id]))
 
   const authority = country ? authorityFor(country) : undefined
   const recommendation = adversaryFor(concerns)
+
+  async function onRestore(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    e.target.value = ''
+    if (!file || !restorePass) { setRestoreErr(!file ? false : true); return }
+    try {
+      const raw = await decryptBackup(file, restorePass)
+      importState(sanitize(raw))
+      navigate('/', { replace: true })
+    } catch (err) {
+      setRestoreErr(err instanceof BackupError)
+      if (!(err instanceof BackupError)) throw err
+    }
+  }
 
   function finish() {
     const c = country || undefined
@@ -57,6 +76,22 @@ export function Onboarding() {
             <button className="btn-primary w-full" onClick={() => setStep(1)}>
               {t('onboarding.start')}
             </button>
+            <div className="mt-5 border-t border-ink-700/60 pt-4">
+              <p className="mb-2 text-center text-xs text-slate-500">{t('onboarding.restore')}</p>
+              <input
+                className="input mb-2"
+                type="password"
+                value={restorePass}
+                onChange={(e) => setRestorePass(e.target.value)}
+                placeholder={t('onboarding.restorePass')}
+                autoComplete="off"
+              />
+              <button className="btn-ghost btn-sm w-full" onClick={() => restoreRef.current?.click()}>
+                {t('onboarding.restoreCta')}
+              </button>
+              <input ref={restoreRef} type="file" accept=".vanish" className="hidden" onChange={onRestore} />
+              {restoreErr && <p className="mt-2 text-center text-xs text-signal-danger" role="status" aria-live="polite">{t('onboarding.restoreErr')}</p>}
+            </div>
           </>
         )}
 
