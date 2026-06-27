@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { ACTIONS, ACTIONS_BY_ID } from './catalog'
+import { ACTIONS, ACTIONS_BY_ID, CATALOG_VERIFIED_AT, verifiedAtOf } from './catalog'
 import { LETTERS } from '../lib/letters'
 import { CATEGORIES, TIERS } from '../lib/types'
 
@@ -52,5 +52,18 @@ describe('catalog integrity', () => {
     for (const a of ACTIONS) {
       if (a.recurDays) expect(a.category).toBe('data-brokers')
     }
+  })
+})
+
+describe('catalog provenance', () => {
+  it('exposes a valid baseline verification date', () => {
+    expect(CATALOG_VERIFIED_AT).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+    expect(Number.isNaN(Date.parse(CATALOG_VERIFIED_AT))).toBe(false)
+  })
+
+  it('verifiedAtOf returns the baseline unless an action overrides it', () => {
+    const plain = ACTIONS.find((a) => !a.verifiedAt)!
+    expect(verifiedAtOf(plain)).toBe(CATALOG_VERIFIED_AT)
+    expect(verifiedAtOf({ ...plain, verifiedAt: '2026-09-09' })).toBe('2026-09-09')
   })
 })
