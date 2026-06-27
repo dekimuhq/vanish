@@ -1,4 +1,5 @@
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { ErrorBoundary } from './components/ErrorBoundary'
 import { Layout } from './components/Layout'
 import { useStore } from './store/store'
 import { Dashboard } from './views/Dashboard'
@@ -13,9 +14,11 @@ import { Decoy } from './views/Decoy'
 
 export default function App() {
   return (
-    <HashRouter>
-      <Gate />
-    </HashRouter>
+    <ErrorBoundary>
+      <HashRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <Gate />
+      </HashRouter>
+    </ErrorBoundary>
   )
 }
 

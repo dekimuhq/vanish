@@ -33,11 +33,13 @@ describe('renderLetter', () => {
 })
 
 describe('mailtoHref', () => {
-  it('encodes subject and body and uses %20 for spaces', () => {
-    const href = mailtoHref('a@b.com', 'Hi there', 'line one\nline two')
-    expect(href.startsWith('mailto:a%40b.com?')).toBe(true)
+  it('keeps the address literal (RFC 6068) and uses %20 for spaces', () => {
+    const href = mailtoHref('a+tag@b.com', 'Hi there', 'line one\nline two')
+    // Address is NOT percent-encoded — '@' and '+' stay literal so clients accept it.
+    expect(href.startsWith('mailto:a+tag@b.com?')).toBe(true)
     expect(href).toContain('subject=Hi%20there')
     expect(href).toContain('line%20one')
-    expect(href).not.toContain('+')
+    // No '+' in the query string (spaces became %20); the only '+' is in the address.
+    expect(href.split('?')[1]).not.toContain('+')
   })
 })

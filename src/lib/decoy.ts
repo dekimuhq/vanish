@@ -31,36 +31,8 @@ export function nameVariants(fullName: string): string[] {
   return [...out]
 }
 
-/** A curated pool of bland, non-identifying interests. The point is *statistical
- *  noise*, not a convincing persona — generic hobbies that match millions. */
-export const DECOY_INTERESTS: readonly string[] = [
-  'houseplants', 'cycling', 'baking sourdough', 'birdwatching', 'board games',
-  'hiking', 'film photography', 'jazz', 'pottery', 'crosswords',
-  'gardening', 'running', 'cooking', 'astronomy', 'cold-water swimming',
-  'chess', 'knitting', 'road trips', 'coffee', 'live music',
-]
-
-/** Build a bland filler bio from a selection of interests. Pure. */
-export function buildDecoyBio(interests: string[]): string {
-  const list = interests.filter(Boolean)
-  if (list.length === 0) return ''
-  const head = list.slice(0, -1).join(', ')
-  const tail = list[list.length - 1]
-  const joined = list.length === 1 ? tail : `${head} and ${tail}`
-  return `Just here for ${joined}. Keep it friendly. Opinions my own.`
-}
-
-/** The non-negotiable do/don't list shown in the UI. */
-export const DECOY_RULES = {
-  do: [
-    'Only ever touch accounts that are YOURS.',
-    'Use it on low-stakes throwaway profiles, never anything tied to money or ID.',
-    'Aim for bland and generic — noise, not a convincing fake person.',
-  ],
-  dont: [
-    'Never impersonate a real, named person.',
-    'Never write fake reviews or ratings.',
-    'Never sign up anyone else, or use anyone else’s details.',
-    'Never use this to evade a creditor, a court, or law enforcement.',
-  ],
-} as const
+// The interest pool, filler-bio text, and do/don't rules now live in the i18n
+// content layer (`decoy.interests` / `decoy.bioTemplate` / `decoy.rulesDo` /
+// `decoy.rulesDont`) and are rendered from there in `views/Decoy.tsx`. The old
+// `DECOY_INTERESTS` / `buildDecoyBio` / `DECOY_RULES` constants were removed to
+// kill the second, drift-prone source of truth.

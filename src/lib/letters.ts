@@ -118,5 +118,7 @@ export function mailtoHref(to: string, subject: string, body: string): string {
   const params = new URLSearchParams({ subject, body })
   // URLSearchParams encodes spaces as '+'; mail clients want %20 in the body.
   const qs = params.toString().replace(/\+/g, '%20')
-  return `mailto:${encodeURIComponent(to)}?${qs}`
+  // The address goes in the `mailto:` path literally per RFC 6068 — percent-
+  // encoding it mangles '@' to %40 and '+' to %2B, which some clients reject.
+  return `mailto:${to.trim()}?${qs}`
 }

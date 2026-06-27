@@ -3,16 +3,49 @@ import {
   type AppState,
   type ActionStatus,
   type Profile,
+  type Region,
+  type Tier,
+  type Country,
   type LetterRecord,
   initialState,
   SCHEMA_VERSION,
 } from '../lib/types'
+import { COUNTRIES } from '../data/countries'
 import { type Lang, isLang, detectLang } from '../i18n/langs'
 
 const STORAGE_KEY = 'vanish.state.v1'
 
 const LETTER_KINDS = ['erasure', 'access', 'ccpa'] as const
 const LETTER_STATUSES = ['drafted', 'sent', 'responded', 'resolved', 'escalated'] as const
+const REGIONS = ['us', 'eu', 'uk', 'other'] as const
+
+/** Validate an untrusted profile field-by-field. The entire cross-device story
+ *  is import/restore JSON, so a corrupt or hand-edited file must never produce a
+ *  `targetTier`/`region`/`country` that later indexes off the end of a lookup
+ *  table and white-screens the app. */
+function sanitizeProfile(raw: unknown, base: Profile): Profile {
+  if (!raw || typeof raw !== 'object') return base
+  const p = raw as Partial<Profile>
+  const str = (v: unknown, fallback: string): string => (typeof v === 'string' ? v : fallback)
+  const country =
+    typeof p.country === 'string' && (p.country as Country) in COUNTRIES
+      ? (p.country as Country)
+      : undefined
+  return {
+    name: str(p.name, base.name),
+    email: str(p.email, base.email),
+    address: str(p.address, base.address),
+    region: (REGIONS as readonly string[]).includes(p.region as string)
+      ? (p.region as Region)
+      : base.region,
+    country,
+    targetTier: ([1, 2, 3, 4] as number[]).includes(p.targetTier as number)
+      ? (p.targetTier as Tier)
+      : base.targetTier,
+    concerns: Array.isArray(p.concerns) ? p.concerns.filter((c): c is string => typeof c === 'string') : [],
+    codeWord: typeof p.codeWord === 'string' ? p.codeWord : undefined,
+  }
+}
 
 type Msg =
   | { type: 'setStatus'; id: string; status: ActionStatus }
@@ -77,7 +110,7 @@ function sanitize(raw: unknown): AppState {
     schemaVersion: SCHEMA_VERSION,
     onboarded: Boolean(r.onboarded),
     lang: isLang(r.lang) ? r.lang : base.lang,
-    profile: { ...base.profile, ...(r.profile ?? {}) },
+    profile: sanitizeProfile(r.profile, base.profile),
     progress:
       r.progress && typeof r.progress === 'object'
         ? Object.fromEntries(

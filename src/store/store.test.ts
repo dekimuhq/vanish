@@ -34,6 +34,33 @@ describe('sanitize', () => {
   it('always stamps the current schema version', () => {
     expect(sanitize({ schemaVersion: 999 }).schemaVersion).toBe(SCHEMA_VERSION)
   })
+
+  it('clamps an out-of-range targetTier from a corrupt import (no white-screen)', () => {
+    // targetTier indexes TIERS in Report/Dashboard; an invalid value used to
+    // crash the whole app. Must fall back to the default tier instead.
+    expect(sanitize({ profile: { targetTier: 9 } }).profile.targetTier).toBe(2)
+    expect(sanitize({ profile: { targetTier: 'three' } }).profile.targetTier).toBe(2)
+    expect(sanitize({ profile: { targetTier: 4 } }).profile.targetTier).toBe(4) // valid kept
+  })
+
+  it('rejects an invalid region and drops an unknown country code', () => {
+    const out = sanitize({ profile: { region: 'mars', country: 'zz' } })
+    expect(out.profile.region).toBe('eu') // default
+    expect(out.profile.country).toBeUndefined()
+    expect(sanitize({ profile: { region: 'uk', country: 'de' } }).profile.country).toBe('de')
+  })
+
+  it('coerces a non-array concerns field to an empty array', () => {
+    expect(sanitize({ profile: { concerns: 'stalking' } }).profile.concerns).toEqual([])
+    expect(sanitize({ profile: { concerns: ['a', 5, 'b'] } }).profile.concerns).toEqual(['a', 'b'])
+  })
+
+  it('coerces non-string name/email/address to safe defaults', () => {
+    const out = sanitize({ profile: { name: 42, email: null, address: {} } })
+    expect(out.profile.name).toBe('')
+    expect(out.profile.email).toBe('')
+    expect(out.profile.address).toBe('')
+  })
 })
 
 describe('sanitize — new slices', () => {

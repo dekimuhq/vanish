@@ -42,7 +42,3 @@ export function TierBadge({ tier, withName = true }: { tier: Tier; withName?: bo
     </span>
   )
 }
-
-export function tierAccent(tier: Tier): string {
-  return TIER_ACCENT[tier]
-}

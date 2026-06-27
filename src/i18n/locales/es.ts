@@ -99,7 +99,7 @@ export const es: Dict = {
   'onboarding.adversaryLead': 'Según tus preocupaciones, tu principal amenaza es {adversary}.',
   'onboarding.rationale':
     "Tu preocupación principal — {adversary} — recomienda {tier}. Ajusta el esfuerzo a quien realmente intentas esquivar; ir más lejos de lo que exige tu modelo de amenaza sacrifica comodidad sin ganar nada real.",
-  'onboarding.useRecommended': 'Usar la recomendación: N{tier} · {name}',
+  'onboarding.useRecommended': 'Usar la recomendación: T{tier} · {name}',
   'onboarding.build': 'Crear mi plan →',
   'onboarding.restore': '¿Vuelves? Restaura una copia de seguridad',
   'onboarding.restoreCta': 'Elegir archivo .vanish',

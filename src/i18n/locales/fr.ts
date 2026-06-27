@@ -100,7 +100,7 @@ export const fr: Dict = {
   'onboarding.adversaryLead': "D'après vos préoccupations, votre adversaire principal est {adversary}.",
   'onboarding.rationale':
     "Votre préoccupation principale — {adversary} — appelle le niveau {tier}. Adaptez votre effort à celui contre qui vous vous protégez vraiment ; aller plus loin que votre modèle de menace coûte en confort sans gain réel.",
-  'onboarding.useRecommended': 'Utiliser la recommandation : N{tier} · {name}',
+  'onboarding.useRecommended': 'Utiliser la recommandation : T{tier} · {name}',
   'onboarding.build': 'Construire mon plan →',
   'onboarding.restore': 'De retour ? Restaurez une sauvegarde',
   'onboarding.restoreCta': 'Choisir un fichier .vanish',

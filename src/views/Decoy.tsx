@@ -8,10 +8,17 @@ function pickInterests(seed: number, pool: string[]): string[] {
   // Deterministic-ish spread driven by a regen counter — no real randomness
   // needed, and it keeps the output stable for a given seed.
   if (pool.length === 0) return []
-  const out: string[] = []
+  const want = Math.min(4, pool.length)
   const step = 7
-  for (let i = 0; i < 4; i++) out.push(pool[(seed * step + i * 5) % pool.length])
-  return [...new Set(out)]
+  const out: string[] = []
+  // Walk the pool until we collect `want` DISTINCT items — a plain
+  // `[...new Set(out)]` after 4 fixed picks can yield fewer than 4 whenever the
+  // index formula collides (it does for several translated pool lengths).
+  for (let i = 0; out.length < want && i < pool.length; i++) {
+    const item = pool[(seed * step + i * 5) % pool.length]
+    if (!out.includes(item)) out.push(item)
+  }
+  return out
 }
 
 export function Decoy() {
