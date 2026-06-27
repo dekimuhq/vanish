@@ -3,6 +3,7 @@ import {
   type AppState,
   type ActionStatus,
   type Profile,
+  type LetterRecord,
   initialState,
   SCHEMA_VERSION,
 } from '../lib/types'
@@ -64,6 +65,20 @@ function sanitize(raw: unknown): AppState {
             ),
           )
         : {},
+    letters:
+      r.letters && typeof r.letters === 'object'
+        ? Object.fromEntries(
+            Object.entries(r.letters).filter(
+              ([, v]) =>
+                v &&
+                typeof v === 'object' &&
+                typeof (v as LetterRecord).id === 'string' &&
+                typeof (v as LetterRecord).status === 'string' &&
+                typeof (v as LetterRecord).deadlineAt === 'string',
+            ),
+          )
+        : {},
+    lastBackupAt: typeof r.lastBackupAt === 'string' ? r.lastBackupAt : null,
   }
 }
 

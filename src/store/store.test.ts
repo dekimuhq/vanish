@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { sanitize } from './store'
+import { SCHEMA_VERSION } from '../lib/types'
 
 describe('sanitize', () => {
   it('returns clean initial state for garbage input', () => {
@@ -31,6 +32,30 @@ describe('sanitize', () => {
   })
 
   it('always stamps the current schema version', () => {
-    expect(sanitize({ schemaVersion: 999 }).schemaVersion).toBe(1)
+    expect(sanitize({ schemaVersion: 999 }).schemaVersion).toBe(SCHEMA_VERSION)
+  })
+})
+
+describe('sanitize — new slices', () => {
+  it('defaults letters to {} and lastBackupAt to null on legacy state', () => {
+    const out = sanitize({ onboarded: true, progress: {} })
+    expect(out.letters).toEqual({})
+    expect(out.lastBackupAt).toBeNull()
+    expect(out.schemaVersion).toBe(SCHEMA_VERSION)
+  })
+
+  it('keeps well-formed letters and drops malformed ones', () => {
+    const out = sanitize({
+      letters: {
+        good: { id: 'good', kind: 'erasure', recipient: 'X', sentAt: '2026-06-01T00:00:00.000Z', deadlineAt: '2026-07-01T00:00:00.000Z', status: 'sent' },
+        bad: { nope: true },
+      },
+    })
+    expect(Object.keys(out.letters)).toEqual(['good'])
+  })
+
+  it('keeps a string lastBackupAt', () => {
+    const out = sanitize({ lastBackupAt: '2026-06-27T00:00:00.000Z' })
+    expect(out.lastBackupAt).toBe('2026-06-27T00:00:00.000Z')
   })
 })
