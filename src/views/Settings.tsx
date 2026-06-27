@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { TierBadge } from '../components/Pills'
 import { sanitize } from '../store/store'
+import { encryptBackup, decryptBackup, BackupError } from '../lib/backup'
 import { TIERS, type Country, type Tier } from '../lib/types'
 import { COUNTRIES, COUNTRY_GROUPS, authorityFor, regionForCountry } from '../data/countries'
 import { useStore } from '../store/store'
@@ -8,11 +9,14 @@ import { useI18n } from '../i18n/i18n'
 import { LANGS, LANG_LABELS, type Lang } from '../i18n/langs'
 
 export function Settings() {
-  const { state, updateProfile, setLang, exportJSON, importState, wipe } = useStore()
+  const { state, updateProfile, setLang, exportJSON, importState, wipe, markBackedUp } = useStore()
   const { t } = useI18n()
   const fileRef = useRef<HTMLInputElement>(null)
+  const encFileRef = useRef<HTMLInputElement>(null)
   const [confirmWipe, setConfirmWipe] = useState(false)
   const [importMsg, setImportMsg] = useState<string | null>(null)
+  const [pass, setPass] = useState('')
+  const [busy, setBusy] = useState(false)
 
   function download() {
     const blob = new Blob([exportJSON()], { type: 'application/json' })
@@ -21,7 +25,44 @@ export function Settings() {
     a.href = url
     a.download = `vanish-backup-${new Date().toISOString().slice(0, 10)}.json`
     a.click()
+    markBackedUp(new Date().toISOString())
     URL.revokeObjectURL(url)
+  }
+
+  async function exportEncrypted() {
+    if (!pass) { setImportMsg(t('settings.passphraseRequired')); setTimeout(() => setImportMsg(null), 3000); return }
+    setBusy(true)
+    try {
+      const blob = await encryptBackup(state, pass)
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `vanish-backup-${new Date().toISOString().slice(0, 10)}.vanish`
+      a.click()
+      URL.revokeObjectURL(url)
+      markBackedUp(new Date().toISOString())
+      setImportMsg(t('settings.backupSaved'))
+    } catch (e) {
+      setImportMsg(e instanceof BackupError ? e.message : t('settings.backupErr'))
+    } finally {
+      setBusy(false)
+      setTimeout(() => setImportMsg(null), 3000)
+    }
+  }
+
+  async function onImportEncrypted(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    e.target.value = ''
+    if (!file) return
+    if (!pass) { setImportMsg(t('settings.passphraseRequired')); setTimeout(() => setImportMsg(null), 3000); return }
+    try {
+      const raw = await decryptBackup(file, pass)
+      importState(sanitize(raw))
+      setImportMsg(t('settings.importOk'))
+    } catch (err) {
+      setImportMsg(err instanceof BackupError ? err.message : t('settings.importErr'))
+    }
+    setTimeout(() => setImportMsg(null), 3000)
   }
 
   function onImport(e: React.ChangeEvent<HTMLInputElement>) {
@@ -183,6 +224,29 @@ export function Settings() {
           <button className="btn-ghost btn-sm" onClick={() => fileRef.current?.click()}>{t('settings.import')}</button>
           <input ref={fileRef} type="file" accept="application/json" className="hidden" onChange={onImport} />
           {importMsg && <span className="self-center text-sm text-ghost-bright">{importMsg}</span>}
+        </div>
+      </section>
+
+      <section className="card space-y-3 p-5">
+        <h2 className="font-semibold text-slate-100">{t('settings.encBackupTitle')}</h2>
+        <p className="text-sm text-slate-400">{t('settings.encBackupBody')}</p>
+        <input
+          className="input"
+          type="password"
+          value={pass}
+          onChange={(e) => setPass(e.target.value)}
+          placeholder={t('settings.passphrasePlaceholder')}
+          aria-label={t('settings.passphrase')}
+          autoComplete="off"
+        />
+        <div className="flex flex-wrap gap-2">
+          <button className="btn-primary btn-sm" onClick={exportEncrypted} disabled={busy}>
+            {t('settings.exportEncrypted')}
+          </button>
+          <button className="btn-ghost btn-sm" onClick={() => encFileRef.current?.click()} disabled={busy}>
+            {t('settings.importEncrypted')}
+          </button>
+          <input ref={encFileRef} type="file" accept=".vanish" className="hidden" onChange={onImportEncrypted} />
         </div>
       </section>
 

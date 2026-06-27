@@ -232,6 +232,16 @@ export const en = {
   'settings.import': '↑ Import plan',
   'settings.importOk': '✓ Plan imported.',
   'settings.importErr': '✗ Could not read that file.',
+  'settings.encBackupTitle': 'Encrypted backup',
+  'settings.encBackupBody':
+    'Clearing your browser data erases everything here — by design. The only copy that survives is a file you keep. This backup is encrypted with a passphrase, so the file itself is not a privacy leak. Store the passphrase somewhere safe; we cannot recover it.',
+  'settings.passphrase': 'Backup passphrase',
+  'settings.passphrasePlaceholder': 'A passphrase only you know',
+  'settings.exportEncrypted': '↓ Save encrypted backup (.vanish)',
+  'settings.importEncrypted': '↥ Restore encrypted backup',
+  'settings.passphraseRequired': 'Enter a passphrase first.',
+  'settings.backupSaved': '✓ Backup saved',
+  'settings.backupErr': 'Backup failed.',
   'settings.wipeTitle': 'Wipe everything',
   'settings.wipeBody':
     'Erase all progress and personal details from this device. This cannot be undone. (There’s nothing on a server to delete — there never was.)',
