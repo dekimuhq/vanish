@@ -139,7 +139,7 @@ export function Letters() {
             <a className="btn-ghost btn-sm" href={mailtoHref(recipient, subject, body)}>
               {t('letters.openEmail')}
             </a>
-            <button className="btn-ghost btn-sm" onClick={track}>
+            <button className="btn-ghost btn-sm" onClick={track} disabled={tracked}>
               {tracked ? t('letters.trackedConfirm') : t('letters.trackThis')}
             </button>
           </div>
