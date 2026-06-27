@@ -23,7 +23,7 @@ type Msg =
   | { type: 'import'; state: AppState }
   | { type: 'wipe' }
   | { type: 'logLetter'; record: LetterRecord }
-  | { type: 'updateLetter'; id: string; patch: Partial<LetterRecord> }
+  | { type: 'updateLetter'; id: string; patch: Partial<Omit<LetterRecord, 'id'>> }
   | { type: 'deleteLetter'; id: string }
   | { type: 'markBackedUp'; at: string }
 
@@ -133,7 +133,7 @@ interface Ctx {
   wipe: () => void
   exportJSON: () => string
   logLetter: (record: LetterRecord) => void
-  updateLetter: (id: string, patch: Partial<LetterRecord>) => void
+  updateLetter: (id: string, patch: Partial<Omit<LetterRecord, 'id'>>) => void
   deleteLetter: (id: string) => void
   markBackedUp: (at: string) => void
 }
