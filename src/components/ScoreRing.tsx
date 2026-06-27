@@ -21,7 +21,7 @@ export function ScoreRing({ score, size = 168, label = true }: Props) {
 
   return (
     <div className="relative inline-grid place-items-center" style={{ width: size, height: size }}>
-      <svg width={size} height={size} className="-rotate-90" role="img" aria-label={t('score.ariaLabel', { score })}>
+      <svg width={size} height={size} className="-rotate-90" aria-hidden="true">
         <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#1b212a" strokeWidth={stroke} />
         <circle
           cx={size / 2}
@@ -36,9 +36,12 @@ export function ScoreRing({ score, size = 168, label = true }: Props) {
           style={{ transition: 'stroke-dashoffset 700ms cubic-bezier(.22,1,.36,1), stroke 400ms' }}
         />
       </svg>
-      <div className="absolute text-center">
-        <div className="font-mono text-4xl font-bold text-slate-100">{score}</div>
-        {label && <div className="mt-0.5 text-xs uppercase tracking-widest" style={{ color: toneColor }}>{text}</div>}
+      {/* role=status announces the score whenever it changes (WCAG 4.1.3); the
+          SVG above is decorative and hidden so the value isn't read twice. */}
+      <div className="absolute text-center" role="status" aria-live="polite">
+        <span className="sr-only">{t('score.ariaLabel', { score })}</span>
+        <div className="font-mono text-4xl font-bold text-slate-100" aria-hidden="true">{score}</div>
+        {label && <div className="mt-0.5 text-xs uppercase tracking-widest" style={{ color: toneColor }} aria-hidden="true">{text}</div>}
       </div>
     </div>
   )

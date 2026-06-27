@@ -93,15 +93,15 @@ export function Letters() {
             <p className="mt-1 text-sm text-slate-400">{def.blurb}</p>
             {isGdpr && authority && country && (
               <p className="mt-3 border-t border-ink-700/60 pt-3 text-xs text-slate-400">
-                <span className="text-slate-500">{t('letters.authorityLabel', { flag: country.flag, name: country.name })}</span>{' '}
+                <span className="text-slate-400">{t('letters.authorityLabel', { flag: country.flag, name: country.name })}</span>{' '}
                 <a className="text-ghost-bright hover:underline" href={authority.url} target="_blank" rel="noopener noreferrer">
                   {authority.name} ↗
                 </a>
-                <span className="mt-1 block text-slate-500">{t('letters.authorityNote')}</span>
+                <span className="mt-1 block text-slate-400">{t('letters.authorityNote')}</span>
               </p>
             )}
             {isGdpr && !authority && (
-              <p className="mt-3 border-t border-ink-700/60 pt-3 text-xs text-slate-500">
+              <p className="mt-3 border-t border-ink-700/60 pt-3 text-xs text-slate-400">
                 {t('letters.noAuthority')}
               </p>
             )}
@@ -111,7 +111,7 @@ export function Letters() {
           <Field label={t('letters.recipientEmail')} value={recipient} onChange={setRecipient} placeholder="privacy@example.com" type="email" />
 
           <div className="card space-y-3 p-4">
-            <div className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+            <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">
               {t('letters.yourDetails')}
             </div>
             <Field label={t('letters.fullName')} value={state.profile.name} onChange={(v) => updateProfile({ name: v })} placeholder={t('letters.namePlaceholder')} />
@@ -122,7 +122,7 @@ export function Letters() {
 
         <div className="space-y-3">
           <div className="card overflow-hidden">
-            <div className="border-b border-ink-700/60 px-4 py-2 text-xs text-slate-500">
+            <div className="border-b border-ink-700/60 px-4 py-2 text-xs text-slate-400">
               {t('letters.subject')} <span className="text-slate-300">{subject}</span>
             </div>
             <pre className="max-h-[28rem] overflow-auto whitespace-pre-wrap px-4 py-3 font-mono text-[13px] leading-relaxed text-slate-300">
@@ -143,7 +143,10 @@ export function Letters() {
               {tracked ? t('letters.trackedConfirm') : t('letters.trackThis')}
             </button>
           </div>
-          <p className="text-xs text-slate-500">
+          <span className="sr-only" role="status" aria-live="polite">
+            {copied ? t('letters.copied') : tracked ? t('letters.trackedConfirm') : ''}
+          </span>
+          <p className="text-xs text-slate-400">
             {t('letters.disclaimerPre')}<strong>{t('letters.disclaimerStrong')}</strong>{t('letters.disclaimerPost')}
           </p>
         </div>

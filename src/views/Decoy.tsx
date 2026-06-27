@@ -87,10 +87,10 @@ export function Decoy() {
               ))}
             </div>
           ) : (
-            <p className="text-sm text-slate-500">{t('decoy.noVariants')}</p>
+            <p className="text-sm text-slate-400">{t('decoy.noVariants')}</p>
           )
         ) : (
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-slate-400">
             {t('decoy.addNamePre')}<Link className="text-ghost-bright hover:underline" to="/settings">{t('decoy.addNameLink')}</Link>{t('decoy.addNamePost')}
           </p>
         )}
@@ -112,7 +112,7 @@ export function Decoy() {
         </button>
       </section>
 
-      <p className="text-xs text-slate-500">{t('decoy.footer')}</p>
+      <p className="text-xs text-slate-400">{t('decoy.footer')}</p>
     </div>
   )
 }

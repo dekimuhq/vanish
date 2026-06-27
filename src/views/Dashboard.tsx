@@ -75,14 +75,14 @@ export function Dashboard() {
           return (
             <Link key={tier} to={`/plan?tier=${tier}`} className="card group p-4 transition hover:border-ghost/30">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs text-slate-500">T{tier}</span>
-                <span className="text-xs text-slate-500">{bt.done}/{bt.total}</span>
+                <span className="font-mono text-xs text-slate-400">T{tier}</span>
+                <span className="text-xs text-slate-400">{bt.done}/{bt.total}</span>
               </div>
               <div className="mt-1 font-semibold text-slate-100">{t(`tier.${TIERS[tier].key}.name`)}</div>
               <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-ink-700">
                 <div className="h-full rounded-full bg-ghost transition-all" style={{ width: `${pct}%` }} />
               </div>
-              <div className="mt-1 text-[11px] text-slate-500">{t(`tier.${TIERS[tier].key}.tagline`)}</div>
+              <div className="mt-1 text-[11px] text-slate-400">{t(`tier.${TIERS[tier].key}.tagline`)}</div>
             </Link>
           )
         })}

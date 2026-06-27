@@ -39,7 +39,7 @@ export function Report() {
         <header className="flex items-baseline justify-between border-b border-ink-700/60 pb-3 print:border-black/20">
           <div>
             <div className="text-lg font-bold text-slate-100 print:text-black">{t('report.docTitle')}</div>
-            <div className="text-xs text-slate-500">
+            <div className="text-xs text-slate-400">
               {t('report.meta', {
                 date: today,
                 tier: t(`tier.${TIERS[state.profile.targetTier].key}.name`),
@@ -49,7 +49,7 @@ export function Report() {
           </div>
           <div className="text-right">
             <div className="font-mono text-3xl font-bold text-ghost print:text-black">{breakdown.score}</div>
-            <div className="text-[10px] uppercase tracking-widest text-slate-500">{t('report.privacyScore')}</div>
+            <div className="text-[10px] uppercase tracking-widest text-slate-400">{t('report.privacyScore')}</div>
           </div>
         </header>
 
@@ -72,7 +72,7 @@ export function Report() {
                       <span className="mt-0.5 inline-block h-4 w-4 shrink-0 rounded border border-slate-500 print:border-black" />
                       <span>
                         <span className="font-medium text-slate-100 print:text-black">{loc.title}</span>
-                        <span className="text-slate-500"> · {t(`category.${a.category}`)}</span>
+                        <span className="text-slate-400"> · {t(`category.${a.category}`)}</span>
                         <div className="text-slate-400 print:text-black/70">{loc.summary}</div>
                         {a.url && <div className="break-all font-mono text-[11px] text-ghost-dim print:text-black/60">{a.url}</div>}
                       </span>
@@ -88,7 +88,7 @@ export function Report() {
           <p className="text-sm text-slate-400">{t('report.allDone')}</p>
         )}
 
-        <footer className="border-t border-ink-700/60 pt-3 text-[11px] text-slate-500 print:border-black/20 print:text-black/60">
+        <footer className="border-t border-ink-700/60 pt-3 text-[11px] text-slate-400 print:border-black/20 print:text-black/60">
           {t('report.footer')}
         </footer>
       </article>

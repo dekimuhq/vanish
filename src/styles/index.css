@@ -13,6 +13,29 @@ body,
   height: 100%;
 }
 
+/* WCAG 2.4.7 — visible keyboard focus on every control. The UA default outline
+   is near-black on the ink background (effectively invisible); paint our own
+   ghost-bright ring. Element-specific rings (.btn, .input) still win on
+   specificity, so this only fills the gap for links, native inputs, and
+   role=button toggles. Pointer focus stays quiet via :focus-visible. */
+:focus-visible {
+  outline: 2px solid #5eead4;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* WCAG 2.4.1 — skip link, visually hidden until keyboard-focused. */
+.skip-link {
+  position: absolute;
+  left: 0.5rem;
+  top: -3rem;
+  z-index: 50;
+  transition: top 0.15s ease;
+}
+.skip-link:focus {
+  top: 0.5rem;
+}
+
 body {
   @apply bg-ink-900 text-slate-200 antialiased;
   background-image:
