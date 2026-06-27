@@ -313,6 +313,9 @@ export const en = {
   'actionCard.hideSteps': 'Hide steps',
   'actionCard.notRelevant': 'Not relevant',
   'actionCard.restore': 'Restore',
+  'nudge.backup': 'Your progress lives only in this browser. Back it up so clearing your data does not erase it.',
+  'nudge.backupCta': 'Back up now',
+  'nudge.dismiss': 'Later',
 } satisfies Dict
 
 export type MessageKey = keyof typeof en

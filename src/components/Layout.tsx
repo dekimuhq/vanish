@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useI18n } from '../i18n/i18n'
+import { BackupNudge } from './BackupNudge'
 import { CatMark } from './CatMark'
 
 const NAV = [
@@ -36,7 +37,7 @@ export function Layout({ children }: { children: ReactNode }) {
         ))}
       </nav>
 
-      <main className="flex-1">{children}</main>
+      <main className="flex-1"><BackupNudge />{children}</main>
 
       {/* Mobile bottom tab bar */}
       <nav className="fixed inset-x-0 bottom-0 z-20 border-t border-ink-700/70 bg-ink-900/95 backdrop-blur sm:hidden">
