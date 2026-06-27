@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import {
   deadlineDays, deadlineFor, daysRemaining, isOverdue,
-  kindForTemplate, newLetter, escalationLetter,
+  kindForTemplate, newLetter, escalationLetter, buildDeadlineICS,
 } from './tracker'
 import type { LetterRecord } from './types'
 
@@ -67,7 +67,51 @@ describe('escalationLetter', () => {
     expect(body).toContain('2026-06-01')
     expect(body).toMatch(/Article 17/)
   })
+  it('cites the Art.77 right to complain for GDPR kinds, CCPA for ccpa', () => {
+    expect(escalationLetter(rec)).toMatch(/Article 77 GDPR/)
+    expect(escalationLetter({ ...rec, kind: 'access' })).toMatch(/Article 77 GDPR/)
+    expect(escalationLetter({ ...rec, kind: 'ccpa' })).toMatch(/CCPA\/CPRA/)
+  })
   it('falls back to a generic authority phrase when none is known', () => {
     expect(escalationLetter(rec)).toContain('supervisory authority')
+  })
+})
+
+describe('buildDeadlineICS', () => {
+  const sent: LetterRecord = {
+    id: 'L1', kind: 'erasure', recipient: 'Spokeo',
+    sentAt: '2026-06-01T00:00:00.000Z', deadlineAt: '2026-07-01T00:00:00.000Z', status: 'sent',
+  }
+  const now = new Date('2026-06-10T09:30:00.000Z')
+
+  it('returns null when nothing is pending', () => {
+    expect(buildDeadlineICS([], now)).toBeNull()
+    expect(buildDeadlineICS([{ ...sent, status: 'resolved' }], now)).toBeNull()
+  })
+
+  it('emits a CRLF VCALENDAR with one all-day VEVENT per pending letter', () => {
+    const ics = buildDeadlineICS([sent], now)!
+    expect(ics).toContain('\r\n')
+    expect(ics).toMatch(/^BEGIN:VCALENDAR/)
+    expect(ics.trimEnd()).toMatch(/END:VCALENDAR$/)
+    expect(ics).toContain('UID:L1@vanish.cat')
+    expect(ics).toContain('DTSTART;VALUE=DATE:20260701')
+    expect(ics).toContain('DTEND;VALUE=DATE:20260702') // exclusive end = deadline + 1 day
+    expect(ics).toContain('DTSTAMP:20260610T093000Z')
+    expect(ics).toContain('SUMMARY:Vanish: response due — Spokeo')
+    expect(ics).toContain('TRIGGER:-P1D')
+    expect((ics.match(/BEGIN:VEVENT/g) || []).length).toBe(1)
+  })
+
+  it('only includes pending letters', () => {
+    const ics = buildDeadlineICS([sent, { ...sent, id: 'L2', status: 'escalated' }], now)!
+    expect((ics.match(/BEGIN:VEVENT/g) || []).length).toBe(1)
+    expect(ics).toContain('UID:L1@vanish.cat')
+    expect(ics).not.toContain('UID:L2@vanish.cat')
+  })
+
+  it('escapes RFC 5545 special characters in text values', () => {
+    const ics = buildDeadlineICS([{ ...sent, recipient: 'Acme, Inc.; data' }], now)!
+    expect(ics).toContain('SUMMARY:Vanish: response due — Acme\\, Inc.\\; data')
   })
 })
