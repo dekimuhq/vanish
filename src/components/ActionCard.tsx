@@ -5,6 +5,7 @@ import { CATEGORIES } from '../lib/types'
 import { useStore } from '../store/store'
 import { useI18n } from '../i18n/i18n'
 import { EffortPill, ImpactPill, TierBadge } from './Pills'
+import { verifiedAtOf } from '../data/catalog'
 
 interface Props {
   action: Action
@@ -71,6 +72,9 @@ export function ActionCard({ action: raw, showTier = true }: Props) {
                 {t('actionCard.recheckEvery', { days: action.recurDays })}
               </span>
             )}
+            <span className="pill bg-ink-700/60 text-slate-500" title={t('actionCard.verifiedTitle')}>
+              ✓ {t('actionCard.verified', { date: verifiedAtOf(raw) })}
+            </span>
           </div>
 
           <div className="mt-3 flex flex-wrap items-center gap-2">

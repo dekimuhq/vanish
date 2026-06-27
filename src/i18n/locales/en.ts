@@ -322,6 +322,8 @@ export const en = {
   'actionCard.open': 'Open',
   'actionCard.recheckEvery': '↻ re-check every {days}d',
   'actionCard.recheckTitle': 'Brokers re-list you; redo this periodically',
+  'actionCard.verified': 'Verified {date}',
+  'actionCard.verifiedTitle': 'When this action and its link were last checked. Report a dead link if it has moved.',
   'actionCard.searchCurrent': '🔎 Search for current page',
   'actionCard.linkDead': 'link dead?',
   'actionCard.linkDeadTitle': 'Opt-out URLs change often',
