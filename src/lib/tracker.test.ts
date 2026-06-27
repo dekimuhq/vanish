@@ -27,6 +27,9 @@ describe('countdown', () => {
     expect(daysRemaining(rec, new Date('2026-06-21T00:00:00.000Z'))).toBe(10)
     expect(daysRemaining(rec, new Date('2026-07-06T00:00:00.000Z'))).toBe(-5)
   })
+  it('still reports a full day left within the final sub-day window (ceil)', () => {
+    expect(daysRemaining(rec, new Date('2026-06-30T13:00:00.000Z'))).toBe(1)
+  })
   it('isOverdue only when sent and past the deadline', () => {
     expect(isOverdue(rec, new Date('2026-06-21T00:00:00.000Z'))).toBe(false)
     expect(isOverdue(rec, new Date('2026-07-06T00:00:00.000Z'))).toBe(true)
@@ -45,6 +48,10 @@ describe('template mapping + construction', () => {
     expect(l.id).toBeTruthy()
     expect(l.status).toBe('sent')
     expect(l.deadlineAt.slice(0, 10)).toBe('2026-07-16')
+  })
+  it('passes linkedActionId through, undefined when omitted', () => {
+    expect(newLetter({ kind: 'erasure', recipient: 'X', sentAt: '2026-06-01T00:00:00.000Z', linkedActionId: 'spokeo' }).linkedActionId).toBe('spokeo')
+    expect(newLetter({ kind: 'erasure', recipient: 'X', sentAt: '2026-06-01T00:00:00.000Z' }).linkedActionId).toBeUndefined()
   })
 })
 

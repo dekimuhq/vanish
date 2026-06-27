@@ -3,7 +3,8 @@ import type { LetterKind, LetterRecord, LetterTemplate } from './types'
 const DAY_MS = 86_400_000
 
 /** Statutory response window, used as a REMINDER (not legal advice):
- *  GDPR Art.12(3) = one month (30 days); CCPA §1798.130 = 45 days. */
+ *  GDPR Art.12(3) = one month (30 days — a deliberate approximation of the
+ *  calendar "one month" that errs early on purpose); CCPA §1798.130 = 45 days. */
 export function deadlineDays(kind: LetterKind): number {
   return kind === 'ccpa' ? 45 : 30
 }
@@ -13,9 +14,11 @@ export function deadlineFor(kind: LetterKind, sentAt: string): string {
   return new Date(sent + deadlineDays(kind) * DAY_MS).toISOString()
 }
 
-/** Whole days until the deadline; negative once it has passed. */
+/** Whole days until the deadline; negative once it has passed. Uses ceil so we
+ *  never under-report time left, and only reach 0 once the deadline has passed
+ *  (consistent with isOverdue's strict `<`). */
 export function daysRemaining(record: LetterRecord, now: Date = new Date()): number {
-  return Math.round((new Date(record.deadlineAt).getTime() - now.getTime()) / DAY_MS)
+  return Math.ceil((new Date(record.deadlineAt).getTime() - now.getTime()) / DAY_MS)
 }
 
 export function isOverdue(record: LetterRecord, now: Date = new Date()): boolean {
