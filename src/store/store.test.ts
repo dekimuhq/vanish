@@ -49,6 +49,8 @@ describe('sanitize — new slices', () => {
       letters: {
         good: { id: 'good', kind: 'erasure', recipient: 'X', sentAt: '2026-06-01T00:00:00.000Z', deadlineAt: '2026-07-01T00:00:00.000Z', status: 'sent' },
         bad: { nope: true },
+        missingField: { id: 'missingField', kind: 'erasure', recipient: 'X', deadlineAt: '2026-07-01T00:00:00.000Z', status: 'sent' },
+        badStatus: { id: 'badStatus', kind: 'erasure', recipient: 'X', sentAt: '2026-06-01T00:00:00.000Z', deadlineAt: '2026-07-01T00:00:00.000Z', status: 'bogus' },
       },
     })
     expect(Object.keys(out.letters)).toEqual(['good'])

@@ -11,6 +11,9 @@ import { type Lang, isLang, detectLang } from '../i18n/langs'
 
 const STORAGE_KEY = 'vanish.state.v1'
 
+const LETTER_KINDS = ['erasure', 'access', 'ccpa'] as const
+const LETTER_STATUSES = ['drafted', 'sent', 'responded', 'resolved', 'escalated'] as const
+
 type Msg =
   | { type: 'setStatus'; id: string; status: ActionStatus }
   | { type: 'clearStatus'; id: string }
@@ -68,14 +71,20 @@ function sanitize(raw: unknown): AppState {
     letters:
       r.letters && typeof r.letters === 'object'
         ? Object.fromEntries(
-            Object.entries(r.letters).filter(
-              ([, v]) =>
-                v &&
-                typeof v === 'object' &&
-                typeof (v as LetterRecord).id === 'string' &&
-                typeof (v as LetterRecord).status === 'string' &&
-                typeof (v as LetterRecord).deadlineAt === 'string',
-            ),
+            Object.entries(r.letters).filter(([, v]) => {
+              if (!v || typeof v !== 'object') return false
+              const l = v as LetterRecord
+              return (
+                typeof l.id === 'string' &&
+                typeof l.kind === 'string' &&
+                typeof l.recipient === 'string' &&
+                typeof l.sentAt === 'string' &&
+                typeof l.deadlineAt === 'string' &&
+                typeof l.status === 'string' &&
+                (LETTER_KINDS as readonly string[]).includes(l.kind) &&
+                (LETTER_STATUSES as readonly string[]).includes(l.status)
+              )
+            }),
           )
         : {},
     lastBackupAt: typeof r.lastBackupAt === 'string' ? r.lastBackupAt : null,
