@@ -55,14 +55,17 @@ export function Settings() {
     e.target.value = ''
     if (!file) return
     if (!pass) { setImportMsg(t('settings.passphraseRequired')); setTimeout(() => setImportMsg(null), 3000); return }
+    setBusy(true)
     try {
       const raw = await decryptBackup(file, pass)
       importState(sanitize(raw))
       setImportMsg(t('settings.importOk'))
-    } catch (err) {
-      setImportMsg(err instanceof BackupError ? err.message : t('settings.importErr'))
+    } catch (e) {
+      setImportMsg(e instanceof BackupError ? e.message : t('settings.importErr'))
+    } finally {
+      setBusy(false)
+      setTimeout(() => setImportMsg(null), 3000)
     }
-    setTimeout(() => setImportMsg(null), 3000)
   }
 
   function onImport(e: React.ChangeEvent<HTMLInputElement>) {
@@ -223,7 +226,7 @@ export function Settings() {
           <button className="btn-ghost btn-sm" onClick={download}>{t('settings.export')}</button>
           <button className="btn-ghost btn-sm" onClick={() => fileRef.current?.click()}>{t('settings.import')}</button>
           <input ref={fileRef} type="file" accept="application/json" className="hidden" onChange={onImport} />
-          {importMsg && <span className="self-center text-sm text-ghost-bright">{importMsg}</span>}
+          {importMsg && <span role="status" aria-live="polite" className="self-center text-sm text-ghost-bright">{importMsg}</span>}
         </div>
       </section>
 
