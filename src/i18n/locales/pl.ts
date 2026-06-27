@@ -101,6 +101,10 @@ export const pl: Dict = {
     'Twoje główne obawy — {adversary} — wskazują na {tier}. Dopasuj wysiłek do tego, przed kim naprawdę się ukrywasz; wychodzenie dalej niż Twój model zagrożeń kosztuje wygodę bez realnych korzyści.',
   'onboarding.useRecommended': 'Użyj zalecanego: T{tier} · {name}',
   'onboarding.build': 'Zbuduj mój plan →',
+  'onboarding.restore': 'Wracasz? Przywróć kopię zapasową',
+  'onboarding.restoreCta': 'Wybierz plik .vanish',
+  'onboarding.restorePass': 'Hasło kopii zapasowej',
+  'onboarding.restoreErr': 'Błędne hasło lub to nie jest kopia zapasowa Vanish.',
 
   // Dashboard
   'dashboard.title': 'Twój wynik prywatności',
@@ -173,6 +177,24 @@ export const pl: Dict = {
   'letters.disclaimerPre': '⚖️ Szablon dla wygody, ',
   'letters.disclaimerStrong': 'nie porada prawna',
   'letters.disclaimerPost': '. Przed wysłaniem sprawdź właściwego adresata i swoje lokalne prawa.',
+  'letters.trackThis': '+ Śledź jako wysłane',
+  'letters.trackedConfirm': '✓ Śledzone',
+  'letters.status.drafted': 'Szkic',
+  'letters.status.sent': 'Oczekuje na odpowiedź',
+  'letters.status.responded': 'Otrzymano odpowiedź',
+  'letters.status.escalated': 'Eskalowane',
+  'letters.status.resolved': 'Zakończone',
+  'letters.tracked.title': 'Moje pisma',
+  'letters.tracked.empty': 'Śledzone pisma pojawią się tutaj wraz z odliczaniem do terminu.',
+  'letters.tracked.sentOn': 'Wysłano {date}',
+  'letters.tracked.daysLeft': '{days} dni do terminu odpowiedzi',
+  'letters.tracked.overdue': 'Przekroczono termin o {days} dni',
+  'letters.tracked.responded': 'Oznacz jako odpowiedziane',
+  'letters.tracked.resolved': 'Oznacz jako zakończone',
+  'letters.tracked.escalate': 'Eskaluj do {authority}',
+  'letters.tracked.copyEscalation': '⧉ Kopiuj skargę',
+  'letters.tracked.copied': '✓ Skopiowano',
+  'letters.tracked.delete': 'Usuń',
 
   // Panic
   'panic.title': '🆘 Tryb paniki',
@@ -226,6 +248,15 @@ export const pl: Dict = {
   'settings.import': '↑ Importuj plan',
   'settings.importOk': '✓ Plan zaimportowany.',
   'settings.importErr': '✗ Nie można odczytać tego pliku.',
+  'settings.encBackupTitle': 'Szyfrowana kopia zapasowa',
+  'settings.encBackupBody': 'Wyczyszczenie danych przeglądarki usuwa stąd wszystko — i tak ma być. Jedyną kopią, która przetrwa, jest plik, który zachowasz. Ta kopia jest zaszyfrowana hasłem, więc sam plik nie jest wyciekiem prywatności. Przechowaj hasło w bezpiecznym miejscu; nie możemy go odzyskać.',
+  'settings.exportEncrypted': '↓ Zapisz szyfrowaną kopię (.vanish)',
+  'settings.importEncrypted': '↥ Przywróć szyfrowaną kopię',
+  'settings.passphrase': 'Hasło kopii zapasowej',
+  'settings.passphrasePlaceholder': 'Hasło, które znasz tylko Ty',
+  'settings.passphraseRequired': 'Najpierw wpisz hasło.',
+  'settings.backupSaved': '✓ Kopia zapisana',
+  'settings.backupErr': 'Tworzenie kopii nie powiodło się.',
   'settings.wipeTitle': 'Wyczyść wszystko',
   'settings.wipeBody':
     'Usuń wszystkie postępy i dane osobowe z tego urządzenia. Tego nie można cofnąć. (Na żadnym serwerze nic nie ma — i nigdy nie było.)',
@@ -239,6 +270,11 @@ export const pl: Dict = {
   'settings.dataBullet3': 'Brak analityki, ciasteczek, konta i telemetrii — sprawdź sam w narzędziach deweloperskich przeglądarki.',
   'settings.dataBullet4':
     'Linki do stron rezygnacji otwierają się w nowej karcie — to jedyne „połączenia sieciowe" i każde z nich inicjujesz sam.',
+
+  // Backup nudge
+  'nudge.backup': 'Twoje postępy istnieją tylko w tej przeglądarce. Zrób kopię zapasową, aby wyczyszczenie danych ich nie usunęło.',
+  'nudge.backupCta': 'Zrób kopię teraz',
+  'nudge.dismiss': 'Później',
 
   // Decoy Kit
   'decoy.title': '⬡ Zestaw wabika',
@@ -293,4 +329,6 @@ export const pl: Dict = {
   'actionCard.hideSteps': 'Ukryj kroki',
   'actionCard.notRelevant': 'Nieistotne',
   'actionCard.restore': 'Przywróć',
+  'actionCard.verified': 'Zweryfikowano {date}',
+  'actionCard.verifiedTitle': 'Kiedy ostatnio sprawdzono to działanie i jego link. Zgłoś nieaktywny link, jeśli adres się zmienił.',
 } satisfies Dict

@@ -101,6 +101,10 @@ export const de: Dict = {
     "Deine stärkste Sorge — {adversary} — spricht für {tier}. Passe deinen Aufwand daran an, vor wem du dich tatsächlich versteckst; mehr zu tun als dein Bedrohungsmodell verlangt, kostet Komfort ohne echten Gewinn.",
   'onboarding.useRecommended': 'Empfehlung übernehmen: T{tier} · {name}',
   'onboarding.build': 'Meinen Plan erstellen →',
+  'onboarding.restore': 'Du kommst zurück? Eine Sicherung wiederherstellen',
+  'onboarding.restoreCta': '.vanish-Datei wählen',
+  'onboarding.restoreErr': 'Falsche Passphrase oder keine Vanish-Sicherung.',
+  'onboarding.restorePass': 'Sicherungs-Passphrase',
 
   // Dashboard
   'dashboard.title': 'Deine Datenschutzwertung',
@@ -173,6 +177,29 @@ export const de: Dict = {
   'letters.disclaimerPre': '⚖️ Vorlage zur Vereinfachung, ',
   'letters.disclaimerStrong': 'keine Rechtsberatung',
   'letters.disclaimerPost': '. Überprüfe vor dem Senden den richtigen Empfänger und deine örtlichen Rechte.',
+  'letters.status.drafted': 'Entwurf',
+  'letters.status.escalated': 'Eskaliert',
+  'letters.status.resolved': 'Erledigt',
+  'letters.status.responded': 'Beantwortet',
+  'letters.status.sent': 'Wartet auf Antwort',
+  'letters.trackThis': '+ Als gesendet verfolgen',
+  'letters.trackedConfirm': '✓ Verfolgt',
+  'letters.tracked.copied': '✓ Kopiert',
+  'letters.tracked.copyEscalation': '⧉ Beschwerde kopieren',
+  'letters.tracked.daysLeft': 'Noch {days} Tage bis zur Antwortfrist',
+  'letters.tracked.delete': 'Entfernen',
+  'letters.tracked.empty': 'Briefe, die du verfolgst, erscheinen hier mit einem Frist-Countdown.',
+  'letters.tracked.escalate': 'An {authority} eskalieren',
+  'letters.tracked.overdue': 'Überfällig um {days} Tage',
+  'letters.tracked.resolved': 'Als erledigt markieren',
+  'letters.tracked.responded': 'Als beantwortet markieren',
+  'letters.tracked.sentOn': 'Gesendet am {date}',
+  'letters.tracked.title': 'Meine Briefe',
+
+  // Backup nudge
+  'nudge.backup': 'Dein Fortschritt liegt nur in diesem Browser. Sichere ihn, damit das Löschen deiner Daten ihn nicht auslöscht.',
+  'nudge.backupCta': 'Jetzt sichern',
+  'nudge.dismiss': 'Später',
 
   // Panic
   'panic.title': '🆘 Panikmodus',
@@ -226,6 +253,16 @@ export const de: Dict = {
   'settings.import': '↑ Plan importieren',
   'settings.importOk': '✓ Plan importiert.',
   'settings.importErr': '✗ Diese Datei konnte nicht gelesen werden.',
+  'settings.encBackupTitle': 'Verschlüsselte Sicherung',
+  'settings.encBackupBody':
+    "Das Löschen deiner Browserdaten entfernt hier alles — so ist es gewollt. Die einzige Kopie, die überlebt, ist eine Datei, die du selbst aufbewahrst. Diese Sicherung ist mit einer Passphrase verschlüsselt, sodass die Datei selbst kein Datenschutzleck ist. Bewahre die Passphrase an einem sicheren Ort auf; wir können sie nicht wiederherstellen.",
+  'settings.exportEncrypted': '↓ Verschlüsselte Sicherung speichern (.vanish)',
+  'settings.importEncrypted': '↥ Verschlüsselte Sicherung wiederherstellen',
+  'settings.passphrase': 'Sicherungs-Passphrase',
+  'settings.passphrasePlaceholder': 'Eine Passphrase, die nur du kennst',
+  'settings.passphraseRequired': 'Gib zuerst eine Passphrase ein.',
+  'settings.backupErr': 'Sicherung fehlgeschlagen.',
+  'settings.backupSaved': '✓ Sicherung gespeichert',
   'settings.wipeTitle': 'Alles löschen',
   'settings.wipeBody':
     "Lösche alle Fortschritte und persönlichen Daten von diesem Gerät. Das kann nicht rückgängig gemacht werden. (Auf einem Server gibt es nichts zu löschen — das war noch nie so.)",
@@ -293,4 +330,6 @@ export const de: Dict = {
   'actionCard.hideSteps': 'Schritte ausblenden',
   'actionCard.notRelevant': 'Nicht relevant',
   'actionCard.restore': 'Wiederherstellen',
+  'actionCard.verified': 'Geprüft {date}',
+  'actionCard.verifiedTitle': 'Wann diese Maßnahme und ihr Link zuletzt geprüft wurden. Melde einen toten Link, falls er umgezogen ist.',
 } satisfies Dict

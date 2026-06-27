@@ -101,6 +101,10 @@ export const it: Dict = {
     "La tua preoccupazione principale — {adversary} — richiede {tier}. Calibra il tuo impegno su chi stai davvero cercando di evitare; andare oltre il tuo modello di minaccia costa convenienza senza un reale guadagno.",
   'onboarding.useRecommended': 'Usa il consigliato: T{tier} · {name}',
   'onboarding.build': 'Costruisci il mio piano →',
+  'onboarding.restore': 'Sei tornato? Ripristina un backup',
+  'onboarding.restoreCta': 'Scegli file .vanish',
+  'onboarding.restoreErr': 'Passphrase errata o non è un backup di Vanish.',
+  'onboarding.restorePass': 'Passphrase del backup',
 
   // Dashboard
   'dashboard.title': 'Il tuo punteggio privacy',
@@ -173,6 +177,24 @@ export const it: Dict = {
   'letters.disclaimerPre': '⚖️ Modello per comodità, ',
   'letters.disclaimerStrong': 'non consulenza legale',
   'letters.disclaimerPost': '. Verifica il destinatario corretto e i tuoi diritti locali prima di inviare.',
+  'letters.status.drafted': 'Bozza',
+  'letters.status.escalated': 'Inoltrata',
+  'letters.status.resolved': 'Risolta',
+  'letters.status.responded': 'Risposta ricevuta',
+  'letters.status.sent': 'In attesa di risposta',
+  'letters.trackedConfirm': '✓ Monitorata',
+  'letters.tracked.copied': '✓ Copiato',
+  'letters.tracked.copyEscalation': '⧉ Copia reclamo',
+  'letters.tracked.daysLeft': '{days} giorni alla scadenza per la risposta',
+  'letters.tracked.delete': 'Rimuovi',
+  'letters.tracked.empty': 'Le lettere che monitori compaiono qui con un conto alla rovescia fino alla scadenza.',
+  'letters.tracked.escalate': 'Inoltra a {authority}',
+  'letters.tracked.overdue': 'In ritardo di {days} giorni',
+  'letters.tracked.resolved': 'Segna come risolta',
+  'letters.tracked.responded': 'Segna come risposta ricevuta',
+  'letters.tracked.sentOn': 'Inviata il {date}',
+  'letters.tracked.title': 'Le mie lettere',
+  'letters.trackThis': '+ Monitora questa come inviata',
 
   // Panic
   'panic.title': '🆘 Modalità Panico',
@@ -197,6 +219,11 @@ export const it: Dict = {
   'report.allDone': 'Niente rimasto — ogni azione rilevante è completata o saltata. Mantieni i ricontrolli.',
   'report.footer':
     "Creato con Vanish — un coach per la privacy completamente offline. I link di opt-out cambiano; verifica prima di agire. Non è consulenza legale.",
+
+  // Backup nudge
+  'nudge.backup': 'I tuoi progressi vivono solo in questo browser. Fanne un backup, così cancellare i tuoi dati non li cancellerà.',
+  'nudge.backupCta': 'Fai un backup ora',
+  'nudge.dismiss': 'Più tardi',
 
   // Settings
   'settings.title': 'Impostazioni',
@@ -226,6 +253,16 @@ export const it: Dict = {
   'settings.import': '↑ Importa piano',
   'settings.importOk': '✓ Piano importato.',
   'settings.importErr': '✗ Impossibile leggere quel file.',
+  'settings.encBackupTitle': 'Backup cifrato',
+  'settings.encBackupBody':
+    "La cancellazione dei dati del browser elimina tutto ciò che è qui — è voluto. L’unica copia che sopravvive è un file che conservi tu. Questo backup è cifrato con una passphrase, quindi il file in sé non è una fuga di privacy. Conserva la passphrase in un luogo sicuro; non possiamo recuperarla.",
+  'settings.exportEncrypted': '↓ Salva backup cifrato (.vanish)',
+  'settings.importEncrypted': '↥ Ripristina backup cifrato',
+  'settings.passphrase': 'Passphrase del backup',
+  'settings.passphrasePlaceholder': 'Una passphrase che conosci solo tu',
+  'settings.passphraseRequired': 'Inserisci prima una passphrase.',
+  'settings.backupSaved': '✓ Backup salvato',
+  'settings.backupErr': 'Backup non riuscito.',
   'settings.wipeTitle': 'Cancella tutto',
   'settings.wipeBody':
     "Elimina tutti i progressi e i dati personali da questo dispositivo. Non è possibile annullare l'operazione. (Non c'è nulla su un server da cancellare — non c'è mai stato.)",
@@ -293,4 +330,6 @@ export const it: Dict = {
   'actionCard.hideSteps': 'Nascondi passi',
   'actionCard.notRelevant': 'Non rilevante',
   'actionCard.restore': 'Ripristina',
+  'actionCard.verified': 'Verificato il {date}',
+  'actionCard.verifiedTitle': "Quando questa azione e il suo link sono stati controllati l’ultima volta. Segnala un link non funzionante se è stato spostato.",
 } satisfies Dict

@@ -226,6 +226,15 @@ export const ca: Dict = {
   'settings.import': '↑ Importa el pla',
   'settings.importOk': '✓ Pla importat.',
   'settings.importErr': '✗ No s\'ha pogut llegir aquest fitxer.',
+  'settings.encBackupTitle': 'Còpia de seguretat xifrada',
+  'settings.encBackupBody': 'Esborrar les dades del navegador elimina tot el que hi ha aquí — per disseny. L’única còpia que sobreviu és un fitxer que guardes tu. Aquesta còpia es xifra amb una contrasenya, de manera que el fitxer en si no és una fuita de privacitat. Desa la contrasenya en un lloc segur; no la podem recuperar.',
+  'settings.exportEncrypted': '↓ Desa la còpia xifrada (.vanish)',
+  'settings.importEncrypted': '↥ Restaura una còpia xifrada',
+  'settings.passphrase': 'Contrasenya de la còpia',
+  'settings.passphrasePlaceholder': 'Una contrasenya que només sàpigues tu',
+  'settings.passphraseRequired': 'Introdueix primer una contrasenya.',
+  'settings.backupErr': 'La còpia ha fallat.',
+  'settings.backupSaved': '✓ Còpia desada',
   'settings.wipeTitle': 'Esborra-ho tot',
   'settings.wipeBody':
     "Elimina tot el progrés i les dades personals d'aquest dispositiu. Aquesta acció no es pot desfer. (No hi ha res en cap servidor per eliminar — mai no n'hi ha hagut.)",
@@ -293,4 +302,37 @@ export const ca: Dict = {
   'actionCard.hideSteps': 'Amaga els passos',
   'actionCard.notRelevant': 'No és rellevant',
   'actionCard.restore': 'Restaura',
+  'actionCard.verified': 'Verificat el {date}',
+  'actionCard.verifiedTitle': 'Quan es van comprovar per últim cop aquesta acció i el seu enllaç. Informa d’un enllaç mort si ha canviat d’adreça.',
+
+  // Tracked letters
+  'letters.status.drafted': 'Esborrany',
+  'letters.status.escalated': 'Escalada',
+  'letters.status.resolved': 'Resolta',
+  'letters.status.responded': 'Resposta',
+  'letters.status.sent': 'Esperant resposta',
+  'letters.trackedConfirm': '✓ Registrada',
+  'letters.tracked.copied': '✓ Copiat',
+  'letters.tracked.copyEscalation': '⧉ Copia la reclamació',
+  'letters.tracked.daysLeft': '{days} dies fins al termini de resposta',
+  'letters.tracked.delete': 'Elimina',
+  'letters.tracked.empty': 'Les cartes que registris apareixen aquí amb un compte enrere fins al termini.',
+  'letters.tracked.escalate': 'Escala a {authority}',
+  'letters.tracked.overdue': 'Endarrerida {days} dies',
+  'letters.tracked.resolved': 'Marca com a resolta',
+  'letters.tracked.responded': 'Marca com a resposta',
+  'letters.tracked.sentOn': 'Enviada el {date}',
+  'letters.tracked.title': 'Les meves cartes',
+  'letters.trackThis': '+ Registra-la com a enviada',
+
+  // Backup nudge
+  'nudge.backup': 'El teu progrés viu només en aquest navegador. Fes-ne una còpia perquè esborrar les teves dades no l’elimini.',
+  'nudge.backupCta': 'Fes la còpia ara',
+  'nudge.dismiss': 'Més tard',
+
+  // Onboarding — restore from backup
+  'onboarding.restore': 'Tornes? Restaura una còpia de seguretat',
+  'onboarding.restoreCta': 'Tria el fitxer .vanish',
+  'onboarding.restoreErr': 'Contrasenya incorrecta o no és una còpia de Vanish.',
+  'onboarding.restorePass': 'Contrasenya de la còpia',
 } satisfies Dict

@@ -101,6 +101,10 @@ export const pt: Dict = {
     "A tua maior preocupação — {adversary} — aponta para {tier}. Ajusta o esforço a quem realmente te estás a esconder; ir além do teu modelo de ameaça custa comodidade sem benefício real.",
   'onboarding.useRecommended': 'Usar o recomendado: T{tier} · {name}',
   'onboarding.build': 'Criar o meu plano →',
+  'onboarding.restore': 'Estás a regressar? Restaura uma cópia de segurança',
+  'onboarding.restoreCta': 'Escolher ficheiro .vanish',
+  'onboarding.restoreErr': 'Frase-passe errada ou não é uma cópia de segurança do Vanish.',
+  'onboarding.restorePass': 'Frase-passe da cópia de segurança',
 
   // Dashboard
   'dashboard.title': 'A tua pontuação de privacidade',
@@ -173,6 +177,24 @@ export const pt: Dict = {
   'letters.disclaimerPre': '⚖️ Modelo para conveniência, ',
   'letters.disclaimerStrong': 'não constitui aconselhamento jurídico',
   'letters.disclaimerPost': '. Verifica o destinatário correto e os teus direitos locais antes de enviar.',
+  'letters.status.drafted': 'Rascunho',
+  'letters.status.escalated': 'Escalada',
+  'letters.status.resolved': 'Resolvida',
+  'letters.status.responded': 'Respondida',
+  'letters.status.sent': 'A aguardar resposta',
+  'letters.trackedConfirm': '✓ Em acompanhamento',
+  'letters.tracked.copied': '✓ Copiado',
+  'letters.tracked.copyEscalation': '⧉ Copiar reclamação',
+  'letters.tracked.daysLeft': '{days} dias até ao prazo de resposta',
+  'letters.tracked.delete': 'Remover',
+  'letters.tracked.empty': 'As cartas que acompanhas aparecem aqui com uma contagem decrescente até ao prazo.',
+  'letters.tracked.escalate': 'Escalar para {authority}',
+  'letters.tracked.overdue': 'Em atraso há {days} dias',
+  'letters.tracked.resolved': 'Marcar como resolvida',
+  'letters.tracked.responded': 'Marcar como respondida',
+  'letters.tracked.sentOn': 'Enviada a {date}',
+  'letters.tracked.title': 'As minhas cartas',
+  'letters.trackThis': '+ Acompanhar esta como enviada',
 
   // Panic
   'panic.title': '🆘 Modo Pânico',
@@ -197,6 +219,11 @@ export const pt: Dict = {
   'report.allDone': 'Nada por fazer — todas as ações relevantes estão concluídas ou ignoradas. Mantém as reverificações.',
   'report.footer':
     'Criado com o Vanish — um coach de privacidade totalmente offline. Os links de exclusão mudam; verifica antes de agir. Não constitui aconselhamento jurídico.',
+
+  // Backup nudge
+  'nudge.backup': 'O teu progresso vive apenas neste navegador. Faz uma cópia de segurança para que apagar os teus dados não o elimine.',
+  'nudge.backupCta': 'Fazer cópia de segurança agora',
+  'nudge.dismiss': 'Mais tarde',
 
   // Settings
   'settings.title': 'Definições',
@@ -226,6 +253,15 @@ export const pt: Dict = {
   'settings.import': '↑ Importar plano',
   'settings.importOk': '✓ Plano importado.',
   'settings.importErr': '✗ Não foi possível ler esse ficheiro.',
+  'settings.encBackupTitle': 'Cópia de segurança cifrada',
+  'settings.encBackupBody': 'Apagar os dados do teu navegador elimina tudo o que está aqui — por design. A única cópia que sobrevive é um ficheiro que guardas. Esta cópia de segurança é cifrada com uma frase-passe, por isso o próprio ficheiro não constitui uma fuga de privacidade. Guarda a frase-passe num local seguro; não a conseguimos recuperar.',
+  'settings.exportEncrypted': '↓ Guardar cópia de segurança cifrada (.vanish)',
+  'settings.importEncrypted': '↥ Restaurar cópia de segurança cifrada',
+  'settings.passphrase': 'Frase-passe da cópia de segurança',
+  'settings.passphrasePlaceholder': 'Uma frase-passe que só tu conheces',
+  'settings.passphraseRequired': 'Introduz primeiro uma frase-passe.',
+  'settings.backupErr': 'A cópia de segurança falhou.',
+  'settings.backupSaved': '✓ Cópia de segurança guardada',
   'settings.wipeTitle': 'Apagar tudo',
   'settings.wipeBody':
     'Elimina todo o progresso e dados pessoais deste dispositivo. Esta ação não pode ser desfeita. (Não há nada num servidor para apagar — nunca houve.)',
@@ -293,4 +329,6 @@ export const pt: Dict = {
   'actionCard.hideSteps': 'Ocultar passos',
   'actionCard.notRelevant': 'Não é relevante',
   'actionCard.restore': 'Restaurar',
+  'actionCard.verified': 'Verificado a {date}',
+  'actionCard.verifiedTitle': 'Quando esta ação e o respetivo link foram verificados pela última vez. Reporta um link inativo se tiver mudado.',
 } satisfies Dict

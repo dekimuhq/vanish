@@ -294,4 +294,48 @@ export const sv: Dict = {
   'actionCard.hideSteps': 'Dölj steg',
   'actionCard.notRelevant': 'Inte relevant',
   'actionCard.restore': 'Återställ',
+  'actionCard.verified': 'Verifierad {date}',
+  'actionCard.verifiedTitle': 'När den här åtgärden och dess länk senast kontrollerades. Rapportera en trasig länk om den har flyttats.',
+
+  // Letters — tracked
+  'letters.status.drafted': 'Utkast',
+  'letters.status.escalated': 'Eskalerad',
+  'letters.status.resolved': 'Löst',
+  'letters.status.responded': 'Besvarad',
+  'letters.status.sent': 'Inväntar svar',
+  'letters.trackedConfirm': '✓ Spårad',
+  'letters.tracked.copied': '✓ Kopierat',
+  'letters.tracked.copyEscalation': '⧉ Kopiera klagomål',
+  'letters.tracked.daysLeft': '{days} dagar kvar till svarsfristen',
+  'letters.tracked.delete': 'Ta bort',
+  'letters.tracked.empty': 'Brev du spårar visas här med en nedräkning till fristen.',
+  'letters.tracked.escalate': 'Eskalera till {authority}',
+  'letters.tracked.overdue': 'Försenad med {days} dagar',
+  'letters.tracked.resolved': 'Markera som löst',
+  'letters.tracked.responded': 'Markera som besvarad',
+  'letters.tracked.sentOn': 'Skickat {date}',
+  'letters.tracked.title': 'Mina brev',
+  'letters.trackThis': '+ Spåra detta som skickat',
+
+  // Nudge — backup
+  'nudge.backup': 'Dina framsteg finns bara i den här webbläsaren. Säkerhetskopiera så att radering av dina data inte raderar dem.',
+  'nudge.backupCta': 'Säkerhetskopiera nu',
+  'nudge.dismiss': 'Senare',
+
+  // Onboarding — restore
+  'onboarding.restore': 'Kommer du tillbaka? Återställ en säkerhetskopia',
+  'onboarding.restoreCta': 'Välj .vanish-fil',
+  'onboarding.restoreErr': 'Fel lösenfras eller inte en Vanish-säkerhetskopia.',
+  'onboarding.restorePass': 'Lösenfras för säkerhetskopia',
+
+  // Settings — encrypted backup
+  'settings.backupErr': 'Säkerhetskopieringen misslyckades.',
+  'settings.backupSaved': '✓ Säkerhetskopia sparad',
+  'settings.encBackupBody': 'När du raderar din webbläsardata raderas allt här — det är meningen. Den enda kopian som överlever är en fil du själv behåller. Den här säkerhetskopian är krypterad med en lösenfras, så själva filen är inte en integritetsläcka. Förvara lösenfrasen på ett säkert ställe; vi kan inte återskapa den.',
+  'settings.encBackupTitle': 'Krypterad säkerhetskopia',
+  'settings.exportEncrypted': '↓ Spara krypterad säkerhetskopia (.vanish)',
+  'settings.importEncrypted': '↥ Återställ krypterad säkerhetskopia',
+  'settings.passphrase': 'Lösenfras för säkerhetskopia',
+  'settings.passphrasePlaceholder': 'En lösenfras som bara du känner till',
+  'settings.passphraseRequired': 'Ange en lösenfras först.',
 } satisfies Dict

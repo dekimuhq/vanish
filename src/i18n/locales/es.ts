@@ -101,6 +101,10 @@ export const es: Dict = {
     "Tu preocupación principal — {adversary} — recomienda {tier}. Ajusta el esfuerzo a quien realmente intentas esquivar; ir más lejos de lo que exige tu modelo de amenaza sacrifica comodidad sin ganar nada real.",
   'onboarding.useRecommended': 'Usar la recomendación: N{tier} · {name}',
   'onboarding.build': 'Crear mi plan →',
+  'onboarding.restore': '¿Vuelves? Restaura una copia de seguridad',
+  'onboarding.restoreCta': 'Elegir archivo .vanish',
+  'onboarding.restoreErr': 'Frase de contraseña incorrecta o no es una copia de Vanish.',
+  'onboarding.restorePass': 'Frase de contraseña de la copia',
 
   // Dashboard
   'dashboard.title': 'Tu puntuación de privacidad',
@@ -173,6 +177,29 @@ export const es: Dict = {
   'letters.disclaimerPre': '⚖️ Plantilla orientativa, ',
   'letters.disclaimerStrong': 'no asesoramiento jurídico',
   'letters.disclaimerPost': '. Verifica el destinatario correcto y tus derechos locales antes de enviar.',
+  'letters.status.drafted': 'Borrador',
+  'letters.status.escalated': 'Escalada',
+  'letters.status.resolved': 'Resuelta',
+  'letters.status.responded': 'Respondida',
+  'letters.status.sent': 'Esperando respuesta',
+  'letters.trackedConfirm': '✓ Registrada',
+  'letters.tracked.copied': '✓ Copiado',
+  'letters.tracked.copyEscalation': '⧉ Copiar reclamación',
+  'letters.tracked.daysLeft': '{days} días hasta el plazo de respuesta',
+  'letters.tracked.delete': 'Quitar',
+  'letters.tracked.empty': 'Las cartas que registres aparecen aquí con una cuenta atrás del plazo.',
+  'letters.tracked.escalate': 'Escalar a {authority}',
+  'letters.tracked.overdue': 'Vencida hace {days} días',
+  'letters.tracked.resolved': 'Marcar como resuelta',
+  'letters.tracked.responded': 'Marcar como respondida',
+  'letters.tracked.sentOn': 'Enviada el {date}',
+  'letters.tracked.title': 'Mis cartas',
+  'letters.trackThis': '+ Registrar como enviada',
+
+  // Backup nudge
+  'nudge.backup': 'Tu progreso vive solo en este navegador. Haz una copia de seguridad para que borrar tus datos no lo elimine.',
+  'nudge.backupCta': 'Hacer copia ahora',
+  'nudge.dismiss': 'Más tarde',
 
   // Panic
   'panic.title': '🆘 Modo pánico',
@@ -226,6 +253,15 @@ export const es: Dict = {
   'settings.import': '↑ Importar plan',
   'settings.importOk': '✓ Plan importado.',
   'settings.importErr': '✗ No se pudo leer ese archivo.',
+  'settings.encBackupTitle': 'Copia de seguridad encriptada',
+  'settings.encBackupBody': 'Borrar los datos de tu navegador elimina todo lo que hay aquí — por diseño. La única copia que sobrevive es un archivo que tú guardas. Esta copia se encripta con una frase de contraseña, así que el archivo en sí no es una fuga de privacidad. Guarda la frase de contraseña en un lugar seguro; no podemos recuperarla.',
+  'settings.exportEncrypted': '↓ Guardar copia encriptada (.vanish)',
+  'settings.importEncrypted': '↥ Restaurar copia encriptada',
+  'settings.passphrase': 'Frase de contraseña de la copia',
+  'settings.passphrasePlaceholder': 'Una frase de contraseña que solo tú conoces',
+  'settings.passphraseRequired': 'Introduce primero una frase de contraseña.',
+  'settings.backupErr': 'La copia de seguridad falló.',
+  'settings.backupSaved': '✓ Copia guardada',
   'settings.wipeTitle': 'Borrar todo',
   'settings.wipeBody':
     'Elimina todo el progreso y los datos personales de este dispositivo. No se puede deshacer. (No hay nada en ningún servidor que borrar — nunca lo hubo.)',
@@ -293,4 +329,6 @@ export const es: Dict = {
   'actionCard.hideSteps': 'Ocultar pasos',
   'actionCard.notRelevant': 'No me aplica',
   'actionCard.restore': 'Restaurar',
+  'actionCard.verified': 'Verificado el {date}',
+  'actionCard.verifiedTitle': 'Cuándo se comprobó por última vez esta acción y su enlace. Avisa de un enlace roto si ha cambiado de sitio.',
 } satisfies Dict
