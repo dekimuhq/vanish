@@ -129,6 +129,12 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     }
   }, [state])
 
+  // Best-effort: ask the browser not to auto-evict our storage under pressure.
+  // Does NOT survive a manual "clear site data" — backups cover that.
+  useEffect(() => {
+    void navigator.storage?.persist?.().catch(() => {})
+  }, [])
+
   const value = useMemo<Ctx>(
     () => ({
       state,
