@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { TierBadge } from '../components/Pills'
 import { sanitize } from '../store/store'
 import { encryptBackup, decryptBackup, BackupError } from '../lib/backup'
+import { saveBlob } from '../lib/save-file'
 import { TIERS, type Country, type Tier } from '../lib/types'
 import { COUNTRIES, COUNTRY_GROUPS, authorityFor, regionForCountry } from '../data/countries'
 import { useStore } from '../store/store'
@@ -34,12 +35,8 @@ export function Settings() {
     setBusy(true)
     try {
       const blob = await encryptBackup(state, pass)
-      const url = URL.createObjectURL(blob)
-      const a = document.createElement('a')
-      a.href = url
-      a.download = `vanish-backup-${new Date().toISOString().slice(0, 10)}.vanish`
-      a.click()
-      URL.revokeObjectURL(url)
+      const ok = await saveBlob(blob, `vanish-backup-${new Date().toISOString().slice(0, 10)}.vanish`)
+      if (!ok) return // user cancelled the save dialog — don't stamp or message
       markBackedUp(new Date().toISOString())
       setImportMsg(t('settings.backupSaved'))
     } catch (e) {
