@@ -42,7 +42,7 @@ export function ActionCard({ action: raw, showTier = true }: Props) {
           onClick={() => setStatus(action.id, status === 'done' ? 'todo' : 'done')}
           aria-pressed={status === 'done'}
           aria-label={status === 'done' ? t('actionCard.markNotDone', { title: action.title }) : t('actionCard.markDone', { title: action.title })}
-          className={`mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-md border text-sm transition ${
+          className={`relative mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-md border text-sm transition before:absolute before:-inset-[10px] before:content-[''] ${
             status === 'done'
               ? 'border-signal-ok bg-signal-ok text-ink-950'
               : 'border-ink-600 text-transparent hover:border-ghost'
@@ -58,7 +58,7 @@ export function ActionCard({ action: raw, showTier = true }: Props) {
             </h3>
             {showTier && <TierBadge tier={action.tier} withName={false} />}
             <span className="pill bg-ink-700/60 text-slate-400">
-              {CATEGORIES[action.category].icon} {catName}
+              <span aria-hidden="true">{CATEGORIES[action.category].icon}</span> {catName}
             </span>
           </div>
 
@@ -72,7 +72,7 @@ export function ActionCard({ action: raw, showTier = true }: Props) {
                 {t('actionCard.recheckEvery', { days: action.recurDays })}
               </span>
             )}
-            <span className="pill bg-ink-700/60 text-slate-500" title={t('actionCard.verifiedTitle')}>
+            <span className="pill bg-ink-700/60 text-slate-400" title={t('actionCard.verifiedTitle')}>
               ✓ {t('actionCard.verified', { date: verifiedAtOf(raw) })}
             </span>
           </div>
@@ -90,7 +90,7 @@ export function ActionCard({ action: raw, showTier = true }: Props) {
                 </a>
               ) : (
                 <button
-                  className="btn-sm rounded-lg px-2 text-xs text-slate-500 hover:text-slate-300"
+                  className="btn-sm rounded-lg px-2 text-xs text-slate-400 hover:text-slate-300"
                   onClick={() => setDeadLink(true)}
                   title={t('actionCard.linkDeadTitle')}
                 >
@@ -115,7 +115,7 @@ export function ActionCard({ action: raw, showTier = true }: Props) {
             <div className="ml-auto flex items-center gap-1">
               {status !== 'skipped' ? (
                 <button
-                  className="btn-sm rounded-lg px-2 text-xs text-slate-500 hover:text-slate-300"
+                  className="btn-sm rounded-lg px-2 text-xs text-slate-400 hover:text-slate-300"
                   onClick={() => setStatus(action.id, 'skipped')}
                 >
                   {t('actionCard.notRelevant')}

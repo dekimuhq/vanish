@@ -70,14 +70,14 @@ export function Onboarding() {
               <li className="flex gap-2"><span className="text-ghost">☰</span> {t('onboarding.bullet2')}</li>
               <li className="flex gap-2"><span className="text-ghost">✍️</span> {t('onboarding.bullet3')}</li>
             </ul>
-            <p className="mb-5 text-xs text-slate-500">
+            <p className="mb-5 text-xs text-slate-400">
               {t('onboarding.privacyNote')}
             </p>
             <button className="btn-primary w-full" onClick={() => setStep(1)}>
               {t('onboarding.start')}
             </button>
             <div className="mt-5 border-t border-ink-700/60 pt-4">
-              <p className="mb-2 text-center text-xs text-slate-500">{t('onboarding.restore')}</p>
+              <p className="mb-2 text-center text-xs text-slate-400">{t('onboarding.restore')}</p>
               <input
                 className="input mb-2"
                 type="password"
@@ -85,12 +85,14 @@ export function Onboarding() {
                 onChange={(e) => setRestorePass(e.target.value)}
                 placeholder={t('onboarding.restorePass')}
                 autoComplete="off"
+                aria-invalid={!!restoreErr}
+                aria-describedby={restoreErr ? 'restore-err' : undefined}
               />
               <button className="btn-ghost btn-sm w-full" onClick={() => restoreRef.current?.click()}>
                 {t('onboarding.restoreCta')}
               </button>
               <input ref={restoreRef} type="file" accept=".vanish" className="hidden" onChange={onRestore} />
-              {restoreErr && <p className="mt-2 text-center text-xs text-signal-danger" role="status" aria-live="polite">{t('onboarding.restoreErr')}</p>}
+              {restoreErr && <p id="restore-err" className="mt-2 text-center text-xs text-signal-danger" role="status" aria-live="polite">{t('onboarding.restoreErr')}</p>}
             </div>
           </>
         )}
@@ -115,7 +117,7 @@ export function Onboarding() {
               ))}
             </select>
             {authority && (
-              <p className="mt-3 text-xs text-slate-500">
+              <p className="mt-3 text-xs text-slate-400">
                 {t('onboarding.authority')} <span className="text-slate-300">{authority.name}</span>
               </p>
             )}
@@ -168,9 +170,9 @@ export function Onboarding() {
                   <div className="text-left">
                     <div className="font-semibold">
                       T{tier} · {t(`tier.${TIERS[tier].key}.name`)}{' '}
-                      <span className="font-normal text-slate-500">— {t(`tier.${TIERS[tier].key}.tagline`)}</span>
+                      <span className="font-normal text-slate-400">— {t(`tier.${TIERS[tier].key}.tagline`)}</span>
                     </div>
-                    <div className="text-xs text-slate-500">{t(`tier.${TIERS[tier].key}.who`)}</div>
+                    <div className="text-xs text-slate-400">{t(`tier.${TIERS[tier].key}.who`)}</div>
                   </div>
                 </Choice>
               ))}
@@ -204,6 +206,7 @@ function Choice({ active, onClick, children }: { active: boolean; onClick: () =>
   return (
     <button
       onClick={onClick}
+      aria-pressed={active}
       className={`rounded-xl border px-4 py-3 text-sm transition ${
         active ? 'border-ghost bg-ghost/10 text-ghost-bright' : 'border-ink-600 text-slate-300 hover:border-ink-500'
       }`}

@@ -17,12 +17,13 @@ export function Layout({ children }: { children: ReactNode }) {
   const { t } = useI18n()
   return (
     <div className="mx-auto flex min-h-full max-w-5xl flex-col px-4 pb-28 pt-5 sm:px-6 sm:pb-10">
+      <a href="#main" className="skip-link btn-primary btn-sm">{t('a11y.skipToContent')}</a>
       <header className="mb-6 flex items-center justify-between">
         <NavLink to="/" className="flex items-center gap-2.5">
           <Logo />
           <div>
             <div className="text-lg font-bold tracking-tight text-slate-100">{t('app.name')}</div>
-            <div className="-mt-1 text-[11px] text-slate-500">{t('app.tagline')}</div>
+            <div className="-mt-1 text-[11px] text-slate-400">{t('app.tagline')}</div>
           </div>
         </NavLink>
         <span className="pill border border-ghost/20 bg-ghost/5 text-ghost-bright" title={t('offline.title')}>
@@ -31,16 +32,16 @@ export function Layout({ children }: { children: ReactNode }) {
       </header>
 
       {/* Desktop / wide nav */}
-      <nav className="mb-6 hidden flex-wrap gap-1.5 sm:flex">
+      <nav aria-label={t('a11y.primaryNav')} className="mb-6 hidden flex-wrap gap-1.5 sm:flex">
         {NAV.map((n) => (
           <NavItem key={n.to} to={n.to} label={t(n.labelKey)} icon={n.icon} end={n.end} />
         ))}
       </nav>
 
-      <main className="flex-1"><BackupNudge />{children}</main>
+      <main id="main" tabIndex={-1} className="flex-1 focus:outline-none"><BackupNudge />{children}</main>
 
       {/* Mobile bottom tab bar */}
-      <nav className="fixed inset-x-0 bottom-0 z-20 border-t border-ink-700/70 bg-ink-900/95 backdrop-blur sm:hidden">
+      <nav aria-label={t('a11y.primaryNav')} className="fixed inset-x-0 bottom-0 z-20 border-t border-ink-700/70 bg-ink-900/95 backdrop-blur sm:hidden">
         <div className="mx-auto grid max-w-5xl grid-cols-6">
           {NAV.map((n) => (
             <NavLink
@@ -49,11 +50,11 @@ export function Layout({ children }: { children: ReactNode }) {
               end={n.end}
               className={({ isActive }) =>
                 `flex flex-col items-center gap-0.5 py-2 text-[10px] ${
-                  isActive ? 'text-ghost-bright' : 'text-slate-500'
+                  isActive ? 'text-ghost-bright' : 'text-slate-400'
                 }`
               }
             >
-              <span className="text-base">{n.icon}</span>
+              <span className="text-base" aria-hidden="true">{n.icon}</span>
               {t(n.labelKey)}
             </NavLink>
           ))}
@@ -76,7 +77,7 @@ function NavItem({ to, label, icon, end }: { to: string; label: string; icon: st
         }`
       }
     >
-      <span>{icon}</span>
+      <span aria-hidden="true">{icon}</span>
       {label}
     </NavLink>
   )

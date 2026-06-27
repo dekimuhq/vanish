@@ -26,7 +26,7 @@ export function BackupNudge() {
       <Link to="/settings" className="btn-primary btn-sm" onClick={() => setDismissed(true)}>
         {t('nudge.backupCta')}
       </Link>
-      <button className="btn-sm text-slate-500 hover:text-slate-300" onClick={() => setDismissed(true)}>
+      <button className="btn-sm text-slate-400 hover:text-slate-300" onClick={() => setDismissed(true)}>
         {t('nudge.dismiss')}
       </button>
     </div>

@@ -59,7 +59,7 @@ export class ErrorBoundary extends Component<Props, State> {
         <button
           type="button"
           onClick={() => location.reload()}
-          className="text-xs text-slate-500 underline-offset-2 hover:underline"
+          className="text-xs text-slate-400 underline-offset-2 hover:underline"
         >
           Just reload (keep my data)
         </button>

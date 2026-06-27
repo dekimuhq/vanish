@@ -19,7 +19,7 @@ export function Brokers() {
         <h1 className="text-2xl font-bold text-slate-100">{t('brokers.title')}</h1>
         <p className="mt-1 max-w-2xl text-sm text-slate-400">
           {t('brokers.subtitle')} {' '}
-          <span className="text-slate-500">{t('brokers.cleared', { done, total: brokers.length })}</span>
+          <span className="text-slate-400">{t('brokers.cleared', { done, total: brokers.length })}</span>
         </p>
       </header>
 

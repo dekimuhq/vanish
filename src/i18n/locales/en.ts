@@ -18,6 +18,8 @@ export const en = {
   'nav.letters': 'Letters',
   'nav.panic': 'Panic',
   'nav.settings': 'Settings',
+  'a11y.skipToContent': 'Skip to content',
+  'a11y.primaryNav': 'Primary',
 
   // Common
   'common.back': '← Back',

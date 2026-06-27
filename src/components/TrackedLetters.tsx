@@ -20,7 +20,7 @@ const STATUS_STYLE: Record<LetterStatus, string> = {
   responded: 'text-slate-300',
   resolved: 'text-signal-ok',
   escalated: 'text-signal-danger',
-  drafted: 'text-slate-500',
+  drafted: 'text-slate-400',
 }
 
 export function TrackedLetters() {
@@ -46,7 +46,7 @@ export function TrackedLetters() {
         )}
       </div>
       {letters.length === 0 ? (
-        <p className="text-sm text-slate-500">{t('letters.tracked.empty')}</p>
+        <p className="text-sm text-slate-400">{t('letters.tracked.empty')}</p>
       ) : (
         <ul className="space-y-3">
           {letters.map((l) => (
@@ -106,7 +106,7 @@ function LetterRow({ letter, authorityName, authorityUrl, onUpdate, onDelete }: 
       <div className="flex flex-wrap items-center gap-2">
         <span className="font-semibold text-slate-100">{letter.recipient || '—'}</span>
         <span className={`pill bg-ink-700/60 ${STATUS_STYLE[letter.status]}`}>{t(`letters.status.${letter.status}`)}</span>
-        <span className="ml-auto text-xs text-slate-500">{t('letters.tracked.sentOn', { date: letter.sentAt.slice(0, 10) })}</span>
+        <span className="ml-auto text-xs text-slate-400">{t('letters.tracked.sentOn', { date: letter.sentAt.slice(0, 10) })}</span>
       </div>
 
       {letter.status === 'sent' && (
@@ -129,12 +129,12 @@ function LetterRow({ letter, authorityName, authorityUrl, onUpdate, onDelete }: 
         {letter.status !== 'resolved' && (
           <button className="btn-ghost btn-sm" onClick={() => onUpdate({ status: 'resolved' })}>{t('letters.tracked.resolved')}</button>
         )}
-        <button className="btn-sm ml-auto px-2 text-xs text-slate-500 hover:text-slate-300" aria-label={t('letters.tracked.delete')} onClick={onDelete}>{t('letters.tracked.delete')}</button>
+        <button className="btn-sm ml-auto px-2 text-xs text-slate-400 hover:text-slate-300" aria-label={t('letters.tracked.delete')} onClick={onDelete}>{t('letters.tracked.delete')}</button>
       </div>
 
       {body && (
-        <div className="space-y-2" role="status" aria-live="polite">
-          <p className="text-xs text-signal-danger">{t('letters.tracked.overdueComplaint')}</p>
+        <div className="space-y-2">
+          <p className="text-xs text-signal-danger" role="status" aria-live="polite">{t('letters.tracked.overdueComplaint')}</p>
           <pre className="max-h-48 overflow-auto whitespace-pre-wrap rounded-lg bg-ink-900/60 px-3 py-2 font-mono text-[12px] leading-relaxed text-slate-300">{body}</pre>
           <div className="flex flex-wrap gap-2">
             <button className="btn-ghost btn-sm" onClick={copy}>{copied ? t('letters.tracked.copied') : t('letters.tracked.copyEscalation')}</button>
@@ -145,6 +145,7 @@ function LetterRow({ letter, authorityName, authorityUrl, onUpdate, onDelete }: 
               </a>
             )}
           </div>
+          <span className="sr-only" role="status" aria-live="polite">{copied ? t('letters.tracked.copied') : ''}</span>
         </div>
       )}
     </li>

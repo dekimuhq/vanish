@@ -20,7 +20,7 @@ export function Panic() {
 
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-bold text-slate-100">{t('panic.doNow')}</h2>
-        <span className="text-sm text-slate-500">{t('panic.doneCount', { done, total: actions.length })}</span>
+        <span className="text-sm text-slate-400">{t('panic.doneCount', { done, total: actions.length })}</span>
       </div>
 
       <ol className="space-y-3">

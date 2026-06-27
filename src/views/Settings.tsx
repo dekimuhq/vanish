@@ -136,7 +136,7 @@ export function Settings() {
               </option>
             ))}
           </select>
-          <span className="mt-2 block text-xs text-slate-500">{t('settings.languageHint')}</span>
+          <span className="mt-2 block text-xs text-slate-400">{t('settings.languageHint')}</span>
         </label>
       </section>
 
@@ -166,14 +166,14 @@ export function Settings() {
           {(() => {
             const auth = authorityFor(state.profile.country)
             return auth ? (
-              <p className="mt-2 text-xs text-slate-500">
+              <p className="mt-2 text-xs text-slate-400">
                 {t('settings.supervisoryAuthority')}{' '}
                 <a className="text-ghost-bright hover:underline" href={auth.url} target="_blank" rel="noopener noreferrer">
                   {auth.name} ↗
                 </a>
               </p>
             ) : (
-              <p className="mt-2 text-xs text-slate-500">{t('settings.region', { region: state.profile.region.toUpperCase() })}</p>
+              <p className="mt-2 text-xs text-slate-400">{t('settings.region', { region: state.profile.region.toUpperCase() })}</p>
             )
           })()}
         </label>
@@ -185,6 +185,7 @@ export function Settings() {
               <button
                 key={tier}
                 onClick={() => updateProfile({ targetTier: tier })}
+                aria-pressed={state.profile.targetTier === tier}
                 className={`flex items-center gap-2 rounded-xl border px-3 py-2 text-left text-sm ${
                   state.profile.targetTier === tier ? 'border-ghost/40 bg-ghost/10' : 'border-ink-700 hover:border-ink-600'
                 }`}
@@ -213,7 +214,7 @@ export function Settings() {
             {t('settings.printCard')}
           </button>
         )}
-        <p className="text-xs text-slate-500">{t('settings.codeWordRule')}</p>
+        <p className="text-xs text-slate-400">{t('settings.codeWordRule')}</p>
       </section>
 
       <section className="card space-y-3 p-5">

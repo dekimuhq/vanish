@@ -56,7 +56,7 @@ export function Plan() {
       <div className="space-y-6">
         <Header />
         {toolbar}
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-slate-400">
           {tPlural('plan.results', results.length, { query })}
         </p>
         <div className="grid gap-3">
@@ -81,12 +81,12 @@ export function Plan() {
             <div className="mb-3 flex items-baseline justify-between border-b border-ink-700/60 pb-2">
               <div>
                 <h2 className="text-lg font-bold text-slate-100">
-                  <span className="font-mono text-slate-500">T{tier}</span> {t(`tier.${TIERS[tier].key}.name`)}
-                  <span className="ml-2 text-sm font-normal text-slate-500">{t(`tier.${TIERS[tier].key}.tagline`)}</span>
+                  <span className="font-mono text-slate-400">T{tier}</span> {t(`tier.${TIERS[tier].key}.name`)}
+                  <span className="ml-2 text-sm font-normal text-slate-400">{t(`tier.${TIERS[tier].key}.tagline`)}</span>
                 </h2>
-                <p className="mt-0.5 text-xs text-slate-500">{t(`tier.${TIERS[tier].key}.who`)}</p>
+                <p className="mt-0.5 text-xs text-slate-400">{t(`tier.${TIERS[tier].key}.who`)}</p>
               </div>
-              <span className="shrink-0 font-mono text-xs text-slate-500">
+              <span className="shrink-0 font-mono text-xs text-slate-400">
                 {bt.done}/{bt.total}
               </span>
             </div>
