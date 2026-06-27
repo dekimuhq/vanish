@@ -140,7 +140,7 @@ export function Letters() {
               {t('letters.openEmail')}
             </a>
             <button className="btn-ghost btn-sm" onClick={track}>
-              {tracked ? t('letters.tracked.copied') : t('letters.trackThis')}
+              {tracked ? t('letters.trackedConfirm') : t('letters.trackThis')}
             </button>
           </div>
           <p className="text-xs text-slate-500">

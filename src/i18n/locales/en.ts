@@ -184,6 +184,7 @@ export const en = {
   'letters.disclaimerStrong': 'not legal advice',
   'letters.disclaimerPost': '. Verify the right recipient and your local rights before sending.',
   'letters.trackThis': '+ Track this as sent',
+  'letters.trackedConfirm': '✓ Tracked',
   'letters.tracked.title': 'My letters',
   'letters.tracked.empty': 'Letters you track appear here with a deadline countdown.',
   'letters.tracked.sentOn': 'Sent {date}',

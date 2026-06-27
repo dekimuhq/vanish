@@ -54,6 +54,7 @@ function LetterRow({ letter, authorityName, onUpdate, onDelete }: RowProps) {
   const [copied, setCopied] = useState(false)
   const days = daysRemaining(letter)
   const overdue = isOverdue(letter)
+  const body = escalation ?? (letter.status === 'escalated' ? escalationLetter(letter, authorityName) : null)
 
   function escalate() {
     setEscalation(escalationLetter(letter, authorityName))
@@ -61,9 +62,9 @@ function LetterRow({ letter, authorityName, onUpdate, onDelete }: RowProps) {
   }
 
   async function copy() {
-    if (!escalation) return
+    if (!body) return
     try {
-      await navigator.clipboard.writeText(escalation)
+      await navigator.clipboard.writeText(body)
       setCopied(true)
       setTimeout(() => setCopied(false), 1800)
     } catch {
@@ -99,12 +100,12 @@ function LetterRow({ letter, authorityName, onUpdate, onDelete }: RowProps) {
         {letter.status !== 'resolved' && (
           <button className="btn-ghost btn-sm" onClick={() => onUpdate({ status: 'resolved' })}>{t('letters.tracked.resolved')}</button>
         )}
-        <button className="btn-sm ml-auto px-2 text-xs text-slate-500 hover:text-slate-300" onClick={onDelete}>{t('letters.tracked.delete')}</button>
+        <button className="btn-sm ml-auto px-2 text-xs text-slate-500 hover:text-slate-300" aria-label={t('letters.tracked.delete')} onClick={onDelete}>{t('letters.tracked.delete')}</button>
       </div>
 
-      {escalation && (
-        <div className="space-y-2">
-          <pre className="max-h-48 overflow-auto whitespace-pre-wrap rounded-lg bg-ink-900/60 px-3 py-2 font-mono text-[12px] leading-relaxed text-slate-300">{escalation}</pre>
+      {body && (
+        <div className="space-y-2" role="status" aria-live="polite">
+          <pre className="max-h-48 overflow-auto whitespace-pre-wrap rounded-lg bg-ink-900/60 px-3 py-2 font-mono text-[12px] leading-relaxed text-slate-300">{body}</pre>
           <button className="btn-ghost btn-sm" onClick={copy}>{copied ? t('letters.tracked.copied') : t('letters.tracked.copyEscalation')}</button>
         </div>
       )}
