@@ -102,6 +102,10 @@ export const fr: Dict = {
     "Votre préoccupation principale — {adversary} — appelle le niveau {tier}. Adaptez votre effort à celui contre qui vous vous protégez vraiment ; aller plus loin que votre modèle de menace coûte en confort sans gain réel.",
   'onboarding.useRecommended': 'Utiliser la recommandation : N{tier} · {name}',
   'onboarding.build': 'Construire mon plan →',
+  'onboarding.restore': 'De retour ? Restaurez une sauvegarde',
+  'onboarding.restoreCta': 'Choisir un fichier .vanish',
+  'onboarding.restoreErr': 'Phrase secrète incorrecte, ou ce n’est pas une sauvegarde Vanish.',
+  'onboarding.restorePass': 'Phrase secrète de la sauvegarde',
 
   // Dashboard
   'dashboard.title': 'Votre score de confidentialité',
@@ -174,6 +178,24 @@ export const fr: Dict = {
   'letters.disclaimerPre': '⚖️ Modèle fourni à titre indicatif, ',
   'letters.disclaimerStrong': 'pas un conseil juridique',
   'letters.disclaimerPost': ". Vérifiez le bon destinataire et vos droits locaux avant d'envoyer.",
+  'letters.status.drafted': 'Brouillon',
+  'letters.status.escalated': 'Transmise à l’autorité',
+  'letters.status.resolved': 'Résolue',
+  'letters.status.responded': 'Réponse reçue',
+  'letters.status.sent': 'En attente de réponse',
+  'letters.trackedConfirm': '✓ Suivie',
+  'letters.tracked.copied': '✓ Copié',
+  'letters.tracked.copyEscalation': '⧉ Copier la réclamation',
+  'letters.tracked.daysLeft': '{days} jours avant la date limite de réponse',
+  'letters.tracked.delete': 'Retirer',
+  'letters.tracked.empty': 'Les lettres que vous suivez apparaissent ici avec un compte à rebours jusqu’à la date limite.',
+  'letters.tracked.escalate': 'Saisir {authority}',
+  'letters.tracked.overdue': 'En retard de {days} jours',
+  'letters.tracked.resolved': 'Marquer comme résolue',
+  'letters.tracked.responded': 'Marquer comme répondue',
+  'letters.tracked.sentOn': 'Envoyée le {date}',
+  'letters.tracked.title': 'Mes lettres',
+  'letters.trackThis': '+ Suivre comme envoyée',
 
   // Panic
   'panic.title': '🆘 Mode panique',
@@ -198,6 +220,11 @@ export const fr: Dict = {
   'report.allDone': "Il ne reste rien — toutes les actions pertinentes sont faites ou ignorées. Continuez les vérifications.",
   'report.footer':
     "Fait avec Vanish — un coach de confidentialité 100% hors ligne. Les liens de désinscription changent ; vérifiez avant d'agir. Pas un conseil juridique.",
+
+  // Backup nudge
+  'nudge.backup': "Votre progression n'existe que dans ce navigateur. Sauvegardez-la pour qu’effacer vos données ne l’efface pas.",
+  'nudge.backupCta': 'Sauvegarder maintenant',
+  'nudge.dismiss': 'Plus tard',
 
   // Settings
   'settings.title': 'Paramètres',
@@ -225,6 +252,16 @@ export const fr: Dict = {
     "Pas de compte, pas de synchronisation dans le cloud — c'est voulu. Exportez un fichier JSON chiffré par vos soins pour transférer votre plan sur un autre appareil. Le fichier contient votre progression et les informations saisies pour les lettres.",
   'settings.export': '↓ Exporter le plan',
   'settings.import': '↑ Importer le plan',
+  'settings.encBackupTitle': 'Sauvegarde chiffrée',
+  'settings.encBackupBody':
+    "Effacer les données de votre navigateur supprime tout ce qui se trouve ici — c'est voulu. La seule copie qui subsiste est un fichier que vous conservez. Cette sauvegarde est chiffrée par une phrase secrète, le fichier lui-même n’est donc pas une fuite de confidentialité. Conservez la phrase secrète en lieu sûr ; nous ne pouvons pas la récupérer.",
+  'settings.exportEncrypted': '↓ Enregistrer une sauvegarde chiffrée (.vanish)',
+  'settings.importEncrypted': '↥ Restaurer une sauvegarde chiffrée',
+  'settings.passphrase': 'Phrase secrète de la sauvegarde',
+  'settings.passphrasePlaceholder': 'Une phrase secrète connue de vous seul',
+  'settings.passphraseRequired': 'Saisissez d’abord une phrase secrète.',
+  'settings.backupErr': 'Échec de la sauvegarde.',
+  'settings.backupSaved': '✓ Sauvegarde enregistrée',
   'settings.importOk': '✓ Plan importé.',
   'settings.importErr': '✗ Impossible de lire ce fichier.',
   'settings.wipeTitle': 'Tout effacer',
@@ -310,4 +347,6 @@ export const fr: Dict = {
   'actionCard.hideSteps': 'Masquer les étapes',
   'actionCard.notRelevant': 'Non pertinent',
   'actionCard.restore': 'Restaurer',
+  'actionCard.verified': 'Vérifié le {date}',
+  'actionCard.verifiedTitle': 'Date du dernier contrôle de cette action et de son lien. Signalez un lien mort s’il a changé d’adresse.',
 } satisfies Dict

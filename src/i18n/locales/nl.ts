@@ -82,6 +82,10 @@ export const nl: Dict = {
   'onboarding.bullet3': 'Genereert AVG/CCPA-verwijderbrieven die je zelf verstuurt.',
   'onboarding.privacyNote': 'Drie korte vragen stellen je plan op maat. Je antwoorden verlaten dit apparaat nooit.',
   'onboarding.start': 'Start →',
+  'onboarding.restore': 'Kom je terug? Herstel een back-up',
+  'onboarding.restoreCta': 'Kies .vanish-bestand',
+  'onboarding.restoreErr': 'Verkeerde wachtwoordzin of geen Vanish-back-up.',
+  'onboarding.restorePass': 'Wachtwoordzin van de back-up',
   'onboarding.step1.title': 'Waar ben je?',
   'onboarding.step1.hint': 'Bepaalt welke makelaars en wettelijke rechten van toepassing zijn — en noemt je gegevensbeschermingsautoriteit in brieven.',
   'onboarding.selectCountry': 'Selecteer je land…',
@@ -101,6 +105,11 @@ export const nl: Dict = {
     "Je grootste zorg — {adversary} — vraagt om {tier}. Stem je inspanning af op wie je je eigenlijk voor verbergt; verder gaan dan je dreigingsmodel kost gemak zonder echte winst.",
   'onboarding.useRecommended': 'Gebruik aanbevolen: T{tier} · {name}',
   'onboarding.build': 'Maak mijn plan →',
+
+  // Backup nudge
+  'nudge.backup': 'Je voortgang staat alleen in deze browser. Maak een back-up zodat het wissen van je gegevens die niet uitveegt.',
+  'nudge.backupCta': 'Nu back-uppen',
+  'nudge.dismiss': 'Later',
 
   // Dashboard
   'dashboard.title': 'Je privacyscore',
@@ -173,6 +182,24 @@ export const nl: Dict = {
   'letters.disclaimerPre': '⚖️ Sjabloon voor gemak, ',
   'letters.disclaimerStrong': 'geen juridisch advies',
   'letters.disclaimerPost': '. Controleer de juiste ontvanger en je lokale rechten voordat je verstuurt.',
+  'letters.status.drafted': 'Concept',
+  'letters.status.escalated': 'Geëscaleerd',
+  'letters.status.resolved': 'Opgelost',
+  'letters.status.responded': 'Beantwoord',
+  'letters.status.sent': 'Wacht op reactie',
+  'letters.trackedConfirm': '✓ Bijgehouden',
+  'letters.tracked.copied': '✓ Gekopieerd',
+  'letters.tracked.copyEscalation': '⧉ Kopieer klacht',
+  'letters.tracked.daysLeft': 'Nog {days} dagen tot de reactietermijn',
+  'letters.tracked.delete': 'Verwijderen',
+  'letters.tracked.empty': 'Brieven die je bijhoudt verschijnen hier met een aftelling tot de termijn.',
+  'letters.tracked.escalate': 'Escaleren naar {authority}',
+  'letters.tracked.overdue': '{days} dagen te laat',
+  'letters.tracked.resolved': 'Markeer als opgelost',
+  'letters.tracked.responded': 'Markeer als beantwoord',
+  'letters.tracked.sentOn': 'Verzonden {date}',
+  'letters.tracked.title': 'Mijn brieven',
+  'letters.trackThis': '+ Houd dit bij als verzonden',
 
   // Panic
   'panic.title': '🆘 Paniekstand',
@@ -226,6 +253,16 @@ export const nl: Dict = {
   'settings.import': '↑ Importeer plan',
   'settings.importOk': '✓ Plan geïmporteerd.',
   'settings.importErr': '✗ Dat bestand kon niet worden gelezen.',
+  'settings.encBackupTitle': 'Versleutelde back-up',
+  'settings.encBackupBody':
+    'Het wissen van je browsergegevens veegt alles hier weg — met opzet. De enige kopie die het overleeft is een bestand dat je zelf bewaart. Deze back-up is versleuteld met een wachtwoordzin, dus het bestand zelf is geen privacylek. Bewaar de wachtwoordzin op een veilige plek; wij kunnen die niet herstellen.',
+  'settings.exportEncrypted': '↓ Bewaar versleutelde back-up (.vanish)',
+  'settings.importEncrypted': '↥ Herstel versleutelde back-up',
+  'settings.passphrase': 'Wachtwoordzin van de back-up',
+  'settings.passphrasePlaceholder': 'Een wachtwoordzin die alleen jij kent',
+  'settings.passphraseRequired': 'Voer eerst een wachtwoordzin in.',
+  'settings.backupSaved': '✓ Back-up opgeslagen',
+  'settings.backupErr': 'Back-up mislukt.',
   'settings.wipeTitle': 'Alles wissen',
   'settings.wipeBody':
     'Wis alle voortgang en persoonlijke gegevens van dit apparaat. Dit kan niet ongedaan worden gemaakt. (Er staat niets op een server te wissen — dat was er nooit.)',
@@ -293,4 +330,6 @@ export const nl: Dict = {
   'actionCard.hideSteps': 'Verberg stappen',
   'actionCard.notRelevant': 'Niet relevant',
   'actionCard.restore': 'Herstellen',
+  'actionCard.verified': 'Gecontroleerd {date}',
+  'actionCard.verifiedTitle': 'Wanneer deze actie en de bijbehorende link voor het laatst zijn gecontroleerd. Meld een dode link als die is verplaatst.',
 } satisfies Dict
