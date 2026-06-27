@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { sanitize } from './store'
+import { sanitize, reducer } from './store'
+import { SCHEMA_VERSION, initialState, type LetterRecord } from '../lib/types'
 
 describe('sanitize', () => {
   it('returns clean initial state for garbage input', () => {
@@ -31,6 +32,60 @@ describe('sanitize', () => {
   })
 
   it('always stamps the current schema version', () => {
-    expect(sanitize({ schemaVersion: 999 }).schemaVersion).toBe(1)
+    expect(sanitize({ schemaVersion: 999 }).schemaVersion).toBe(SCHEMA_VERSION)
+  })
+})
+
+describe('sanitize — new slices', () => {
+  it('defaults letters to {} and lastBackupAt to null on legacy state', () => {
+    const out = sanitize({ onboarded: true, progress: {} })
+    expect(out.letters).toEqual({})
+    expect(out.lastBackupAt).toBeNull()
+    expect(out.schemaVersion).toBe(SCHEMA_VERSION)
+  })
+
+  it('keeps well-formed letters and drops malformed ones', () => {
+    const out = sanitize({
+      letters: {
+        good: { id: 'good', kind: 'erasure', recipient: 'X', sentAt: '2026-06-01T00:00:00.000Z', deadlineAt: '2026-07-01T00:00:00.000Z', status: 'sent' },
+        bad: { nope: true },
+        missingField: { id: 'missingField', kind: 'erasure', recipient: 'X', deadlineAt: '2026-07-01T00:00:00.000Z', status: 'sent' },
+        badStatus: { id: 'badStatus', kind: 'erasure', recipient: 'X', sentAt: '2026-06-01T00:00:00.000Z', deadlineAt: '2026-07-01T00:00:00.000Z', status: 'bogus' },
+      },
+    })
+    expect(Object.keys(out.letters)).toEqual(['good'])
+  })
+
+  it('keeps a string lastBackupAt', () => {
+    const out = sanitize({ lastBackupAt: '2026-06-27T00:00:00.000Z' })
+    expect(out.lastBackupAt).toBe('2026-06-27T00:00:00.000Z')
+  })
+})
+
+const sample: LetterRecord = {
+  id: 'L1', kind: 'erasure', recipient: 'Spokeo',
+  sentAt: '2026-06-01T00:00:00.000Z', deadlineAt: '2026-07-01T00:00:00.000Z', status: 'sent',
+}
+
+describe('reducer — letters', () => {
+  it('logs, updates, and deletes a letter', () => {
+    let s = reducer(initialState(), { type: 'logLetter', record: sample })
+    expect(s.letters.L1.recipient).toBe('Spokeo')
+
+    s = reducer(s, { type: 'updateLetter', id: 'L1', patch: { status: 'resolved' } })
+    expect(s.letters.L1.status).toBe('resolved')
+
+    s = reducer(s, { type: 'deleteLetter', id: 'L1' })
+    expect(s.letters.L1).toBeUndefined()
+  })
+
+  it('updateLetter on a missing id is a no-op', () => {
+    const s = reducer(initialState(), { type: 'updateLetter', id: 'nope', patch: { status: 'resolved' } })
+    expect(s.letters).toEqual({})
+  })
+
+  it('markBackedUp stamps lastBackupAt', () => {
+    const s = reducer(initialState(), { type: 'markBackedUp', at: '2026-06-27T10:00:00.000Z' })
+    expect(s.lastBackupAt).toBe('2026-06-27T10:00:00.000Z')
   })
 })

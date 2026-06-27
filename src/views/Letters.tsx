@@ -3,6 +3,8 @@ import { useSearchParams } from 'react-router-dom'
 import { LETTERS, mailtoHref, renderLetter } from '../lib/letters'
 import type { LetterTemplate, Region } from '../lib/types'
 import { authorityFor, countryInfo } from '../data/countries'
+import { kindForTemplate, newLetter } from '../lib/tracker'
+import { TrackedLetters } from '../components/TrackedLetters'
 import { useStore } from '../store/store'
 import { useI18n } from '../i18n/i18n'
 
@@ -14,7 +16,7 @@ const REGION_DEFAULT: Record<Region, LetterTemplate> = {
 }
 
 export function Letters() {
-  const { state, updateProfile } = useStore()
+  const { state, updateProfile, logLetter } = useStore()
   const { t } = useI18n()
   const [params] = useSearchParams()
   const initial = (params.get('t') as LetterTemplate) || REGION_DEFAULT[state.profile.region]
@@ -22,6 +24,7 @@ export function Letters() {
   const [org, setOrg] = useState('')
   const [recipient, setRecipient] = useState('')
   const [copied, setCopied] = useState(false)
+  const [tracked, setTracked] = useState(false)
 
   const def = LETTERS[template]
   const authority = authorityFor(state.profile.country)
@@ -50,6 +53,16 @@ export function Letters() {
     a.download = `vanish-${template}.txt`
     a.click()
     URL.revokeObjectURL(url)
+  }
+
+  function track() {
+    logLetter(newLetter({
+      kind: kindForTemplate(template),
+      recipient: org || recipient,
+      sentAt: new Date().toISOString(),
+    }))
+    setTracked(true)
+    setTimeout(() => setTracked(false), 2000)
   }
 
   return (
@@ -126,12 +139,17 @@ export function Letters() {
             <a className="btn-ghost btn-sm" href={mailtoHref(recipient, subject, body)}>
               {t('letters.openEmail')}
             </a>
+            <button className="btn-ghost btn-sm" onClick={track} disabled={tracked}>
+              {tracked ? t('letters.trackedConfirm') : t('letters.trackThis')}
+            </button>
           </div>
           <p className="text-xs text-slate-500">
             {t('letters.disclaimerPre')}<strong>{t('letters.disclaimerStrong')}</strong>{t('letters.disclaimerPost')}
           </p>
         </div>
       </div>
+
+      <TrackedLetters />
     </div>
   )
 }

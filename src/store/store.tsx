@@ -3,12 +3,16 @@ import {
   type AppState,
   type ActionStatus,
   type Profile,
+  type LetterRecord,
   initialState,
   SCHEMA_VERSION,
 } from '../lib/types'
 import { type Lang, isLang, detectLang } from '../i18n/langs'
 
 const STORAGE_KEY = 'vanish.state.v1'
+
+const LETTER_KINDS = ['erasure', 'access', 'ccpa'] as const
+const LETTER_STATUSES = ['drafted', 'sent', 'responded', 'resolved', 'escalated'] as const
 
 type Msg =
   | { type: 'setStatus'; id: string; status: ActionStatus }
@@ -18,6 +22,10 @@ type Msg =
   | { type: 'setLang'; lang: Lang }
   | { type: 'import'; state: AppState }
   | { type: 'wipe' }
+  | { type: 'logLetter'; record: LetterRecord }
+  | { type: 'updateLetter'; id: string; patch: Partial<Omit<LetterRecord, 'id'>> }
+  | { type: 'deleteLetter'; id: string }
+  | { type: 'markBackedUp'; at: string }
 
 function reducer(state: AppState, msg: Msg): AppState {
   switch (msg.type) {
@@ -41,6 +49,20 @@ function reducer(state: AppState, msg: Msg): AppState {
       return sanitize(msg.state)
     case 'wipe':
       return initialState()
+    case 'logLetter':
+      return { ...state, letters: { ...state.letters, [msg.record.id]: msg.record } }
+    case 'updateLetter': {
+      const cur = state.letters[msg.id]
+      if (!cur) return state
+      return { ...state, letters: { ...state.letters, [msg.id]: { ...cur, ...msg.patch } } }
+    }
+    case 'deleteLetter': {
+      const next = { ...state.letters }
+      delete next[msg.id]
+      return { ...state, letters: next }
+    }
+    case 'markBackedUp':
+      return { ...state, lastBackupAt: msg.at }
     default:
       return state
   }
@@ -64,6 +86,26 @@ function sanitize(raw: unknown): AppState {
             ),
           )
         : {},
+    letters:
+      r.letters && typeof r.letters === 'object'
+        ? Object.fromEntries(
+            Object.entries(r.letters).filter(([, v]) => {
+              if (!v || typeof v !== 'object') return false
+              const l = v as LetterRecord
+              return (
+                typeof l.id === 'string' &&
+                typeof l.kind === 'string' &&
+                typeof l.recipient === 'string' &&
+                typeof l.sentAt === 'string' &&
+                typeof l.deadlineAt === 'string' &&
+                typeof l.status === 'string' &&
+                (LETTER_KINDS as readonly string[]).includes(l.kind) &&
+                (LETTER_STATUSES as readonly string[]).includes(l.status)
+              )
+            }),
+          )
+        : {},
+    lastBackupAt: typeof r.lastBackupAt === 'string' ? r.lastBackupAt : null,
   }
 }
 
@@ -90,6 +132,10 @@ interface Ctx {
   importState: (state: AppState) => void
   wipe: () => void
   exportJSON: () => string
+  logLetter: (record: LetterRecord) => void
+  updateLetter: (id: string, patch: Partial<Omit<LetterRecord, 'id'>>) => void
+  deleteLetter: (id: string) => void
+  markBackedUp: (at: string) => void
 }
 
 const StoreContext = createContext<Ctx | null>(null)
@@ -105,6 +151,12 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     }
   }, [state])
 
+  // Best-effort: ask the browser not to auto-evict our storage under pressure.
+  // Does NOT survive a manual "clear site data" — backups cover that.
+  useEffect(() => {
+    void navigator.storage?.persist?.().catch(() => {})
+  }, [])
+
   const value = useMemo<Ctx>(
     () => ({
       state,
@@ -116,6 +168,10 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       importState: (s) => dispatch({ type: 'import', state: s }),
       wipe: () => dispatch({ type: 'wipe' }),
       exportJSON: () => JSON.stringify(state, null, 2),
+      logLetter: (record) => dispatch({ type: 'logLetter', record }),
+      updateLetter: (id, patch) => dispatch({ type: 'updateLetter', id, patch }),
+      deleteLetter: (id) => dispatch({ type: 'deleteLetter', id }),
+      markBackedUp: (at) => dispatch({ type: 'markBackedUp', at }),
     }),
     [state],
   )
@@ -129,4 +185,4 @@ export function useStore(): Ctx {
   return ctx
 }
 
-export { STORAGE_KEY, sanitize }
+export { STORAGE_KEY, sanitize, reducer }

@@ -1,5 +1,14 @@
 import type { Action } from '../lib/types'
 
+/** The catalog was sourced & URL-verified in one batch on this date. A single
+ *  action re-checked later can override it via its own `verifiedAt`. Surfaced
+ *  per-action in the UI so every claim carries a "last verified" date. */
+export const CATALOG_VERIFIED_AT = '2026-06-26'
+
+export function verifiedAtOf(action: Action): string {
+  return action.verifiedAt ?? CATALOG_VERIFIED_AT
+}
+
 // The Vanish action catalog. Sourced & URL-verified ~2026-06 (see
 // docs/research/2026-06-26-competitor-and-content-research.md). URLs rot — the
 // app surfaces a "report dead link" affordance and these should be re-verified

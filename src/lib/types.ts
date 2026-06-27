@@ -43,6 +43,24 @@ export type Level = 'low' | 'med' | 'high'
 
 export type LetterTemplate = 'gdpr-erasure' | 'gdpr-access' | 'ccpa-delete'
 
+export type LetterKind = 'erasure' | 'access' | 'ccpa'
+export type LetterStatus = 'drafted' | 'sent' | 'responded' | 'resolved' | 'escalated'
+
+/** A tracked GDPR/CCPA letter the user has sent. Drives the deadline countdown
+ *  and DPA escalation. Stored locally only, like everything else. */
+export interface LetterRecord {
+  id: string
+  kind: LetterKind
+  recipient: string
+  /** Optional catalog action / broker this letter fulfils. */
+  linkedActionId?: string
+  sentAt: string // ISO
+  deadlineAt: string // ISO, derived from sentAt + statutory window
+  status: LetterStatus
+  escalatedAt?: string // ISO, set when an escalation complaint is generated
+  notes?: string
+}
+
 export interface Action {
   id: string
   title: string
@@ -75,6 +93,9 @@ export interface Action {
   countries?: Country[]
   /** Surface in the emergency Panic flow, with a priority (lower = sooner). */
   panicPriority?: number
+  /** ISO date this single action was last re-verified. Overrides the catalog
+   *  baseline (CATALOG_VERIFIED_AT). Surfaced in the UI for provenance. */
+  verifiedAt?: string
 }
 
 export type ActionStatus = 'todo' | 'done' | 'skipped'
@@ -122,9 +143,11 @@ export interface AppState {
   lang: Lang
   profile: Profile
   progress: Record<string, ProgressEntry>
+  letters: Record<string, LetterRecord>
+  lastBackupAt: string | null
 }
 
-export const SCHEMA_VERSION = 1
+export const SCHEMA_VERSION = 2
 
 export const emptyProfile = (): Profile => ({
   name: '',
@@ -141,4 +164,6 @@ export const initialState = (): AppState => ({
   lang: 'en',
   profile: emptyProfile(),
   progress: {},
+  letters: {},
+  lastBackupAt: null,
 })
