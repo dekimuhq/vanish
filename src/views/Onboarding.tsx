@@ -7,12 +7,13 @@ import { adversaryFor } from '../lib/adversary'
 import { useStore } from '../store/store'
 import { sanitize } from '../store/store'
 import { decryptBackup, BackupError } from '../lib/backup'
+import { LANGS, LANG_LABELS, type Lang } from '../i18n/langs'
 import { useI18n } from '../i18n/i18n'
 
 const CONCERN_IDS = ['recruiters', 'brokers', 'bigtech', 'breaches', 'stalking', 'spam'] as const
 
 export function Onboarding() {
-  const { completeOnboarding, importState } = useStore()
+  const { state, setLang, completeOnboarding, importState } = useStore()
   const { t } = useI18n()
   const navigate = useNavigate()
   const [step, setStep] = useState(0)
@@ -60,6 +61,20 @@ export function Onboarding() {
       <div className="card animate-fade-up p-6 sm:p-8">
         {step === 0 && (
           <>
+            <div className="mb-4 flex justify-end">
+              <select
+                className="rounded-lg border border-ink-600 bg-ink-900/80 px-2 py-1 text-xs text-slate-200 focus:border-ghost/60 focus:outline-none"
+                value={state.lang}
+                onChange={(e) => setLang(e.target.value as Lang)}
+                aria-label={t('settings.language')}
+              >
+                {LANGS.map((l) => (
+                  <option key={l} value={l}>
+                    {LANG_LABELS[l]}
+                  </option>
+                ))}
+              </select>
+            </div>
             <div className="mb-6 text-center">
               <CatMark size={72} className="mx-auto mb-3" />
               <h1 className="text-2xl font-bold text-slate-100">{t('app.name')}</h1>
