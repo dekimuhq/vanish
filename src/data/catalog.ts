@@ -1622,6 +1622,83 @@ export const ACTIONS: Action[] = [
     impact: 'low',
     regions: ['all'],
   },
+  {
+    id: 'recognize-phishing',
+    title: 'Recognize & avoid phishing',
+    tier: 1,
+    category: 'accounts',
+    summary:
+      'Most account takeovers start with a convincing email or text, not a hack. Learn the tells so a fake login page never gets your password.',
+    steps: [
+      'Treat any unsolicited “verify your account” / “unusual activity” message as suspect — banks and platforms never need your password by email.',
+      'Never log in via a link in a message. Open the site yourself from a bookmark or by typing the address.',
+      'Check the real sender address and hover links to see where they actually go before clicking.',
+      'Let your password manager be the check: if it won’t autofill, the domain is probably wrong.',
+      'Where possible use a hardware security key — it is phishing-proof even if you are fooled.',
+    ],
+    url: 'https://ssd.eff.org/module/how-avoid-phishing-attacks',
+    urlLabel: 'EFF: avoid phishing',
+    effort: 'low',
+    impact: 'high',
+    regions: ['all'],
+  },
+  {
+    id: 'iphone-lockdown-mode',
+    title: 'Turn on iPhone/Mac Lockdown Mode',
+    tier: 3,
+    category: 'devices',
+    summary:
+      'Apple’s Lockdown Mode strips the rarely-used features that mercenary spyware abuses. For people at elevated risk it sharply shrinks the attack surface.',
+    steps: [
+      'Update to the latest iOS/iPadOS/macOS first.',
+      'Open Settings → Privacy & Security → Lockdown Mode (bottom of the list).',
+      'Turn it on and restart. It applies across your Apple devices signed into the same account.',
+      'Expect some links, attachments, and web features to be limited — that is the protection working.',
+    ],
+    url: 'https://support.apple.com/en-us/105120',
+    urlLabel: 'Apple: Lockdown Mode',
+    effort: 'low',
+    impact: 'med',
+    regions: ['all'],
+  },
+  {
+    id: 'verify-signal-safety-numbers',
+    title: 'Verify Signal safety numbers',
+    tier: 3,
+    category: 'messaging',
+    summary:
+      'End-to-end encryption only protects you if you’re talking to the real person. Verifying the safety number rules out a machine-in-the-middle.',
+    steps: [
+      'Open a Signal conversation → tap the contact’s name → View Safety Number.',
+      'In person, scan each other’s QR code; remotely, compare the number over a separate trusted channel.',
+      'Tap “Mark as verified” once they match.',
+      'If the safety number ever changes unexpectedly, confirm why before sending anything sensitive.',
+    ],
+    url: 'https://support.signal.org/hc/en-us/articles/360007060632-What-is-a-safety-number-and-why-do-I-see-that-it-changed',
+    urlLabel: 'Signal: safety numbers',
+    effort: 'low',
+    impact: 'med',
+    regions: ['all'],
+  },
+  {
+    id: 'detect-bluetooth-trackers',
+    title: 'Detect hidden Bluetooth trackers',
+    tier: 4,
+    category: 'devices',
+    summary:
+      'AirTags and Tile-style trackers are cheap stalking tools. Phones can now alert you to an unknown tracker travelling with you — make sure detection is on and know how to scan.',
+    steps: [
+      'iPhone: keep Bluetooth and Location on; iOS alerts you to an unknown AirTag/Find My tracker moving with you. Tap the alert to make it play a sound.',
+      'Android: unknown-tracker alerts are built in (Settings → Safety & emergency → Unknown tracker alerts), or install Apple’s “Tracker Detect” to scan manually.',
+      'If you find a tracker you don’t own, you can disable it by removing its battery — but if you feel in danger, preserve it and contact local support/authorities first.',
+    ],
+    url: 'https://support.apple.com/en-us/102593',
+    urlLabel: 'Apple: unwanted tracking',
+    effort: 'low',
+    impact: 'high',
+    regions: ['all'],
+    panicPriority: 4,
+  },
 ]
 
 export const ACTIONS_BY_ID: Record<string, Action> = Object.fromEntries(ACTIONS.map((a) => [a.id, a]))
