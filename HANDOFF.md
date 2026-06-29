@@ -1,12 +1,18 @@
 # Vanish — Handoff
 
 <!-- LIVE:BEGIN -->
-- [ ] id:feat-restore-preview | Show diff/preview before applying a `.vanish` restore | owner:claude | gate:none | note:reinforces the import boundary hardened in `c9b378a`; build trust for cross-device story. `views/Settings.tsx` + `views/Onboarding.tsx` restore paths.
-- [ ] id:feat-localized-letters | Localized GDPR/CCPA letter bodies | owner:claude | gate:none | note:letters currently EN even for a German DPA (BfDI). i18n infra exists; translate the 3 templates in `lib/letters.ts`. Trigger: non-English supervisory authorities.
-- [ ] id:feat-due-now-queue | Consolidated "re-check due now" queue on Dashboard | owner:claude | gate:none | note:brokers re-list every 120d (`recheckEvery`); surface everything due in one place. Pairs with feat-ics-deadlines.
 - [ ] id:oss-flip | Flip license MIT→OSS at launch | owner:claude | gate:founder go-live | note:license is proprietary-INTERIM ON PURPOSE; OSS is the END state — never re-add MIT mid-flight. See [[project_vanish_privacy_app]].
-- [ ] id:country-coverage | Country-specific actions now cover ~14 states (ES IT FR DE BE PT SE AT DK FI HR EE + GB IE); rest fall back to region + GDPR-letter w/ named DPA | owner:claude | gate:none | note:`Action.countries` overrides `regions`; hidden when user country unset. People-search slice DONE for DK/FI/EE (81e4940); next public-records candidates if pursued = LV/LT/NO/IS — verify-first, may be honest-omissions.
+- [ ] id:country-coverage | EEA DPA layer extended (IS/NO shipped 2026-06-29); national opt-out *actions* still cover ES IT FR DE BE PT SE AT DK FI HR EE + GB IE | owner:claude | gate:none | note:IS/NO now carry their DPAs (Persónuvernd/Datatilsynet) + EEA picker group; region 'eu' for GDPR action relevance. LV/LT + remaining EU members = honest omission (no official self-serve register — verify live URLs before adding any).
 <!-- LIVE:END -->
+
+## Done — 2026-06-29 (what-next batch: merged + pushed to main → vanish.cat)
+
+Branch `feat/coverage-letters-duenow` (3 commits, rebased onto main #2, ff-merged `6f3021a`, pushed). 106 tests · tsc · validate:data (32 countries) · build green. Worktree+branch cleaned up. (Parallel uncommitted "Sources" WIP on main was stashed across the merge and restored intact — not mine, left uncommitted.)
+
+- **feat-restore-preview** — decrypted `.vanish`/JSON backup now previews a Now-vs-Backup diff (completed actions, letters, language, profile) and requires confirm before overwriting. Pure `lib/restore.ts` (+ test); Settings modal. Scoped to Settings (the destructive path); Onboarding restore lands on an empty device so no preview needed.
+- **feat-localized-letters** — GDPR Art.17/Art.15 + CCPA bodies translated into all 9 non-EN langs (`src/i18n/letters.ts` overlay, EN fallback); `renderLetter` takes the active lang. Picker metadata (name/law/blurb) localized too (`letterMeta` + META overlay) — whole Letter Forge screen is now localized.
+- **feat-due-now-queue** — Dashboard "Due now" panel merges broker re-checks + letter response deadlines into one urgency-sorted queue (`lib/score.ts` `dueLetters`/`dueQueue`).
+- **country-coverage (IS/NO slice)** — Iceland + Norway added to the country/DPA layer (EEA, GDPR via the EEA Agreement; region `eu`; dedicated EEA picker group + `countryGroup.eea` in all 10 locales). LV/LT left as honest omissions (no fabricated opt-out URLs). Remaining country-coverage stays open for verified national opt-out *actions*.
 
 ## Vanish — QA + a11y — Kensho pass — 2026-06-27 (this session)
 
