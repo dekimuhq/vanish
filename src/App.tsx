@@ -11,6 +11,7 @@ import { Panic } from './views/Panic'
 import { Report } from './views/Report'
 import { Settings } from './views/Settings'
 import { Decoy } from './views/Decoy'
+import { Scenarios } from './views/Scenarios'
 
 export default function App() {
   return (
@@ -37,6 +38,8 @@ function Gate() {
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/plan" element={<Plan />} />
+        <Route path="/scenarios" element={<Scenarios />} />
+        <Route path="/scenarios/:id" element={<Scenarios />} />
         <Route path="/brokers" element={<Brokers />} />
         <Route path="/letters" element={<Letters />} />
         <Route path="/panic" element={<Panic />} />

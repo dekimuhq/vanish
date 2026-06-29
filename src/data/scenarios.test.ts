@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import { SCENARIOS } from './scenarios'
 import { ACTIONS_BY_ID } from './catalog'
-import { en } from '../i18n/locales/en'
+import { en as enDict } from '../i18n/locales/en'
+
+const en = enDict as Record<string, string | string[]>
 
 describe('scenarios', () => {
   it('have unique ids', () => {

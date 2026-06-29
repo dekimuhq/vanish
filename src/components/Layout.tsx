@@ -7,6 +7,8 @@ import { CatMark } from './CatMark'
 const NAV = [
   { to: '/', labelKey: 'nav.dashboard', icon: '◎', end: true },
   { to: '/plan', labelKey: 'nav.plan', icon: '☰' },
+  { to: '/scenarios', labelKey: 'nav.scenarios', icon: '🧭' },
+  { to: '/learn', labelKey: 'nav.learn', icon: '📖' },
   { to: '/brokers', labelKey: 'nav.brokers', icon: '🏷️' },
   { to: '/letters', labelKey: 'nav.letters', icon: '✍️' },
   { to: '/panic', labelKey: 'nav.panic', icon: '🆘' },
