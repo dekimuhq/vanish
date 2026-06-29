@@ -67,3 +67,20 @@ describe('catalog provenance', () => {
     expect(verifiedAtOf({ ...plain, verifiedAt: '2026-09-09' })).toBe('2026-09-09')
   })
 })
+
+describe('EFF SSD new actions', () => {
+  const NEW = ['detect-bluetooth-trackers', 'iphone-lockdown-mode', 'recognize-phishing', 'verify-signal-safety-numbers'] as const
+  it('all four new actions exist', () => {
+    for (const id of NEW) expect(ACTIONS_BY_ID[id], id).toBeDefined()
+  })
+  it('detect-bluetooth-trackers is tier 4 and panic-surfaced', () => {
+    const a = ACTIONS_BY_ID['detect-bluetooth-trackers']
+    expect(a.tier).toBe(4)
+    expect(typeof a.panicPriority).toBe('number')
+  })
+  it('verify-signal-safety-numbers is messaging tier 3', () => {
+    const a = ACTIONS_BY_ID['verify-signal-safety-numbers']
+    expect(a.category).toBe('messaging')
+    expect(a.tier).toBe(3)
+  })
+})

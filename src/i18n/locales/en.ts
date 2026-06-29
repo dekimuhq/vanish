@@ -46,6 +46,72 @@ export const en = {
   'tier.ghost.tagline': 'Disappear',
   'tier.ghost.who': 'Activists, survivors, the targeted. Maximum separation from your name.',
 
+  // EFF SSD: scenario playlists
+  'nav.scenarios': 'Scenarios',
+  'scenarios.title': 'Start from your situation',
+  'scenarios.lead':
+    'Curated paths for a specific situation. Each is a hand-picked order through actions you already have — start at the top.',
+  'scenarios.notFound': 'That scenario doesn’t exist.',
+  'scenario.survivor.title': 'Stalking or abuse survivor',
+  'scenario.survivor.intro':
+    'Separating your location and contact details from your name, and ruling out hidden trackers. If you are in immediate danger, contact local support services first.',
+  'scenario.job-seeker.title': 'Cleaning up before a job search',
+  'scenario.job-seeker.intro':
+    'What a recruiter or hiring manager finds when they search your name — and how to tidy it before they look.',
+  'scenario.activist.title': 'Activist / attending a protest',
+  'scenario.activist.intro':
+    'Hardening your phone and communications before and during organizing or a demonstration.',
+  'scenario.journalist.title': 'Journalist protecting sources',
+  'scenario.journalist.intro':
+    'Confidential communication and keeping work and personal identities apart.',
+  'scenario.breach.title': 'After a data breach',
+  'scenario.breach.intro':
+    'You were in a breach (or suspect it). Contain the damage and shut the door behind it.',
+
+  // EFF SSD: learn primers
+  'nav.learn': 'Learn',
+  'learn.title': 'Understand the why',
+  'learn.lead':
+    'Short plain-language primers behind the actions. For the full guide, each links out to EFF’s Surveillance Self-Defense.',
+  'learn.related': 'Related actions',
+  'learn.readMore': 'Full guide',
+  'learn.notFound': 'That topic doesn’t exist.',
+  'learn.threat-model.title': 'What is a threat model?',
+  'learn.threat-model.body': [
+    'A threat model is just five honest questions: what do you want to protect, who do you want to protect it from, how likely is it you’ll need to, how bad are the consequences if you fail, and how much trouble are you willing to go through to prevent it?',
+    'There’s no single right level of privacy. Matching your effort to the people you’re actually worried about is the whole game — going further than your situation needs trades real convenience for no real safety.',
+  ],
+  'learn.metadata.title': 'What metadata reveals',
+  'learn.metadata.body': [
+    'Metadata is the data about your data: when a photo was taken, on what phone, and often the exact GPS coordinates. A message’s metadata — who, when, how often — can be as revealing as the words.',
+    'You can’t always control the metadata services keep, but you can stop handing it out: strip location and device details from photos before you post them.',
+  ],
+  'learn.encryption.title': 'What end-to-end encryption is',
+  'learn.encryption.body': [
+    'End-to-end encryption (E2EE) means only you and the person you’re talking to can read the messages — not the app maker, the network, or anyone who intercepts them in transit.',
+    'It’s the difference between a postcard and a sealed letter. Use E2EE tools for anything sensitive, and remember it protects the contents, not always the metadata around them.',
+  ],
+  'learn.phishing.title': 'How phishing works',
+  'learn.phishing.body': [
+    'Phishing tricks you into handing over a password or code, usually with an urgent message and a link to a fake login page. It’s how most account takeovers actually start — no hacking required.',
+    'The defenses are habits, not tools: never log in through a link in a message, verify the sender, and lean on a password manager (which won’t autofill the wrong domain) and hardware keys (which are phishing-proof).',
+  ],
+  'learn.data-brokers.title': 'What data brokers are',
+  'learn.data-brokers.body': [
+    'Data brokers buy, scrape, and resell profiles of you — name, address, relatives, phone numbers — to advertisers, recruiters, and anyone who pays. People-search sites are the public shop window onto that industry.',
+    'Opting out works, but it’s not permanent: brokers re-acquire and re-list you from fresh public records, so removal is a habit on a timer, not a one-time fix.',
+  ],
+  'learn.vpn.title': 'What a VPN does and doesn’t do',
+  'learn.vpn.body': [
+    'A VPN hides your browsing from your network and internet provider, and your IP address from the sites you visit — useful on untrusted Wi-Fi or to avoid a single ISP profiling everything you do.',
+    'It does not make you anonymous: you’re now trusting the VPN provider instead, and it doesn’t stop sites from tracking you once you log in. For strong anonymity, Tor is the better tool.',
+  ],
+  'learn.key-verification.title': 'Why verify keys',
+  'learn.key-verification.body': [
+    'Encryption assumes you’re talking to the real person. A machine-in-the-middle attack works by sitting between you and swapping in its own keys — you’d still see a locked padlock.',
+    'Verifying a safety number (in person via QR, or over a separate trusted channel) confirms there’s no impostor in the middle. Do it once for your most sensitive contacts.',
+  ],
+
   // Categories
   'category.accounts': 'Accounts',
   'category.data-brokers': 'Data Brokers',
