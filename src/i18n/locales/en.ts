@@ -46,6 +46,28 @@ export const en = {
   'tier.ghost.tagline': 'Disappear',
   'tier.ghost.who': 'Activists, survivors, the targeted. Maximum separation from your name.',
 
+  // EFF SSD: scenario playlists
+  'nav.scenarios': 'Scenarios',
+  'scenarios.title': 'Start from your situation',
+  'scenarios.lead':
+    'Curated paths for a specific situation. Each is a hand-picked order through actions you already have — start at the top.',
+  'scenarios.notFound': 'That scenario doesn’t exist.',
+  'scenario.survivor.title': 'Stalking or abuse survivor',
+  'scenario.survivor.intro':
+    'Separating your location and contact details from your name, and ruling out hidden trackers. If you are in immediate danger, contact local support services first.',
+  'scenario.job-seeker.title': 'Cleaning up before a job search',
+  'scenario.job-seeker.intro':
+    'What a recruiter or hiring manager finds when they search your name — and how to tidy it before they look.',
+  'scenario.activist.title': 'Activist / attending a protest',
+  'scenario.activist.intro':
+    'Hardening your phone and communications before and during organizing or a demonstration.',
+  'scenario.journalist.title': 'Journalist protecting sources',
+  'scenario.journalist.intro':
+    'Confidential communication and keeping work and personal identities apart.',
+  'scenario.breach.title': 'After a data breach',
+  'scenario.breach.intro':
+    'You were in a breach (or suspect it). Contain the damage and shut the door behind it.',
+
   // Categories
   'category.accounts': 'Accounts',
   'category.data-brokers': 'Data Brokers',
