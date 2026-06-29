@@ -753,4 +753,52 @@ export const pl: ContentOverlay = {
       'Wyłącz dostęp do czujników ruchu dla stron, które ich nie potrzebują.',
     ],
   },
+  'recognize-phishing': {
+    title: 'Rozpoznaj phishing i go unikaj',
+    summary:
+      'Większość przejęć kont zaczyna się od przekonującego e-maila lub SMS-a, a nie od włamania. Naucz się sygnałów ostrzegawczych, żeby fałszywa strona logowania nigdy nie dostała Twojego hasła.',
+    steps: [
+      'Traktuj każdą niezamówioną wiadomość „zweryfikuj konto" / „podejrzana aktywność" jako podejrzaną — banki i platformy nigdy nie proszą o hasło e-mailem.',
+      'Nigdy nie loguj się przez link w wiadomości. Otwórz stronę samodzielnie z zakładki lub wpisując adres.',
+      'Sprawdź prawdziwy adres nadawcy i najedź kursorem na linki, żeby zobaczyć, dokąd naprawdę prowadzą.',
+      'Niech menedżer haseł będzie Twoim strażnikiem: jeśli nie autouzupełni, domena jest prawdopodobnie fałszywa.',
+      'Tam gdzie to możliwe, używaj sprzętowego klucza bezpieczeństwa — jest odporny na phishing, nawet jeśli dasz się nabrać.',
+    ],
+    urlLabel: 'EFF: jak unikać phishingu',
+  },
+  'iphone-lockdown-mode': {
+    title: 'Włącz Lockdown Mode na iPhone lub Mac',
+    summary:
+      'Lockdown Mode Apple usuwa rzadko używane funkcje, które są nadużywane przez komercyjne oprogramowanie szpiegowskie. Dla osób narażonych na podwyższone ryzyko znacznie zmniejsza powierzchnię ataku.',
+    steps: [
+      'Najpierw zaktualizuj do najnowszej wersji iOS/iPadOS/macOS.',
+      'Otwórz Ustawienia → Prywatność i bezpieczeństwo → Lockdown Mode (na dole listy).',
+      'Włącz i uruchom ponownie urządzenie. Działa na wszystkich urządzeniach Apple zalogowanych na to samo konto.',
+      'Spodziewaj się, że niektóre linki, załączniki i funkcje internetowe będą ograniczone — to właśnie ta ochrona działa.',
+    ],
+    urlLabel: 'Apple: Lockdown Mode',
+  },
+  'verify-signal-safety-numbers': {
+    title: 'Zweryfikuj numery bezpieczeństwa Signal',
+    summary:
+      'Szyfrowanie end-to-end chroni Cię tylko wtedy, gdy rozmawiasz z prawdziwą osobą. Weryfikacja numeru bezpieczeństwa wyklucza atak man-in-the-middle.',
+    steps: [
+      'Otwórz rozmowę w Signal → naciśnij imię kontaktu → Wyświetl numer bezpieczeństwa.',
+      'Osobiście zeskanujcie nawzajem swoje kody QR; zdalnie porównajcie numer przez oddzielny zaufany kanał.',
+      'Naciśnij „Oznacz jako zweryfikowany", gdy numery się zgadzają.',
+      'Jeśli numer bezpieczeństwa kiedykolwiek zmieni się niespodziewanie, wyjaśnij przyczynę przed wysłaniem czegokolwiek wrażliwego.',
+    ],
+    urlLabel: 'Signal: numery bezpieczeństwa',
+  },
+  'detect-bluetooth-trackers': {
+    title: 'Wykryj ukryte urządzenia śledzące Bluetooth',
+    summary:
+      'AirTagi i urządzenia podobne do Tile to tanie narzędzia stalkingu. Telefony mogą teraz ostrzegać Cię o nieznanym urządzeniu śledzącym podróżującym z Tobą — upewnij się, że wykrywanie jest włączone i wiesz, jak skanować.',
+    steps: [
+      'iPhone: utrzymuj Bluetooth i lokalizację włączone; iOS ostrzega Cię o nieznanym AirTagu lub urządzeniu Find My poruszającym się razem z Tobą. Naciśnij alert, żeby urządzenie wydało dźwięk.',
+      'Android: alerty o nieznanych urządzeniach śledzących są wbudowane (Ustawienia → Bezpieczeństwo i nagłe przypadki → Alerty o nieznanych urządzeniach śledzących) lub zainstaluj aplikację Apple „Tracker Detect" do ręcznego skanowania.',
+      'Jeśli znajdziesz urządzenie śledzące, którego nie jesteś właścicielem, możesz je wyłączyć, wyjmując baterię — jednak jeśli czujesz się zagrożony, zachowaj je jako dowód i najpierw skontaktuj się z lokalnymi służbami pomocowymi lub organami ścigania.',
+    ],
+    urlLabel: 'Apple: niechciane śledzenie',
+  },
 }

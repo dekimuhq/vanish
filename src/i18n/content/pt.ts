@@ -744,4 +744,52 @@ export const pt: ContentOverlay = {
       'Desativa o acesso a sensores de movimento para sites que não precisem disso.',
     ],
   },
+  'recognize-phishing': {
+    title: 'Reconhecer e evitar phishing',
+    summary:
+      'A maioria das tomadas de conta começa com um email ou mensagem convincente, não com um ataque informático. Aprende os sinais para que uma página de login falsa nunca te roube a palavra-passe.',
+    steps: [
+      'Trata qualquer mensagem não solicitada de "verifica a tua conta" / "atividade suspeita" como suspeita — os bancos e plataformas nunca pedem a tua palavra-passe por email.',
+      'Nunca entres através de um link numa mensagem. Abre o site tu mesmo a partir de um marcador ou digitando o endereço.',
+      'Verifica o endereço real do remetente e passa o rato sobre os links para veres para onde vão antes de clicar.',
+      'Deixa o gestor de palavras-passe ser o teu verificador: se não preencher automaticamente, o domínio provavelmente está errado.',
+      'Sempre que possível usa uma chave de segurança de hardware — é imune a phishing mesmo que sejas enganado.',
+    ],
+    urlLabel: 'EFF: evitar phishing',
+  },
+  'iphone-lockdown-mode': {
+    title: 'Ativar o Lockdown Mode no iPhone/Mac',
+    summary:
+      'O Lockdown Mode da Apple remove as funcionalidades raramente usadas que os spywares mercenários exploram. Para pessoas em risco elevado, reduz significativamente a superfície de ataque.',
+    steps: [
+      'Atualiza primeiro para a versão mais recente do iOS/iPadOS/macOS.',
+      'Abre as Definições → Privacidade e Segurança → Lockdown Mode (no fundo da lista).',
+      'Ativa e reinicia. Aplica-se em todos os teus dispositivos Apple com sessão iniciada na mesma conta.',
+      'Espera que alguns links, anexos e funcionalidades web fiquem limitados — é a proteção a funcionar.',
+    ],
+    urlLabel: 'Apple: Lockdown Mode',
+  },
+  'verify-signal-safety-numbers': {
+    title: 'Verificar os números de segurança do Signal',
+    summary:
+      'A encriptação ponta a ponta só te protege se estiveres a falar com a pessoa real. Verificar o número de segurança descarta a possibilidade de um ataque man-in-the-middle.',
+    steps: [
+      'Abre uma conversa no Signal → toca no nome do contacto → Ver Número de Segurança.',
+      'Pessoalmente, leiam mutuamente os códigos QR; à distância, comparem o número por um canal de confiança separado.',
+      'Toca em "Marcar como verificado" quando coincidirem.',
+      'Se o número de segurança mudar inesperadamente, confirma o motivo antes de enviares algo sensível.',
+    ],
+    urlLabel: 'Signal: números de segurança',
+  },
+  'detect-bluetooth-trackers': {
+    title: 'Detetar rastreadores Bluetooth ocultos',
+    summary:
+      'Os AirTags e rastreadores do tipo Tile são ferramentas baratas de stalking. Os telemóveis já conseguem alertar-te para um rastreador desconhecido que viaja contigo — certifica-te de que a deteção está ativa e sabe como fazer uma pesquisa.',
+    steps: [
+      'iPhone: mantém o Bluetooth e a Localização ativos; o iOS alerta-te para um AirTag/rastreador Find My desconhecido em movimento contigo. Toca no alerta para o fazer emitir som.',
+      'Android: os alertas de rastreadores desconhecidos estão integrados (Definições → Segurança e emergência → Alertas de rastreadores desconhecidos), ou instala o "Tracker Detect" da Apple para pesquisar manualmente.',
+      'Se encontrares um rastreador que não é teu, podes desativá-lo removendo a bateria — mas se sentires que estás em perigo, preserva-o e contacta primeiro o apoio local ou as autoridades.',
+    ],
+    urlLabel: 'Apple: rastreamento indesejado',
+  },
 }

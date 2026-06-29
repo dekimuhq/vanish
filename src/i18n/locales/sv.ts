@@ -338,4 +338,70 @@ export const sv: Dict = {
   'settings.passphrase': 'Lösenfras för säkerhetskopia',
   'settings.passphrasePlaceholder': 'En lösenfras som bara du känner till',
   'settings.passphraseRequired': 'Ange en lösenfras först.',
+
+  // EFF SSD: scenario playlists
+  'nav.scenarios': 'Scenarier',
+  'scenarios.title': 'Börja från din situation',
+  'scenarios.lead':
+    'Anpassade vägar för en specifik situation. Varje är en handplockad ordning bland åtgärder du redan har — börja uppifrån.',
+  'scenarios.notFound': 'Det scenariot finns inte.',
+  'scenario.survivor.title': 'Överlevare av stalkning eller misshandel',
+  'scenario.survivor.intro':
+    'Separera din plats och dina kontaktuppgifter från ditt namn och uteslut dolda spårare. Om du är i omedelbar fara, kontakta lokala stödtjänster först.',
+  'scenario.job-seeker.title': 'Städa upp inför jobbsökning',
+  'scenario.job-seeker.intro':
+    'Vad en rekryterare eller anställande chef hittar när de söker på ditt namn — och hur du städar upp det innan de ser det.',
+  'scenario.activist.title': 'Aktivist / ska delta i en demonstration',
+  'scenario.activist.intro':
+    'Härda din telefon och kommunikation inför och under organisering eller en demonstration.',
+  'scenario.journalist.title': 'Journalist som skyddar källor',
+  'scenario.journalist.intro':
+    'Konfidentiell kommunikation och att hålla arbets- och privatidentiteter isär.',
+  'scenario.breach.title': 'Efter ett dataintrång',
+  'scenario.breach.intro':
+    'Du fanns med i ett intrång (eller misstänker det). Begränsa skadan och stäng dörren bakom dig.',
+
+  // EFF SSD: learn primers
+  'nav.learn': 'Lär dig',
+  'learn.title': 'Förstå varför',
+  'learn.lead':
+    'Korta lättlästa introduktioner bakom åtgärderna. För hela guiden länkar var och en till EFF:s Surveillance Self-Defense.',
+  'learn.related': 'Relaterade åtgärder',
+  'learn.readMore': 'Fullständig guide',
+  'learn.notFound': 'Det ämnet finns inte.',
+  'learn.threat-model.title': 'Vad är en hotmodell?',
+  'learn.threat-model.body': [
+    'En hotmodell är bara fem ärliga frågor: vad vill du skydda, från vem vill du skydda det, hur troligt är det att du behöver göra det, hur allvarliga är konsekvenserna om du misslyckas, och hur mycket besvär är du beredd att gå igenom för att förhindra det?',
+    'Det finns ingen enda rätt integritetsnivå. Att matcha din insats mot de du faktiskt är orolig för är hela grejen — att gå längre än din situation kräver kostar verklig bekvämlighet utan verklig säkerhetsvinst.',
+  ],
+  'learn.metadata.title': 'Vad metadata avslöjar',
+  'learn.metadata.body': [
+    'Metadata är data om din data: när ett foto togs, på vilken telefon, och ofta med exakta GPS-koordinater. Ett meddelandes metadata — vem, när, hur ofta — kan vara lika avslöjande som orden.',
+    'Du kan inte alltid kontrollera vilken metadata tjänster sparar, men du kan sluta dela ut den: ta bort plats- och enhetsinformation från foton innan du publicerar dem.',
+  ],
+  'learn.encryption.title': 'Vad end-to-end-kryptering är',
+  'learn.encryption.body': [
+    'End-to-end-kryptering (E2EE) innebär att bara du och den du pratar med kan läsa meddelandena — inte apptillverkaren, nätverket eller någon som fångar upp dem på vägen.',
+    'Det är skillnaden mellan ett vykort och ett försegat brev. Använd E2EE-verktyg för allt känsligt, och kom ihåg att det skyddar innehållet, men inte alltid metadata runt det.',
+  ],
+  'learn.phishing.title': 'Hur nätfiske fungerar',
+  'learn.phishing.body': [
+    'Nätfiske lurar dig att lämna ut ett lösenord eller en kod, vanligtvis med ett brådskande meddelande och en länk till en falsk inloggningssida. Det är så de flesta kontokapningar faktiskt börjar — utan något egentligt hackande.',
+    'Försvaret är vanor, inte verktyg: logga aldrig in via en länk i ett meddelande, verifiera avsändaren och förlita dig på en lösenordshanterare (som inte fyller i fel domän automatiskt) och hårdvarunycklar (som är nätfiske-säkra).',
+  ],
+  'learn.data-brokers.title': 'Vad datamäklare är',
+  'learn.data-brokers.body': [
+    'Datamäklare köper, skrapar och säljer vidare profiler om dig — namn, adress, anhöriga, telefonnummer — till annonsörer, rekryterare och vem som helst som betalar. Personssöksajter är branschens offentliga skyltfönster.',
+    'Avanmälning fungerar, men är inte permanent: mäklare återinhämtar och återlistar dig från nya offentliga uppgifter, så borttagning är en vana med en timer, inte en engångslösning.',
+  ],
+  'learn.vpn.title': 'Vad ett VPN gör och inte gör',
+  'learn.vpn.body': [
+    'Ett VPN döljer din surfning från ditt nätverk och din internetleverantör, och din IP-adress från de sajter du besöker — användbart på opålitligt wifi eller för att undvika att en enda internetleverantör profilerar allt du gör.',
+    'Det gör dig inte anonym: du litar nu på VPN-leverantören istället, och det hindrar inte sajter från att spåra dig när du loggar in. För stark anonymitet är Tor det bättre verktyget.',
+  ],
+  'learn.key-verification.title': 'Varför verifiera nycklar',
+  'learn.key-verification.body': [
+    'Kryptering förutsätter att du pratar med rätt person. En man-i-mitten-attack fungerar genom att sitta mellan er och byta ut sina egna nycklar — du skulle fortfarande se ett låst hänglås.',
+    'Att verifiera ett säkerhetsnummer (personligen via QR-kod, eller via en separat betrodd kanal) bekräftar att det inte finns någon inkräktare i mitten. Gör det en gång för dina känsligaste kontakter.',
+  ],
 } satisfies Dict

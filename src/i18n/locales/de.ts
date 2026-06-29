@@ -332,4 +332,74 @@ export const de: Dict = {
   'actionCard.restore': 'Wiederherstellen',
   'actionCard.verified': 'Geprüft {date}',
   'actionCard.verifiedTitle': 'Wann diese Maßnahme und ihr Link zuletzt geprüft wurden. Melde einen toten Link, falls er umgezogen ist.',
+
+  // EFF SSD: scenario playlists
+  'nav.scenarios': 'Szenarien',
+  'scenarios.title': 'Von deiner Situation aus starten',
+  'scenarios.lead':
+    'Kuratierte Pfade für bestimmte Situationen. Jeder ist eine handverlesene Reihenfolge durch Maßnahmen, die du bereits hast — oben beginnen.',
+  'scenarios.notFound': 'Dieses Szenario existiert nicht.',
+  'scenario.survivor.title': 'Betroffene von Stalking oder Missbrauch',
+  'scenario.survivor.intro':
+    'Deinen Standort und deine Kontaktdaten von deinem Namen trennen und versteckte Tracker aufspüren. Wenn du in unmittelbarer Gefahr bist, wende dich zuerst an lokale Hilfsangebote.',
+  'scenario.job-seeker.title': 'Aufräumen vor der Jobsuche',
+  'scenario.job-seeker.intro':
+    'Was ein Recruiter oder Einstellungsverantwortlicher findet, wenn er nach deinem Namen sucht — und wie du es aufräumst, bevor er schaut.',
+  'scenario.activist.title': 'Aktivist:in / Teilnahme an einer Demo',
+  'scenario.activist.intro':
+    'Dein Telefon und deine Kommunikation vor und während einer Organisation oder Demonstration absichern.',
+  'scenario.journalist.title': 'Journalist:in, der/die Quellen schützt',
+  'scenario.journalist.intro':
+    'Vertrauliche Kommunikation und das Trennen von beruflicher und privater Identität.',
+  'scenario.breach.title': 'Nach einem Datenleck',
+  'scenario.breach.intro':
+    'Du warst in einem Datenleck (oder vermutest es). Den Schaden eindämmen und die Tür dahinter schließen.',
+
+  // EFF SSD: learn primers
+  'nav.learn': 'Lernen',
+  'learn.title': 'Das Warum verstehen',
+  'learn.lead':
+    'Kurze, verständliche Hintergrundinformationen zu den Maßnahmen. Den vollständigen Leitfaden findest du jeweils bei EFF’s Surveillance Self-Defense.',
+  'learn.related': 'Verwandte Maßnahmen',
+  'learn.readMore': 'Vollständiger Leitfaden',
+  'learn.notFound': 'Dieses Thema existiert nicht.',
+  'learn.threat-model.title': 'Was ist ein Bedrohungsmodell?',
+  'learn.threat-model.body': [
+    'Ein Bedrohungsmodell sind nur fünf ehrliche Fragen: Was möchtest du schützen, vor wem möchtest du es schützen, wie wahrscheinlich ist es, dass du das tun musst, wie schlimm wären die Folgen, wenn du scheitern würdest, und wie viel Mühe bist du bereit, zur Vorbeugung auf dich zu nehmen?',
+    'Es gibt kein einheitlich richtiges Datenschutzniveau. Den eigenen Aufwand an die Personen anzupassen, vor denen man sich wirklich sorgt, ist das eigentliche Spiel — weiter zu gehen als die Situation erfordert, kostet echten Komfort ohne echten Sicherheitsgewinn.',
+  ],
+  'learn.metadata.title': 'Was Metadaten verraten',
+  'learn.metadata.body': [
+    'Metadaten sind Daten über deine Daten: wann ein Foto aufgenommen wurde, mit welchem Gerät und oft die genauen GPS-Koordinaten. Die Metadaten einer Nachricht — wer, wann, wie oft — können genauso aufschlussreich sein wie der Inhalt.',
+    'Du kannst nicht immer kontrollieren, welche Metadaten Dienste aufbewahren, aber du kannst aufhören, sie freizügig weiterzugeben: Standort- und Geräteinformationen aus Fotos entfernen, bevor du sie veröffentlichst.',
+  ],
+  'learn.encryption.title': 'Was Ende-zu-Ende-Verschlüsselung ist',
+  'learn.encryption.body': [
+    'Ende-zu-Ende-Verschlüsselung (E2EE) bedeutet, dass nur du und dein Gesprächspartner die Nachrichten lesen können — nicht der App-Anbieter, das Netzwerk oder jemand, der sie unterwegs abfängt.',
+    'Es ist der Unterschied zwischen einer Postkarte und einem versiegelten Brief. Nutze E2EE-Tools für alles Sensible, und denke daran: Es schützt den Inhalt, aber nicht immer die Metadaten drumherum.',
+  ],
+  'learn.phishing.title': 'Wie Phishing funktioniert',
+  'learn.phishing.body': [
+    'Phishing verleitet dich dazu, ein Passwort oder einen Code herauszugeben — meistens mit einer dringlichen Nachricht und einem Link zu einer gefälschten Anmeldeseite. So beginnen die meisten Kontoübernahmen tatsächlich — ganz ohne Hacking.',
+    'Die Schutzmaßnahmen sind Gewohnheiten, keine Tools: Melde dich nie über einen Link in einer Nachricht an, prüfe den Absender, und verlasse dich auf einen Passwort-Manager (der in der falschen Domain nicht automatisch ausfüllt) und Hardware-Schlüssel (die phishing-sicher sind).',
+  ],
+  'learn.data-brokers.title': 'Was Datenhändler sind',
+  'learn.data-brokers.body': [
+    'Datenhändler kaufen, scrapen und verkaufen Profile über dich — Name, Adresse, Verwandte, Telefonnummern — an Werbetreibende, Recruiter und jeden, der zahlt. Personensuch-Websites sind das öffentliche Schaufenster dieser Branche.',
+    'Opt-outs funktionieren, sind aber nicht dauerhaft: Händler erwerben und listen dich aus frischen öffentlichen Quellen erneut, daher ist das Entfernen eine Gewohnheit mit Timer, keine einmalige Lösung.',
+  ],
+  'learn.vpn.title': 'Was ein VPN leistet und was nicht',
+  'learn.vpn.body': [
+    'Ein VPN verbirgt dein Surfverhalten vor deinem Netzwerk und Internetanbieter sowie deine IP-Adresse vor den besuchten Websites — nützlich in unbekannten WLAN-Netzen oder um zu verhindern, dass ein einziger Anbieter alles aufzeichnet.',
+    'Anonym macht es dich nicht: Du vertraust jetzt stattdessen dem VPN-Anbieter, und es hindert Websites nicht daran, dich zu tracken, sobald du dich anmeldest. Für starke Anonymität ist Tor das bessere Werkzeug.',
+  ],
+  'learn.key-verification.title': 'Warum Schlüssel verifizieren',
+  'learn.key-verification.body': [
+    'Verschlüsselung setzt voraus, dass du mit der richtigen Person sprichst. Ein Man-in-the-Middle-Angriff funktioniert, indem er sich zwischen dich und dein Gegenüber setzt und eigene Schlüssel einschmuggelt — du würdest trotzdem ein Schlosssymbol sehen.',
+    'Das Verifizieren einer Sicherheitsnummer (persönlich per QR oder über einen separaten vertrauenswürdigen Kanal) bestätigt, dass kein Eindringling dazwischen ist. Mach es einmal für deine sensibelsten Kontakte.',
+  ],
+
+  // a11y
+  'a11y.skipToContent': 'Zum Inhalt springen',
+  'a11y.primaryNav': 'Hauptnavigation',
 } satisfies Dict

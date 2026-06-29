@@ -745,4 +745,52 @@ export const sv: ContentOverlay = {
       'Inaktivera rörelse-/sensoråtkomst för sajter som inte behöver det.',
     ],
   },
+  'recognize-phishing': {
+    title: 'Känna igen och undvika nätfiske',
+    summary:
+      'De flesta kontokapningar börjar med ett övertygande mejl eller SMS, inte ett hackförsök. Lär dig kännetecknen så att en falsk inloggningssida aldrig får ditt lösenord.',
+    steps: [
+      'Behandla varje ombett "verifiera ditt konto" / "ovanlig aktivitet"-meddelande som misstänkt — banker och plattformar ber aldrig om ditt lösenord via mejl.',
+      'Logga aldrig in via en länk i ett meddelande. Öppna sajten själv via ett bokmärke eller genom att skriva adressen.',
+      'Kontrollera den verkliga avsändaradressen och hovra över länkar för att se vart de faktiskt leder innan du klickar.',
+      'Låt din lösenordshanterare vara kontrollen: om den inte fyller i automatiskt är domänen troligen fel.',
+      'Använd om möjligt en hårdvarusäkerhetsnyckel — den är nätfiske-säker även om du lurats.',
+    ],
+    urlLabel: 'EFF: undvik nätfiske',
+  },
+  'iphone-lockdown-mode': {
+    title: 'Slå på Lockdown Mode på iPhone/Mac',
+    summary:
+      'Apples Lockdown Mode tar bort sällan använda funktioner som kommersiellt spionprogram utnyttjar. För personer med förhöjd risk krymper det attackytan avsevärt.',
+    steps: [
+      'Uppdatera till senaste iOS/iPadOS/macOS först.',
+      'Öppna Inställningar → Integritet och säkerhet → Lockdown Mode (längst ner i listan).',
+      'Slå på det och starta om. Det tillämpas på alla dina Apple-enheter inloggade på samma konto.',
+      'Räkna med att vissa länkar, bilagor och webbfunktioner begränsas — det är skyddet i arbete.',
+    ],
+    urlLabel: 'Apple: Lockdown Mode',
+  },
+  'verify-signal-safety-numbers': {
+    title: 'Verifiera Signals säkerhetsnummer',
+    summary:
+      'End-to-end-kryptering skyddar dig bara om du pratar med rätt person. Att verifiera säkerhetsnumret utesluter en man-i-mitten-attack.',
+    steps: [
+      'Öppna ett Signal-samtal → tryck på kontaktens namn → Visa säkerhetsnummer.',
+      'Personligen: scanna varandras QR-kod; på distans: jämför numret via en separat betrodd kanal.',
+      'Tryck "Markera som verifierat" när de stämmer.',
+      'Om säkerhetsnumret någonsin ändras oväntat, ta reda på varför innan du skickar något känsligt.',
+    ],
+    urlLabel: 'Signal: säkerhetsnummer',
+  },
+  'detect-bluetooth-trackers': {
+    title: 'Upptäck dolda Bluetooth-spårare',
+    summary:
+      'AirTags och Tile-liknande spårare är billiga stalkingverktyg. Telefoner kan nu varna dig för en okänd spårare som följer med dig — se till att identifiering är på och lär dig hur du söker.',
+    steps: [
+      'iPhone: håll Bluetooth och Plats på; iOS varnar dig om en okänd AirTag/Find My-spårare rör sig med dig. Tryck på varningen för att få den att spela ett ljud.',
+      'Android: varningar för okända spårare är inbyggda (Inställningar → Säkerhet och nödsituationer → Varningar för okända spårare), eller installera Apples "Tracker Detect" för manuell sökning.',
+      'Om du hittar en spårare du inte äger kan du inaktivera den genom att ta bort batteriet — men om du känner dig i fara, bevara den och kontakta lokalt stöd/myndigheter först.',
+    ],
+    urlLabel: 'Apple: oönskad spårning',
+  },
 }
