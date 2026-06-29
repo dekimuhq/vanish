@@ -255,6 +255,11 @@ export const sv: Dict = {
   'settings.dataBullet4':
     'Länkar till avanmälningssidor öppnas i en ny flik — det är de enda "nätverksanropen", och du initierar varje ett.',
 
+  // Sources
+  'settings.sourcesTitle': 'Källor',
+  'settings.sourcesIntro':
+    'Vanishs vägledning bygger på respekterade, oberoende integritetsresurser — inte vår åsikt. Fördjupa dig vid källan:',
+
   // Decoy Kit
   'decoy.title': '⬡ Lockkod-kit',
   'decoy.subtitle':

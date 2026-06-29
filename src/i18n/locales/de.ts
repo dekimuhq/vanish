@@ -291,6 +291,11 @@ export const de: Dict = {
   'settings.dataBullet4':
     'Links zu Opt-out-Seiten öffnen sich in einem neuen Tab — das sind die einzigen „Netzwerk"-Aufrufe, und du löst jeden einzelnen selbst aus.',
 
+  // Sources
+  'settings.sourcesTitle': 'Quellen',
+  'settings.sourcesIntro':
+    'Die Empfehlungen von Vanish stützen sich auf angesehene, unabhängige Datenschutz-Ressourcen — nicht auf unsere Meinung. Vertiefe dich an der Quelle:',
+
   // Decoy Kit
   'decoy.title': '⬡ Täuschungskit',
   'decoy.subtitle':

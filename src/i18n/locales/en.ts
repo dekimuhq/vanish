@@ -364,6 +364,11 @@ export const en = {
   'settings.dataBullet4':
     'Links to opt-out pages open in a new tab — those are the only “network” calls, and you initiate every one.',
 
+  // Sources
+  'settings.sourcesTitle': 'Sources',
+  'settings.sourcesIntro':
+    'Vanish’s guidance draws on respected, independent privacy resources — not our opinion. Go deeper at the source:',
+
   // Decoy Kit
   'decoy.title': '⬡ Decoy Kit',
   'decoy.subtitle':

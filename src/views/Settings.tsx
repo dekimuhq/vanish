@@ -324,6 +324,30 @@ export function Settings() {
           <li className="flex gap-2"><span className="text-ghost">⬡</span> {t('settings.dataBullet4')}</li>
         </ul>
       </section>
+
+      <section className="card space-y-3 p-5 text-sm text-slate-400">
+        <h2 className="font-semibold text-slate-100">{t('settings.sourcesTitle')}</h2>
+        <p>{t('settings.sourcesIntro')}</p>
+        <ul className="space-y-1.5">
+          {SOURCES.map((s) => (
+            <li key={s.url} className="flex gap-2">
+              <span className="text-ghost">⬡</span>
+              <a className="text-ghost-bright hover:underline" href={s.url} target="_blank" rel="noopener noreferrer">
+                {s.label} ↗
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   )
 }
+
+// Independent privacy-guidance sources the action catalogue draws on. These are
+// user-clicked top-level links (CSP allows that) — never fetched at runtime.
+const SOURCES: ReadonlyArray<{ label: string; url: string }> = [
+  { label: 'EFF — Surveillance Self-Defense', url: 'https://ssd.eff.org' },
+  { label: 'Privacy Guides', url: 'https://www.privacyguides.org' },
+  { label: 'Tactical Tech — Data Detox Kit', url: 'https://datadetoxkit.org' },
+  { label: 'GDPR — Regulation (EU) 2016/679 (EUR-Lex)', url: 'https://eur-lex.europa.eu/eli/reg/2016/679/oj' },
+]

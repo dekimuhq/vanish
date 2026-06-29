@@ -291,6 +291,11 @@ export const nl: Dict = {
   'settings.dataBullet4':
     'Links naar opt-out-pagina\'s openen in een nieuw tabblad — dat zijn de enige "netwerk"-aanroepen, en jij initieert ze allemaal.',
 
+  // Sources
+  'settings.sourcesTitle': 'Bronnen',
+  'settings.sourcesIntro':
+    'De adviezen van Vanish zijn gebaseerd op gerespecteerde, onafhankelijke privacybronnen — niet op onze mening. Verdiep je bij de bron:',
+
   // Decoy Kit
   'decoy.title': '⬡ Lokaaskit',
   'decoy.subtitle':

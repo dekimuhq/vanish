@@ -290,6 +290,11 @@ export const pt: Dict = {
   'settings.dataBullet4':
     'Os links para páginas de exclusão abrem num novo separador — esses são os únicos "pedidos de rede", e és tu quem inicia cada um.',
 
+  // Sources
+  'settings.sourcesTitle': 'Fontes',
+  'settings.sourcesIntro':
+    'As orientações da Vanish baseiam-se em recursos de privacidade independentes e respeitados — não na nossa opinião. Aprofunda na fonte:',
+
   // Decoy Kit
   'decoy.title': '⬡ Kit Isco',
   'decoy.subtitle':

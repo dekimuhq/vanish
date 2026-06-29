@@ -263,6 +263,11 @@ export const ca: Dict = {
   'settings.dataBullet4':
     "Els enllaços a pàgines d'opt-out s'obren en una pestanya nova — aquestes són les úniques \"peticions de xarxa\", i tu inicies cada una.",
 
+  // Sources
+  'settings.sourcesTitle': 'Fonts',
+  'settings.sourcesIntro':
+    "La guia de Vanish es basa en recursos de privadesa independents i de confiança — no en la nostra opinió. Aprofundeix-hi a la font:",
+
   // Decoy Kit
   'decoy.title': '⬡ Kit de camuflatge',
   'decoy.subtitle':

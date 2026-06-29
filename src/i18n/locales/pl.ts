@@ -285,6 +285,11 @@ export const pl: Dict = {
   'settings.dataBullet4':
     'Linki do stron rezygnacji otwierają się w nowej karcie — to jedyne „połączenia sieciowe" i każde z nich inicjujesz sam.',
 
+  // Sources
+  'settings.sourcesTitle': 'Źródła',
+  'settings.sourcesIntro':
+    'Wskazówki Vanish opierają się na cenionych, niezależnych źródłach o prywatności — nie na naszej opinii. Zgłęb temat u źródła:',
+
   // Backup nudge
   'nudge.backup': 'Twoje postępy istnieją tylko w tej przeglądarce. Zrób kopię zapasową, aby wyczyszczenie danych ich nie usunęło.',
   'nudge.backupCta': 'Zrób kopię teraz',

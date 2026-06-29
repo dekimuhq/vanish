@@ -292,6 +292,11 @@ export const fr: Dict = {
   'settings.dataBullet4':
     "Les liens vers les pages de désinscription s'ouvrent dans un nouvel onglet — ce sont les seuls appels « réseau », et vous les initiez tous.",
 
+  // Sources
+  'settings.sourcesTitle': 'Sources',
+  'settings.sourcesIntro':
+    "Les conseils de Vanish s'appuient sur des ressources de confidentialité indépendantes et reconnues — pas sur notre avis. Approfondissez à la source :",
+
   // Decoy Kit
   'decoy.title': '⬡ Kit leurre',
   'decoy.subtitle':

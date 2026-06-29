@@ -291,6 +291,11 @@ export const it: Dict = {
   'settings.dataBullet4':
     "I link alle pagine di opt-out si aprono in una nuova scheda — queste sono le uniche \"chiamate di rete\", e le avvii tu ogni volta.",
 
+  // Sources
+  'settings.sourcesTitle': 'Fonti',
+  'settings.sourcesIntro':
+    'Le indicazioni di Vanish si basano su risorse di privacy indipendenti e autorevoli — non sulla nostra opinione. Approfondisci alla fonte:',
+
   // Decoy Kit
   'decoy.title': '⬡ Kit Esca',
   'decoy.subtitle':

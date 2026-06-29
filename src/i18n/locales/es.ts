@@ -290,6 +290,11 @@ export const es: Dict = {
   'settings.dataBullet4':
     'Los enlaces a páginas de opt-out se abren en una pestaña nueva — esas son las únicas «peticiones de red», y las inicias tú mismo.',
 
+  // Sources
+  'settings.sourcesTitle': 'Fuentes',
+  'settings.sourcesIntro':
+    'La guía de Vanish se basa en recursos de privacidad independientes y de confianza — no en nuestra opinión. Profundiza en la fuente:',
+
   // Decoy Kit
   'decoy.title': '⬡ Kit de ruido',
   'decoy.subtitle':
