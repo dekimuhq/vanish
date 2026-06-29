@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { computeScore, dueRechecks, momentum, scoreLabel } from './score'
-import type { Action, AppState } from './types'
+import { computeScore, dueLetters, dueQueue, dueRechecks, momentum, scoreLabel } from './score'
+import type { Action, AppState, LetterRecord } from './types'
 import { initialState } from './types'
 
 const a = (id: string, over: Partial<Action> = {}): Action => ({
@@ -69,6 +69,65 @@ describe('dueRechecks', () => {
     const actions = [a('plain')]
     const state = withProgress({ plain: { status: 'done', updatedAt: '2020-01-01' } })
     expect(dueRechecks(actions, state)).toHaveLength(0)
+  })
+})
+
+const letter = (id: string, over: Partial<LetterRecord> = {}): LetterRecord => ({
+  id,
+  kind: 'erasure',
+  recipient: id,
+  sentAt: '2026-01-01',
+  deadlineAt: '2026-01-31',
+  status: 'sent',
+  ...over,
+})
+
+function withLetters(ls: LetterRecord[]): AppState {
+  return { ...initialState(), letters: Object.fromEntries(ls.map((l) => [l.id, l])) }
+}
+
+describe('dueLetters', () => {
+  it('surfaces an overdue sent letter', () => {
+    const past = new Date(Date.now() - 5 * 86_400_000).toISOString()
+    const items = dueLetters(withLetters([letter('a', { deadlineAt: past })]))
+    expect(items).toHaveLength(1)
+    expect(items[0].overdue).toBe(true)
+  })
+
+  it('ignores letters whose deadline is far off, and non-sent letters', () => {
+    const soon = new Date(Date.now() + 5 * 86_400_000).toISOString()
+    const far = new Date(Date.now() + 60 * 86_400_000).toISOString()
+    const items = dueLetters(
+      withLetters([
+        letter('soon', { deadlineAt: soon }), // within window → included
+        letter('far', { deadlineAt: far }), // outside window → excluded
+        letter('resolved', { deadlineAt: '2020-01-01', status: 'resolved' }), // not sent → excluded
+      ]),
+    )
+    expect(items.map((i) => i.letter.id)).toEqual(['soon'])
+  })
+})
+
+describe('dueQueue', () => {
+  it('merges rechecks and letters, overdue first', () => {
+    const longAgo = new Date(Date.now() - 130 * 86_400_000).toISOString()
+    const soon = new Date(Date.now() + 5 * 86_400_000).toISOString()
+    const past = new Date(Date.now() - 2 * 86_400_000).toISOString()
+    const state: AppState = {
+      ...initialState(),
+      progress: { broker: { status: 'done', updatedAt: longAgo } }, // overdue recheck
+      letters: {
+        soon: letter('soon', { deadlineAt: soon }), // due soon, not overdue
+        late: letter('late', { deadlineAt: past }), // overdue
+      },
+    }
+    const q = dueQueue([a('broker', { recurDays: 120 })], state)
+    expect(q).toHaveLength(3)
+    // overdue items sort ahead of the merely-soon one
+    expect(q[q.length - 1].overdue).toBe(false)
+    expect(q.filter((i) => i.overdue)).toHaveLength(2)
+    expect(q.some((i) => i.kind === 'recheck')).toBe(true)
+    expect(q.some((i) => i.kind === 'letter')).toBe(true)
   })
 })
 

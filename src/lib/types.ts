@@ -115,6 +115,9 @@ export type Country =
   | 'at' | 'be' | 'bg' | 'hr' | 'cy' | 'cz' | 'dk' | 'ee' | 'fi' | 'fr'
   | 'de' | 'gr' | 'hu' | 'ie' | 'it' | 'lv' | 'lt' | 'lu' | 'mt' | 'nl'
   | 'pl' | 'pt' | 'ro' | 'sk' | 'si' | 'es' | 'se'
+  // EEA non-EU members — GDPR applies via the EEA Agreement (region 'eu' for
+  // action relevance; grouped separately in the country picker).
+  | 'is' | 'no'
   | 'gb' | 'us' | 'ot'
 
 export interface Profile {

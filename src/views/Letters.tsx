@@ -31,8 +31,8 @@ export function Letters() {
   const country = countryInfo(state.profile.country)
   const isGdpr = template === 'gdpr-erasure' || template === 'gdpr-access'
   const { subject, body } = useMemo(
-    () => renderLetter(template, state.profile, org, authority?.name),
-    [template, state.profile, org, authority],
+    () => renderLetter(template, state.profile, org, authority?.name, state.lang),
+    [template, state.profile, org, authority, state.lang],
   )
 
   async function copy() {

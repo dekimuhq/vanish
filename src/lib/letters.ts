@@ -1,4 +1,6 @@
 import type { LetterTemplate, Profile } from './types'
+import type { Lang } from '../i18n/langs'
+import { localizedLetter } from '../i18n/letters'
 
 export interface LetterDef {
   id: LetterTemplate
@@ -109,7 +111,15 @@ ${p.name || '[Your full name]'}`,
   },
 }
 
-export function renderLetter(template: LetterTemplate, profile: Profile, org: string, authority?: string) {
+export function renderLetter(
+  template: LetterTemplate,
+  profile: Profile,
+  org: string,
+  authority?: string,
+  lang?: Lang,
+) {
+  const loc = lang ? localizedLetter(lang, template) : undefined
+  if (loc) return { subject: loc.subject, body: loc.body(profile, org, authority) }
   const def = LETTERS[template]
   return { subject: def.subject, body: def.body(profile, org, authority) }
 }

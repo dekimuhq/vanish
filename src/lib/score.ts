@@ -1,4 +1,8 @@
-import type { Action, AppState, Level, Tier } from './types'
+import type { Action, AppState, LetterRecord, Level, Tier } from './types'
+
+const DAY_MS = 86_400_000
+/** Lead time for surfacing something as "due soon" before its date. */
+const SOON_DAYS = 14
 
 const IMPACT_WEIGHT: Record<Level, number> = { low: 1, med: 2, high: 4 }
 
@@ -69,12 +73,50 @@ export function dueRechecks(actions: Action[], state: AppState, now = new Date()
     if (!a.recurDays) continue
     const e = state.progress[a.id]
     if (e?.status !== 'done') continue
-    const due = new Date(new Date(e.updatedAt).getTime() + a.recurDays * 86_400_000)
-    if (due.getTime() <= now.getTime() + 14 * 86_400_000) {
+    const due = new Date(new Date(e.updatedAt).getTime() + a.recurDays * DAY_MS)
+    if (due.getTime() <= now.getTime() + SOON_DAYS * DAY_MS) {
       items.push({ action: a, dueAt: due, overdue: due.getTime() <= now.getTime() })
     }
   }
   return items.sort((x, y) => x.dueAt.getTime() - y.dueAt.getTime())
+}
+
+export interface DueLetterItem {
+  letter: LetterRecord
+  dueAt: Date
+  overdue: boolean
+}
+
+/** Sent letters whose statutory response deadline has passed or is within the
+ *  soon window — the user should chase or escalate these. */
+export function dueLetters(state: AppState, now = new Date()): DueLetterItem[] {
+  const items: DueLetterItem[] = []
+  for (const l of Object.values(state.letters)) {
+    if (l.status !== 'sent') continue
+    const due = new Date(l.deadlineAt)
+    if (due.getTime() <= now.getTime() + SOON_DAYS * DAY_MS) {
+      items.push({ letter: l, dueAt: due, overdue: due.getTime() <= now.getTime() })
+    }
+  }
+  return items.sort((x, y) => x.dueAt.getTime() - y.dueAt.getTime())
+}
+
+/** A single time-sensitive item — a broker re-check or a letter deadline —
+ *  merged into one urgency-sorted queue for the Dashboard "Due now" panel. */
+export type DueItem =
+  | { kind: 'recheck'; action: Action; dueAt: Date; overdue: boolean }
+  | { kind: 'letter'; letter: LetterRecord; dueAt: Date; overdue: boolean }
+
+/** Everything due now (or soon), broker re-checks and letter deadlines together,
+ *  overdue first then by date. The one place the user sees what needs doing. */
+export function dueQueue(actions: Action[], state: AppState, now = new Date()): DueItem[] {
+  const items: DueItem[] = [
+    ...dueRechecks(actions, state, now).map((r): DueItem => ({ kind: 'recheck', ...r })),
+    ...dueLetters(state, now).map((l): DueItem => ({ kind: 'letter', ...l })),
+  ]
+  return items.sort(
+    (x, y) => Number(y.overdue) - Number(x.overdue) || x.dueAt.getTime() - y.dueAt.getTime(),
+  )
 }
 
 export interface Momentum {

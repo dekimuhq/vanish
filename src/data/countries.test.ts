@@ -48,4 +48,19 @@ describe('country table', () => {
     expect(grouped.length).toBe(Object.keys(COUNTRIES).length)
     expect(new Set(grouped).size).toBe(grouped.length)
   })
+
+  it('covers EEA non-EU members (IS/NO) with their authority, region eu, and a dedicated group', () => {
+    for (const c of ['is', 'no'] as const) {
+      expect(COUNTRIES[c].region).toBe('eu') // GDPR applies via the EEA Agreement
+      const auth = COUNTRIES[c].authority
+      expect(auth, `${c} should have a supervisory authority`).toBeDefined()
+      expect(auth!.url.startsWith('https://')).toBe(true)
+      expect(regionForCountry(c)).toBe('eu')
+    }
+    // They are grouped under EEA, not folded into the EU-27.
+    expect(EU_COUNTRIES).not.toContain('is')
+    expect(EU_COUNTRIES).not.toContain('no')
+    const eea = COUNTRY_GROUPS.find((g) => g.key === 'eea')
+    expect(eea?.codes).toEqual(['is', 'no'])
+  })
 })

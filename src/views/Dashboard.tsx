@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { ScoreRing } from '../components/ScoreRing'
 import { ActionCard } from '../components/ActionCard'
 import { TierBadge } from '../components/Pills'
-import { computeScore, dueRechecks, momentum, scoreLabel } from '../lib/score'
+import { computeScore, dueQueue, momentum, scoreLabel } from '../lib/score'
 import { actionsForRegion, byQuickWin } from '../lib/select'
 import { TIERS, type Category, type Tier } from '../lib/types'
 import { useStore } from '../store/store'
@@ -20,10 +20,10 @@ const CONCERN_CATEGORIES: Record<string, Category[]> = {
 
 export function Dashboard() {
   const { state } = useStore()
-  const { t, tPlural, localizeAction } = useI18n()
+  const { t, localizeAction } = useI18n()
   const actions = actionsForRegion(state.profile.region, state.profile.country)
   const breakdown = computeScore(actions, state)
-  const rechecks = dueRechecks(actions, state)
+  const due = dueQueue(actions, state)
   const mo = momentum(state)
   const tone = scoreLabel(breakdown.score).tone
 
@@ -51,8 +51,8 @@ export function Dashboard() {
           <div className="mt-4 flex flex-wrap justify-center gap-2 sm:justify-start">
             <Link to="/plan" className="btn-primary btn-sm">{t('dashboard.openLadder')}</Link>
             <Link to="/report" className="btn-ghost btn-sm">{t('dashboard.printPlan')}</Link>
-            {rechecks.length > 0 && (
-              <Link to="/brokers" className="btn-ghost btn-sm">{tPlural('dashboard.rechecksDue', rechecks.length)}</Link>
+            {due.length > 0 && (
+              <a href="#due-now" className="btn-ghost btn-sm">{t('dashboard.dueNowHeading')}</a>
             )}
           </div>
           {(mo.streakDays > 0 || mo.completedThisWeek > 0) && (
@@ -88,19 +88,32 @@ export function Dashboard() {
         })}
       </section>
 
-      {rechecks.length > 0 && (
-        <section className="card border-signal-warn/30 bg-signal-warn/[0.04] p-4">
-          <h2 className="flex items-center gap-2 font-semibold text-signal-warn">{t('dashboard.rechecksHeading')}</h2>
-          <p className="mt-1 text-sm text-slate-400">
-            {t('dashboard.rechecksBody')}
-          </p>
+      {due.length > 0 && (
+        <section id="due-now" className="card border-signal-warn/30 bg-signal-warn/[0.04] p-4">
+          <h2 className="flex items-center gap-2 font-semibold text-signal-warn">{t('dashboard.dueNowHeading')}</h2>
+          <p className="mt-1 text-sm text-slate-400">{t('dashboard.dueNowBody')}</p>
           <ul className="mt-2 flex flex-wrap gap-2">
-            {rechecks.map((r) => (
-              <li key={r.action.id} className={`pill border ${r.overdue ? 'border-signal-danger/40 text-signal-danger' : 'border-ink-600 text-slate-400'}`}>
-                {localizeAction(r.action).title}
-                {r.overdue ? ` · ${t('dashboard.overdue')}` : ` · ${Math.max(0, Math.ceil((r.dueAt.getTime() - Date.now()) / 86_400_000))}d`}
-              </li>
-            ))}
+            {due.map((item) => {
+              const overdueCls = item.overdue ? 'border-signal-danger/40 text-signal-danger' : 'border-ink-600 text-slate-400'
+              const days = Math.max(0, Math.ceil((item.dueAt.getTime() - Date.now()) / 86_400_000))
+              const suffix = item.overdue ? ` · ${t('dashboard.overdue')}` : ` · ${days}d`
+              if (item.kind === 'recheck') {
+                return (
+                  <li key={`r-${item.action.id}`}>
+                    <Link to="/brokers" className={`pill border transition hover:border-signal-warn/50 ${overdueCls}`}>
+                      ↻ {localizeAction(item.action).title}{suffix}
+                    </Link>
+                  </li>
+                )
+              }
+              return (
+                <li key={`l-${item.letter.id}`}>
+                  <Link to="/letters" className={`pill border transition hover:border-signal-warn/50 ${overdueCls}`}>
+                    ✉ {item.letter.recipient || t('dashboard.dueLetterFallback')}{suffix}
+                  </Link>
+                </li>
+              )
+            })}
           </ul>
         </section>
       )}

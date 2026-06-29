@@ -59,6 +59,11 @@ export const COUNTRIES: Record<Country, CountryInfo> = {
   es: { code: 'es', name: 'Spain', flag: '🇪🇸', region: 'eu', authority: { name: 'AEPD', url: 'https://www.aepd.es' } },
   se: { code: 'se', name: 'Sweden', flag: '🇸🇪', region: 'eu', authority: { name: 'IMY', url: 'https://www.imy.se' } },
 
+  // EEA non-EU. GDPR applies via the EEA Agreement, so region 'eu' drives the
+  // same GDPR action set; each has its own national supervisory authority.
+  is: { code: 'is', name: 'Iceland', flag: '🇮🇸', region: 'eu', authority: { name: 'Persónuvernd', url: 'https://www.personuvernd.is' } },
+  no: { code: 'no', name: 'Norway', flag: '🇳🇴', region: 'eu', authority: { name: 'Datatilsynet', url: 'https://www.datatilsynet.no' } },
+
   gb: { code: 'gb', name: 'United Kingdom', flag: '🇬🇧', region: 'uk', authority: { name: "Information Commissioner's Office (ICO)", url: 'https://ico.org.uk' } },
   us: { code: 'us', name: 'United States', flag: '🇺🇸', region: 'us' },
   ot: { code: 'ot', name: 'Elsewhere', flag: '🌍', region: 'other' },
@@ -67,8 +72,9 @@ export const COUNTRIES: Record<Country, CountryInfo> = {
 /** Grouped for the onboarding / settings country pickers. `key` resolves the
  *  localized group label via `t('countryGroup.'+key)`; `label` is the English
  *  fallback. */
-export const COUNTRY_GROUPS: { key: 'eu' | 'uk' | 'us' | 'other'; label: string; codes: Country[] }[] = [
+export const COUNTRY_GROUPS: { key: 'eu' | 'eea' | 'uk' | 'us' | 'other'; label: string; codes: Country[] }[] = [
   { key: 'eu', label: 'European Union', codes: EU_COUNTRIES },
+  { key: 'eea', label: 'European Economic Area', codes: ['is', 'no'] },
   { key: 'uk', label: 'United Kingdom', codes: ['gb'] },
   { key: 'us', label: 'United States', codes: ['us'] },
   { key: 'other', label: 'Elsewhere', codes: ['ot'] },

@@ -3,7 +3,8 @@ import { TierBadge } from '../components/Pills'
 import { sanitize } from '../store/store'
 import { encryptBackup, decryptBackup, BackupError } from '../lib/backup'
 import { saveBlob } from '../lib/save-file'
-import { TIERS, type Country, type Tier } from '../lib/types'
+import { TIERS, type AppState, type Country, type Tier } from '../lib/types'
+import { diffBackup, type BackupDiff } from '../lib/restore'
 import { COUNTRIES, COUNTRY_GROUPS, authorityFor, regionForCountry } from '../data/countries'
 import { useStore } from '../store/store'
 import { useI18n } from '../i18n/i18n'
@@ -18,6 +19,21 @@ export function Settings() {
   const [importMsg, setImportMsg] = useState<string | null>(null)
   const [pass, setPass] = useState('')
   const [busy, setBusy] = useState(false)
+  // A decrypted+sanitized backup staged for preview — applied only on confirm,
+  // so "restore" never silently overwrites the device.
+  const [pending, setPending] = useState<{ candidate: AppState; diff: BackupDiff } | null>(null)
+
+  function stageRestore(candidate: AppState) {
+    setPending({ candidate, diff: diffBackup(state, candidate) })
+  }
+
+  function applyRestore() {
+    if (!pending) return
+    importState(pending.candidate)
+    setPending(null)
+    setImportMsg(t('settings.importOk'))
+    setTimeout(() => setImportMsg(null), 3000)
+  }
 
   function download() {
     const blob = new Blob([exportJSON()], { type: 'application/json' })
@@ -55,13 +71,12 @@ export function Settings() {
     setBusy(true)
     try {
       const raw = await decryptBackup(file, pass)
-      importState(sanitize(raw))
-      setImportMsg(t('settings.importOk'))
+      stageRestore(sanitize(raw)) // preview before applying — see applyRestore()
     } catch (e) {
       setImportMsg(e instanceof BackupError ? e.message : t('settings.importErr'))
+      setTimeout(() => setImportMsg(null), 3000)
     } finally {
       setBusy(false)
-      setTimeout(() => setImportMsg(null), 3000)
     }
   }
 
@@ -71,13 +86,11 @@ export function Settings() {
     const reader = new FileReader()
     reader.onload = () => {
       try {
-        const parsed = sanitize(JSON.parse(String(reader.result)))
-        importState(parsed)
-        setImportMsg(t('settings.importOk'))
+        stageRestore(sanitize(JSON.parse(String(reader.result)))) // preview before applying
       } catch {
         setImportMsg(t('settings.importErr'))
+        setTimeout(() => setImportMsg(null), 3000)
       }
-      setTimeout(() => setImportMsg(null), 3000)
     }
     reader.readAsText(file)
     e.target.value = ''
@@ -117,6 +130,39 @@ export function Settings() {
 
   return (
     <div className="space-y-6">
+      {pending && (
+        <div role="dialog" aria-modal="true" aria-labelledby="restore-title" className="fixed inset-0 z-50 grid place-items-center bg-ink-950/80 p-4">
+          <div className="card w-full max-w-md space-y-4 border-signal-warn/40 p-5">
+            <h2 id="restore-title" className="font-semibold text-slate-100">{t('settings.restorePreviewTitle')}</h2>
+            <p className="text-sm text-signal-warn">{t('settings.restorePreviewWarn')}</p>
+            <div className="grid grid-cols-[1fr_auto_auto] gap-x-4 gap-y-1.5 text-sm">
+              <span />
+              <span className="text-right text-xs uppercase tracking-wide text-slate-500">{t('settings.restoreNow')}</span>
+              <span className="text-right text-xs uppercase tracking-wide text-ghost-bright">{t('settings.restoreBackup')}</span>
+
+              <span className="text-slate-400">{t('settings.restoreActions')}</span>
+              <span className="text-right text-slate-300">{pending.diff.current.doneCount}</span>
+              <span className="text-right font-semibold text-slate-100">{pending.diff.incoming.doneCount}</span>
+
+              <span className="text-slate-400">{t('settings.restoreLetters')}</span>
+              <span className="text-right text-slate-300">{pending.diff.current.letterCount}</span>
+              <span className="text-right font-semibold text-slate-100">{pending.diff.incoming.letterCount}</span>
+
+              <span className="text-slate-400">{t('settings.restoreLang')}</span>
+              <span className="text-right text-slate-300">{LANG_LABELS[pending.diff.current.lang]}</span>
+              <span className="text-right font-semibold text-slate-100">{LANG_LABELS[pending.diff.incoming.lang]}</span>
+
+              <span className="text-slate-400">{t('settings.restoreProfile')}</span>
+              <span className="text-right text-slate-300">{pending.diff.current.profileName || t('settings.restoreNoProfile')}</span>
+              <span className="text-right font-semibold text-slate-100">{pending.diff.incoming.profileName || t('settings.restoreNoProfile')}</span>
+            </div>
+            <div className="flex flex-wrap justify-end gap-2">
+              <button className="btn-ghost btn-sm" onClick={() => setPending(null)}>{t('common.cancel')}</button>
+              <button className="btn-primary btn-sm" onClick={applyRestore}>{t('settings.restoreApply')}</button>
+            </div>
+          </div>
+        </div>
+      )}
       <header>
         <h1 className="text-2xl font-bold text-slate-100">{t('settings.title')}</h1>
       </header>

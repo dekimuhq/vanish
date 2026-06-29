@@ -58,7 +58,7 @@ for (const code of EU_COUNTRIES) {
 
 const counts = [1, 2, 3, 4].map((t) => `T${t}=${ACTIONS.filter((a) => a.tier === t).length}`)
 console.log(`Catalog: ${ACTIONS.length} actions (${counts.join(' ')}), ${Object.keys(LETTERS).length} letters`)
-console.log(`Countries: ${Object.keys(COUNTRIES).length} (${EU_COUNTRIES.length} EU + UK/US/other)`)
+console.log(`Countries: ${Object.keys(COUNTRIES).length} (${EU_COUNTRIES.length} EU + IS/NO EEA + UK/US/other)`)
 
 if (problems.length) {
   console.error(`\n✗ ${problems.length} problem(s):`)

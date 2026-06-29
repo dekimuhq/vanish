@@ -32,6 +32,42 @@ describe('renderLetter', () => {
   })
 })
 
+describe('renderLetter — localization', () => {
+  const profile = { ...emptyProfile(), name: 'Jane Doe', email: 'jane@example.com' }
+  const LANGS = ['fr', 'de', 'es', 'it', 'pt', 'nl', 'ca', 'pl', 'sv'] as const
+
+  it('uses the localized body when a language overlay exists', () => {
+    const { subject, body } = renderLetter('gdpr-erasure', profile, 'Spokeo', 'CNIL', 'fr')
+    expect(subject).toMatch(/article 17/i)
+    expect(body).toContain('Spokeo') // org still interpolated
+    expect(body).toContain('Jane Doe') // signature still interpolated
+    expect(body).toContain('CNIL') // authority named in the localized escalation
+    expect(body).not.toContain('Yours faithfully') // not the English body
+  })
+
+  it('falls back to English when no overlay / no lang', () => {
+    const en1 = renderLetter('gdpr-erasure', profile, 'Org')
+    const en2 = renderLetter('gdpr-erasure', profile, 'Org', undefined, 'en')
+    expect(en1.body).toContain('Yours faithfully')
+    expect(en2.body).toBe(en1.body)
+  })
+
+  it('every overlay renders all three templates with the same Article/§ anchors', () => {
+    for (const lang of LANGS) {
+      expect(renderLetter('gdpr-erasure', profile, 'Org', 'DPA', lang).subject).toMatch(/17/)
+      expect(renderLetter('gdpr-access', profile, 'Org', 'DPA', lang).subject).toMatch(/15/)
+      const ccpa = renderLetter('ccpa-delete', profile, 'Org', undefined, lang).body
+      expect(ccpa, `${lang} ccpa`).toMatch(/1798\.105/)
+      expect(ccpa, `${lang} ccpa`).toMatch(/1798\.120/)
+    }
+  })
+
+  it('localized empty profile keeps a placeholder signature (never blank)', () => {
+    const { body } = renderLetter('gdpr-access', emptyProfile(), '', undefined, 'de')
+    expect(body).toContain('[Ihr vollständiger Name]')
+  })
+})
+
 describe('mailtoHref', () => {
   it('keeps the address literal (RFC 6068) and uses %20 for spaces', () => {
     const href = mailtoHref('a+tag@b.com', 'Hi there', 'line one\nline two')
