@@ -12,6 +12,7 @@ import { Report } from './views/Report'
 import { Settings } from './views/Settings'
 import { Decoy } from './views/Decoy'
 import { Scenarios } from './views/Scenarios'
+import { Learn } from './views/Learn'
 
 export default function App() {
   return (
@@ -40,6 +41,8 @@ function Gate() {
         <Route path="/plan" element={<Plan />} />
         <Route path="/scenarios" element={<Scenarios />} />
         <Route path="/scenarios/:id" element={<Scenarios />} />
+        <Route path="/learn" element={<Learn />} />
+        <Route path="/learn/:id" element={<Learn />} />
         <Route path="/brokers" element={<Brokers />} />
         <Route path="/letters" element={<Letters />} />
         <Route path="/panic" element={<Panic />} />
