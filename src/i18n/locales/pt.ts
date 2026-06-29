@@ -331,4 +331,70 @@ export const pt: Dict = {
   'actionCard.restore': 'Restaurar',
   'actionCard.verified': 'Verificado a {date}',
   'actionCard.verifiedTitle': 'Quando esta ação e o respetivo link foram verificados pela última vez. Reporta um link inativo se tiver mudado.',
+
+  // EFF SSD: scenario playlists
+  'nav.scenarios': 'Cenários',
+  'scenarios.title': 'Começa pela tua situação',
+  'scenarios.lead':
+    'Percursos organizados para situações específicas. Cada um é uma ordem escolhida a dedo pelas ações que já tens — começa pelo topo.',
+  'scenarios.notFound': 'Esse cenário não existe.',
+  'scenario.survivor.title': 'Sobrevivente de stalking ou abuso',
+  'scenario.survivor.intro':
+    'Separar a tua localização e dados de contacto do teu nome, e descartar rastreadores ocultos. Se estiveres em perigo imediato, contacta primeiro os serviços de apoio locais.',
+  'scenario.job-seeker.title': 'Limpar a pegada antes de uma procura de emprego',
+  'scenario.job-seeker.intro':
+    'O que um recrutador ou responsável de contratação encontra ao pesquisar o teu nome — e como arrumar isso antes de procurarem.',
+  'scenario.activist.title': 'Ativista / a participar num protesto',
+  'scenario.activist.intro':
+    'Reforçar o teu telemóvel e as comunicações antes e durante uma organização ou manifestação.',
+  'scenario.journalist.title': 'Jornalista a proteger fontes',
+  'scenario.journalist.intro':
+    'Comunicação confidencial e manter separadas as identidades profissional e pessoal.',
+  'scenario.breach.title': 'Após uma fuga de dados',
+  'scenario.breach.intro':
+    'Estiveste numa fuga (ou suspeitas disso). Contém os danos e fecha a porta atrás de ti.',
+
+  // EFF SSD: learn primers
+  'nav.learn': 'Aprender',
+  'learn.title': 'Percebe o porquê',
+  'learn.lead':
+    'Introduções curtas em linguagem simples sobre o que está por trás das ações. Para o guia completo, cada uma tem um link para o Surveillance Self-Defense da EFF.',
+  'learn.related': 'Ações relacionadas',
+  'learn.readMore': 'Guia completo',
+  'learn.notFound': 'Esse tema não existe.',
+  'learn.threat-model.title': 'O que é um modelo de ameaça?',
+  'learn.threat-model.body': [
+    'Um modelo de ameaça são apenas cinco perguntas honestas: o que queres proteger, de quem o queres proteger, qual é a probabilidade de precisares de o fazer, quão graves são as consequências se falhares, e quanto trabalho estás disposto a fazer para o evitar?',
+    'Não existe um nível de privacidade universalmente certo. Ajustar o esforço às pessoas de quem realmente te preocupas é o essencial — ir além do que a tua situação exige troca comodidade real por nenhuma segurança real.',
+  ],
+  'learn.metadata.title': 'O que os metadados revelam',
+  'learn.metadata.body': [
+    'Os metadados são os dados sobre os teus dados: quando foi tirada uma fotografia, em que telemóvel, e muitas vezes as coordenadas GPS exatas. Os metadados de uma mensagem — quem, quando, com que frequência — podem ser tão reveladores como as palavras em si.',
+    'Nem sempre consegues controlar os metadados que os serviços guardam, mas podes parar de os distribuir: remove os dados de localização e de dispositivo das fotos antes de as publicares.',
+  ],
+  'learn.encryption.title': 'O que é a encriptação ponta a ponta',
+  'learn.encryption.body': [
+    'A encriptação ponta a ponta (E2EE) significa que apenas tu e a pessoa com quem estás a falar conseguem ler as mensagens — nem o criador da aplicação, nem a rede, nem ninguém que as intercete em trânsito.',
+    'É a diferença entre um postal e uma carta selada. Usa ferramentas E2EE para tudo o que seja sensível, e lembra-te de que protege o conteúdo, mas não necessariamente os metadados à sua volta.',
+  ],
+  'learn.phishing.title': 'Como funciona o phishing',
+  'learn.phishing.body': [
+    'O phishing engana-te para entregares uma palavra-passe ou código, normalmente com uma mensagem urgente e um link para uma página de login falsa. É assim que a maioria das tomadas de conta começa — sem necessidade de hacking.',
+    'As defesas são hábitos, não ferramentas: nunca entres através de um link numa mensagem, verifica o remetente, e confia num gestor de palavras-passe (que não preenche automaticamente no domínio errado) e em chaves de hardware (que são imunes a phishing).',
+  ],
+  'learn.data-brokers.title': 'O que são os corretores de dados',
+  'learn.data-brokers.body': [
+    'Os corretores de dados compram, raspam e revendem perfis teus — nome, morada, familiares, números de telefone — a anunciantes, recrutadores e a quem pagar. Os sites de pesquisa de pessoas são a montra pública desta indústria.',
+    'A exclusão funciona, mas não é permanente: os corretores voltam a adquirir e a listar-te a partir de registos públicos novos, por isso a remoção é um hábito com prazo, não uma correção única.',
+  ],
+  'learn.vpn.title': 'O que uma VPN faz e não faz',
+  'learn.vpn.body': [
+    'Uma VPN esconde a tua navegação à tua rede e ao teu fornecedor de internet, e o teu endereço IP aos sites que visitas — útil em redes Wi-Fi não fidedignas ou para evitar que um único ISP perfile tudo o que fazes.',
+    'Não te torna anónimo: estás agora a confiar no fornecedor de VPN em vez disso, e não impede que os sites te rastreiem depois de iniciares sessão. Para um anonimato forte, o Tor é a melhor ferramenta.',
+  ],
+  'learn.key-verification.title': 'Porque verificar chaves',
+  'learn.key-verification.body': [
+    'A encriptação pressupõe que estás a falar com a pessoa real. Um ataque man-in-the-middle funciona ao sentar-se entre vós e a substituir as chaves — continuarias a ver um cadeado fechado.',
+    'Verificar um número de segurança (pessoalmente por QR, ou por um canal de confiança separado) confirma que não há nenhum impostor no meio. Faz-o uma vez para os teus contactos mais sensíveis.',
+  ],
 } satisfies Dict

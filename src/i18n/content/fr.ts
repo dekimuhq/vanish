@@ -799,4 +799,54 @@ export const fr: ContentOverlay = {
       "Désactivez l'accès aux capteurs de mouvement pour les sites qui n'en ont pas besoin.",
     ],
   },
+
+  // ─────────────── EFF SSD (2026-06-29) ───────────────
+  'recognize-phishing': {
+    title: 'Reconnaître et éviter le phishing',
+    summary:
+      "La plupart des prises de contrôle de comptes commencent par un e-mail ou un SMS convaincant, pas par un piratage. Apprenez les signes révélateurs pour qu'une fausse page de connexion ne vous soutire jamais votre mot de passe.",
+    steps: [
+      "Traitez tout message non sollicité de type « vérifiez votre compte » ou « activité inhabituelle » comme suspect — les banques et les plateformes ne demandent jamais votre mot de passe par e-mail.",
+      "Ne vous connectez jamais via un lien dans un message. Ouvrez le site vous-même depuis un favori ou en tapant l'adresse.",
+      "Vérifiez la vraie adresse d'expéditeur et survolez les liens pour voir leur destination réelle avant de cliquer.",
+      "Laissez votre gestionnaire de mots de passe faire le contrôle : s'il ne remplit pas automatiquement, le domaine est probablement faux.",
+      "Utilisez une clé de sécurité matérielle si possible — elle est insensible au phishing même si vous êtes trompé.",
+    ],
+    urlLabel: 'EFF : éviter le phishing',
+  },
+  'iphone-lockdown-mode': {
+    title: "Activer le mode Isolation sur iPhone/Mac",
+    summary:
+      "Le mode Isolation d'Apple supprime les fonctionnalités rarement utilisées qu'exploitent les logiciels espions mercenaires. Pour les personnes exposées à un risque élevé, il réduit considérablement la surface d'attaque.",
+    steps: [
+      "Mettez d'abord à jour vers la dernière version d'iOS/iPadOS/macOS.",
+      "Ouvrez Réglages → Confidentialité et sécurité → Mode Isolation (en bas de la liste).",
+      "Activez-le et redémarrez. Il s'applique à tous vos appareils Apple connectés au même compte.",
+      "Certains liens, pièces jointes et fonctionnalités web seront limités — c'est la protection en action.",
+    ],
+    urlLabel: 'Apple : mode Isolation',
+  },
+  'verify-signal-safety-numbers': {
+    title: 'Vérifier les numéros de sécurité Signal',
+    summary:
+      "Le chiffrement de bout en bout ne vous protège que si vous parlez à la bonne personne. Vérifier le numéro de sécurité écarte toute possibilité d'intermédiaire malveillant.",
+    steps: [
+      "Ouvrez une conversation Signal → appuyez sur le nom du contact → Voir le numéro de sécurité.",
+      "En personne, scannez mutuellement vos QR codes ; à distance, comparez le numéro sur un canal de confiance séparé.",
+      "Appuyez sur « Marquer comme vérifié » une fois qu'ils correspondent.",
+      "Si le numéro de sécurité change de façon inattendue, confirmez pourquoi avant d'envoyer quoi que ce soit de sensible.",
+    ],
+    urlLabel: 'Signal : numéros de sécurité',
+  },
+  'detect-bluetooth-trackers': {
+    title: 'Détecter les traceurs Bluetooth cachés',
+    summary:
+      "Les AirTags et les traceurs de type Tile sont des outils de surveillance bon marché. Les téléphones peuvent désormais vous alerter si un traceur inconnu voyage avec vous — assurez-vous que la détection est activée et sachez comment lancer une recherche.",
+    steps: [
+      "iPhone : gardez le Bluetooth et la localisation activés ; iOS vous alerte si un traceur AirTag/Find My inconnu se déplace avec vous. Appuyez sur l'alerte pour lui faire émettre un son.",
+      "Android : les alertes de traceur inconnu sont intégrées (Réglages → Sécurité et urgences → Alertes traceur inconnu), ou installez « Tracker Detect » d'Apple pour lancer une recherche manuelle.",
+      "Si vous trouvez un traceur qui ne vous appartient pas, vous pouvez le désactiver en retirant sa batterie — mais si vous vous sentez en danger, conservez-le et contactez d'abord les services d'aide ou les autorités locales.",
+    ],
+    urlLabel: 'Apple : pistage non désiré',
+  },
 }

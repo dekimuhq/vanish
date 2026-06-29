@@ -335,4 +335,70 @@ export const ca: Dict = {
   'onboarding.restoreCta': 'Tria el fitxer .vanish',
   'onboarding.restoreErr': 'Contrasenya incorrecta o no és una còpia de Vanish.',
   'onboarding.restorePass': 'Contrasenya de la còpia',
+
+  // EFF SSD: scenario playlists
+  'nav.scenarios': 'Escenaris',
+  'scenarios.title': 'Comença per la teva situació',
+  'scenarios.lead':
+    'Camins curats per a una situació concreta. Cadascun és un ordre escollit a mà de les accions que ja tens — comença per dalt.',
+  'scenarios.notFound': 'Aquest escenari no existeix.',
+  'scenario.survivor.title': 'Supervivent d’assetjament o violència',
+  'scenario.survivor.intro':
+    'Separar la teva ubicació i dades de contacte del teu nom, i descartar rastrejadors amagats. Si estàs en perill immediat, contacta primer amb els serveis de suport locals.',
+  'scenario.job-seeker.title': 'Neteja prèvia a una recerca de feina',
+  'scenario.job-seeker.intro':
+    'El que troba un reclutador o responsable de selecció quan cerca el teu nom — i com endreçar-ho abans que ho miri.',
+  'scenario.activist.title': 'Activista / assistent a una protesta',
+  'scenario.activist.intro':
+    'Endurir el telèfon i les comunicacions abans i durant l’organització o una manifestació.',
+  'scenario.journalist.title': 'Periodista que protegeix fonts',
+  'scenario.journalist.intro':
+    'Comunicació confidencial i mantenir separades les identitats professional i personal.',
+  'scenario.breach.title': 'Després d’una filtració de dades',
+  'scenario.breach.intro':
+    'Has estat en una filtració (o ho sospites). Conté el dany i tanca la porta darrere seu.',
+
+  // EFF SSD: learn primers
+  'nav.learn': 'Aprèn',
+  'learn.title': 'Entén el perquè',
+  'learn.lead':
+    'Primers breus en llenguatge planer darrere de les accions. Per a la guia completa, cadascun enllaça a l’EFF Surveillance Self-Defense.',
+  'learn.related': 'Accions relacionades',
+  'learn.readMore': 'Guia completa',
+  'learn.notFound': 'Aquest tema no existeix.',
+  'learn.threat-model.title': 'Què és un model d’amenaça?',
+  'learn.threat-model.body': [
+    'Un model d’amenaça és només cinc preguntes honestes: què vols protegir, de qui ho vols protegir, quina probabilitat hi ha que ho necessitis, quines conseqüències tindrà si falles, i quant esforç estàs disposat a fer per evitar-ho?',
+    'No hi ha un nivell de privacitat únic i correcte. Ajustar l’esforç a les persones de les quals realment et preocupes és tot el joc — anar més lluny del que la teva situació necessita bescanvia comoditat real per cap seguretat real.',
+  ],
+  'learn.metadata.title': 'El que revelen les metadades',
+  'learn.metadata.body': [
+    'Les metadades són les dades sobre les teves dades: quan es va fer una foto, amb quin telèfon i sovint les coordenades GPS exactes. Les metadades d’un missatge — qui, quan, amb quina freqüència — poden ser tan reveladores com les paraules.',
+    'No sempre pots controlar les metadades que guarden els serveis, però pots deixar de repartir-les: elimina la ubicació i les dades del dispositiu de les fotos abans de publicar-les.',
+  ],
+  'learn.encryption.title': 'Què és el xifratge d’extrem a extrem',
+  'learn.encryption.body': [
+    'El xifratge d’extrem a extrem (E2EE) significa que només tu i la persona amb qui parles podeu llegir els missatges — no el fabricant de l’app, la xarxa ni ningú que els intercepti en trànsit.',
+    'És la diferència entre una postal i una carta segellada. Usa eines E2EE per a qualsevol cosa sensible, i recorda que protegeix el contingut, però no sempre les metadades que l’envolten.',
+  ],
+  'learn.phishing.title': 'Com funciona el phishing',
+  'learn.phishing.body': [
+    'El phishing t’enganya perquè lliuris una contrasenya o codi, normalment amb un missatge urgent i un enllaç a una pàgina d’inici de sessió falsa. Així és com comencen realment la majoria dels robatoris de comptes — sense necessitat de cap pirateig.',
+    'Les defenses són hàbits, no eines: mai no iniciïs sessió a través d’un enllaç en un missatge, verifica el remitent i recolza’t en un gestor de contrasenyes (que no emplenarà automàticament el domini equivocat) i en claus de maquinari (que són resistents al phishing).',
+  ],
+  'learn.data-brokers.title': 'Què són els brokers de dades',
+  'learn.data-brokers.body': [
+    'Els brokers de dades compren, recopilen i revenen perfils teus — nom, adreça, familiars, números de telèfon — a anunciants, reclutadors i a qualsevol que pagui. Els llocs de cerca de persones són l’aparador públic d’aquesta indústria.',
+    'Fer opt-out funciona, però no és permanent: els brokers et tornen a adquirir i publicar a partir de nous registres públics, de manera que l’eliminació és un hàbit amb temporitzador, no una solució única.',
+  ],
+  'learn.vpn.title': 'El que fa i no fa una VPN',
+  'learn.vpn.body': [
+    'Una VPN amaga la teva navegació a la teva xarxa i proveïdor d’internet, i la teva adreça IP als llocs que visites — útil en Wi-Fi no confiable o per evitar que un únic ISP perfili tot el que fas.',
+    'No et fa anònim: ara estàs confiant en el proveïdor de la VPN en lloc d’ell, i no impedeix que els llocs et rastregin un cop inicies sessió. Per a un fort anonimat, Tor és l’eina millor.',
+  ],
+  'learn.key-verification.title': 'Per què verificar claus',
+  'learn.key-verification.body': [
+    'El xifratge assumeix que parles amb la persona real. Un atac d’intermediari funciona posant-se entre tu i intercanviant les seves pròpies claus — seguiries veient un cadenat tancat.',
+    'Verificar un número de seguretat (en persona per QR o a través d’un canal de confiança separat) confirma que no hi ha cap impostor al mig. Fes-ho una vegada per als teus contactes més sensibles.',
+  ],
 } satisfies Dict

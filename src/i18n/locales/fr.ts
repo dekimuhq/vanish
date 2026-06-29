@@ -348,5 +348,71 @@ export const fr: Dict = {
   'actionCard.notRelevant': 'Non pertinent',
   'actionCard.restore': 'Restaurer',
   'actionCard.verified': 'Vérifié le {date}',
-  'actionCard.verifiedTitle': 'Date du dernier contrôle de cette action et de son lien. Signalez un lien mort s’il a changé d’adresse.',
+  'actionCard.verifiedTitle': "Date du dernier contrôle de cette action et de son lien. Signalez un lien mort s'il a changé d'adresse.",
+
+  // EFF SSD: scenario playlists
+  'nav.scenarios': 'Scénarios',
+  'scenarios.title': 'Commencez par votre situation',
+  'scenarios.lead':
+    "Des parcours adaptés à une situation précise. Chaque scénario est un ordre de visite soigneusement choisi parmi les actions que vous avez déjà — commencez par le haut.",
+  'scenarios.notFound': "Ce scénario n'existe pas.",
+  'scenario.survivor.title': 'Victime de harcèlement ou de violence',
+  'scenario.survivor.intro':
+    "Séparer votre localisation et vos coordonnées de votre nom, et vérifier l'absence de traceurs cachés. Si vous êtes en danger immédiat, contactez d'abord les services d'aide locaux.",
+  'scenario.job-seeker.title': "Préparer une recherche d'emploi",
+  'scenario.job-seeker.intro':
+    "Ce qu'un recruteur ou un responsable RH trouve en cherchant votre nom — et comment s'en occuper avant qu'il ne regarde.",
+  'scenario.activist.title': 'Militant · participation à une manifestation',
+  'scenario.activist.intro':
+    "Renforcer votre téléphone et vos communications avant et pendant une action militante ou une manifestation.",
+  'scenario.journalist.title': 'Journaliste protégeant ses sources',
+  'scenario.journalist.intro':
+    'Communications confidentielles et séparation des identités professionnelle et personnelle.',
+  'scenario.breach.title': 'Après une fuite de données',
+  'scenario.breach.intro':
+    "Vous étiez dans une fuite (ou vous le soupçonnez). Limitez les dégâts et fermez la porte derrière vous.",
+
+  // EFF SSD: learn primers
+  'nav.learn': 'Comprendre',
+  'learn.title': 'Comprendre le pourquoi',
+  'learn.lead':
+    "De courtes fiches pédagogiques sur les actions. Pour le guide complet, chacune renvoie vers Surveillance Self-Defense de l'EFF.",
+  'learn.related': 'Actions associées',
+  'learn.readMore': 'Guide complet',
+  'learn.notFound': "Ce sujet n'existe pas.",
+  'learn.threat-model.title': "Qu'est-ce qu'un modèle de menace ?",
+  'learn.threat-model.body': [
+    "Un modèle de menace, c'est cinq questions honnêtes : que souhaitez-vous protéger, de qui voulez-vous le protéger, quelle est la probabilité d'en avoir besoin, quelles seraient les conséquences en cas d'échec, et quel effort êtes-vous prêt à consentir pour l'éviter ?",
+    "Il n'existe pas un niveau de vie privée universellement juste. Adapter son effort aux personnes dont on se méfie vraiment, c'est tout le jeu — aller plus loin que sa situation ne l'exige échange du confort réel contre une sécurité illusoire.",
+  ],
+  'learn.metadata.title': 'Ce que révèlent les métadonnées',
+  'learn.metadata.body': [
+    "Les métadonnées, ce sont les données sur vos données : quand une photo a été prise, sur quel téléphone, et souvent les coordonnées GPS exactes. Les métadonnées d'un message — qui, quand, à quelle fréquence — peuvent être aussi révélatrices que son contenu.",
+    "Vous ne pouvez pas toujours contrôler les métadonnées conservées par les services, mais vous pouvez cesser de les distribuer : supprimez la localisation et les informations sur l'appareil des photos avant de les publier.",
+  ],
+  'learn.encryption.title': 'Qu\'est-ce que le chiffrement de bout en bout',
+  'learn.encryption.body': [
+    "Le chiffrement de bout en bout (E2EE) signifie que seuls vous et la personne à qui vous parlez pouvez lire les messages — pas l'éditeur de l'application, pas le réseau, ni quiconque les intercepterait en transit.",
+    "C'est la différence entre une carte postale et une lettre sous enveloppe. Utilisez des outils E2EE pour tout ce qui est sensible, et gardez à l'esprit que cela protège le contenu, pas toujours les métadonnées qui l'entourent.",
+  ],
+  'learn.phishing.title': 'Comment fonctionne le phishing',
+  'learn.phishing.body': [
+    "Le phishing vous amène à livrer un mot de passe ou un code, généralement par un message urgent accompagné d'un lien vers une fausse page de connexion. C'est ainsi que démarrent la plupart des prises de contrôle de comptes — aucun piratage nécessaire.",
+    "Les défenses sont des habitudes, pas des outils : ne vous connectez jamais via un lien reçu dans un message, vérifiez l'expéditeur, et fiez-vous à un gestionnaire de mots de passe (qui ne remplira pas automatiquement le mauvais domaine) et à des clés matérielles (insensibles au phishing).",
+  ],
+  'learn.data-brokers.title': 'Ce que sont les courtiers en données',
+  'learn.data-brokers.body': [
+    "Les courtiers en données achètent, collectent et revendent des profils vous concernant — nom, adresse, proches, numéros de téléphone — aux annonceurs, aux recruteurs et à quiconque paie. Les sites de recherche de personnes sont la vitrine publique de ce secteur.",
+    "La désinscription fonctionne, mais elle n'est pas permanente : les courtiers vous récupèrent et vous réinscrivent à partir de nouveaux documents publics, donc la suppression est une habitude à renouveler, pas un acte définitif.",
+  ],
+  'learn.vpn.title': "Ce qu'un VPN fait — et ne fait pas",
+  'learn.vpn.body': [
+    "Un VPN masque votre navigation à votre réseau et à votre fournisseur d'accès, et cache votre adresse IP aux sites que vous visitez — utile sur un Wi-Fi non fiable ou pour éviter qu'un seul FAI ne profile tout ce que vous faites.",
+    "Il ne vous rend pas anonyme : vous faites simplement confiance au fournisseur VPN à la place, et il ne stoppe pas le pistage des sites une fois que vous êtes connecté. Pour un anonymat sérieux, Tor est le meilleur outil.",
+  ],
+  'learn.key-verification.title': 'Pourquoi vérifier les clés',
+  'learn.key-verification.body': [
+    "Le chiffrement part du principe que vous parlez à la bonne personne. Une attaque par intermédiaire fonctionne en s'intercalant entre vous et en substituant ses propres clés — vous verriez quand même un cadenas verrouillé.",
+    "Vérifier un numéro de sécurité (en personne via QR, ou sur un canal de confiance séparé) confirme qu'il n'y a pas d'imposteur au milieu. Faites-le une fois pour vos contacts les plus sensibles.",
+  ],
 } satisfies Dict

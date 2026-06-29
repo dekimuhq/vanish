@@ -745,4 +745,52 @@ export const nl: ContentOverlay = {
       'Schakel bewegings- en sensortoegang uit voor sites die dat niet nodig hebben.',
     ],
   },
+  'recognize-phishing': {
+    title: 'Phishing herkennen en vermijden',
+    summary:
+      'De meeste accountovernames beginnen met een overtuigende e-mail of sms, niet met een hack. Leer de signalen kennen zodat een nep-inlogpagina nooit je wachtwoord te pakken krijgt.',
+    steps: [
+      'Behandel elk ongevraagd bericht over "verificatie van je account" of "verdachte activiteit" als verdacht — banken en platforms vragen nooit je wachtwoord via e-mail.',
+      'Log nooit in via een link in een bericht. Open de site zelf via een bladwijzer of door het adres te typen.',
+      'Controleer het echte afzenderadres en beweeg de muis over links om te zien waar ze werkelijk naartoe gaan voor je klikt.',
+      'Laat je wachtwoordmanager de controle doen: als die niet automatisch invult, klopt het domein waarschijnlijk niet.',
+      'Gebruik waar mogelijk een hardware-beveiligingssleutel — die is phishing-bestendig, zelfs als je wordt misleid.',
+    ],
+    urlLabel: 'EFF: phishing vermijden',
+  },
+  'iphone-lockdown-mode': {
+    title: 'Lockdown Mode inschakelen op iPhone/Mac',
+    summary:
+      'Apple\'s Lockdown Mode verwijdert de zelden gebruikte functies waar commerciële spyware misbruik van maakt. Voor mensen met een verhoogd risico verkleint het de aanvalsruimte aanzienlijk.',
+    steps: [
+      'Update eerst naar de nieuwste iOS/iPadOS/macOS.',
+      'Ga naar Instellingen → Privacy en beveiliging → Lockdown Mode (onderaan de lijst).',
+      'Zet het aan en herstart. Het geldt voor al je Apple-apparaten die zijn aangemeld bij hetzelfde account.',
+      'Verwacht dat sommige links, bijlagen en webfuncties worden beperkt — dat is de beveiliging die werkt.',
+    ],
+    urlLabel: 'Apple: Lockdown Mode',
+  },
+  'verify-signal-safety-numbers': {
+    title: 'Signal-veiligheidsnummers verifiëren',
+    summary:
+      'End-to-end-versleuteling beschermt je alleen als je met de echte persoon praat. Het veiligheidsnummer verifiëren sluit een man-in-the-middle uit.',
+    steps: [
+      'Open een Signal-gesprek → tik op de naam van het contact → Veiligheidsnummer bekijken.',
+      'In persoon: scan elkaars QR-code; op afstand: vergelijk het nummer via een apart vertrouwd kanaal.',
+      'Tik op "Markeer als geverifieerd" zodra ze overeenkomen.',
+      'Als het veiligheidsnummer ooit onverwacht verandert, controleer dan waarom voor je iets gevoeligs verstuurt.',
+    ],
+    urlLabel: 'Signal: veiligheidsnummers',
+  },
+  'detect-bluetooth-trackers': {
+    title: 'Verborgen Bluetooth-trackers opsporen',
+    summary:
+      'AirTags en Tile-achtige trackers zijn goedkope stalkinghulpmiddelen. Telefoons kunnen je nu waarschuwen voor een onbekende tracker die met je meereist — zorg dat detectie aan staat en weet hoe je handmatig kunt scannen.',
+    steps: [
+      'iPhone: houd Bluetooth en Locatie aan; iOS waarschuwt je voor een onbekende AirTag/Find My-tracker die met je meereist. Tik op de melding om hem een geluid te laten maken.',
+      'Android: waarschuwingen voor onbekende trackers zijn ingebouwd (Instellingen → Veiligheid en noodgevallen → Waarschuwingen onbekende tracker), of installeer Apple\'s "Tracker Detect" om handmatig te scannen.',
+      'Als je een tracker vindt die niet van jou is, kun je hem uitschakelen door de batterij te verwijderen — maar als je je in gevaar voelt, bewaar hem dan en neem eerst contact op met lokale hulpdiensten of de politie.',
+    ],
+    urlLabel: 'Apple: ongewenste tracking',
+  },
 }

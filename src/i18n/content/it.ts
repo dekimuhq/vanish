@@ -744,4 +744,52 @@ export const it: ContentOverlay = {
       "Disabilita l'accesso a movimento/sensori per i siti che non ne hanno bisogno.",
     ],
   },
+  'recognize-phishing': {
+    title: "Riconosci ed evita il phishing",
+    summary:
+      "La maggior parte dei furti di account inizia con un'email o un SMS convincente, non con un vero hack. Impara i segnali rivelatori così una pagina di accesso falsa non otterrà mai la tua password.",
+    steps: [
+      "Tratta qualsiasi messaggio non richiesto del tipo \"verifica il tuo account\" / \"attività insolita\" come sospetto — banche e piattaforme non chiedono mai la tua password via email.",
+      "Non accedere mai tramite un link in un messaggio. Apri il sito direttamente da un segnalibro o digitando l'indirizzo.",
+      "Controlla il vero indirizzo del mittente e passa il mouse sui link per vedere dove portano davvero prima di cliccare.",
+      "Lascia che il tuo gestore di password faccia da controllo: se non compila automaticamente, il dominio è probabilmente sbagliato.",
+      "Dove possibile usa una chiave di sicurezza hardware — è a prova di phishing anche se vieni ingannato.",
+    ],
+    urlLabel: "EFF: evitare il phishing",
+  },
+  'iphone-lockdown-mode': {
+    title: "Attiva Lockdown Mode su iPhone/Mac",
+    summary:
+      "Lockdown Mode di Apple elimina le funzionalità poco usate che gli spyware mercenari sfruttano. Per chi è a rischio elevato, riduce notevolmente la superficie di attacco.",
+    steps: [
+      "Aggiorna prima all'ultima versione di iOS/iPadOS/macOS.",
+      "Apri Impostazioni → Privacy e sicurezza → Lockdown Mode (in fondo alla lista).",
+      "Attivalo e riavvia. Si applica a tutti i tuoi dispositivi Apple collegati allo stesso account.",
+      "Aspettati che alcuni link, allegati e funzionalità web siano limitati — è la protezione che funziona.",
+    ],
+    urlLabel: "Apple: Lockdown Mode",
+  },
+  'verify-signal-safety-numbers': {
+    title: "Verifica i numeri di sicurezza di Signal",
+    summary:
+      "La cifratura end-to-end ti protegge solo se stai parlando con la persona reale. Verificare il numero di sicurezza esclude un attacco man-in-the-middle.",
+    steps: [
+      "Apri una conversazione Signal → tocca il nome del contatto → Visualizza numero di sicurezza.",
+      "Di persona, scansionate reciprocamente il codice QR; a distanza, confrontate il numero su un canale fidato separato.",
+      "Tocca \"Segna come verificato\" quando coincidono.",
+      "Se il numero di sicurezza cambia inaspettatamente, conferma il motivo prima di inviare qualcosa di sensibile.",
+    ],
+    urlLabel: "Signal: numeri di sicurezza",
+  },
+  'detect-bluetooth-trackers': {
+    title: "Rileva tracciatori Bluetooth nascosti",
+    summary:
+      "AirTag e tracciatori simili a Tile sono strumenti di stalking economici. I telefoni possono ora avvisarti di un tracciatore sconosciuto che si sposta con te — assicurati che il rilevamento sia attivo e sappi come fare una scansione.",
+    steps: [
+      "iPhone: tieni Bluetooth e Posizione attivi; iOS ti avvisa di un AirTag/tracciatore Find My sconosciuto che si muove con te. Tocca l'avviso per farlo emettere un suono.",
+      "Android: gli avvisi per tracciatori sconosciuti sono integrati (Impostazioni → Sicurezza e emergenza → Avvisi tracciatori sconosciuti), oppure installa \"Tracker Detect\" di Apple per una scansione manuale.",
+      "Se trovi un tracciatore che non ti appartiene, puoi disattivarlo rimuovendo la batteria — ma se ti senti in pericolo, conservalo e contatta prima il supporto locale/le autorità.",
+    ],
+    urlLabel: "Apple: tracciamento indesiderato",
+  },
 }

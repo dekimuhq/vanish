@@ -898,4 +898,56 @@ export const de: ContentOverlay = {
       'Bewegungs-/Sensorzugriff für Websites deaktivieren, die ihn nicht benötigen.',
     ],
   },
+
+  'recognize-phishing': {
+    title: 'Phishing erkennen und vermeiden',
+    summary:
+      'Die meisten Kontoübernahmen beginnen mit einer überzeugenden E-Mail oder SMS, nicht mit einem Hack. Lerne die Warnsignale, damit eine gefälschte Anmeldeseite nie an dein Passwort kommt.',
+    steps: [
+      'Betrachte jede unaufgeforderte „Konto bestätigen"- oder „Ungewöhnliche Aktivität"-Nachricht als verdächtig — Banken und Plattformen fragen nie per E-Mail nach deinem Passwort.',
+      'Melde dich nie über einen Link in einer Nachricht an. Öffne die Website selbst über ein Lesezeichen oder indem du die Adresse eintippst.',
+      'Prüfe die echte Absenderadresse und zeige mit der Maus auf Links, um zu sehen, wohin sie wirklich führen, bevor du klickst.',
+      'Lass deinen Passwort-Manager die Überprüfung übernehmen: Wenn er nicht automatisch ausfüllt, stimmt die Domain wahrscheinlich nicht.',
+      'Nutze wenn möglich einen Hardware-Sicherheitsschlüssel — er ist phishing-sicher, selbst wenn du getäuscht wirst.',
+    ],
+    urlLabel: 'EFF: Phishing vermeiden',
+  },
+
+  'iphone-lockdown-mode': {
+    title: 'Lockdown Mode auf iPhone/Mac aktivieren',
+    summary:
+      'Apples Lockdown Mode entfernt selten genutzte Funktionen, die Spähsoftware ausnutzt. Für Menschen mit erhöhtem Risiko verkleinert er die Angriffsfläche erheblich.',
+    steps: [
+      'Zuerst auf die neueste iOS/iPadOS/macOS-Version aktualisieren.',
+      'Einstellungen → Datenschutz & Sicherheit → Lockdown Mode öffnen (ganz unten in der Liste).',
+      'Aktivieren und neu starten. Er gilt für alle Apple-Geräte, die beim selben Konto angemeldet sind.',
+      'Manche Links, Anhänge und Web-Funktionen werden eingeschränkt — das ist der Schutz in Aktion.',
+    ],
+    urlLabel: 'Apple: Lockdown Mode',
+  },
+
+  'verify-signal-safety-numbers': {
+    title: 'Signal-Sicherheitsnummern verifizieren',
+    summary:
+      'Ende-zu-Ende-Verschlüsselung schützt dich nur, wenn du wirklich mit der richtigen Person sprichst. Das Verifizieren der Sicherheitsnummer schließt einen Man-in-the-Middle aus.',
+    steps: [
+      'Ein Signal-Gespräch öffnen → auf den Namen des Kontakts tippen → Sicherheitsnummer anzeigen.',
+      'Persönlich: gegenseitig den QR-Code scannen; aus der Ferne: die Nummer über einen separaten vertrauenswürdigen Kanal vergleichen.',
+      'Auf „Als verifiziert markieren" tippen, sobald sie übereinstimmen.',
+      'Wenn sich die Sicherheitsnummer unerwartet ändert, den Grund bestätigen, bevor du etwas Sensibles sendest.',
+    ],
+    urlLabel: 'Signal: Sicherheitsnummern',
+  },
+
+  'detect-bluetooth-trackers': {
+    title: 'Versteckte Bluetooth-Tracker aufspüren',
+    summary:
+      'AirTags und Tracker à la Tile sind günstige Stalking-Werkzeuge. Smartphones können dich jetzt auf unbekannte Tracker hinweisen, die sich mit dir bewegen — stelle sicher, dass die Erkennung aktiviert ist, und wisse, wie du manuell scannst.',
+    steps: [
+      'iPhone: Bluetooth und Standort eingeschaltet lassen; iOS warnt dich bei einem unbekannten AirTag/Find My-Tracker, der sich mit dir bewegt. Auf die Meldung tippen, um ihn einen Ton abspielen zu lassen.',
+      'Android: Unbekannte-Tracker-Warnungen sind integriert (Einstellungen → Sicherheit & Notfall → Unbekannte Tracker-Warnungen); oder Apples „Tracker Detect" für manuelles Scannen installieren.',
+      'Wenn du einen Tracker findest, der dir nicht gehört, kannst du ihn durch Entfernen der Batterie deaktivieren — aber wenn du dich in Gefahr fühlst, bewahre ihn auf und wende dich zuerst an Hilfsangebote oder Behörden.',
+    ],
+    urlLabel: 'Apple: Unerwünschtes Tracking',
+  },
 }

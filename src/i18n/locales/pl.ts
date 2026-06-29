@@ -331,4 +331,70 @@ export const pl: Dict = {
   'actionCard.restore': 'Przywróć',
   'actionCard.verified': 'Zweryfikowano {date}',
   'actionCard.verifiedTitle': 'Kiedy ostatnio sprawdzono to działanie i jego link. Zgłoś nieaktywny link, jeśli adres się zmienił.',
+
+  // EFF SSD: scenario playlists
+  'nav.scenarios': 'Scenariusze',
+  'scenarios.title': 'Zacznij od swojej sytuacji',
+  'scenarios.lead':
+    'Ścieżki dostosowane do konkretnych sytuacji. Każda to starannie dobrana kolejność działań, które już masz — zacznij od góry.',
+  'scenarios.notFound': 'Ten scenariusz nie istnieje.',
+  'scenario.survivor.title': 'Ofiara stalkingu lub przemocy',
+  'scenario.survivor.intro':
+    'Oddzielenie lokalizacji i danych kontaktowych od swojego imienia oraz wykluczenie ukrytych urządzeń śledzących. Jeśli jesteś w bezpośrednim niebezpieczeństwie, najpierw skontaktuj się z lokalnymi służbami pomocowymi.',
+  'scenario.job-seeker.title': 'Porządki przed szukaniem pracy',
+  'scenario.job-seeker.intro':
+    'Co rekruter lub menedżer ds. rekrutacji znajdzie, szukając Twojego imienia — i jak to posprzątać, zanim spojrzą.',
+  'scenario.activist.title': 'Aktywista / udział w proteście',
+  'scenario.activist.intro':
+    'Zabezpieczenie telefonu i komunikacji przed organizowaniem akcji lub demonstracją i w jej trakcie.',
+  'scenario.journalist.title': 'Dziennikarz chroniący źródła',
+  'scenario.journalist.intro':
+    'Poufna komunikacja i utrzymywanie rozdzielności tożsamości zawodowej i prywatnej.',
+  'scenario.breach.title': 'Po wycieku danych',
+  'scenario.breach.intro':
+    'Znalazłeś się w wycieku (lub podejrzewasz to). Ogranicz szkody i zamknij drzwi za sobą.',
+
+  // EFF SSD: learn primers
+  'nav.learn': 'Wiedza',
+  'learn.title': 'Zrozum, dlaczego to ważne',
+  'learn.lead':
+    'Krótkie, zrozumiałe wyjaśnienia stojące za poszczególnymi działaniami. Aby przeczytać pełny przewodnik, każde z nich prowadzi do EFF Surveillance Self-Defense.',
+  'learn.related': 'Powiązane działania',
+  'learn.readMore': 'Pełny przewodnik',
+  'learn.notFound': 'Ten temat nie istnieje.',
+  'learn.threat-model.title': 'Czym jest model zagrożeń?',
+  'learn.threat-model.body': [
+    'Model zagrożeń to pięć szczerych pytań: co chcesz chronić, przed kim to chronić, jak prawdopodobne jest, że będziesz potrzebować tej ochrony, jakie będą konsekwencje, jeśli się nie uda, oraz ile wysiłku jesteś gotów włożyć w zapobieganie?',
+    'Nie ma jednego właściwego poziomu prywatności. Dostosowanie wysiłku do ludzi, których naprawdę się boisz, to cała sztuka — wychodzenie dalej, niż wymaga Twoja sytuacja, kosztuje wygodę bez realnego przyrostu bezpieczeństwa.',
+  ],
+  'learn.metadata.title': 'Co ujawniają metadane',
+  'learn.metadata.body': [
+    'Metadane to dane o Twoich danych: kiedy zdjęcie zostało zrobione, jakim telefonem i często dokładne współrzędne GPS. Metadane wiadomości — kto, kiedy, jak często — mogą być tak samo wymowne jak same słowa.',
+    'Nie zawsze możesz kontrolować, jakie metadane serwisy przechowują, ale możesz przestać je rozdawać: usuń dane lokalizacji i urządzenia ze zdjęć przed ich publikacją.',
+  ],
+  'learn.encryption.title': 'Czym jest szyfrowanie end-to-end',
+  'learn.encryption.body': [
+    'Szyfrowanie end-to-end (E2EE) oznacza, że tylko Ty i osoba, z którą rozmawiasz, możecie odczytać wiadomości — nie twórca aplikacji, sieć ani nikt, kto przechwytuje je w drodze.',
+    'To różnica między pocztówką a zapieczętowaną kopertą. Używaj narzędzi E2EE do wszystkiego, co wrażliwe, i pamiętaj, że chroni treść, ale nie zawsze metadane wokół niej.',
+  ],
+  'learn.phishing.title': 'Jak działa phishing',
+  'learn.phishing.body': [
+    'Phishing nakłania Cię do oddania hasła lub kodu — zazwyczaj pilną wiadomością i linkiem do fałszywej strony logowania. Tak zaczyna się większość przejęć kont — bez żadnego hakowania.',
+    'Obroną są nawyki, nie narzędzia: nigdy nie loguj się przez link w wiadomości, weryfikuj nadawcę i polegaj na menedżerze haseł (który nie automatycznie wypełni złej domeny) oraz kluczach sprzętowych (które są odporne na phishing).',
+  ],
+  'learn.data-brokers.title': 'Kim są brokerzy danych',
+  'learn.data-brokers.body': [
+    'Brokerzy danych kupują, scrapują i odsprzedają Twoje profile — imię, adres, krewni, numery telefonów — reklamodawcom, rekruterom i każdemu, kto zapłaci. Strony do wyszukiwania osób to publiczna witryna sklepowa tej branży.',
+    'Rezygnacje działają, ale nie są trwałe: brokerzy ponownie pozyskują i wystawiają Cię na nowo ze świeżych rejestrów publicznych, więc usuwanie to nawyk z licznikiem, a nie jednorazowa czynność.',
+  ],
+  'learn.vpn.title': 'Co VPN robi, a czego nie robi',
+  'learn.vpn.body': [
+    'VPN ukrywa Twoje przeglądanie przed siecią i dostawcą internetu oraz Twój adres IP przed odwiedzanymi stronami — przydatne w niezaufanej sieci Wi-Fi lub żeby uniknąć profilowania przez jednego dostawcę internetu.',
+    'Nie czyni Cię anonimowym: teraz ufasz dostawcy VPN zamiast ISP, a VPN nie powstrzymuje stron przed śledzeniem Cię po zalogowaniu. Przy silnej anonimowości Tor jest lepszym narzędziem.',
+  ],
+  'learn.key-verification.title': 'Dlaczego warto weryfikować klucze',
+  'learn.key-verification.body': [
+    'Szyfrowanie zakłada, że rozmawiasz z prawdziwą osobą. Atak man-in-the-middle polega na siedzeniu między Wami i podmienianiu kluczy — nadal widziałbyś zamkniętą kłódkę.',
+    'Weryfikacja numeru bezpieczeństwa (osobiście przez kod QR lub przez oddzielny zaufany kanał) potwierdza, że nie ma żadnego pośrednika. Zrób to raz dla najważniejszych kontaktów.',
+  ],
 } satisfies Dict

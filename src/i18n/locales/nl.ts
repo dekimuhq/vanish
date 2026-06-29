@@ -332,4 +332,70 @@ export const nl: Dict = {
   'actionCard.restore': 'Herstellen',
   'actionCard.verified': 'Gecontroleerd {date}',
   'actionCard.verifiedTitle': 'Wanneer deze actie en de bijbehorende link voor het laatst zijn gecontroleerd. Meld een dode link als die is verplaatst.',
+
+  // EFF SSD: scenario playlists
+  'nav.scenarios': 'Scenario\'s',
+  'scenarios.title': 'Begin vanuit jouw situatie',
+  'scenarios.lead':
+    'Samengestelde paden voor een specifieke situatie. Elk is een handgekozen volgorde door acties die je al hebt — begin bovenaan.',
+  'scenarios.notFound': 'Dat scenario bestaat niet.',
+  'scenario.survivor.title': 'Overlevende van stalking of misbruik',
+  'scenario.survivor.intro':
+    'Je locatie en contactgegevens scheiden van je naam, en verborgen trackers uitsluiten. Als je direct gevaar loopt, neem dan eerst contact op met lokale hulpdiensten.',
+  'scenario.job-seeker.title': 'Opruimen voor een sollicitatie',
+  'scenario.job-seeker.intro':
+    'Wat een recruiter of leidinggevende vindt als ze je naam opzoeken — en hoe je dat opruimt voor ze kijken.',
+  'scenario.activist.title': 'Activist / deelnemer aan een demonstratie',
+  'scenario.activist.intro':
+    'Je telefoon en communicatie beveiligen voor en tijdens het organiseren of een demonstratie.',
+  'scenario.journalist.title': 'Journalist die bronnen beschermt',
+  'scenario.journalist.intro':
+    'Vertrouwelijke communicatie en werk- en persoonlijke identiteiten gescheiden houden.',
+  'scenario.breach.title': 'Na een datalek',
+  'scenario.breach.intro':
+    'Je zat in een lek (of vermoedt het). Beperk de schade en sluit de deur achter je.',
+
+  // EFF SSD: learn primers
+  'nav.learn': 'Leren',
+  'learn.title': 'Begrijp het waarom',
+  'learn.lead':
+    'Korte inleidingen in begrijpelijke taal bij de acties. Voor de volledige gids linkt elk onderwerp naar EFF\'s Surveillance Self-Defense.',
+  'learn.related': 'Gerelateerde acties',
+  'learn.readMore': 'Volledige gids',
+  'learn.notFound': 'Dat onderwerp bestaat niet.',
+  'learn.threat-model.title': 'Wat is een dreigingsmodel?',
+  'learn.threat-model.body': [
+    'Een dreigingsmodel zijn gewoon vijf eerlijke vragen: wat wil je beschermen, van wie wil je het beschermen, hoe waarschijnlijk is het dat je dat nodig hebt, hoe erg zijn de gevolgen als het misgaat, en hoeveel moeite ben je bereid te doen om het te voorkomen?',
+    'Er is geen enkel juist niveau van privacy. Je inspanning afstemmen op de mensen waar je je werkelijk zorgen over maakt, is het hele spel — verder gaan dan jouw situatie vraagt, kost je gemak zonder extra veiligheid.',
+  ],
+  'learn.metadata.title': 'Wat metadata onthult',
+  'learn.metadata.body': [
+    'Metadata is de data over je data: wanneer een foto is genomen, op welke telefoon, en vaak de exacte GPS-coördinaten. De metadata van een bericht — wie, wanneer, hoe vaak — kan net zo veelzeggend zijn als de inhoud zelf.',
+    'Je kunt niet altijd bepalen welke metadata diensten bewaren, maar je kunt stoppen met het vrijwillig weggeven: verwijder locatie- en apparaatgegevens uit foto\'s voor je ze deelt.',
+  ],
+  'learn.encryption.title': 'Wat end-to-end-versleuteling is',
+  'learn.encryption.body': [
+    'End-to-end-versleuteling (E2EE) betekent dat alleen jij en de persoon met wie je communiceert de berichten kunnen lezen — niet de app-maker, het netwerk, of iemand die ze onderweg onderschept.',
+    'Het is het verschil tussen een briefkaart en een dichtgeplakte envelop. Gebruik E2EE-tools voor alles wat gevoelig is, en onthoud dat het de inhoud beschermt, maar niet altijd de metadata eromheen.',
+  ],
+  'learn.phishing.title': 'Hoe phishing werkt',
+  'learn.phishing.body': [
+    'Phishing verleidt je om een wachtwoord of code af te geven, meestal via een urgent bericht en een link naar een nep-inlogpagina. Zo beginnen de meeste accountovernames echt — er is geen hacken voor nodig.',
+    'De verdediging bestaat uit gewoontes, niet tools: log nooit in via een link in een bericht, controleer de afzender, en vertrouw op een wachtwoordmanager (die het verkeerde domein niet automatisch invult) en hardwaresleutels (die phishing-bestendig zijn).',
+  ],
+  'learn.data-brokers.title': 'Wat datamakelaars zijn',
+  'learn.data-brokers.body': [
+    'Datamakelaars kopen, scrapen en verkopen profielen van jou — naam, adres, familieleden, telefoonnummers — aan adverteerders, recruiters en iedereen die betaalt. Persoonszoekmachines zijn het publieke etalageraam van die sector.',
+    'Afmelden helpt, maar is niet permanent: makelaars verwerven je gegevens opnieuw en zetten je opnieuw op de lijst vanuit nieuwe openbare registers, dus verwijdering is een gewoonte op een timer, geen eenmalige oplossing.',
+  ],
+  'learn.vpn.title': 'Wat een VPN wel en niet doet',
+  'learn.vpn.body': [
+    'Een VPN verbergt je surfgedrag voor je netwerk en internetprovider, en je IP-adres voor de sites die je bezoekt — handig op onbetrouwbare wifi of om te voorkomen dat één internetprovider alles wat je doet profileert.',
+    'Het maakt je niet anoniem: je vertrouwt nu de VPN-aanbieder in plaats daarvan, en het verhindert niet dat sites je volgen zodra je inlogt. Voor sterke anonimiteit is Tor de betere keuze.',
+  ],
+  'learn.key-verification.title': 'Waarom sleutels verifiëren',
+  'learn.key-verification.body': [
+    'Versleuteling gaat ervan uit dat je met de echte persoon praat. Een man-in-the-middle-aanval werkt door zich tussen jullie te positioneren en de sleutels te verwisselen — je zou nog steeds een gesloten slotje zien.',
+    'Een veiligheidsnummer verifiëren (persoonlijk via QR, of via een apart vertrouwd kanaal) bevestigt dat er geen bedrieger tussenin zit. Doe het eenmalig voor je meest gevoelige contacten.',
+  ],
 } satisfies Dict

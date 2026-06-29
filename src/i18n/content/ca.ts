@@ -744,4 +744,52 @@ export const ca: ContentOverlay = {
       "Desactiva l'accés a sensors de moviment en els llocs que no els necessitin.",
     ],
   },
+  'recognize-phishing': {
+    title: "Reconeix i evita el phishing",
+    summary:
+      "La majoria de robatoris de comptes comencen amb un correu o missatge convincent, no amb un pirateig. Aprèn els senyals d'alerta perquè cap pàgina d'inici de sessió falsa no t'aconsegueixi la contrasenya.",
+    steps: [
+      "Tracta qualsevol missatge no sol·licitat de \"verifica el teu compte\" o \"activitat inusual\" com a sospitós — els bancs i plataformes mai et demanaran la contrasenya per correu.",
+      "Mai iniciïs sessió a través d'un enllaç en un missatge. Obre el lloc tu mateix des d'un marcador o escrivint l'adreça.",
+      "Comprova l'adreça real del remitent i passa el ratolí pels enllaços per veure on van realment abans de fer clic.",
+      "Deixa que el gestor de contrasenyes faci de comprovació: si no emplena automàticament, el domini probablement és incorrecte.",
+      "On sigui possible, usa una clau de seguretat de maquinari — és resistent al phishing fins i tot si et deixen enganyar.",
+    ],
+    urlLabel: "EFF: evita el phishing",
+  },
+  'iphone-lockdown-mode': {
+    title: "Activa el Lockdown Mode a l'iPhone/Mac",
+    summary:
+      "El Lockdown Mode d'Apple elimina les funcions poc usades que abusa el programari espia mercenari. Per a persones amb un risc elevat, redueix dràsticament la superfície d'atac.",
+    steps: [
+      "Actualitza primer a la darrera versió d'iOS/iPadOS/macOS.",
+      "Obre Ajustos → Privacitat i Seguretat → Lockdown Mode (al final de la llista).",
+      "Activa'l i reinicia. S'aplica a tots els dispositius Apple connectats al mateix compte.",
+      "Espera que alguns enllaços, fitxers adjunts i funcions web queden limitats — és la protecció funcionant.",
+    ],
+    urlLabel: "Apple: Lockdown Mode",
+  },
+  'verify-signal-safety-numbers': {
+    title: "Verifica els números de seguretat de Signal",
+    summary:
+      "El xifratge d'extrem a extrem només et protegeix si parles amb la persona real. Verificar el número de seguretat descarta un intermediari màquina.",
+    steps: [
+      "Obre una conversa de Signal → toca el nom del contacte → Veure número de seguretat.",
+      "En persona, escanejeu mútuament el codi QR; de manera remota, compareu el número a través d'un canal de confiança separat.",
+      "Toca \"Marca com a verificat\" un cop coincideixin.",
+      "Si el número de seguretat canvia de manera inesperada, confirma el motiu abans d'enviar qualsevol cosa sensible.",
+    ],
+    urlLabel: "Signal: números de seguretat",
+  },
+  'detect-bluetooth-trackers': {
+    title: "Detecta rastrejadors Bluetooth amagats",
+    summary:
+      "Els AirTags i rastrejadors similars a Tile són eines d'assetjament barates. Els telèfons ara poden alertar-te d'un rastrejador desconegut que viatja amb tu — assegura't que la detecció estigui activada i sàpigues com escanejar.",
+    steps: [
+      "iPhone: mantén el Bluetooth i la Ubicació activats; iOS t'alerta d'un AirTag/rastrejador Find My desconegut que es mou amb tu. Toca l'alerta perquè emeti un so.",
+      "Android: les alertes de rastrejadors desconeguts estan integrades (Ajustos → Seguretat i emergències → Alertes de rastrejadors desconeguts), o instal·la l'app \"Tracker Detect\" d'Apple per escanejar manualment.",
+      "Si trobes un rastrejador que no és teu, pots desactivar-lo traient-li la bateria — però si et sents en perill, conserva'l i contacta primer amb el suport local o les autoritats.",
+    ],
+    urlLabel: "Apple: rastreig no desitjat",
+  },
 }
