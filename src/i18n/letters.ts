@@ -729,3 +729,69 @@ const OVERLAYS: Partial<Record<Lang, LetterSet>> = { fr, de, es, it, pt, nl, ca,
 export function localizedLetter(lang: Lang, template: LetterTemplate): LocalizedLetter | undefined {
   return OVERLAYS[lang]?.[template]
 }
+
+// ── Picker metadata (name / legal basis / blurb) ───────────────────────────
+// The descriptive chrome shown in the Letter Forge selector, separate from the
+// transmitted subject+body above. Article / § numbers stay identical; only the
+// surrounding prose is translated. Falls back to the English LETTERS metadata.
+
+export interface LetterMeta {
+  name: string
+  law: string
+  blurb: string
+}
+
+type MetaSet = Record<LetterTemplate, LetterMeta>
+
+const META: Partial<Record<Lang, MetaSet>> = {
+  fr: {
+    'gdpr-erasure': { name: "Demande d'effacement RGPD", law: "RGPD Article 17 — Droit à l'effacement (« droit à l'oubli »)", blurb: "Exigez d'une organisation soumise au RGPD (UE/Royaume-Uni) qu'elle supprime toutes vos données personnelles. Elle doit répondre sous un mois." },
+    'gdpr-access': { name: "Demande d'accès RGPD (DAI)", law: "RGPD Article 15 — Droit d'accès", blurb: "Voyez exactement ce qu'une organisation détient sur vous et d'où cela provient — l'étape de reconnaissance avant l'effacement." },
+    'ccpa-delete': { name: 'Suppression CCPA/CPRA & opposition à la vente', law: 'CCPA/CPRA de Californie — §1798.105 (suppression) & §1798.120 (opposition à la vente/au partage)', blurb: "Pour les résidents des États-Unis (Californie) — exigez qu'une entreprise supprime vos données et cesse de les vendre ou de les partager. De nombreux courtiers les honorent même hors de Californie." },
+  },
+  de: {
+    'gdpr-erasure': { name: 'DSGVO-Löschantrag', law: 'DSGVO Artikel 17 — Recht auf Löschung („Recht auf Vergessenwerden“)', blurb: 'Verlangen Sie von einer DSGVO-regulierten Organisation (EU/UK) die Löschung aller über Sie gespeicherten personenbezogenen Daten. Sie muss innerhalb eines Monats antworten.' },
+    'gdpr-access': { name: 'DSGVO-Auskunftsantrag', law: 'DSGVO Artikel 15 — Auskunftsrecht', blurb: 'Sehen Sie genau, was eine Organisation über Sie gespeichert hat und woher es stammt — der Aufklärungsschritt vor der Löschung.' },
+    'ccpa-delete': { name: 'CCPA/CPRA-Löschung & Verkaufs-Widerspruch', law: 'Kalifornien CCPA/CPRA — §1798.105 (Löschung) & §1798.120 (Widerspruch gegen Verkauf/Weitergabe)', blurb: 'Für Einwohner der USA (Kalifornien) — verlangen Sie von einem Unternehmen, Ihre Daten zu löschen und deren Verkauf oder Weitergabe einzustellen. Viele Datenhändler erfüllen dies auch außerhalb Kaliforniens.' },
+  },
+  es: {
+    'gdpr-erasure': { name: 'Solicitud de supresión RGPD', law: 'RGPD Artículo 17 — Derecho de supresión («derecho al olvido»)', blurb: 'Exige a una organización sujeta al RGPD (UE/Reino Unido) que elimine todos los datos personales que tenga sobre ti. Debe responder en el plazo de un mes.' },
+    'gdpr-access': { name: 'Solicitud de acceso RGPD', law: 'RGPD Artículo 15 — Derecho de acceso', blurb: 'Descubre exactamente qué tiene una organización sobre ti y de dónde lo obtuvo — el paso de reconocimiento previo a la supresión.' },
+    'ccpa-delete': { name: 'Eliminación CCPA/CPRA y oposición a la venta', law: 'CCPA/CPRA de California — §1798.105 (supresión) y §1798.120 (oposición a la venta/cesión)', blurb: 'Para residentes de EE. UU. (California) — exige a una empresa que elimine tus datos y deje de venderlos o compartirlos. Muchos intermediarios los respetan incluso fuera de California.' },
+  },
+  it: {
+    'gdpr-erasure': { name: 'Richiesta di cancellazione GDPR', law: "GDPR Articolo 17 — Diritto alla cancellazione («diritto all'oblio»)", blurb: 'Chiedi a un\'organizzazione soggetta al GDPR (UE/Regno Unito) di cancellare tutti i dati personali che detiene su di te. Deve rispondere entro un mese.' },
+    'gdpr-access': { name: 'Richiesta di accesso GDPR', law: 'GDPR Articolo 15 — Diritto di accesso', blurb: 'Scopri esattamente cosa un\'organizzazione detiene su di te e da dove proviene — il passo di ricognizione prima della cancellazione.' },
+    'ccpa-delete': { name: 'Cancellazione CCPA/CPRA e opposizione alla vendita', law: 'CCPA/CPRA della California — §1798.105 (cancellazione) e §1798.120 (opposizione alla vendita/condivisione)', blurb: 'Per i residenti negli USA (California) — chiedi a un\'azienda di cancellare i tuoi dati e di smettere di venderli o condividerli. Molti broker li rispettano anche fuori dalla California.' },
+  },
+  pt: {
+    'gdpr-erasure': { name: 'Pedido de apagamento RGPD', law: 'RGPD Artigo 17.º — Direito ao apagamento («direito a ser esquecido»)', blurb: 'Exija a uma organização sujeita ao RGPD (UE/Reino Unido) que apague todos os dados pessoais que detém sobre si. Tem de responder no prazo de um mês.' },
+    'gdpr-access': { name: 'Pedido de acesso RGPD', law: 'RGPD Artigo 15.º — Direito de acesso', blurb: 'Veja exatamente o que uma organização detém sobre si e de onde veio — o passo de reconhecimento antes do apagamento.' },
+    'ccpa-delete': { name: 'Eliminação CCPA/CPRA e oposição à venda', law: 'CCPA/CPRA da Califórnia — §1798.105 (eliminação) e §1798.120 (oposição à venda/partilha)', blurb: 'Para residentes nos EUA (Califórnia) — exija que uma empresa elimine os seus dados e deixe de os vender ou partilhar. Muitos intermediários respeitam-no mesmo fora da Califórnia.' },
+  },
+  nl: {
+    'gdpr-erasure': { name: 'AVG-wissingsverzoek', law: 'AVG Artikel 17 — Recht op wissing („recht op vergetelheid")', blurb: 'Eis van een AVG-gereguleerde organisatie (EU/VK) dat ze alle persoonsgegevens die ze over je bewaren wissen. Ze moeten binnen een maand reageren.' },
+    'gdpr-access': { name: 'AVG-inzageverzoek', law: 'AVG Artikel 15 — Recht op inzage', blurb: 'Zie precies wat een organisatie over je bewaart en waar het vandaan komt — de verkenningsstap vóór wissing.' },
+    'ccpa-delete': { name: 'CCPA/CPRA-verwijdering & verkoopbezwaar', law: 'Californië CCPA/CPRA — §1798.105 (verwijdering) & §1798.120 (bezwaar tegen verkoop/delen)', blurb: 'Voor inwoners van de VS (Californië) — eis dat een bedrijf je gegevens verwijdert en stopt met verkopen of delen. Veel handelaren honoreren dit ook buiten Californië.' },
+  },
+  ca: {
+    'gdpr-erasure': { name: 'Sol·licitud de supressió RGPD', law: "RGPD Article 17 — Dret de supressió («dret a l'oblit»)", blurb: "Exigeix a una organització subjecta al RGPD (UE/Regne Unit) que elimini totes les dades personals que tingui sobre tu. Ha de respondre en el termini d'un mes." },
+    'gdpr-access': { name: "Sol·licitud d'accés RGPD", law: "RGPD Article 15 — Dret d'accés", blurb: "Descobreix exactament què té una organització sobre tu i d'on ho va obtenir — el pas de reconeixement previ a la supressió." },
+    'ccpa-delete': { name: 'Eliminació CCPA/CPRA i oposició a la venda', law: 'CCPA/CPRA de Califòrnia — §1798.105 (eliminació) i §1798.120 (oposició a la venda/compartició)', blurb: "Per a residents als EUA (Califòrnia) — exigeix a una empresa que elimini les teves dades i deixi de vendre-les o compartir-les. Molts intermediaris ho respecten fins i tot fora de Califòrnia." },
+  },
+  pl: {
+    'gdpr-erasure': { name: 'Żądanie usunięcia RODO', law: 'RODO Artykuł 17 — Prawo do usunięcia („prawo do bycia zapomnianym")', blurb: 'Zażądaj od organizacji podlegającej RODO (UE/Wielka Brytania) usunięcia wszystkich danych osobowych, które o tobie przechowuje. Musi odpowiedzieć w ciągu miesiąca.' },
+    'gdpr-access': { name: 'Żądanie dostępu RODO', law: 'RODO Artykuł 15 — Prawo dostępu', blurb: 'Zobacz dokładnie, co organizacja o tobie przechowuje i skąd to pochodzi — krok rozpoznawczy przed usunięciem.' },
+    'ccpa-delete': { name: 'Usunięcie CCPA/CPRA i sprzeciw wobec sprzedaży', law: 'Kalifornijska CCPA/CPRA — §1798.105 (usunięcie) i §1798.120 (sprzeciw wobec sprzedaży/udostępniania)', blurb: 'Dla mieszkańców USA (Kalifornia) — zażądaj od firmy usunięcia twoich danych oraz zaprzestania ich sprzedaży lub udostępniania. Wielu brokerów respektuje to nawet poza Kalifornią.' },
+  },
+  sv: {
+    'gdpr-erasure': { name: 'GDPR-raderingsbegäran', law: 'GDPR Artikel 17 — Rätt till radering ("rätten att bli bortglömd")', blurb: 'Kräv att en GDPR-reglerad organisation (EU/Storbritannien) raderar alla personuppgifter de har om dig. De måste svara inom en månad.' },
+    'gdpr-access': { name: 'GDPR-tillgångsbegäran', law: 'GDPR Artikel 15 — Rätt till tillgång', blurb: 'Se exakt vad en organisation har om dig och varifrån det kommer — spaningssteget före radering.' },
+    'ccpa-delete': { name: 'CCPA/CPRA-radering & försäljningsinvändning', law: 'Kaliforniens CCPA/CPRA — §1798.105 (radering) & §1798.120 (invändning mot försäljning/delning)', blurb: 'För invånare i USA (Kalifornien) — kräv att ett företag raderar dina uppgifter och slutar sälja eller dela dem. Många mäklare respekterar detta även utanför Kalifornien.' },
+  },
+}
+
+/** Localized picker metadata, or undefined to fall back to English. */
+export function localizedMeta(lang: Lang, template: LetterTemplate): LetterMeta | undefined {
+  return META[lang]?.[template]
+}

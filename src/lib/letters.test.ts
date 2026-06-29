@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { LETTERS, mailtoHref, renderLetter } from './letters'
+import { LETTERS, letterMeta, mailtoHref, renderLetter } from './letters'
 import { emptyProfile } from './types'
 
 describe('renderLetter', () => {
@@ -65,6 +65,20 @@ describe('renderLetter — localization', () => {
   it('localized empty profile keeps a placeholder signature (never blank)', () => {
     const { body } = renderLetter('gdpr-access', emptyProfile(), '', undefined, 'de')
     expect(body).toContain('[Ihr vollständiger Name]')
+  })
+})
+
+describe('letterMeta', () => {
+  it('localizes name/law/blurb when an overlay exists, keeping Article numbers', () => {
+    const m = letterMeta('gdpr-erasure', 'de')
+    expect(m.name).toBe('DSGVO-Löschantrag')
+    expect(m.law).toMatch(/Artikel 17/)
+    expect(m.blurb).not.toBe(LETTERS['gdpr-erasure'].blurb) // not the English blurb
+  })
+
+  it('falls back to the English metadata without a lang/overlay', () => {
+    expect(letterMeta('gdpr-access').name).toBe(LETTERS['gdpr-access'].name)
+    expect(letterMeta('ccpa-delete', 'en').law).toBe(LETTERS['ccpa-delete'].law)
   })
 })
 

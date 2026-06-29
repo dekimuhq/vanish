@@ -1,6 +1,6 @@
 import type { LetterTemplate, Profile } from './types'
 import type { Lang } from '../i18n/langs'
-import { localizedLetter } from '../i18n/letters'
+import { localizedLetter, localizedMeta, type LetterMeta } from '../i18n/letters'
 
 export interface LetterDef {
   id: LetterTemplate
@@ -122,6 +122,18 @@ export function renderLetter(
   if (loc) return { subject: loc.subject, body: loc.body(profile, org, authority) }
   const def = LETTERS[template]
   return { subject: def.subject, body: def.body(profile, org, authority) }
+}
+
+/** Picker metadata (name / legal basis / blurb) in the active language, falling
+ *  back to the English canonical. */
+export function letterMeta(template: LetterTemplate, lang?: Lang): LetterMeta {
+  const loc = lang ? localizedMeta(lang, template) : undefined
+  const def = LETTERS[template]
+  return {
+    name: loc?.name ?? def.name,
+    law: loc?.law ?? def.law,
+    blurb: loc?.blurb ?? def.blurb,
+  }
 }
 
 export function mailtoHref(to: string, subject: string, body: string): string {

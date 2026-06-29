@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { LETTERS, mailtoHref, renderLetter } from '../lib/letters'
+import { LETTERS, letterMeta, mailtoHref, renderLetter } from '../lib/letters'
 import type { LetterTemplate, Region } from '../lib/types'
 import { authorityFor, countryInfo } from '../data/countries'
 import { kindForTemplate, newLetter } from '../lib/tracker'
@@ -26,7 +26,7 @@ export function Letters() {
   const [copied, setCopied] = useState(false)
   const [tracked, setTracked] = useState(false)
 
-  const def = LETTERS[template]
+  const meta = letterMeta(template, state.lang)
   const authority = authorityFor(state.profile.country)
   const country = countryInfo(state.profile.country)
   const isGdpr = template === 'gdpr-erasure' || template === 'gdpr-access'
@@ -81,7 +81,7 @@ export function Letters() {
               template === id ? 'border-ghost/40 bg-ghost/10 text-ghost-bright' : 'border-ink-700 text-slate-400 hover:border-ink-600'
             }`}
           >
-            {LETTERS[id].name}
+            {letterMeta(id, state.lang).name}
           </button>
         ))}
       </div>
@@ -89,8 +89,8 @@ export function Letters() {
       <div className="grid gap-6 lg:grid-cols-2">
         <div className="space-y-4">
           <div className="card p-4">
-            <div className="text-xs font-semibold uppercase tracking-wide text-ghost-dim">{def.law}</div>
-            <p className="mt-1 text-sm text-slate-400">{def.blurb}</p>
+            <div className="text-xs font-semibold uppercase tracking-wide text-ghost-dim">{meta.law}</div>
+            <p className="mt-1 text-sm text-slate-400">{meta.blurb}</p>
             {isGdpr && authority && country && (
               <p className="mt-3 border-t border-ink-700/60 pt-3 text-xs text-slate-400">
                 <span className="text-slate-400">{t('letters.authorityLabel', { flag: country.flag, name: country.name })}</span>{' '}
