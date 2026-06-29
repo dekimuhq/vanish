@@ -57,7 +57,7 @@ export function Onboarding() {
   }
 
   return (
-    <div className="mx-auto flex min-h-full max-w-lg flex-col justify-center px-5 py-10">
+    <main className="mx-auto flex min-h-full max-w-lg flex-col justify-center px-5 py-10">
       <div className="card animate-fade-up p-6 sm:p-8">
         {step === 0 && (
           <>
@@ -203,7 +203,7 @@ export function Onboarding() {
           </Step>
         )}
       </div>
-    </div>
+    </main>
   )
 }
 
