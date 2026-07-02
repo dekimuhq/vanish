@@ -193,7 +193,11 @@ export const fr: Dict = {
   'letters.tracked.daysLeft': '{days} jours avant la date limite de réponse',
   'letters.tracked.delete': 'Retirer',
   'letters.tracked.empty': 'Les lettres que vous suivez apparaissent ici avec un compte à rebours jusqu’à la date limite.',
-  'letters.tracked.escalate': 'Saisir {authority}',
+  'letters.tracked.addToCalendar': '📅 Ajouter les échéances au calendrier',
+  'letters.tracked.downloadComplaint': '↓ Télécharger la réclamation',
+  'letters.tracked.lodgeAt': 'Saisir {authority} ↗',
+  'letters.tracked.markEscalated': 'Marquer comme transmise',
+  'letters.tracked.overdueComplaint': 'Délai dépassé — une réclamation à votre autorité de contrôle est rédigée ci-dessous, prête à envoyer.',
   'letters.tracked.overdue': 'En retard de {days} jours',
   'letters.tracked.resolved': 'Marquer comme résolue',
   'letters.tracked.responded': 'Marquer comme répondue',
@@ -434,4 +438,8 @@ export const fr: Dict = {
     "Le chiffrement part du principe que vous parlez à la bonne personne. Une attaque par intermédiaire fonctionne en s'intercalant entre vous et en substituant ses propres clés — vous verriez quand même un cadenas verrouillé.",
     "Vérifier un numéro de sécurité (en personne via QR, ou sur un canal de confiance séparé) confirme qu'il n'y a pas d'imposteur au milieu. Faites-le une fois pour vos contacts les plus sensibles.",
   ],
+
+  // Accessibility
+  'a11y.skipToContent': 'Aller au contenu',
+  'a11y.primaryNav': 'Navigation principale',
 } satisfies Dict

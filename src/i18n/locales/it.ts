@@ -192,7 +192,11 @@ export const it: Dict = {
   'letters.tracked.daysLeft': '{days} giorni alla scadenza per la risposta',
   'letters.tracked.delete': 'Rimuovi',
   'letters.tracked.empty': 'Le lettere che monitori compaiono qui con un conto alla rovescia fino alla scadenza.',
-  'letters.tracked.escalate': 'Inoltra a {authority}',
+  'letters.tracked.addToCalendar': '📅 Aggiungi le scadenze al calendario',
+  'letters.tracked.downloadComplaint': '↓ Scarica il reclamo',
+  'letters.tracked.lodgeAt': 'Presenta a {authority} ↗',
+  'letters.tracked.markEscalated': 'Segna come inoltrata',
+  'letters.tracked.overdueComplaint': 'Termine scaduto — qui sotto trovi un reclamo alla tua autorità di controllo già redatto, pronto da inviare.',
   'letters.tracked.overdue': 'In ritardo di {days} giorni',
   'letters.tracked.resolved': 'Segna come risolta',
   'letters.tracked.responded': 'Segna come risposta ricevuta',
@@ -417,4 +421,8 @@ export const it: Dict = {
     'La cifratura presuppone che tu stia parlando con la persona reale. Un attacco man-in-the-middle funziona inserendosi tra voi e sostituendo le proprie chiavi — vedresti comunque un lucchetto chiuso.',
     'Verificare un numero di sicurezza (di persona tramite QR, o su un canale fidato separato) conferma che non c’è un impostore nel mezzo. Fallo una volta per i tuoi contatti più sensibili.',
   ],
+
+  // Accessibility
+  'a11y.skipToContent': 'Salta al contenuto',
+  'a11y.primaryNav': 'Navigazione principale',
 } satisfies Dict

@@ -336,7 +336,11 @@ export const ca: Dict = {
   'letters.tracked.daysLeft': '{days} dies fins al termini de resposta',
   'letters.tracked.delete': 'Elimina',
   'letters.tracked.empty': 'Les cartes que registris apareixen aquí amb un compte enrere fins al termini.',
-  'letters.tracked.escalate': 'Escala a {authority}',
+  'letters.tracked.addToCalendar': '📅 Afegeix els terminis al calendari',
+  'letters.tracked.downloadComplaint': '↓ Descarrega la reclamació',
+  'letters.tracked.lodgeAt': 'Presenta-la a {authority} ↗',
+  'letters.tracked.markEscalated': 'Marca com a escalada',
+  'letters.tracked.overdueComplaint': 'Fora de termini — a sota tens redactada una reclamació per a la teva autoritat de supervisió, a punt per enviar.',
   'letters.tracked.overdue': 'Endarrerida {days} dies',
   'letters.tracked.resolved': 'Marca com a resolta',
   'letters.tracked.responded': 'Marca com a resposta',
@@ -420,4 +424,8 @@ export const ca: Dict = {
     'El xifratge assumeix que parles amb la persona real. Un atac d’intermediari funciona posant-se entre tu i intercanviant les seves pròpies claus — seguiries veient un cadenat tancat.',
     'Verificar un número de seguretat (en persona per QR o a través d’un canal de confiança separat) confirma que no hi ha cap impostor al mig. Fes-ho una vegada per als teus contactes més sensibles.',
   ],
+
+  // Accessibility
+  'a11y.skipToContent': 'Salta al contingut',
+  'a11y.primaryNav': 'Navegació principal',
 } satisfies Dict

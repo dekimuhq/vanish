@@ -192,7 +192,11 @@ export const pt: Dict = {
   'letters.tracked.daysLeft': '{days} dias até ao prazo de resposta',
   'letters.tracked.delete': 'Remover',
   'letters.tracked.empty': 'As cartas que acompanhas aparecem aqui com uma contagem decrescente até ao prazo.',
-  'letters.tracked.escalate': 'Escalar para {authority}',
+  'letters.tracked.addToCalendar': '📅 Adicionar prazos ao calendário',
+  'letters.tracked.downloadComplaint': '↓ Transferir reclamação',
+  'letters.tracked.lodgeAt': 'Apresentar junto de {authority} ↗',
+  'letters.tracked.markEscalated': 'Marcar como escalada',
+  'letters.tracked.overdueComplaint': 'Prazo ultrapassado — abaixo está redigida uma reclamação para a tua autoridade de supervisão, pronta a enviar.',
   'letters.tracked.overdue': 'Em atraso há {days} dias',
   'letters.tracked.resolved': 'Marcar como resolvida',
   'letters.tracked.responded': 'Marcar como respondida',
@@ -416,4 +420,8 @@ export const pt: Dict = {
     'A encriptação pressupõe que estás a falar com a pessoa real. Um ataque man-in-the-middle funciona ao sentar-se entre vós e a substituir as chaves — continuarias a ver um cadeado fechado.',
     'Verificar um número de segurança (pessoalmente por QR, ou por um canal de confiança separado) confirma que não há nenhum impostor no meio. Faz-o uma vez para os teus contactos mais sensíveis.',
   ],
+
+  // Accessibility
+  'a11y.skipToContent': 'Saltar para o conteúdo',
+  'a11y.primaryNav': 'Navegação principal',
 } satisfies Dict

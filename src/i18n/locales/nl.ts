@@ -197,7 +197,11 @@ export const nl: Dict = {
   'letters.tracked.daysLeft': 'Nog {days} dagen tot de reactietermijn',
   'letters.tracked.delete': 'Verwijderen',
   'letters.tracked.empty': 'Brieven die je bijhoudt verschijnen hier met een aftelling tot de termijn.',
-  'letters.tracked.escalate': 'Escaleren naar {authority}',
+  'letters.tracked.addToCalendar': '📅 Zet deadlines in je agenda',
+  'letters.tracked.downloadComplaint': '↓ Klacht downloaden',
+  'letters.tracked.lodgeAt': 'Indienen bij {authority} ↗',
+  'letters.tracked.markEscalated': 'Markeer als geëscaleerd',
+  'letters.tracked.overdueComplaint': 'Termijn verstreken — hieronder staat een kant-en-klare klacht voor je toezichthouder, klaar om te versturen.',
   'letters.tracked.overdue': '{days} dagen te laat',
   'letters.tracked.resolved': 'Markeer als opgelost',
   'letters.tracked.responded': 'Markeer als beantwoord',
@@ -417,4 +421,8 @@ export const nl: Dict = {
     'Versleuteling gaat ervan uit dat je met de echte persoon praat. Een man-in-the-middle-aanval werkt door zich tussen jullie te positioneren en de sleutels te verwisselen — je zou nog steeds een gesloten slotje zien.',
     'Een veiligheidsnummer verifiëren (persoonlijk via QR, of via een apart vertrouwd kanaal) bevestigt dat er geen bedrieger tussenin zit. Doe het eenmalig voor je meest gevoelige contacten.',
   ],
+
+  // Accessibility
+  'a11y.skipToContent': 'Naar de inhoud',
+  'a11y.primaryNav': 'Hoofdnavigatie',
 } satisfies Dict

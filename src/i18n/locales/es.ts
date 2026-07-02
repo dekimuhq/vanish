@@ -192,7 +192,11 @@ export const es: Dict = {
   'letters.tracked.daysLeft': '{days} días hasta el plazo de respuesta',
   'letters.tracked.delete': 'Quitar',
   'letters.tracked.empty': 'Las cartas que registres aparecen aquí con una cuenta atrás del plazo.',
-  'letters.tracked.escalate': 'Escalar a {authority}',
+  'letters.tracked.addToCalendar': '📅 Añadir plazos al calendario',
+  'letters.tracked.downloadComplaint': '↓ Descargar reclamación',
+  'letters.tracked.lodgeAt': 'Presentar ante {authority} ↗',
+  'letters.tracked.markEscalated': 'Marcar como escalada',
+  'letters.tracked.overdueComplaint': 'Plazo vencido — abajo tienes redactada una reclamación para tu autoridad de control, lista para enviar.',
   'letters.tracked.overdue': 'Vencida hace {days} días',
   'letters.tracked.resolved': 'Marcar como resuelta',
   'letters.tracked.responded': 'Marcar como respondida',
@@ -416,4 +420,8 @@ export const es: Dict = {
     'El cifrado asume que hablas con la persona real. Un ataque de intermediario funciona sentándose entre vosotros e intercambiando sus propias claves — seguirías viendo un candado cerrado.',
     'Verificar un número de seguridad (en persona mediante QR, o por un canal de confianza separado) confirma que no hay ningún impostor en medio. Hazlo una vez con tus contactos más sensibles.',
   ],
+
+  // Accessibility
+  'a11y.skipToContent': 'Saltar al contenido',
+  'a11y.primaryNav': 'Navegación principal',
 } satisfies Dict

@@ -195,7 +195,11 @@ export const pl: Dict = {
   'letters.tracked.overdue': 'Przekroczono termin o {days} dni',
   'letters.tracked.responded': 'Oznacz jako odpowiedziane',
   'letters.tracked.resolved': 'Oznacz jako zakończone',
-  'letters.tracked.escalate': 'Eskaluj do {authority}',
+  'letters.tracked.addToCalendar': '📅 Dodaj terminy do kalendarza',
+  'letters.tracked.downloadComplaint': '↓ Pobierz skargę',
+  'letters.tracked.lodgeAt': 'Złóż w {authority} ↗',
+  'letters.tracked.markEscalated': 'Oznacz jako eskalowane',
+  'letters.tracked.overdueComplaint': 'Termin minął — poniżej masz przygotowaną skargę do organu nadzorczego, gotową do wysłania.',
   'letters.tracked.copyEscalation': '⧉ Kopiuj skargę',
   'letters.tracked.copied': '✓ Skopiowano',
   'letters.tracked.delete': 'Usuń',
@@ -416,4 +420,8 @@ export const pl: Dict = {
     'Szyfrowanie zakłada, że rozmawiasz z prawdziwą osobą. Atak man-in-the-middle polega na siedzeniu między Wami i podmienianiu kluczy — nadal widziałbyś zamkniętą kłódkę.',
     'Weryfikacja numeru bezpieczeństwa (osobiście przez kod QR lub przez oddzielny zaufany kanał) potwierdza, że nie ma żadnego pośrednika. Zrób to raz dla najważniejszych kontaktów.',
   ],
+
+  // Accessibility
+  'a11y.skipToContent': 'Przejdź do treści',
+  'a11y.primaryNav': 'Nawigacja główna',
 } satisfies Dict

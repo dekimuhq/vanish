@@ -328,7 +328,11 @@ export const sv: Dict = {
   'letters.tracked.daysLeft': '{days} dagar kvar till svarsfristen',
   'letters.tracked.delete': 'Ta bort',
   'letters.tracked.empty': 'Brev du spårar visas här med en nedräkning till fristen.',
-  'letters.tracked.escalate': 'Eskalera till {authority}',
+  'letters.tracked.addToCalendar': '📅 Lägg till tidsfrister i kalendern',
+  'letters.tracked.downloadComplaint': '↓ Ladda ner klagomål',
+  'letters.tracked.lodgeAt': 'Lämna in till {authority} ↗',
+  'letters.tracked.markEscalated': 'Markera som eskalerad',
+  'letters.tracked.overdueComplaint': 'Tidsfristen har passerat — nedan finns ett färdigt klagomål till din tillsynsmyndighet, redo att skickas.',
   'letters.tracked.overdue': 'Försenad med {days} dagar',
   'letters.tracked.resolved': 'Markera som löst',
   'letters.tracked.responded': 'Markera som besvarad',
@@ -423,4 +427,8 @@ export const sv: Dict = {
     'Kryptering förutsätter att du pratar med rätt person. En man-i-mitten-attack fungerar genom att sitta mellan er och byta ut sina egna nycklar — du skulle fortfarande se ett låst hänglås.',
     'Att verifiera ett säkerhetsnummer (personligen via QR-kod, eller via en separat betrodd kanal) bekräftar att det inte finns någon inkräktare i mitten. Gör det en gång för dina känsligaste kontakter.',
   ],
+
+  // Accessibility
+  'a11y.skipToContent': 'Hoppa till innehållet',
+  'a11y.primaryNav': 'Huvudnavigering',
 } satisfies Dict
