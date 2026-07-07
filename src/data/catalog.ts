@@ -1699,6 +1699,111 @@ export const ACTIONS: Action[] = [
     regions: ['all'],
     panicPriority: 4,
   },
+
+  // ─────────────── Record-lock & ES exposure research (2026-07-08) ───────────────
+  // Gaps found by diffing a widely-shared "10 steps to go private" playbook
+  // (and its Spain adaptation) against this catalog. US: the two record-lock
+  // actions we lacked. ES: identity pre-registration + two very Spanish
+  // exposure vectors (Bizum name lookup, official-bulletin publications).
+  {
+    id: 'us-irs-ip-pin',
+    title: 'Get an IRS Identity Protection PIN',
+    tier: 3,
+    category: 'finance',
+    summary:
+      'A free 6-digit PIN that must accompany any tax return filed under your SSN — the single switch that stops tax-refund fraud in your name. A new PIN is issued every year.',
+    steps: [
+      'Sign in to (or create) your IRS online account — identity verification via ID.me.',
+      'Opt in to the Identity Protection PIN program.',
+      'Enter the current PIN on every federal return; retrieve the fresh one in your account each year.',
+      'Never share it — the IRS will not call or email asking for your IP PIN.',
+    ],
+    url: 'https://www.irs.gov/identity-theft-fraud-scams/get-an-identity-protection-pin',
+    urlLabel: 'IRS — Get an IP PIN',
+    effort: 'low',
+    impact: 'high',
+    regions: ['us'],
+    verifiedAt: '2026-07-08',
+  },
+  {
+    id: 'us-chexsystems-freeze',
+    title: 'Freeze your ChexSystems banking file',
+    tier: 3,
+    category: 'finance',
+    summary:
+      'The credit-bureau freeze doesn’t cover checking accounts — banks screen new customers through ChexSystems. Freezing it stops someone opening a bank account as you. Free, like credit freezes.',
+    steps: [
+      'On the ChexSystems site, go to Security Freeze → Place a Freeze.',
+      'Verify your identity and store the PIN they issue — you’ll need it to lift the freeze when you open an account yourself.',
+      'While there, request your free ChexSystems consumer report and check for accounts you don’t recognise.',
+    ],
+    url: 'https://www.chexsystems.com/security-freeze/place-freeze',
+    urlLabel: 'ChexSystems freeze',
+    effort: 'low',
+    impact: 'high',
+    regions: ['us'],
+    verifiedAt: '2026-07-08',
+  },
+  {
+    id: 'es-clave-preregister',
+    title: 'Register Cl@ve + certificado digital before an impersonator does',
+    tier: 3,
+    category: 'legal',
+    summary:
+      'Spain’s e-government identity (Cl@ve, certificado FNMT) is first-come: whoever enrols can operate your tax, social-security and benefits portals. Registering yourself now occupies that slot — and lets you see anything filed in your name.',
+    steps: [
+      'Register at clave.gob.es (Cl@ve PIN / Cl@ve Permanente) — in person at an oficina de registro, or online with video-identification.',
+      'Also request the FNMT certificado digital de persona física and install it in your browser.',
+      'Log into AEAT and Seguridad Social once and review your data — a domicilio, borrador or trámite you don’t recognise is the fraud signal.',
+      'Treat these credentials like a bank login: they can sign on your behalf.',
+    ],
+    url: 'https://clave.gob.es',
+    urlLabel: 'Cl@ve — registro',
+    effort: 'med',
+    impact: 'high',
+    countries: ['es'],
+    verifiedAt: '2026-07-08',
+  },
+  {
+    id: 'es-bizum-name-lookup',
+    title: 'Limit what Bizum reveals about you',
+    tier: 2,
+    category: 'finance',
+    summary:
+      'Anyone with your phone number who starts a Bizum transfer sees the legal name your bank holds — effectively a free name-lookup on every Spanish mobile. Decide which number is Bizum-linked and who gets it.',
+    steps: [
+      'Bizum is managed bank-side: check your bank’s app for which number/account it’s active on.',
+      'If your number is public (marketplace listings, flyers, work), consider moving Bizum to a second, private number — it can only be linked to one bank at a time.',
+      'To leave entirely, deactivate it in your bank’s app (“darse de baja de Bizum”).',
+      'The lookup works in reverse too: use it to verify a recipient’s name before paying a stranger.',
+    ],
+    url: 'https://bizum.es',
+    urlLabel: 'Bizum',
+    effort: 'low',
+    impact: 'med',
+    countries: ['es'],
+    verifiedAt: '2026-07-08',
+  },
+  {
+    id: 'es-boe-deindex',
+    title: 'De-index official-bulletin (BOE) mentions of you',
+    tier: 4,
+    category: 'search',
+    summary:
+      'Spanish official bulletins publish names — grants, oposiciones, sanctions, edictos — and search engines make them the top result for your name. You usually can’t delete the bulletin, but you can get it de-indexed.',
+    steps: [
+      'Search your name plus “BOE” (and your region’s boletín) to find what’s published.',
+      'Ask Google to delist those URLs via the EU right-to-be-forgotten form (see the search-delisting action).',
+      'Ask the bulletin itself to stop indexing the entry: the BOE and most boletines have a derecho-al-olvido / protección-de-datos procedure on their sede electrónica.',
+      'If refused, escalate to the AEPD citing supresión (Art. 17 GDPR) — Spanish case law backs de-indexing dated, non-newsworthy bulletin entries.',
+    ],
+    url: 'https://www.aepd.es/derechos-y-deberes/conoce-tus-derechos/derecho-de-supresion-al-olvido',
+    urlLabel: 'AEPD — derecho de supresión',
+    effort: 'med',
+    impact: 'high',
+    countries: ['es'],
+    verifiedAt: '2026-07-08',
+  },
 ]
 
 export const ACTIONS_BY_ID: Record<string, Action> = Object.fromEntries(ACTIONS.map((a) => [a.id, a]))
