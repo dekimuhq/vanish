@@ -7,6 +7,7 @@ import {
   type Tier,
   type Country,
   type LetterRecord,
+  type ScanState,
   initialState,
   SCHEMA_VERSION,
 } from '../lib/types'
@@ -47,6 +48,39 @@ function sanitizeProfile(raw: unknown, base: Profile): Profile {
   }
 }
 
+/** Validate an untrusted scan field-by-field. Imported from a `.vscan` file
+ *  produced by a separate CLI, so it must be treated exactly as adversarially
+ *  as any other import/restore payload. */
+function sanitizeScan(raw: unknown): AppState['scan'] {
+  if (!raw || typeof raw !== 'object') return null
+  const s = raw as Record<string, unknown>
+  if (!Array.isArray(s.exposures)) return null
+  const exposures = (s.exposures as unknown[])
+    .filter((e): e is Record<string, unknown> => !!e && typeof e === 'object')
+    .filter((e) =>
+      typeof e.probeId === 'string' &&
+      typeof e.source === 'string' &&
+      (e.category === 'username' || e.category === 'breach') &&
+      typeof e.confidence === 'number',
+    )
+    .map((e) => ({
+      probeId: e.probeId as string,
+      source: e.source as string,
+      category: e.category as 'username' | 'breach',
+      confidence: e.confidence as number,
+      evidenceUrl: typeof e.evidenceUrl === 'string' ? (e.evidenceUrl as string) : undefined,
+      catalogActionId: typeof e.catalogActionId === 'string' ? (e.catalogActionId as string) : undefined,
+    }))
+  return {
+    importedAt: typeof s.importedAt === 'string' ? (s.importedAt as string) : new Date(0).toISOString(),
+    engine: typeof s.engine === 'string' ? (s.engine as string) : 'unknown',
+    profileFingerprint: typeof s.profileFingerprint === 'string' ? (s.profileFingerprint as string) : '',
+    verified: Boolean(s.verified),
+    exposures,
+    resolved: Array.isArray(s.resolved) ? (s.resolved as unknown[]).filter((x): x is string => typeof x === 'string') : [],
+  }
+}
+
 type Msg =
   | { type: 'setStatus'; id: string; status: ActionStatus }
   | { type: 'clearStatus'; id: string }
@@ -59,6 +93,7 @@ type Msg =
   | { type: 'updateLetter'; id: string; patch: Partial<Omit<LetterRecord, 'id'>> }
   | { type: 'deleteLetter'; id: string }
   | { type: 'markBackedUp'; at: string }
+  | { type: 'importScan'; scan: ScanState }
 
 function reducer(state: AppState, msg: Msg): AppState {
   switch (msg.type) {
@@ -96,6 +131,12 @@ function reducer(state: AppState, msg: Msg): AppState {
     }
     case 'markBackedUp':
       return { ...state, lastBackupAt: msg.at }
+    case 'importScan': {
+      const priorSources = new Set((state.scan?.exposures ?? []).map((e) => e.source))
+      const nowSources = new Set(msg.scan.exposures.map((e) => e.source))
+      const resolved = [...priorSources].filter((s) => !nowSources.has(s))
+      return { ...state, scan: { ...msg.scan, resolved } }
+    }
     default:
       return state
   }
@@ -139,6 +180,7 @@ function sanitize(raw: unknown): AppState {
           )
         : {},
     lastBackupAt: typeof r.lastBackupAt === 'string' ? r.lastBackupAt : null,
+    scan: sanitizeScan((r as { scan?: unknown }).scan),
   }
 }
 
@@ -169,6 +211,7 @@ interface Ctx {
   updateLetter: (id: string, patch: Partial<Omit<LetterRecord, 'id'>>) => void
   deleteLetter: (id: string) => void
   markBackedUp: (at: string) => void
+  importScan: (scan: ScanState) => void
 }
 
 const StoreContext = createContext<Ctx | null>(null)
@@ -205,6 +248,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       updateLetter: (id, patch) => dispatch({ type: 'updateLetter', id, patch }),
       deleteLetter: (id) => dispatch({ type: 'deleteLetter', id }),
       markBackedUp: (at) => dispatch({ type: 'markBackedUp', at }),
+      importScan: (scan) => dispatch({ type: 'importScan', scan }),
     }),
     [state],
   )

@@ -139,6 +139,33 @@ export interface Profile {
   codeWord?: string
 }
 
+/** One matched exposure from an imported vanish-recon `.vscan` report. */
+export interface ScanFinding {
+  /** Stable probe id, e.g. "username:GitHub" or "hibp-account". */
+  probeId: string
+  /** Human label for the UI, e.g. "GitHub". */
+  source: string
+  category: 'username' | 'breach'
+  confidence: number
+  evidenceUrl?: string
+  /** Vanish catalog Action.id this exposure maps to, when known. */
+  catalogActionId?: string
+}
+
+/** The latest imported scan. Additive, non-destructive: never changes
+ *  progress/letters, only annotates the plan with real-world exposure. */
+export interface ScanState {
+  importedAt: string // ISO
+  engine: string
+  profileFingerprint: string
+  /** ed25519 signature verified at import time. */
+  verified: boolean
+  /** Matched exposures only (misses are dropped at import). */
+  exposures: ScanFinding[]
+  /** Source labels present in the PRIOR scan but absent now — proof of forgetting. */
+  resolved: string[]
+}
+
 export interface AppState {
   schemaVersion: number
   onboarded: boolean
@@ -148,9 +175,11 @@ export interface AppState {
   progress: Record<string, ProgressEntry>
   letters: Record<string, LetterRecord>
   lastBackupAt: string | null
+  /** Latest imported exposure scan, or null if none imported. */
+  scan: ScanState | null
 }
 
-export const SCHEMA_VERSION = 2
+export const SCHEMA_VERSION = 3
 
 export const emptyProfile = (): Profile => ({
   name: '',
@@ -169,4 +198,5 @@ export const initialState = (): AppState => ({
   progress: {},
   letters: {},
   lastBackupAt: null,
+  scan: null,
 })
