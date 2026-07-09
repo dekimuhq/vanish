@@ -3,6 +3,7 @@
 <!-- LIVE:BEGIN -->
 - [ ] id:oss-flip | Flip license MIT→OSS at launch | owner:claude | gate:founder go-live | note:license is proprietary-INTERIM ON PURPOSE; OSS is the END state — never re-add MIT mid-flight. See [[project_vanish_privacy_app]].
 - [ ] id:country-coverage | EEA DPA layer extended (IS/NO shipped 2026-06-29); national opt-out *actions* still cover ES IT FR DE BE PT SE AT DK FI HR EE + GB IE | owner:claude | gate:none | note:IS/NO now carry their DPAs (Persónuvernd/Datatilsynet) + EEA picker group; region 'eu' for GDPR action relevance. LV/LT + remaining EU members = honest omission (no official self-serve register — verify live URLs before adding any).
+- [ ] id:scan-import | Import vanish-recon .vscan → confirmed-exposure v3 layer | owner:claude | gate:none | note:PLAN READY docs/superpowers/plans/2026-07-09-vanish-scan-import.md (8 tasks, subagent-driven). Upstream engine `vanish-recon` v1 SHIPPED 2026-07-09 (sibling repo ~/Documents/Personal/vanish-recon, 14 commits, reviewed+verified: 327-site username scan + optional user-keyed HIBP → ed25519-signed .vscan). Decisions locked: .vscan ext (avoids .vanish backup collision), SCHEMA v3 scan layer. Pickup = "execute the vanish-scan-import plan".
 <!-- LIVE:END -->
 
 ## Done — 2026-06-29 (what-next batch: merged + pushed to main → vanish.cat)
