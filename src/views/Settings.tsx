@@ -3,22 +3,27 @@ import { TierBadge } from '../components/Pills'
 import { sanitize } from '../store/store'
 import { encryptBackup, decryptBackup, BackupError } from '../lib/backup'
 import { saveBlob } from '../lib/save-file'
-import { TIERS, type AppState, type Country, type Tier } from '../lib/types'
+import { TIERS, type AppState, type Country, type Tier, type ScanState } from '../lib/types'
 import { diffBackup, type BackupDiff } from '../lib/restore'
+import { parseScanReport, ScanError } from '../lib/scan'
 import { COUNTRIES, COUNTRY_GROUPS, authorityFor, regionForCountry } from '../data/countries'
 import { useStore } from '../store/store'
 import { useI18n } from '../i18n/i18n'
 import { LANGS, LANG_LABELS, type Lang } from '../i18n/langs'
 
 export function Settings() {
-  const { state, updateProfile, setLang, exportJSON, importState, wipe, markBackedUp } = useStore()
+  const { state, updateProfile, setLang, exportJSON, importState, wipe, markBackedUp, importScan } = useStore()
   const { t } = useI18n()
   const fileRef = useRef<HTMLInputElement>(null)
   const encFileRef = useRef<HTMLInputElement>(null)
+  const scanFileRef = useRef<HTMLInputElement>(null)
   const [confirmWipe, setConfirmWipe] = useState(false)
   const [importMsg, setImportMsg] = useState<string | null>(null)
   const [pass, setPass] = useState('')
   const [busy, setBusy] = useState(false)
+  const [scanErr, setScanErr] = useState<string | null>(null)
+  const [scanMsg, setScanMsg] = useState<string | null>(null)
+  const [pendingScan, setPendingScan] = useState<ScanState | null>(null)
   // A decrypted+sanitized backup staged for preview — applied only on confirm,
   // so "restore" never silently overwrites the device.
   const [pending, setPending] = useState<{ candidate: AppState; diff: BackupDiff } | null>(null)
@@ -94,6 +99,35 @@ export function Settings() {
     }
     reader.readAsText(file)
     e.target.value = ''
+  }
+
+  async function onImportScan(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    e.target.value = ''
+    if (!file) return
+    setScanErr(null)
+    setScanMsg(null)
+    let json: unknown
+    try {
+      json = JSON.parse(await file.text())
+    } catch {
+      setScanErr(t('settings.scanImportErr'))
+      return
+    }
+    try {
+      const scan = await parseScanReport(json)
+      setPendingScan(scan)
+    } catch (err) {
+      setScanErr(err instanceof ScanError ? err.message : t('settings.scanImportErr'))
+    }
+  }
+
+  function applyScan() {
+    if (!pendingScan) return
+    importScan(pendingScan)
+    setPendingScan(null)
+    setScanMsg(t('settings.scanImportOk'))
+    setTimeout(() => setScanMsg(null), 3000)
   }
 
   function printCodeWordCard(word: string) {
@@ -272,6 +306,48 @@ export function Settings() {
           <input ref={fileRef} type="file" accept="application/json" className="hidden" onChange={onImport} />
           {importMsg && <span role="status" aria-live="polite" className="self-center text-sm text-ghost-bright">{importMsg}</span>}
         </div>
+      </section>
+
+      <section className="card space-y-3 p-5">
+        <h2 className="font-semibold text-slate-100">{t('settings.scanTitle')}</h2>
+        <p className="text-sm text-slate-400">{t('settings.scanBody')}</p>
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            className="btn-ghost btn-sm"
+            onClick={() => scanFileRef.current?.click()}
+            aria-describedby={scanErr ? 'scan-err' : undefined}
+          >
+            {t('settings.scanImportCta')}
+          </button>
+          <input
+            ref={scanFileRef}
+            type="file"
+            accept=".vscan,application/json"
+            className="hidden"
+            onChange={onImportScan}
+            aria-describedby={scanErr ? 'scan-err' : undefined}
+          />
+          {scanMsg && <span role="status" aria-live="polite" className="self-center text-sm text-ghost-bright">{scanMsg}</span>}
+        </div>
+        {scanErr && (
+          <p id="scan-err" role="status" aria-live="polite" className="text-xs text-signal-danger">
+            {scanErr}
+          </p>
+        )}
+        {pendingScan && (
+          <div className="rounded-xl border border-ink-700 bg-ink-900/40 p-3 text-sm">
+            <p className="text-slate-200">
+              {t(pendingScan.verified ? 'settings.scanSummary' : 'settings.scanSummaryUnverified', {
+                count: pendingScan.exposures.length,
+              })}
+            </p>
+            <div className="mt-2 flex justify-end gap-2">
+              <button className="btn-ghost btn-sm" onClick={() => setPendingScan(null)}>{t('common.cancel')}</button>
+              <button className="btn-primary btn-sm" onClick={applyScan}>{t('settings.scanApply')}</button>
+            </div>
+          </div>
+        )}
+        <p className="text-xs text-slate-400">{t('settings.scanNote')}</p>
       </section>
 
       <section className="card space-y-3 p-5">
