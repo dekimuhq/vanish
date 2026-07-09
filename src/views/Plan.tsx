@@ -1,9 +1,10 @@
 import { useMemo, useState } from 'react'
 import { useSearchParams, type SetURLSearchParams } from 'react-router-dom'
 import { ActionCard } from '../components/ActionCard'
+import { ExposureBadge } from '../components/ExposureBadge'
 import { computeScore } from '../lib/score'
 import { actionsForRegion, byQuickWin } from '../lib/select'
-import { CATEGORIES, TIERS, type Category, type Tier } from '../lib/types'
+import { CATEGORIES, TIERS, type Category, type Tier, type ScanState, type ScanFinding } from '../lib/types'
 import { useStore } from '../store/store'
 import { useI18n } from '../i18n/i18n'
 
@@ -21,6 +22,35 @@ export function Plan() {
 
   const usedCategories = useMemo(() => Array.from(new Set(actions.map((a) => a.category))), [actions])
   const tiers = focusTier ? [focusTier] : ([1, 2, 3, 4] as Tier[])
+
+  // actionId -> max confidence, from any matched scan exposure the importer
+  // could map to a catalog action. Additive only — never touches progress/score.
+  const exposedById = useMemo(() => {
+    const m = new Map<string, number>()
+    for (const e of state.scan?.exposures ?? []) {
+      if (!e.catalogActionId) continue
+      m.set(e.catalogActionId, Math.max(m.get(e.catalogActionId) ?? 0, e.confidence))
+    }
+    return m
+  }, [state.scan])
+
+  // Exposed actions float to the top of whatever list they're in; within each
+  // bucket (exposed / not) the existing quick-win order is untouched.
+  const byExposureThenQuickWin = useMemo(
+    () => (a: (typeof actions)[number], b: (typeof actions)[number]) => {
+      const ea = exposedById.has(a.id) ? 1 : 0
+      const eb = exposedById.has(b.id) ? 1 : 0
+      return ea !== eb ? eb - ea : byQuickWin(a, b)
+    },
+    [exposedById],
+  )
+
+  // Exposures the importer couldn't map to a one-click catalog action — the
+  // "found online, nothing to click yet" bucket surfaced in Scan Results.
+  const unmappedExposures = useMemo(
+    () => (state.scan?.exposures ?? []).filter((e) => !e.catalogActionId),
+    [state.scan],
+  )
 
   const q = query.trim().toLowerCase()
   const byCatAndDone = (a: (typeof actions)[number]) =>
@@ -51,7 +81,7 @@ export function Plan() {
         )
       })
       .filter(byCatAndDone)
-      .sort(byQuickWin)
+      .sort(byExposureThenQuickWin)
     return (
       <div className="space-y-6">
         <Header />
@@ -61,7 +91,7 @@ export function Plan() {
         </p>
         <div className="grid gap-3">
           {results.map((a) => (
-            <ActionCard key={a.id} action={a} />
+            <ActionCard key={a.id} action={a} exposureConfidence={exposedById.get(a.id)} />
           ))}
         </div>
       </div>
@@ -73,7 +103,7 @@ export function Plan() {
       <Header />
       {toolbar}
       {tiers.map((tier) => {
-        const list = actions.filter((a) => a.tier === tier).filter(byCatAndDone).sort(byQuickWin)
+        const list = actions.filter((a) => a.tier === tier).filter(byCatAndDone).sort(byExposureThenQuickWin)
         if (list.length === 0) return null
         const bt = breakdown.byTier[tier]
         return (
@@ -92,13 +122,66 @@ export function Plan() {
             </div>
             <div className="grid gap-3">
               {list.map((a) => (
-                <ActionCard key={a.id} action={a} showTier={false} />
+                <ActionCard key={a.id} action={a} showTier={false} exposureConfidence={exposedById.get(a.id)} />
               ))}
             </div>
           </section>
         )
       })}
+      {state.scan && <ScanResults scan={state.scan} unmapped={unmappedExposures} />}
     </div>
+  )
+}
+
+function ScanResults({ scan, unmapped }: { scan: ScanState; unmapped: ScanFinding[] }) {
+  const { t } = useI18n()
+  return (
+    <section>
+      <div className="mb-3 border-b border-ink-700/60 pb-2">
+        <h2 className="text-lg font-bold text-slate-100">{t('plan.scanResultsTitle')}</h2>
+        <p className="mt-0.5 text-xs text-slate-400">
+          {t('plan.scanResultsSubtitle', { date: new Date(scan.importedAt).toLocaleDateString() })}
+        </p>
+      </div>
+
+      {unmapped.length > 0 && (
+        <div className="grid gap-2">
+          <p className="text-xs text-slate-400">{t('plan.scanUnmappedIntro')}</p>
+          <ul className="grid gap-2">
+            {unmapped.map((e) => (
+              <li key={e.probeId} className="card flex flex-wrap items-center gap-2 p-3">
+                <span className="font-medium text-slate-200">{e.source}</span>
+                <ExposureBadge confidence={e.confidence} />
+                {e.evidenceUrl && (
+                  <a
+                    className="ml-auto text-sm text-ghost-bright hover:underline"
+                    href={e.evidenceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {t('plan.scanViewEvidence')} ↗
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {scan.resolved.length > 0 && (
+        <div className={unmapped.length > 0 ? 'mt-4' : ''}>
+          <p className="text-xs font-medium text-slate-300">{t('plan.scanResolvedTitle')}</p>
+          <ul className="mt-1.5 grid gap-1 text-sm text-slate-400">
+            {scan.resolved.map((source) => (
+              <li key={source} className="flex items-center gap-1.5">
+                <span className="text-signal-ok" aria-hidden="true">✓</span>
+                {t('plan.scanResolvedItem', { source })}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </section>
   )
 }
 

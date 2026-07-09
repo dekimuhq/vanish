@@ -141,6 +141,10 @@ export const en = {
   'pills.impact.low': 'Low impact',
   'pills.impact.med': 'Solid impact',
   'pills.impact.high': 'High impact',
+  'pills.exposure.confirmed': 'Confirmed exposure',
+  'pills.exposure.confirmedTitle': 'Confirmed by your scan',
+  'pills.exposure.possible': 'Possible exposure',
+  'pills.exposure.possibleTitle': 'Possible match — verify',
 
   // Adversaries (onboarding concern → adversary phrase)
   'adversary.stalking': 'a specific person trying to find you',
@@ -217,6 +221,12 @@ export const en = {
   'plan.searchPlaceholder': 'Search all actions… (e.g. “Spokeo”, “2FA”, “email”)',
   'plan.filterByCategory': 'Filter by category',
   'plan.searchAria': 'Search actions',
+  'plan.scanResultsTitle': 'Scan Results',
+  'plan.scanResultsSubtitle': 'From your scan imported {date}.',
+  'plan.scanUnmappedIntro': 'Found online, no one-click removal in the catalog yet:',
+  'plan.scanViewEvidence': 'View evidence',
+  'plan.scanResolvedTitle': 'Gone since last scan ✓',
+  'plan.scanResolvedItem': '{source} no longer found',
 
   // Brokers
   'brokers.title': 'Data-Broker Hit List',
