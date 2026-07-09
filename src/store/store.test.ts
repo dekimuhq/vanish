@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { sanitize, reducer } from './store'
-import { SCHEMA_VERSION, initialState, type LetterRecord } from '../lib/types'
+import { SCHEMA_VERSION, initialState, type LetterRecord, type AppState, type ScanState } from '../lib/types'
 
 describe('sanitize', () => {
   it('returns clean initial state for garbage input', () => {
@@ -114,5 +114,63 @@ describe('reducer — letters', () => {
   it('markBackedUp stamps lastBackupAt', () => {
     const s = reducer(initialState(), { type: 'markBackedUp', at: '2026-06-27T10:00:00.000Z' })
     expect(s.lastBackupAt).toBe('2026-06-27T10:00:00.000Z')
+  })
+})
+
+const scanA: ScanState = {
+  importedAt: '2026-07-09T00:00:00Z', engine: 'vanish-recon@0.1.0',
+  profileFingerprint: 'fp', verified: true,
+  exposures: [
+    { probeId: 'username:GitHub', source: 'GitHub', category: 'username', confidence: 0.9, catalogActionId: 'prune-social-profiles' },
+    { probeId: 'hibp-account', source: 'Breach', category: 'breach', confidence: 0.95, catalogActionId: 'change-breached-passwords' },
+  ],
+  resolved: [],
+}
+
+describe('scan layer', () => {
+  it('migrates a v2 state (no scan field) to v3 with scan:null', () => {
+    const v2: unknown = { schemaVersion: 2, onboarded: true, lang: 'en',
+      profile: initialState().profile, progress: {}, letters: {}, lastBackupAt: null }
+    const s = sanitize(v2)
+    expect(s.schemaVersion).toBe(SCHEMA_VERSION)
+    expect(s.scan).toBeNull()
+  })
+
+  it('sanitize drops a malformed scan to null', () => {
+    const bad: unknown = { ...initialState(), scan: { exposures: 'nope' } }
+    expect(sanitize(bad).scan).toBeNull()
+  })
+
+  it('sanitize keeps a well-formed scan', () => {
+    const ok: AppState = { ...initialState(), scan: scanA }
+    expect(sanitize(ok).scan?.exposures).toHaveLength(2)
+  })
+
+  it('importScan sets the scan and computes resolved vs the prior scan', () => {
+    // Prior + imported share profileFingerprint 'fp' (from the scanA spread), so
+    // the resolved-diff is honoured: GitHub was present before, gone now.
+    const withA = reducer({ ...initialState(), scan: scanA }, { type: 'importScan', scan: {
+      ...scanA, importedAt: '2026-07-10T00:00:00Z',
+      // GitHub gone this round; Breach remains
+      exposures: [scanA.exposures[1]!], resolved: [],
+    }})
+    expect(withA.scan?.exposures).toHaveLength(1)
+    expect(withA.scan?.resolved).toContain('GitHub')
+  })
+
+  it('importScan across a different fingerprint yields resolved: [] (no false claims)', () => {
+    // A re-scan of a DIFFERENT identity must not claim the prior identity's
+    // GitHub exposure is "gone since last scan".
+    const out = reducer({ ...initialState(), scan: scanA }, { type: 'importScan', scan: {
+      ...scanA, profileFingerprint: 'different-person', importedAt: '2026-07-10T00:00:00Z',
+      exposures: [scanA.exposures[1]!], resolved: [],
+    }})
+    expect(out.scan?.resolved).toEqual([])
+  })
+
+  it('importScan does not touch progress or letters', () => {
+    const base: AppState = { ...initialState(), progress: { 'hibp': { status: 'done', updatedAt: 'x' } } }
+    const out = reducer(base, { type: 'importScan', scan: scanA })
+    expect(out.progress['hibp']?.status).toBe('done')
   })
 })

@@ -5,11 +5,14 @@ import { CATEGORIES } from '../lib/types'
 import { useStore } from '../store/store'
 import { useI18n } from '../i18n/i18n'
 import { EffortPill, ImpactPill, TierBadge } from './Pills'
+import { ExposureBadge } from './ExposureBadge'
 import { verifiedAtOf } from '../data/catalog'
 
 interface Props {
   action: Action
   showTier?: boolean
+  /** Max confidence from a matched `.vscan` exposure mapped to this action, if any. */
+  exposureConfidence?: number
 }
 
 /** Link-rot is the #1 operational risk for an opt-out catalog. When a direct
@@ -19,7 +22,7 @@ function fallbackSearch(title: string): string {
   return `https://duckduckgo.com/?q=${encodeURIComponent(`${q} opt out removal`)}`
 }
 
-export function ActionCard({ action: raw, showTier = true }: Props) {
+export function ActionCard({ action: raw, showTier = true, exposureConfidence }: Props) {
   const { state, setStatus, clearStatus } = useStore()
   const { t, localizeAction } = useI18n()
   const [open, setOpen] = useState(false)
@@ -60,6 +63,7 @@ export function ActionCard({ action: raw, showTier = true }: Props) {
             <span className="pill bg-ink-700/60 text-slate-400">
               <span aria-hidden="true">{CATEGORIES[action.category].icon}</span> {catName}
             </span>
+            {exposureConfidence != null && <ExposureBadge confidence={exposureConfidence} />}
           </div>
 
           <p className="mt-1.5 text-sm leading-relaxed text-slate-400">{action.summary}</p>
