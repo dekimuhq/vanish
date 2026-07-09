@@ -147,6 +147,8 @@ describe('scan layer', () => {
   })
 
   it('importScan sets the scan and computes resolved vs the prior scan', () => {
+    // Prior + imported share profileFingerprint 'fp' (from the scanA spread), so
+    // the resolved-diff is honoured: GitHub was present before, gone now.
     const withA = reducer({ ...initialState(), scan: scanA }, { type: 'importScan', scan: {
       ...scanA, importedAt: '2026-07-10T00:00:00Z',
       // GitHub gone this round; Breach remains
@@ -154,6 +156,16 @@ describe('scan layer', () => {
     }})
     expect(withA.scan?.exposures).toHaveLength(1)
     expect(withA.scan?.resolved).toContain('GitHub')
+  })
+
+  it('importScan across a different fingerprint yields resolved: [] (no false claims)', () => {
+    // A re-scan of a DIFFERENT identity must not claim the prior identity's
+    // GitHub exposure is "gone since last scan".
+    const out = reducer({ ...initialState(), scan: scanA }, { type: 'importScan', scan: {
+      ...scanA, profileFingerprint: 'different-person', importedAt: '2026-07-10T00:00:00Z',
+      exposures: [scanA.exposures[1]!], resolved: [],
+    }})
+    expect(out.scan?.resolved).toEqual([])
   })
 
   it('importScan does not touch progress or letters', () => {

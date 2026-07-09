@@ -45,11 +45,16 @@ export function Plan() {
     [exposedById],
   )
 
-  // Exposures the importer couldn't map to a one-click catalog action — the
-  // "found online, nothing to click yet" bucket surfaced in Scan Results.
-  const unmappedExposures = useMemo(
-    () => (state.scan?.exposures ?? []).filter((e) => !e.catalogActionId),
-    [state.scan],
+  const actionIds = useMemo(() => new Set(actions.map((a) => a.id)), [actions])
+
+  // Exposures with no one-click action in the CURRENT plan — either the importer
+  // couldn't map them, OR the mapped action isn't actually present (bogus id from
+  // the file, catalog/recon version skew, or region/tier filtering removed it).
+  // Without the second case a mapped-but-absent exposure renders no badge
+  // anywhere AND is dropped from Scan Results — silently invisible.
+  const unlistedExposures = useMemo(
+    () => (state.scan?.exposures ?? []).filter((e) => !e.catalogActionId || !actionIds.has(e.catalogActionId)),
+    [state.scan, actionIds],
   )
 
   const q = query.trim().toLowerCase()
@@ -128,12 +133,12 @@ export function Plan() {
           </section>
         )
       })}
-      {state.scan && <ScanResults scan={state.scan} unmapped={unmappedExposures} />}
+      {state.scan && <ScanResults scan={state.scan} unlisted={unlistedExposures} />}
     </div>
   )
 }
 
-function ScanResults({ scan, unmapped }: { scan: ScanState; unmapped: ScanFinding[] }) {
+function ScanResults({ scan, unlisted }: { scan: ScanState; unlisted: ScanFinding[] }) {
   const { t } = useI18n()
   return (
     <section>
@@ -144,12 +149,12 @@ function ScanResults({ scan, unmapped }: { scan: ScanState; unmapped: ScanFindin
         </p>
       </div>
 
-      {unmapped.length > 0 && (
+      {unlisted.length > 0 && (
         <div className="grid gap-2">
           <p className="text-xs text-slate-400">{t('plan.scanUnmappedIntro')}</p>
           <ul className="grid gap-2">
-            {unmapped.map((e) => (
-              <li key={e.probeId} className="card flex flex-wrap items-center gap-2 p-3">
+            {unlisted.map((e, i) => (
+              <li key={`${e.probeId}-${i}`} className="card flex flex-wrap items-center gap-2 p-3">
                 <span className="font-medium text-slate-200">{e.source}</span>
                 <ExposureBadge confidence={e.confidence} />
                 {e.evidenceUrl && (
@@ -169,7 +174,7 @@ function ScanResults({ scan, unmapped }: { scan: ScanState; unmapped: ScanFindin
       )}
 
       {scan.resolved.length > 0 && (
-        <div className={unmapped.length > 0 ? 'mt-4' : ''}>
+        <div className={unlisted.length > 0 ? 'mt-4' : ''}>
           <p className="text-xs font-medium text-slate-300">{t('plan.scanResolvedTitle')}</p>
           <ul className="mt-1.5 grid gap-1 text-sm text-slate-400">
             {scan.resolved.map((source) => (

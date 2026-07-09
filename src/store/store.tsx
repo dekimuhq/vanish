@@ -12,6 +12,7 @@ import {
   SCHEMA_VERSION,
 } from '../lib/types'
 import { COUNTRIES } from '../data/countries'
+import { MAX_EXPOSURES } from '../lib/scan'
 import { type Lang, isLang, detectLang } from '../i18n/langs'
 
 const STORAGE_KEY = 'vanish.state.v1'
@@ -63,14 +64,23 @@ function sanitizeScan(raw: unknown): AppState['scan'] {
       (e.category === 'username' || e.category === 'breach') &&
       typeof e.confidence === 'number',
     )
-    .map((e) => ({
-      probeId: e.probeId as string,
-      source: e.source as string,
-      category: e.category as 'username' | 'breach',
-      confidence: e.confidence as number,
-      evidenceUrl: typeof e.evidenceUrl === 'string' ? (e.evidenceUrl as string) : undefined,
-      catalogActionId: typeof e.catalogActionId === 'string' ? (e.catalogActionId as string) : undefined,
-    }))
+    .map((e) => {
+      const c = e.confidence as number
+      const url = e.evidenceUrl
+      return {
+        probeId: e.probeId as string,
+        source: e.source as string,
+        category: e.category as 'username' | 'breach',
+        // Parity with parseScanReport: clamp to [0,1], allowlist url schemes.
+        confidence: Number.isFinite(c) ? Math.min(1, Math.max(0, c)) : 0,
+        evidenceUrl:
+          typeof url === 'string' && (url.startsWith('https://') || url.startsWith('http://'))
+            ? url
+            : undefined,
+        catalogActionId: typeof e.catalogActionId === 'string' ? (e.catalogActionId as string) : undefined,
+      }
+    })
+    .slice(0, MAX_EXPOSURES)
   return {
     importedAt: typeof s.importedAt === 'string' ? (s.importedAt as string) : new Date(0).toISOString(),
     engine: typeof s.engine === 'string' ? (s.engine as string) : 'unknown',
@@ -132,10 +142,17 @@ function reducer(state: AppState, msg: Msg): AppState {
     case 'markBackedUp':
       return { ...state, lastBackupAt: msg.at }
     case 'importScan': {
+      // Only diff against the prior scan when it covers the SAME identity set —
+      // otherwise a cross-profile re-scan fabricates false "gone since last
+      // scan" claims about an unrelated person.
+      const sameProfile = state.scan?.profileFingerprint === msg.scan.profileFingerprint
       const priorSources = new Set((state.scan?.exposures ?? []).map((e) => e.source))
       const nowSources = new Set(msg.scan.exposures.map((e) => e.source))
-      const resolved = [...priorSources].filter((s) => !nowSources.has(s))
-      return { ...state, scan: { ...msg.scan, resolved } }
+      const resolved = sameProfile ? [...priorSources].filter((s) => !nowSources.has(s)) : []
+      // Re-sanitize on store so persisted-vs-session state is identically strict
+      // (defense in depth). A null result means structurally broken input —
+      // consistent with the load path, which also stores scan:null in that case.
+      return { ...state, scan: sanitizeScan({ ...msg.scan, resolved }) }
     }
     default:
       return state

@@ -26,12 +26,24 @@ const CATEGORY_DEFAULT: Record<'username' | 'breach', string | undefined> = {
   breach: 'hibp',
 }
 
+// An unbounded import can blow past the localStorage quota and silently kill
+// persistence for the WHOLE app on the next save — cap the exposures we keep.
+export const MAX_EXPOSURES = 500
+
 export function mapToCatalog(f: { probeId: string; category: 'username' | 'breach'; catalogActionId?: string }): string | undefined {
-  return f.catalogActionId ?? SOURCE_TO_CATALOG[f.probeId] ?? CATEGORY_DEFAULT[f.category]
+  const hint = typeof f.catalogActionId === 'string' ? f.catalogActionId : undefined
+  // hasOwnProperty guard: a hostile probeId like "__proto__"/"constructor" must
+  // not resolve to an inherited Object.prototype member.
+  const mapped = Object.prototype.hasOwnProperty.call(SOURCE_TO_CATALOG, f.probeId)
+    ? SOURCE_TO_CATALOG[f.probeId]
+    : undefined
+  return hint ?? mapped ?? CATEGORY_DEFAULT[f.category]
 }
 
 function sourceLabel(probeId: string, category: 'username' | 'breach'): string {
-  if (category === 'breach') return 'Breach'
+  // Keep today's sole breach probe labelled 'Breach'; future distinct breach
+  // probes keep their own probeId so a resolved-diff can tell them apart.
+  if (category === 'breach') return probeId === 'hibp-account' ? 'Breach' : probeId
   return probeId.startsWith('username:') ? probeId.slice('username:'.length) : probeId
 }
 
@@ -62,19 +74,34 @@ export async function parseScanReport(json: unknown, verifier: Verifier = webcry
     verified = false // Ed25519 unsupported or malformed sig → best-effort
   }
   const exposures: ScanFinding[] = json.findings
-    .filter((f): f is RawFinding => !!f && typeof f === 'object' && (f as RawFinding).matched === true)
-    .map((f) => ({
-      probeId: f.probeId,
-      source: sourceLabel(f.probeId, f.category),
-      category: f.category,
-      confidence: typeof f.confidence === 'number' ? f.confidence : 0,
-      evidenceUrl: typeof f.evidenceUrl === 'string' ? f.evidenceUrl : undefined,
-      catalogActionId: mapToCatalog(f),
-    }))
+    .filter((f): f is RawFinding => {
+      if (!f || typeof f !== 'object') return false
+      const r = f as RawFinding
+      // A non-string probeId used to reach sourceLabel and throw a raw
+      // TypeError; an unknown category would flow downstream. Reject both here.
+      return r.matched === true && typeof r.probeId === 'string' &&
+        (r.category === 'username' || r.category === 'breach')
+    })
+    .map((f) => {
+      const c = f.confidence
+      return {
+        probeId: f.probeId,
+        source: sourceLabel(f.probeId, f.category),
+        category: f.category,
+        confidence: Number.isFinite(c) ? Math.min(1, Math.max(0, c)) : 0,
+        evidenceUrl:
+          typeof f.evidenceUrl === 'string' &&
+          (f.evidenceUrl.startsWith('https://') || f.evidenceUrl.startsWith('http://'))
+            ? f.evidenceUrl
+            : undefined,
+        catalogActionId: mapToCatalog(f),
+      }
+    })
+    .slice(0, MAX_EXPOSURES)
   return {
     importedAt: new Date().toISOString(),
-    engine: json.engine,
-    profileFingerprint: json.profileFingerprint,
+    engine: typeof json.engine === 'string' ? json.engine : '',
+    profileFingerprint: typeof json.profileFingerprint === 'string' ? json.profileFingerprint : '',
     verified,
     exposures,
     resolved: [],
