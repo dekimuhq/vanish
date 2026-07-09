@@ -67,6 +67,10 @@ export const ca: Dict = {
   'pills.impact.low': 'Impacte baix',
   'pills.impact.med': 'Impacte sòlid',
   'pills.impact.high': 'Impacte alt',
+  'pills.exposure.confirmed': 'Exposició confirmada',
+  'pills.exposure.confirmedTitle': 'Confirmada pel teu escaneig',
+  'pills.exposure.possible': 'Exposició possible',
+  'pills.exposure.possibleTitle': 'Coincidència possible — verifica-la',
 
   // Adversaries (onboarding concern → adversary phrase)
   'adversary.stalking': "una persona concreta que t'intenta localitzar",
@@ -139,6 +143,12 @@ export const ca: Dict = {
   'plan.searchPlaceholder': 'Cerca entre totes les accions… (p. ex. "Spokeo", "2FA", "correu")',
   'plan.filterByCategory': 'Filtra per categoria',
   'plan.searchAria': 'Cerca accions',
+  'plan.scanResultsTitle': "Resultats de l'escaneig",
+  'plan.scanResultsSubtitle': 'Del teu escaneig importat el {date}.',
+  'plan.scanUnmappedIntro': 'Trobat en línia, encara sense eliminació amb un clic al catàleg:',
+  'plan.scanViewEvidence': "Mostra l'evidència",
+  'plan.scanResolvedTitle': "Desaparegut des de l'últim escaneig ✓",
+  'plan.scanResolvedItem': '{source} ja no apareix',
 
   // Brokers
   'brokers.title': 'Llista negra de brokers',
@@ -240,6 +250,17 @@ export const ca: Dict = {
   'settings.restoreApply': 'Substituir les meves dades',
   'settings.restoreNoProfile': 'Sense definir',
   'settings.importErr': '✗ No s\'ha pogut llegir aquest fitxer.',
+
+  'settings.scanTitle': "🔍 Resultats de l'escaneig",
+  'settings.scanBody': "Importa les troballes d'exposició d'un informe de vanish-recon per anotar el teu pla amb coincidències reals.",
+  'settings.scanImportCta': "↥ Importa els resultats de l'escaneig",
+  'settings.scanImportErr': 'Aquest fitxer no és un escaneig vàlid.',
+  'settings.scanSummary': 'Exposicions trobades: {count}',
+  'settings.scanSummaryUnverified': 'Exposicions trobades: {count} (fitxer sense verificar)',
+  'settings.scanApply': 'Aplica',
+  'settings.scanImportOk': '✓ Escaneig importat.',
+  'settings.scanNote': 'Generat per vanish-recon a la teva pròpia màquina. Importar no envia mai res — només llegeix el fitxer que tries.',
+
   'settings.encBackupTitle': 'Còpia de seguretat xifrada',
   'settings.encBackupBody': 'Esborrar les dades del navegador elimina tot el que hi ha aquí — per disseny. L’única còpia que sobreviu és un fitxer que guardes tu. Aquesta còpia es xifra amb una contrasenya, de manera que el fitxer en si no és una fuita de privacitat. Desa la contrasenya en un lloc segur; no la podem recuperar.',
   'settings.exportEncrypted': '↓ Desa la còpia xifrada (.vanish)',

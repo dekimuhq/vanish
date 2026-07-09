@@ -68,6 +68,10 @@ export const fr: Dict = {
   'pills.impact.low': 'Impact faible',
   'pills.impact.med': 'Impact solide',
   'pills.impact.high': 'Impact fort',
+  'pills.exposure.confirmed': 'Exposition confirmée',
+  'pills.exposure.confirmedTitle': 'Confirmée par votre scan',
+  'pills.exposure.possible': 'Exposition possible',
+  'pills.exposure.possibleTitle': 'Correspondance possible — à vérifier',
 
   // Adversaries (onboarding concern → adversary phrase)
   'adversary.stalking': "une personne précise qui cherche à vous retrouver",
@@ -144,6 +148,12 @@ export const fr: Dict = {
   'plan.searchPlaceholder': 'Rechercher des actions… (ex. « Spokeo », « 2FA », « email »)',
   'plan.filterByCategory': 'Filtrer par catégorie',
   'plan.searchAria': 'Rechercher des actions',
+  'plan.scanResultsTitle': 'Résultats du scan',
+  'plan.scanResultsSubtitle': 'De votre scan importé le {date}.',
+  'plan.scanUnmappedIntro': 'Trouvé en ligne, pas encore de suppression en un clic dans le catalogue :',
+  'plan.scanViewEvidence': 'Voir la preuve',
+  'plan.scanResolvedTitle': 'Disparu depuis le dernier scan ✓',
+  'plan.scanResolvedItem': "{source} n'est plus trouvé",
 
   // Brokers
   'brokers.title': 'Liste noire des courtiers',
@@ -282,6 +292,17 @@ export const fr: Dict = {
   'settings.restoreApply': 'Remplacer mes données',
   'settings.restoreNoProfile': 'Non défini',
   'settings.importErr': '✗ Impossible de lire ce fichier.',
+
+  'settings.scanTitle': '🔍 Résultats du scan',
+  'settings.scanBody': "Importez les expositions détectées d'un rapport vanish-recon pour annoter votre plan avec des correspondances réelles.",
+  'settings.scanImportCta': '↥ Importer les résultats du scan',
+  'settings.scanImportErr': "Ce fichier n'est pas un scan valide.",
+  'settings.scanSummary': '{count} exposition(s) trouvée(s)',
+  'settings.scanSummaryUnverified': '{count} exposition(s) trouvée(s) (fichier non vérifié)',
+  'settings.scanApply': 'Appliquer',
+  'settings.scanImportOk': '✓ Scan importé.',
+  'settings.scanNote': "Généré par vanish-recon sur votre propre machine. L'import n'envoie jamais rien — il lit seulement le fichier que vous choisissez.",
+
   'settings.wipeTitle': 'Tout effacer',
   'settings.wipeBody':
     "Supprimez toute progression et toutes les informations personnelles de cet appareil. Cette action est irréversible. (Il n'y a rien sur un serveur à supprimer — il n'y en a jamais eu.)",

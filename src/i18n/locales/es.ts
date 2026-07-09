@@ -67,6 +67,10 @@ export const es: Dict = {
   'pills.impact.low': 'Impacto bajo',
   'pills.impact.med': 'Impacto sólido',
   'pills.impact.high': 'Impacto alto',
+  'pills.exposure.confirmed': 'Exposición confirmada',
+  'pills.exposure.confirmedTitle': 'Confirmada por tu escaneo',
+  'pills.exposure.possible': 'Exposición posible',
+  'pills.exposure.possibleTitle': 'Coincidencia posible — verifícala',
 
   // Adversaries (onboarding concern → adversary phrase)
   'adversary.stalking': 'una persona concreta que intenta localizarte',
@@ -143,6 +147,12 @@ export const es: Dict = {
   'plan.searchPlaceholder': 'Buscar acciones… (p.ej. «Spokeo», «2FA», «correo»)',
   'plan.filterByCategory': 'Filtrar por categoría',
   'plan.searchAria': 'Buscar acciones',
+  'plan.scanResultsTitle': 'Resultados del escaneo',
+  'plan.scanResultsSubtitle': 'De tu escaneo importado el {date}.',
+  'plan.scanUnmappedIntro': 'Encontrado en línea, todavía sin eliminación con un clic en el catálogo:',
+  'plan.scanViewEvidence': 'Ver evidencia',
+  'plan.scanResolvedTitle': 'Desaparecido desde el último escaneo ✓',
+  'plan.scanResolvedItem': '{source} ya no aparece',
 
   // Brokers
   'brokers.title': 'Lista de brokers de datos',
@@ -271,6 +281,17 @@ export const es: Dict = {
   'settings.restoreApply': 'Sustituir mis datos',
   'settings.restoreNoProfile': 'Sin definir',
   'settings.importErr': '✗ No se pudo leer ese archivo.',
+
+  'settings.scanTitle': '🔍 Resultados del escaneo',
+  'settings.scanBody': 'Importa los hallazgos de exposición de un informe de vanish-recon para anotar tu plan con coincidencias reales.',
+  'settings.scanImportCta': '↥ Importar resultados del escaneo',
+  'settings.scanImportErr': 'Ese archivo no es un escaneo válido.',
+  'settings.scanSummary': '{count} exposición(es) encontrada(s)',
+  'settings.scanSummaryUnverified': '{count} exposición(es) encontrada(s) (archivo sin verificar)',
+  'settings.scanApply': 'Aplicar',
+  'settings.scanImportOk': '✓ Escaneo importado.',
+  'settings.scanNote': 'Generado por vanish-recon en tu propia máquina. Importar nunca envía nada — solo lee el archivo que tú eliges.',
+
   'settings.encBackupTitle': 'Copia de seguridad encriptada',
   'settings.encBackupBody': 'Borrar los datos de tu navegador elimina todo lo que hay aquí — por diseño. La única copia que sobrevive es un archivo que tú guardas. Esta copia se encripta con una frase de contraseña, así que el archivo en sí no es una fuga de privacidad. Guarda la frase de contraseña en un lugar seguro; no podemos recuperarla.',
   'settings.exportEncrypted': '↓ Guardar copia encriptada (.vanish)',

@@ -67,6 +67,10 @@ export const nl: Dict = {
   'pills.impact.low': 'Weinig impact',
   'pills.impact.med': 'Solide impact',
   'pills.impact.high': 'Grote impact',
+  'pills.exposure.confirmed': 'Bevestigde blootstelling',
+  'pills.exposure.confirmedTitle': 'Bevestigd door je scan',
+  'pills.exposure.possible': 'Mogelijke blootstelling',
+  'pills.exposure.possibleTitle': 'Mogelijke match — controleer',
 
   // Adversaries
   'adversary.stalking': 'een specifiek persoon die je probeert te vinden',
@@ -148,6 +152,12 @@ export const nl: Dict = {
   'plan.searchPlaceholder': 'Zoek alle acties… (bijv. "Spokeo", "2FA", "e-mail")',
   'plan.filterByCategory': 'Filteren op categorie',
   'plan.searchAria': 'Zoek acties',
+  'plan.scanResultsTitle': 'Scanresultaten',
+  'plan.scanResultsSubtitle': 'Uit je scan, geïmporteerd op {date}.',
+  'plan.scanUnmappedIntro': 'Online gevonden, nog geen één-klik-verwijdering in de catalogus:',
+  'plan.scanViewEvidence': 'Bekijk bewijs',
+  'plan.scanResolvedTitle': 'Verdwenen sinds de laatste scan ✓',
+  'plan.scanResolvedItem': '{source} niet meer gevonden',
 
   // Brokers
   'brokers.title': 'Datamakelaars aanpakken',
@@ -271,6 +281,17 @@ export const nl: Dict = {
   'settings.restoreApply': 'Mijn gegevens vervangen',
   'settings.restoreNoProfile': 'Niet ingesteld',
   'settings.importErr': '✗ Dat bestand kon niet worden gelezen.',
+
+  'settings.scanTitle': '🔍 Scanresultaten',
+  'settings.scanBody': 'Importeer blootstellingsbevindingen uit een vanish-recon-rapport om je plan aan te vullen met echte matches.',
+  'settings.scanImportCta': '↥ Scanresultaten importeren',
+  'settings.scanImportErr': 'Dat bestand is geen geldige scan.',
+  'settings.scanSummary': '{count} blootstelling(en) gevonden',
+  'settings.scanSummaryUnverified': '{count} blootstelling(en) gevonden (niet-geverifieerd bestand)',
+  'settings.scanApply': 'Toepassen',
+  'settings.scanImportOk': '✓ Scan geïmporteerd.',
+  'settings.scanNote': 'Gegenereerd door vanish-recon op je eigen computer. Importeren verstuurt nooit iets — het leest alleen het bestand dat je kiest.',
+
   'settings.encBackupTitle': 'Versleutelde back-up',
   'settings.encBackupBody':
     'Het wissen van je browsergegevens veegt alles hier weg — met opzet. De enige kopie die het overleeft is een bestand dat je zelf bewaart. Deze back-up is versleuteld met een wachtwoordzin, dus het bestand zelf is geen privacylek. Bewaar de wachtwoordzin op een veilige plek; wij kunnen die niet herstellen.',

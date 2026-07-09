@@ -67,6 +67,10 @@ export const de: Dict = {
   'pills.impact.low': 'Geringe Wirkung',
   'pills.impact.med': 'Solide Wirkung',
   'pills.impact.high': 'Hohe Wirkung',
+  'pills.exposure.confirmed': 'Bestätigte Exposition',
+  'pills.exposure.confirmedTitle': 'Durch deinen Scan bestätigt',
+  'pills.exposure.possible': 'Mögliche Exposition',
+  'pills.exposure.possibleTitle': 'Möglicher Treffer — überprüfen',
 
   // Adversaries
   'adversary.stalking': 'eine bestimmte Person, die dich sucht',
@@ -143,6 +147,12 @@ export const de: Dict = {
   'plan.searchPlaceholder': 'Alle Maßnahmen durchsuchen … (z. B. „Spokeo", „2FA", „E-Mail")',
   'plan.filterByCategory': 'Nach Kategorie filtern',
   'plan.searchAria': 'Maßnahmen suchen',
+  'plan.scanResultsTitle': 'Scan-Ergebnisse',
+  'plan.scanResultsSubtitle': 'Aus deinem am {date} importierten Scan.',
+  'plan.scanUnmappedIntro': 'Online gefunden, noch keine Ein-Klick-Entfernung im Katalog:',
+  'plan.scanViewEvidence': 'Beleg ansehen',
+  'plan.scanResolvedTitle': 'Seit dem letzten Scan verschwunden ✓',
+  'plan.scanResolvedItem': '{source} nicht mehr gefunden',
 
   // Brokers
   'brokers.title': 'Datenhändler-Abschussliste',
@@ -271,6 +281,17 @@ export const de: Dict = {
   'settings.restoreApply': 'Meine Daten ersetzen',
   'settings.restoreNoProfile': 'Nicht festgelegt',
   'settings.importErr': '✗ Diese Datei konnte nicht gelesen werden.',
+
+  'settings.scanTitle': '🔍 Scan-Ergebnisse',
+  'settings.scanBody': 'Importiere Expositionsfunde aus einem vanish-recon-Bericht, um deinen Plan mit echten Treffern zu ergänzen.',
+  'settings.scanImportCta': '↥ Scan-Ergebnisse importieren',
+  'settings.scanImportErr': 'Diese Datei ist kein gültiger Scan.',
+  'settings.scanSummary': '{count} Exposition(en) gefunden',
+  'settings.scanSummaryUnverified': '{count} Exposition(en) gefunden (Datei nicht verifiziert)',
+  'settings.scanApply': 'Übernehmen',
+  'settings.scanImportOk': '✓ Scan importiert.',
+  'settings.scanNote': 'Von vanish-recon auf deinem eigenen Rechner erzeugt. Der Import sendet nie etwas — er liest nur die Datei, die du auswählst.',
+
   'settings.encBackupTitle': 'Verschlüsselte Sicherung',
   'settings.encBackupBody':
     "Das Löschen deiner Browserdaten entfernt hier alles — so ist es gewollt. Die einzige Kopie, die überlebt, ist eine Datei, die du selbst aufbewahrst. Diese Sicherung ist mit einer Passphrase verschlüsselt, sodass die Datei selbst kein Datenschutzleck ist. Bewahre die Passphrase an einem sicheren Ort auf; wir können sie nicht wiederherstellen.",

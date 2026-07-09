@@ -67,6 +67,10 @@ export const it: Dict = {
   'pills.impact.low': 'Impatto basso',
   'pills.impact.med': 'Impatto buono',
   'pills.impact.high': 'Impatto alto',
+  'pills.exposure.confirmed': 'Esposizione confermata',
+  'pills.exposure.confirmedTitle': 'Confermata dalla tua scansione',
+  'pills.exposure.possible': 'Esposizione possibile',
+  'pills.exposure.possibleTitle': 'Corrispondenza possibile — verifica',
 
   // Adversaries (onboarding concern → adversary phrase)
   'adversary.stalking': 'una persona specifica che cerca di trovarti',
@@ -143,6 +147,12 @@ export const it: Dict = {
   'plan.searchPlaceholder': 'Cerca tra tutte le azioni… (es. "Spokeo", "2FA", "email")',
   'plan.filterByCategory': 'Filtra per categoria',
   'plan.searchAria': 'Cerca azioni',
+  'plan.scanResultsTitle': 'Risultati della scansione',
+  'plan.scanResultsSubtitle': 'Dalla tua scansione importata il {date}.',
+  'plan.scanUnmappedIntro': 'Trovato online, ancora nessuna rimozione con un clic nel catalogo:',
+  'plan.scanViewEvidence': 'Vedi la prova',
+  'plan.scanResolvedTitle': "Sparito dall'ultima scansione ✓",
+  'plan.scanResolvedItem': '{source} non più trovato',
 
   // Brokers
   'brokers.title': 'Lista dei Data Broker',
@@ -271,6 +281,17 @@ export const it: Dict = {
   'settings.restoreApply': 'Sostituisci i miei dati',
   'settings.restoreNoProfile': 'Non impostato',
   'settings.importErr': '✗ Impossibile leggere quel file.',
+
+  'settings.scanTitle': '🔍 Risultati della scansione',
+  'settings.scanBody': 'Importa le esposizioni rilevate da un report vanish-recon per annotare il tuo piano con corrispondenze reali.',
+  'settings.scanImportCta': '↥ Importa i risultati della scansione',
+  'settings.scanImportErr': 'Quel file non è una scansione valida.',
+  'settings.scanSummary': '{count} esposizione/i trovata/e',
+  'settings.scanSummaryUnverified': '{count} esposizione/i trovata/e (file non verificato)',
+  'settings.scanApply': 'Applica',
+  'settings.scanImportOk': '✓ Scansione importata.',
+  'settings.scanNote': "Generato da vanish-recon sulla tua macchina. L'importazione non invia mai nulla — legge solo il file che scegli.",
+
   'settings.encBackupTitle': 'Backup cifrato',
   'settings.encBackupBody':
     "La cancellazione dei dati del browser elimina tutto ciò che è qui — è voluto. L’unica copia che sopravvive è un file che conservi tu. Questo backup è cifrato con una passphrase, quindi il file in sé non è una fuga di privacy. Conserva la passphrase in un luogo sicuro; non possiamo recuperarla.",

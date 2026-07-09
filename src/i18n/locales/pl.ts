@@ -67,6 +67,10 @@ export const pl: Dict = {
   'pills.impact.low': 'Niski efekt',
   'pills.impact.med': 'Dobry efekt',
   'pills.impact.high': 'Duży efekt',
+  'pills.exposure.confirmed': 'Potwierdzona ekspozycja',
+  'pills.exposure.confirmedTitle': 'Potwierdzone przez Twój skan',
+  'pills.exposure.possible': 'Możliwa ekspozycja',
+  'pills.exposure.possibleTitle': 'Możliwe trafienie — zweryfikuj',
 
   // Adversaries (onboarding concern → adversary phrase)
   'adversary.stalking': 'konkretna osoba próbująca Cię odnaleźć',
@@ -143,6 +147,12 @@ export const pl: Dict = {
   'plan.searchPlaceholder': 'Przeszukaj wszystkie działania… (np. „Spokeo", „2FA", „email")',
   'plan.filterByCategory': 'Filtruj według kategorii',
   'plan.searchAria': 'Przeszukaj działania',
+  'plan.scanResultsTitle': 'Wyniki skanu',
+  'plan.scanResultsSubtitle': 'Z Twojego skanu zaimportowanego {date}.',
+  'plan.scanUnmappedIntro': 'Znalezione online, jeszcze bez usuwania jednym kliknięciem w katalogu:',
+  'plan.scanViewEvidence': 'Zobacz dowód',
+  'plan.scanResolvedTitle': 'Zniknęło od ostatniego skanu ✓',
+  'plan.scanResolvedItem': '{source} już nie występuje',
 
   // Brokers
   'brokers.title': 'Lista brokerów danych do usunięcia',
@@ -266,6 +276,17 @@ export const pl: Dict = {
   'settings.restoreApply': 'Zastąp moje dane',
   'settings.restoreNoProfile': 'Nie ustawiono',
   'settings.importErr': '✗ Nie można odczytać tego pliku.',
+
+  'settings.scanTitle': '🔍 Wyniki skanu',
+  'settings.scanBody': 'Zaimportuj wykryte ekspozycje z raportu vanish-recon, aby wzbogacić swój plan o rzeczywiste trafienia.',
+  'settings.scanImportCta': '↥ Importuj wyniki skanu',
+  'settings.scanImportErr': 'Ten plik nie jest prawidłowym skanem.',
+  'settings.scanSummary': 'Znalezione ekspozycje: {count}',
+  'settings.scanSummaryUnverified': 'Znalezione ekspozycje: {count} (plik niezweryfikowany)',
+  'settings.scanApply': 'Zastosuj',
+  'settings.scanImportOk': '✓ Skan zaimportowany.',
+  'settings.scanNote': 'Wygenerowane przez vanish-recon na Twoim własnym komputerze. Import niczego nie wysyła — odczytuje tylko plik, który wybierzesz.',
+
   'settings.encBackupTitle': 'Szyfrowana kopia zapasowa',
   'settings.encBackupBody': 'Wyczyszczenie danych przeglądarki usuwa stąd wszystko — i tak ma być. Jedyną kopią, która przetrwa, jest plik, który zachowasz. Ta kopia jest zaszyfrowana hasłem, więc sam plik nie jest wyciekiem prywatności. Przechowaj hasło w bezpiecznym miejscu; nie możemy go odzyskać.',
   'settings.exportEncrypted': '↓ Zapisz szyfrowaną kopię (.vanish)',

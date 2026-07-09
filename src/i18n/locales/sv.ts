@@ -68,6 +68,10 @@ export const sv: Dict = {
   'pills.impact.low': 'Låg effekt',
   'pills.impact.med': 'Solid effekt',
   'pills.impact.high': 'Hög effekt',
+  'pills.exposure.confirmed': 'Bekräftad exponering',
+  'pills.exposure.confirmedTitle': 'Bekräftad av din skanning',
+  'pills.exposure.possible': 'Möjlig exponering',
+  'pills.exposure.possibleTitle': 'Möjlig träff — verifiera',
 
   // Adversaries (onboarding concern → adversary phrase)
   'adversary.stalking': 'en specifik person som försöker hitta dig',
@@ -140,6 +144,12 @@ export const sv: Dict = {
   'plan.searchPlaceholder': 'Sök bland alla åtgärder… (t.ex. "Spokeo", "2FA", "e-post")',
   'plan.filterByCategory': 'Filtrera per kategori',
   'plan.searchAria': 'Sök åtgärder',
+  'plan.scanResultsTitle': 'Skanningsresultat',
+  'plan.scanResultsSubtitle': 'Från din skanning importerad {date}.',
+  'plan.scanUnmappedIntro': 'Hittat online, ännu ingen borttagning med ett klick i katalogen:',
+  'plan.scanViewEvidence': 'Visa bevis',
+  'plan.scanResolvedTitle': 'Borta sedan senaste skanningen ✓',
+  'plan.scanResolvedItem': '{source} hittas inte längre',
 
   // Brokers
   'brokers.title': 'Datamäklarlistan',
@@ -241,6 +251,17 @@ export const sv: Dict = {
   'settings.restoreApply': 'Ersätt mina data',
   'settings.restoreNoProfile': 'Inte angivet',
   'settings.importErr': '✗ Det gick inte att läsa den filen.',
+
+  'settings.scanTitle': '🔍 Skanningsresultat',
+  'settings.scanBody': 'Importera exponeringsfynd från en vanish-recon-rapport för att komplettera din plan med verkliga träffar.',
+  'settings.scanImportCta': '↥ Importera skanningsresultat',
+  'settings.scanImportErr': 'Den filen är inte en giltig skanning.',
+  'settings.scanSummary': '{count} exponering(ar) hittades',
+  'settings.scanSummaryUnverified': '{count} exponering(ar) hittades (overifierad fil)',
+  'settings.scanApply': 'Tillämpa',
+  'settings.scanImportOk': '✓ Skanning importerad.',
+  'settings.scanNote': 'Genererad av vanish-recon på din egen dator. Importen skickar aldrig något — den läser bara filen du väljer.',
+
   'settings.wipeTitle': 'Radera allt',
   'settings.wipeBody':
     'Raderar alla framsteg och personuppgifter från den här enheten. Det går inte att ångra. (Det finns inget på en server att radera — det har aldrig funnits.)',
